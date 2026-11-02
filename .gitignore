@@ -4,3 +4,8 @@ __pycache__/
 *.pyc
 .DS_Store
 verify/*.png
+
+media-src/
+.env
+.env.*
+!.env.example

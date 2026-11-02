@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
 <title>Page not found · Fitz Feral Hunters</title>
 <meta name="description" content="That page isn&#x27;t here.">
 <meta name="robots" content="noindex, nofollow">
@@ -522,6 +523,84 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
 .varbar .hide{margin-inline-start:4px}
 .varbar[hidden]{display:none}
 .notfound{padding-block:96px}
+@layer components{
+/* v1.0 · real photos and video in the registration-tick frame */
+figure.slot{margin:0}
+.slot.photo picture{display:contents}
+.slot.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot.video{background:var(--chrome)}
+.slot.video::before,.slot.video::after{display:none}
+.slot.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--chrome);z-index:1}
+.slot .corner,.slot .plate,.slot .dur{pointer-events:none}
+.slot.video .corner.bl,.slot.video .corner.br{display:none}
+.slot.video .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
+.slot.photo::before,.slot.photo::after{display:none}
+.slot.video .corner.tl{display:none}
+.slot.video .play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:var(--radius)}
+.slot.video .play span{width:68px;height:68px;border-radius:50%;background:var(--gold-light);display:grid;place-items:center;transition:background-color var(--t-hover,.2s) cubic-bezier(.165,.84,.44,1)}
+.slot.video .play span::before{content:"";margin-left:6px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent var(--chrome)}
+.slot.video .play:hover span{background:color-mix(in srgb, var(--gold-light), #ffffff 18%)}
+.slot.video .play:focus-visible{outline:3px solid var(--focus-dark);outline-offset:-6px}
+.slot .dur{position:absolute;left:10px;top:10px;z-index:2;font:600 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--foot-ink);background:color-mix(in srgb, var(--chrome) 78%, transparent);padding:5px 7px;border-radius:3px}
+.vid.is-playing .dur,.vid.is-playing .plate{display:none}
+.vid{margin:0;display:grid;gap:10px;min-width:0;align-content:start}
+.vid figcaption{font-size:var(--fs-small);color:var(--ink-2);max-width:60ch}
+.vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
+.band.drone .vid figcaption{color:color-mix(in srgb, var(--foot-ink) 78%, transparent)}
+.band.drone .vid figcaption b{color:var(--foot-ink)}
+.vids{list-style:none;margin:0;padding:0;display:grid;gap:28px}
+@media (min-width:700px){.vids{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.job-grid{display:grid;gap:24px}
+.job-grid .side{display:grid;gap:24px;align-content:start}
+@media (min-width:800px){.job-grid{grid-template-columns:minmax(0,.62fr) minmax(0,1fr);align-items:start}}
+@media (max-width:799px){.vid.tall .slot{--ar:4/5 !important}}
+h2.sub{font-size:var(--fs-h3);font-family:var(--font-cond);margin:8px 0 0}
+dialog.lightbox .slot.in-lb{aspect-ratio:auto;height:min(72vh,720px)}
+dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
+.about-photos .slot{--ar:4/5 !important}
+/* v1.0 · phone numbers and the toast */
+a.tel{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;font-weight:600}
+a.tel:hover{color:var(--gold-ink)}
+.site-foot a.tel:hover,.band.invert a.tel:hover{color:var(--gold-light)}
+.contact-list .kv .row a.tel,.contact-list .kv .row a.mail{font:600 clamp(20px, 1rem + 1vw, 26px)/1.2 var(--font-body);overflow-wrap:anywhere}
+.contact-list .kv .row a.mail{font-size:19px}
+a.mail{color:inherit}
+.hint-copy{display:none;font-size:var(--fs-caption);color:var(--ink-2);font-weight:500}
+@media (hover:hover) and (pointer:fine){.hint-copy{display:inline}.touch-only{display:none !important}}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:60;background:var(--chrome);color:var(--foot-ink);padding:12px 18px;border-radius:var(--radius);font-weight:600;font-size:var(--fs-small);box-shadow:inset 0 0 0 1px var(--gold);max-width:calc(100vw - 32px);opacity:0;visibility:hidden;transition:opacity .2s cubic-bezier(.165,.84,.44,1),visibility 0s linear .2s}
+.toast.on{opacity:1;visibility:visible;transition:opacity .2s cubic-bezier(.165,.84,.44,1),visibility 0s}
+@media (max-width:899px){.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){.toast,.toast.on{transition:none}}
+/* v1.0 · the receipt dialog */
+dialog.sent{border:0;padding:0;background:var(--bg);color:var(--ink);width:min(94vw,600px);max-width:none;max-height:min(90vh,820px);border-radius:var(--radius);box-shadow:inset 0 0 0 2px var(--ok);overscroll-behavior:contain}
+dialog.sent[data-state="fallback"],dialog.sent[data-state="failed"]{box-shadow:inset 0 0 0 2px var(--gold)}
+dialog.sent::backdrop{background:rgb(27 38 34 / .62)}
+dialog.sent .frame{display:grid;gap:14px;padding:24px}
+dialog.sent h2{margin:0;font-size:var(--fs-h2)}
+dialog.sent h2:focus-visible{outline:none}
+dialog.sent #sent-lede{margin:0}
+dialog.sent .eyebrow{margin:0;color:var(--ok)}
+dialog.sent[data-state="fallback"] .eyebrow,dialog.sent[data-state="failed"] .eyebrow{color:var(--gold-ink)}
+.sent-list{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 16px;margin:0;padding:14px 16px;background:var(--surface);border-radius:var(--radius);font-size:var(--fs-small)}
+.sent-list dt{font-weight:600;color:var(--ink-2);text-transform:uppercase;font-size:12px;letter-spacing:.06em;padding-top:2px}
+.sent-list dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
+#sent-ref:empty,#sent-actions[hidden]{display:none}
+dialog.sent[data-state="fallback"] #sent-close,dialog.sent[data-state="failed"] #sent-close{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="failed"] #sent-close:hover{background:var(--wash)}
+/* v1.0 · reviews */
+.review{border-radius:var(--radius);padding:20px;display:grid;gap:10px;align-content:start;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);margin:0;min-width:0}
+.review blockquote{margin:0}
+.review .who{font-size:var(--fs-caption);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+.review .caption{margin:0}
+.review .reply{margin:0;border-left:2px solid var(--gold);padding-left:12px;font-size:var(--fs-small);color:var(--ink-2)}
+.review-empty,.review-closed{grid-column:1/-1;box-shadow:inset 0 0 0 1px var(--line-strong)}
+.reviews-write{display:grid;gap:24px;max-width:44rem}
+.field select{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--ink);font:inherit}
+.field select:hover{border-color:var(--ink-2)}
+.consent label{display:flex;gap:12px;align-items:flex-start;font-weight:500;cursor:pointer}
+.consent input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
+.cf-turnstile{min-height:65px}
+}
 
 [data-sheet='off'] body::after{display:none}
 </style>
@@ -529,28 +608,16 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
 </head>
 <body>
 <svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol><symbol id="i-north" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8"/><path class="fill" d="M12 3l4.5 9h-9z"/></symbol></svg>
-<div class="varbar" id="varbar" data-per="D4980 D3245 D4657 D0264 D2126" role="region" aria-label="Mockup controls">
+<div class="skips"><a href="#main">Skip to content</a><a href="/contact#enquiry">Skip to contact</a></div>
+<header class="site-head">
   <div class="wrap">
-    <span><strong>D700 mockup · SP-01e PADDOCK v0.3.2</strong><span class="long"> · card colourway (green · gold · cream) · dense topographic sheet, no map · seed fitzferalhunters-paddock</span></span>
-    <span class="grow"></span>
-    <button type="button" id="t-motion" aria-pressed="false" title="Emulates the reduced-motion twin (D4980); the real gate is the media query (D3453)"><span class="long">Motion: on</span><span class="short">Motion</span></button>
-    <button type="button" id="t-topo" aria-pressed="true" title="Toggle the contour field and grid (D2410) to compare against v1"><span class="long">Sheet: on</span><span class="short">Sheet</span></button>
-    <button type="button" id="t-xray" aria-pressed="false" title="Outline every component and show the D-ids it honours"><span class="long">X-ray</span><span class="short">X-ray</span></button>
-    <button type="button" id="t-spec" command="show-modal" commandfor="spec"><span class="long">Spec sheet</span><span class="short">Spec</span></button>
-    <a href="https://claude.ai/artifact/4PrRTSy2hk4rb2sk4bysiz" target="_blank" rel="noopener"><span class="long">Other mockup: </span>Night Shift &rarr;</a>
-    <button type="button" class="hide" id="t-hide" aria-label="Hide mockup controls">&times;</button>
-  </div>
-</div>
-<div class="skips" data-per="D0228 D2113 D0583 D2114"><a href="#main">Skip to content</a><a href="/contact#enquiry">Skip to contact</a></div>
-<header class="site-head" data-per="D0201 D2108 D2050 D4262">
-  <div class="wrap">
-    <a class="logo" href="/" data-per="D0106 D0141" data-per="D0443 D0401 D0448 D0404 D0408"><img src="/brand/logo-lockup.png" alt="Fitz Feral Hunters — Protecting Victoria&#x27;s Farms" width="640" height="181" decoding="async" fetchpriority="high"></a>
+    <a class="logo" href="/"><img src="/brand/logo-lockup.png" alt="Fitz Feral Hunters — Protecting Victoria&#x27;s Farms" width="640" height="181" decoding="async" fetchpriority="high"></a>
     <span class="datum" title="Grid: MGA zone 55, GDA2020"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>N · MGA 55</span></span>
-    <nav class="nav" aria-label="Primary" data-per="D3404 D0282 D2124 D2139 D0300 D0551 D0745 D5641 D2121 D0220 D0494 D1493 D2244"><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li class="nav-cta"><a class="btn btn-gold" href="/contact#enquiry" data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
-    <details class="drawer" id="drawer" data-per="D0207 D2122 D0377"><summary aria-label="Menu">Menu</summary><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li><a href="/contact#enquiry" data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
+    <nav class="nav" aria-label="Primary"><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li class="nav-cta"><a class="btn btn-gold" href="/contact#enquiry" data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
+    <details class="drawer" id="drawer"><summary aria-label="Menu">Menu</summary><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li><a href="/contact#enquiry" data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
   </div>
 </header>
-<main id="main" data-per="D1749 D6548 D2519 D4311 D3135 D2114 D0228 D2113 D2041 D1214 D2044 D1278 D2647 D1268 D0054 D2037 D0081 D1251 D0080 D0083 D2045 D2046 D2744 D2450 D1737 D0447 D4987 D1784 D2121 D5641 D0745 D4657 D1201 D1248 D1296 D1336 D2213 D0580 D0594 D0597" data-per="D0158 D3009 D0153 D3432 D1011 D3006 D4198 D0400 D0162 D0161 D0166 D0033 D2018 D0168 D2019 D0192 D0191 D0197 D0157 D1243 D1038 D2510 D1150 D3373 D1227 D2504" data-per="D0106 D0108 D2668 D0101 D1323 D3193 D3458 D0144 D0076 D0149 D0063 D0142 D3017 D0141 D0140 D2069 D1333 D2052 D1350" data-per="D3051 D3468 D3052 D3171 D0651 D0652 D2335 D0673 D2248 D2327 D0693 D0643 D2343 D0488 D2249 D3453 D0594 D2301 D2342 D0694 D4656 D4980 D0453 D3425 D2227 D0451 D0665 D0666 D2347 D2035 D1222 D1225 D0668" data-per="D3007 D0644 D2147 D0581 D0582" data-per="D3002 D3003 D3040 D0353 D5252" data-per="D2410 D0041 D1851 D1856 D3077 D3359 D0436 D4987 D0191">
+<main id="main">
 
 <section class="page notfound" aria-labelledby="h-404">
   <div class="wrap prose">
@@ -558,67 +625,31 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
     <h1 id="h-404" style="font-size:var(--fs-h2)">That page isn't here</h1>
     <p>The address may have been mistyped, or the page has moved. The five pages that exist are below, and the phone always works.</p>
     <ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li></ul>
-    <p class="num">Call 0499 866 580</p>
+    <p>Call <a class="tel num" href="tel:+61499866580">0499 866 580</a></p>
   </div>
 </section>
 </main>
 
-<footer class="site-foot" id="footer" data-per="D0226 D0087 D4187 D3135 D2124 D0859">
+<footer class="site-foot" id="footer">
   <div class="wrap">
     <div class="cols">
       <div class="stack" style="--gap:12px">
-        <a class="logo foot-logo" href="/" data-per="D0443 D0401 D0448 D0404 D0408"><img src="/brand/logo-lockup.png" alt="Fitz Feral Hunters — Protecting Victoria&#x27;s Farms" width="640" height="181" loading="lazy" decoding="async"></a>
+        <a class="logo foot-logo" href="/"><img src="/brand/logo-lockup.png" alt="Fitz Feral Hunters — Protecting Victoria&#x27;s Farms" width="640" height="181" loading="lazy" decoding="async"></a>
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across all of Victoria.</p>
-        <p class="small num">0499 866 580 · fitzferalhunters1@gmail.com</p>
+        <p class="small"><a class="tel num" href="tel:+61499866580">0499 866 580</a> · <a class="mail" href="mailto:fitzferalhunters1@gmail.com?subject=Enquiry%20from%20the%20website">fitzferalhunters1@gmail.com</a></p>
       </div>
-      <div><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li><a href="/reviews">Reviews</a></li></ul></div>
       <div><h4>Elsewhere</h4><ul><li><a href="https://www.instagram.com/gippsland_gunner/" target="_blank" rel="noopener">Instagram @gippsland_gunner</a></li><li><a href="https://www.facebook.com/search/top?q=Fitz%20Feral%20Hunters" target="_blank" rel="noopener">Facebook</a></li><li><a href="/contact#enquiry" data-focus="enquiry">Request a quote</a></li></ul></div>
     </div>
     <div class="cred-strip" aria-label="Credentials"><span>Firearms licence</span><span>Game Licence</span><span>SSAA member</span><span>Farmer Assist</span><span>First Aid</span><span>AHCPMG304</span><span>$20m public liability</span></div>
-    <div class="margin" data-per="D2410 D0041 D1851 D1856 D3077 D3359 D0436 D4987 D0191" data-per="D0140 D0142 D6468 D0041 D2124"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>Grid MGA zone 55 · datum GDA2020</span><span>Contour interval 10 m · index 50 m</span><span>Base GR <span class="num">063 758</span></span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale" data-per="D0041 D0142 D0436 D6468"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure><span>Sheet styling after Victorian 1:25 000 topographic maps · field seed <span class="num">fitzferalhunters-paddock</span></span></div>
-    <div class="legal"><span>&copy; 2026 Fitz Feral Hunters</span><span>Warragul VIC</span><span>ABN <span class="flag" style="border-color:var(--foot-line);color:inherit">to be supplied</span></span><span>Work carried out under Victorian codes of practice</span></div>
+    <div class="margin"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>Grid MGA zone 55 · datum GDA2020</span><span>Contour interval 10 m · index 50 m</span><span>Base GR <span class="num">063 758</span></span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure><span>Sheet styling after Victorian 1:25 000 topographic maps · field seed <span class="num">fitzferalhunters-paddock</span></span></div>
+    <div class="legal"><span>&copy; 2026 Fitz Feral Hunters</span><span>Warragul VIC</span><span>Work carried out under Victorian codes of practice</span></div>
   </div>
 </footer>
-<div class="cta-bar" id="ctabar" data-per="D0280 D0248 D0553 D0552 D2044 D1278 D0300 D2137 D2298">
+<div class="cta-bar" id="ctabar">
   <a class="btn btn-secondary num" href="tel:+61499866580">Call 0499 866 580</a>
   <a class="btn btn-primary" href="/contact#enquiry" data-focus="enquiry">Request a quote</a>
 </div>
-<dialog class="spec" id="spec" data-per="D3245 D4657 D2126" aria-labelledby="spec-title">
-  <div class="bar"><h2 id="spec-title">SP-01e · PADDOCK v0.3.2 · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
-  <div class="inner">
-    <p class="counts"><span>268 entries</span><span>30 laws</span><span>23 pairs</span><span>10 anti-pairs resolved</span><span>7 palette records</span><span>25 doctrine records</span><span>5 templates/dynamics/kits</span><span>368 citations total</span></p>
-    <p>Compiled against <span class="mono">D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses</span>. Every component on the page carries a <span class="mono">data-per</span> attribute naming the records it honours; switch on X-ray and hover any outlined component to read them. The topographic sheet layer (seeded contour field, MGA-style 1 km grid, real zone-55 grid references, scale bars, marginalia, photo registration frames) runs at 3× the v0.2 line density: the same 1200px tile drawn at 600px with 29 levels; the locality map and key are off at the client's request (<span class="mono">sheet_map</span>).</p>
-    <h3>Templates, dynamics, motion kit</h3><p class="mono">MK-01 · DY01 · DY10 · DY07 · TP04</p>
-    <h3>Palettes and colour rules</h3><p class="mono">PALRULE-02 · PALRULE-03 · PALRULE-05 · PAL Noma Forest Season · PAL Forest Institutional · PALRULE-01 · PALRULE-04</p>
-    <h3>Doctrine lenses</h3><p class="mono">LENS-05 · LENS-06 · LENS-16 · LENS-19 · LENS-20 · LENS-09 · LENS-03 · LENS-02 · LENS-04 · LENS-07 · LENS-14 · LENS-15 · LENS-13 · LENS-12 · TENSION-01 · TENSION-05 · TENSION-06 · LENS-21 · DOC-01 · DOC-02 · DOC-03 · DOC-04 · DOC-05 · TENSION-02 · TENSION-03</p>
-    <h3>Laws honoured</h3><p class="mono">LAW-02 · LAW-03 · LAW-05 · LAW-06 · LAW-07 · LAW-10 · LAW-12 · LAW-14 · LAW-15 · LAW-16 · LAW-17 · LAW-18 · LAW-20 · LAW-23 · LAW-25 · LAW-26 · LAW-27 · LAW-28 · LAW-29 · LAW-31 · LAW-32 · LAW-33 · LAW-34 · LAW-37 · LAW-40 · LAW-41 · LAW-44 · LAW-46 · LAW-83 · LAW-113</p>
-    <h3>Pairs honoured</h3><p class="mono">PAIR-06 · PAIR-25 · PAIR-26 · PAIR-88 · PAIR-125 · PAIR-168 · PAIR-173 · PAIR-184 · PAIR-191 · PAIR-199 · PAIR-266 · PAIR-356 · PAIR-357 · PAIR-388 · PAIR-422 · PAIR-509 · PAIR-794 · PAIR-796 · PAIR-958 · PAIR-982 · PAIR-1075 · PAIR-1132 · PAIR-1142</p>
-    <h3>Anti-pairs swept and resolved</h3><p class="mono">NOPAIR-01 · NOPAIR-02 · NOPAIR-04 · NOPAIR-59 · NOPAIR-85 · NOPAIR-129 · NOPAIR-176 · NOPAIR-185 · NOPAIR-237 · NOPAIR-450</p>
-    <h3>Entries (268)</h3><ul class="ids"><li>D0033 · Nature distilled / earthy</li><li>D0039 · Grain &amp; noise texture</li><li>D0041 · Blueprint / schematic</li><li>D0049 · </li><li>D0054 · 8-point spacing system</li><li>D0059 · </li><li>D0061 · Z-pattern flow</li><li>D0063 · Single-column long-form</li><li>D0067 · Card grid</li><li>D0076 · Centered narrow measure</li><li>D0080 · Container-query modules</li><li>D0081 · Fluid intrinsic sizing</li><li>D0083 · Auto-fit responsive cards</li><li>D0087 · Mega-footer grid</li><li>D0093 · Vertical timeline</li><li>D0098 · Marginalia annotations</li><li>D0101 · Fluid type scale</li><li>D0106 · Display + body pairing</li><li>D0107 · </li><li>D0108 · Neutral grotesque system</li><li>D0140 · Small caps + tracking labels</li><li>D0141 · All-caps eyebrow kickers</li><li>D0142 · Tabular numerals</li><li>D0144 · text-wrap balance &amp; pretty</li><li>D0149 · Dynamic line-length guard</li><li>D0153 · Relative color derivation</li><li>D0157 · High-contrast mode support</li><li>D0158 · Semantic color tokens</li><li>D0159 · </li><li>D0161 · 60-30-10 distribution</li><li>D0162 · Monochrome + single accent</li><li>D0166 · Earthy distilled palette</li><li>D0168 · Muted desaturated calm</li><li>D0191 · Color-blind safe ramps</li><li>D0192 · APCA contrast pairing</li><li>D0197 · Status color system</li><li>D0201 · Sticky header</li><li>D0207 · Hamburger drawer</li><li>D0220 · Smooth anchor scrolling</li><li>D0226 · Footer sitemap</li><li>D0228 · Skip-to-content link</li><li>D0248 · Persistent dock / player</li><li>D0251 · Solid primary button</li><li>D0252 · Outline secondary</li><li>D0253 · Ghost / tertiary</li><li>D0260 · Icon button</li><li>D0264 · Toggle button</li><li>D0265 · Loading spinner-in-place</li><li>D0280 · Sticky mobile CTA bar</li><li>D0282 · Inline text link system</li><li>D0297 · Section-end CTA rhythm</li><li>D0300 · Min 44px hit area</li><li>D0301 · Top-aligned labels</li><li>D0307 · Validate-on-blur</li><li>D0310 · Submit error summary</li><li>D0311 · Field-level help affordance</li><li>D0323 · Autofill-cooperative markup</li><li>D0344 · Crash-proof draft restore</li><li>D0346 · Optional-field marking</li><li>D0347 · Grouped fieldsets</li><li>D0351 · Standard content card</li><li>D0353 · Outlined flat card</li><li>D0367 · Testimonial card</li><li>D0371 · Image-overlay caption card</li><li>D0374 · Empty-slot ghost card</li><li>D0375 · Accordion</li><li>D0377 · Native details/summary</li><li>D0381 · Native dialog element</li><li>D0387 · Inline banner alert</li><li>D0400 · Surface token hierarchy</li><li>D0401 · Responsive srcset images</li><li>D0402 · AVIF/WebP delivery</li><li>D0404 · Native lazy loading</li><li>D0408 · Aspect-ratio reservation</li><li>D0416 · Lightbox viewer</li><li>D0433 · Figure caption system</li><li>D0436 · SVG illustration system</li><li>D0443 · Descriptive alt strategy</li><li>D0446 · Keyboard-traversable gallery</li><li>D0447 · Image CDN transforms</li><li>D0448 · Priority hint preloading</li><li>D0451 · Fade-rise entrance</li><li>D0453 · CSS view() reveals</li><li>D0488 · Reduced-motion narrative path</li><li>D0494 · Anchored scroll margins</li><li>D0551 · 44px minimum targets</li><li>D0552 · Thumb-zone layout</li><li>D0553 · Bottom-anchored actions</li><li>D0580 · Complete tab order</li><li>D0581 · Visible focus rings</li><li>D0582 · :focus-visible styling</li><li>D0583 · Skip links</li><li>D0585 · Arrow-key grid navigation</li><li>D0589 · Escape-closes-everything</li><li>D0590 · Guarded enter-submit</li><li>D0591 · Space/enter button parity</li><li>D0592 · Modal focus trap</li><li>D0593 · Focus return on close</li><li>D0594 · Reduced-motion compliance</li><li>D0595 · Voice-control compatibility</li><li>D0597 · Live-region announcements</li><li>D0598 · inputmode keyboards</li><li>D0601 · Button state quartet</li><li>D0603 · Loading-state button</li><li>D0615 · Copy-confirm morph</li><li>D0642 · Live region announcements</li><li>D0643 · Reduced-motion fallback set</li><li>D0644 · Focus-visible ring system</li><li>D0651 · Duration token scale</li><li>D0652 · Easing token library</li><li>D0665 · @starting-style entry</li><li>D0666 · transition-behavior allow-discrete</li><li>D0668 · Height auto transitions</li><li>D0673 · GPU-only property discipline</li><li>D0693 · Reduced-motion variant set</li><li>D0694 · Vestibular-safe constraints</li><li>D0745 · Route announcement region</li><li>D0859 · Last-updated timestamps</li><li>D0860 · First-use empty state</li><li>D0867 · Actionable error messages</li><li>D0876 · Draft restoration prompt</li><li>D0878 · Double-submit guard</li><li>D0895 · Form error summary</li><li>D1011 · color-mix() blending</li><li>D1038 · Forced-colors adaptation</li><li>D1150 · Trust-signal palette</li><li>D1201 · Cascade layers (@layer)</li><li>D1214 · Logical properties</li><li>D1222 · interpolate-size auto</li><li>D1225 · ::details-content</li><li>D1226 · field-sizing: content</li><li>D1227 · accent-color</li><li>D1243 · forced-colors adaptation</li><li>D1248 · Utility + layer architecture</li><li>D1251 · clamp() fluid sizing</li><li>D1268 · Logical inset positioning</li><li>D1278 · Safe-area insets</li><li>D1296 · Print stylesheet layout</li><li>D1300 · field-sizing: content</li><li>D1323 · Fluid type with clamp</li><li>D1333 · text-box-trim</li><li>D1336 · font-display strategy</li><li>D1350 · Type licensing audit</li><li>D1493 · scroll-margin / padding</li><li>D1649 · Progressive enhancement forms</li><li>D1674 · Debounced autosave</li><li>D1737 · Preview deployments</li><li>D1749 · Structured data markup</li><li>D1784 · Performance budgets in CI</li><li>D1851 · Seeded PRNG</li><li>D1856 · Perlin and simplex noise</li><li>D2018 · Calm technology aesthetic</li><li>D2019 · OS-native utilitarian</li><li>D2035 · calc-size and interpolate-size</li><li>D2037 · Stack layout primitive</li><li>D2041 · Logical-property layout</li><li>D2044 · Safe-area inset layout</li><li>D2045 · content-visibility virtualization</li><li>D2046 · contain-intrinsic-size reservation</li><li>D2050 · Scroll-state layout adaptation</li><li>D2052 · text-box-edge tuning</li><li>D2069 · from-font underline metrics</li><li>D2078 · feTurbulence grain</li><li>D2108 · Sticky nav scroll-state</li><li>D2113 · Multiple skip links</li><li>D2114 · Landmark region jumps</li><li>D2121 · Deep-link state restoration</li><li>D2122 · Progressive disclosure nav</li><li>D2124 · Wayfinding scent labels</li><li>D2126 · command and commandfor</li><li>D2137 · Pointer-coarse sizing</li><li>D2138 · Pseudo-element hit expansion</li><li>D2139 · Accessible-name discipline</li><li>D2147 · Focus-visible-only ring</li><li>D2152 · user-invalid styling</li><li>D2156 · Constraint Validation messages</li><li>D2160 · inputmode and enterkeyhint</li><li>D2165 · Autocomplete token discipline</li><li>D2171 · No-JS progressive form</li><li>D2175 · Scroll-into-view on focus</li><li>D2184 · dialog closedby control</li><li>D2185 · Backdrop pseudo styling</li><li>D2186 · Paint and layout containment</li><li>D2187 · content-visibility cards</li><li>D2188 · Link-overlay block card</li><li>D2193 · Aspect-locked media card</li><li>D2202 · decoding=async hints</li><li>D2212 · Focal-point cropping</li><li>D2213 · SVG symbol sprite system</li><li>D2227 · animation-range phases</li><li>D2233 · overscroll-behavior containment</li><li>D2244 · scroll-margin chapter targets</li><li>D2248 · Compositor-only scroll effects</li><li>D2249 · Static reduced-motion narrative</li><li>D2276 · inert background isolation</li><li>D2282 · Voice-control name matching</li><li>D2298 · Pointer-coarse target scaling</li><li>D2301 · Perceived-instant budget</li><li>D2306 · status versus alert roles</li><li>D2312 · Success persistence tuning</li><li>D2313 · Error recovery guidance</li><li>D2314 · Debounce and throttle grammar</li><li>D2318 · Micro-copy as feedback</li><li>D2324 · Focus-return guarantee</li><li>D2327 · Individual transform properties</li><li>D2335 · Asymmetric enter and exit</li><li>D2342 · Vestibular trigger audit</li><li>D2343 · Reduced-motion granularity</li><li>D2347 · Discrete property transitions</li><li>D2410 · Contour isoline plot</li><li>D2450 · Degradation ladder design</li><li>D2504 · accent-color theming</li><li>D2510 · prefers-contrast adaptation</li><li>D2519 · theme-color meta tag</li><li>D2647 · Safe-area landscape insets</li><li>D2668 · Modern system font stack</li><li>D2744 · Progressive enhancement ladder</li><li>D3002 · Warm ivory ground, never white</li><li>D3003 · Near-black ink, never black</li><li>D3006 · Alpha-tint border tokens</li><li>D3007 · Focus colour outside the palette</li><li>D3009 · Three-layer colour indirection</li><li>D3017 · Proportional lining numerals globally</li><li>D3040 · Inset box-shadow hairlines</li><li>D3051 · Four named easing tokens</li><li>D3052 · Colour-only hover transitions</li><li>D3077 · Shader-hash deterministic seeding</li><li>D3128 · Partner logo wall</li><li>D3135 · Complete sitemap as inventory</li><li>D3171 · No-transform hover discipline</li><li>D3187 · Static partner wall</li><li>D3193 · Fluid headings, fixed body</li><li>D3245 · Iteration-timeline case study</li><li>D3359 · Config-hash regeneration</li><li>D3373 · Mode-invariant brand accent</li><li>D3399 · </li><li>D3404 · Dimming ink links</li><li>D3425 · Commerce view() reveals</li><li>D3428 · Flat tiles, dressed controls</li><li>D3432 · Relative-color state layers</li><li>D3453 · Reduced-motion as a hard gate</li><li>D3458 · Optical tracking table</li><li>D3465 · Invisible-link plus real-button pair</li><li>D3468 · Non-round house durations</li><li>D3746 · Forgiving-format input</li><li>D3780 · Status dot with text twin</li><li>D3790 · Step-by-step journey navigation</li><li>D3792 · Transaction confirmation page</li><li>D3796 · Third-party review badge strip</li><li>D3813 · Plain-language policy summary</li><li>D3821 · Disclosure at body contrast</li><li>D3876 · </li><li>D4187 · Audit-badge footer</li><li>D4198 · Alpha line tokens</li><li>D4225 · Trust-claim copy triad</li><li>D4262 · Scrolled hairline by self-timeline</li><li>D4311 · Brand-chrome theme-color</li><li>D4653 · Overline-numbered takeaway grid</li><li>D4656 · Monoculture transition pair</li><li>D4657 · Version-stamped token root</li><li>D4980 · In-page Reduce-Motion Toggle</li><li>D4987 · Carbon-Aware Interface Budget</li><li>D5252 · Seasonal eight-step ground sheets</li><li>D5303 · </li><li>D5639 · State-attribute dialog lightbox</li><li>D5641 · Section-tracking document title</li><li>D6468 · Parameter readout captions</li><li>D6548 · OG Image At 1200 × 630</li></ul>
-    <h3>Surface plan record</h3><pre># SP-01e · Fitz Feral Hunters · PADDOCK v0.3.2 — the dense sheet, no map (diff-mode SP, D700 §0D)
-
-Compiled against: STAMP :: D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses
-Correction to v0.3.1: Aqua keeps the topographic background (&quot;great&quot;) and wants it denser — more lines per pixel, more area visually covered. Only the locality map goes, as the client asked. Everything else in v0.3.1 (all-of-Victoria copy, the drone band, the credentials flag) stands.
-Lenses: LENS-12 back in the lead for the ground, within LENS-04&#x27;s rule for text and controls; LENS-14 unchanged.
-
-Delta: `sheet_layer: true`, `sheet_map: false`. The same seeded 1200px tile is drawn at 600px (`TOPO_SCALE = 0.5`) with 29 levels instead of 19 (interval 1/30), strokes 1.3/2.2 px in tile units (0.65/1.1 px on screen), stroke-opacity .11 minor / .17 index. Measured line density rises from 58 to ≈175 px of contour per 1,000 px² (3.0×). Sheet meta lines, scale-bar dividers, the base grid reference and the footer datum line return with the sheet; the locality map and key stay off behind `sheet_map`.
-
-SP-01e :: Fitz Feral Hunters :: SURFACES=all (delta only) :: CITES=SP-01c set (sheet keys restored) minus the map keys (D0436-as-map, D0191-as-map, D3780-as-legend) plus LENS-12 :: FLOOR=unchanged + 6 delta asserts
-
-## ASSERT lines (delta)
-ASSERT :: all :: body::after carries the tile at background-size 600px (mobile 450px); the tile file is written and ≤ 135 KB (gzip ≈ 50 KB) :: PER=D2410 (Contour isoline plot) · D4987 (Carbon-Aware Interface Budget)
-ASSERT :: all :: contour density ≥ 3× v0.2 (≥ 170 px of line per 1,000 px² at the drawn scale) :: PER=D2410 · LENS-12
-ASSERT :: all :: contour strokes are ink #1b2622 at .11 / .17 alpha; no stroke on the layer exceeds .17 :: PER=D3006 (Alpha-tint border tokens) · LENS-04
-ASSERT :: all :: token contrast on the field: body ≥ 12:1, ink-2 ≥ 7:1 against the solid ground; the field never sits under a control :: PER=D0192 (APCA contrast pairing) · LENS-15
-ASSERT :: home :: no .map or .legend renders; sheet meta, scale bars and the footer datum line do :: PER=client instruction · D0041 (Blueprint / schematic)
-ASSERT :: all :: seed and geometry unchanged: three builds hash identically :: PER=D1851 (Seeded PRNG) · LAW-10
-
-MEASURE :: (filled by the probe run — docs/verdicts-v3-2.txt)
-</pre>
-    <h3>What Fitz supplies before launch</h3>
-    <ul style="margin:0;padding-left:18px;display:grid;gap:4px"><li>A vector or larger logo file if one exists (the current lockup is cut from the card).</li><li>Photos: hero, two about shots, nine gallery shots at 1600px wide, with a one-line description each for alt text.</li><li>Instagram bio wording for the hero lede.</li><li>Testimonials with name, property type and locality (or a Google Business reviews link).</li><li>Pricing line for the first FAQ, ABN for the footer, and whether thermal drone services stay on the Services page.</li></ul>
-  </div>
-</dialog>
 <script>
 (function(){
   var root=document.documentElement;
@@ -626,7 +657,7 @@ MEASURE :: (filled by the probe run — docs/verdicts-v3-2.txt)
   /* hash router (artifact build only): five sections, bare tokens */
   if(ARTIFACT){
     var pages=[].slice.call(document.querySelectorAll('[data-page]')), tokens=pages.map(function(p){return p.id});
-    var titles={"home": "Fitz Feral Hunters \u00b7 Pest & vermin control, Victoria", "services": "Services \u00b7 Fitz Feral Hunters", "about": "About \u00b7 Fitz Feral Hunters", "gallery": "Gallery \u00b7 Fitz Feral Hunters", "contact": "Contact \u00b7 Fitz Feral Hunters"};
+    var titles={"home": "Fitz Feral Hunters \u00b7 Pest & vermin control, Victoria", "services": "Services \u00b7 Fitz Feral Hunters", "about": "About \u00b7 Fitz Feral Hunters", "gallery": "Gallery \u00b7 Fitz Feral Hunters", "contact": "Contact \u00b7 Fitz Feral Hunters", "reviews": "Reviews \u00b7 Fitz Feral Hunters"};
     var live=document.getElementById('route-live');
     function current(){var h=(location.hash||'#home').slice(1);return tokens.indexOf(h)>-1?h:'home'}
     function show(tok,focusId){
@@ -642,22 +673,66 @@ MEASURE :: (filled by the probe run — docs/verdicts-v3-2.txt)
     window.addEventListener('hashchange',function(){show(current())}); window.addEventListener('popstate',function(){show(current())});
     show(current());
   }
-  /* copy buttons */
+  var PHONE="0499 866 580", E164="+61499866580", EMAIL="fitzferalhunters1@gmail.com";
+  /* toast: one shared polite live region, created at load so the first message is announced */
+  var toastEl=document.createElement('div'), toastT=null; toastEl.className='toast'; toastEl.setAttribute('role','status'); toastEl.setAttribute('aria-live','polite'); document.body.appendChild(toastEl);
+  function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(function(){ toastEl.classList.remove('on'); },2400); }
+  function selectText(el){ try{ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); }catch(e){} }
+  function copyText(txt,ok,fail){ try{ navigator.clipboard.writeText(txt).then(ok,fail); }catch(err){ fail(); } }
+  /* copy buttons (email) */
   [].forEach.call(document.querySelectorAll('.copy'),function(b){
     b.addEventListener('click',function(){
-      var txt=b.getAttribute('data-copy'), done=function(){b.setAttribute('data-state','copied');b.textContent='Copied';setTimeout(function(){b.removeAttribute('data-state');b.textContent='Copy'},1600)};
-      function fallback(){ var el=b.previousElementSibling; if(el){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); } b.textContent='Select & copy'; setTimeout(function(){b.textContent='Copy'},1600); }
-      try{ navigator.clipboard.writeText(txt).then(done,fallback); }catch(err){ fallback(); }
+      var txt=b.getAttribute('data-copy'), done=function(){b.setAttribute('data-state','copied');b.textContent='Copied';toast('Copied — '+txt);setTimeout(function(){b.removeAttribute('data-state');b.textContent='Copy'},1600)};
+      function fallback(){ var el=b.previousElementSibling; if(el) selectText(el); toast('Press Ctrl+C (⌘C on Mac) to copy'); }
+      copyText(txt,done,fallback);
     });
   });
+  /* phone numbers: touch phones dial (the plain tel: link); anything with a fine pointer copies the number instead */
+  var touch=window.matchMedia?matchMedia('(hover: none) and (pointer: coarse)'):{matches:true};
+  function telLabels(){ root.setAttribute('data-input',touch.matches?'touch':'pointer'); [].forEach.call(document.querySelectorAll('a[href^="tel:"]'),function(a){ a.setAttribute('aria-label',(touch.matches?'Call ':'Copy phone number ')+PHONE); if(!touch.matches) a.title='Click to copy '+PHONE; else a.removeAttribute('title'); }); }
+  telLabels(); if(touch.addEventListener) touch.addEventListener('change',telLabels);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href^="tel:"]'); if(!a) return;
+    if(touch.matches || e.defaultPrevented || e.button!==0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    copyText(PHONE,function(){ toast('Number copied — '+PHONE); },function(){ selectText(a); toast('Press Ctrl+C (⌘C on Mac) to copy '+PHONE); });
+  });
+  /* videos: a play button over the poster (native controls take over once playing; without script the native controls show), one at a time */
+  [].forEach.call(document.querySelectorAll('.vid video'),function(v){
+    var b=document.createElement('button'); b.type='button'; b.className='play'; b.setAttribute('aria-label','Play video: '+(v.getAttribute('aria-label')||'').replace(/^Video: /,'')); b.innerHTML='<span aria-hidden="true"></span>';
+    v.controls=false; v.parentNode.appendChild(b);
+    b.addEventListener('click',function(){ v.controls=true; b.remove(); var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); try{ v.focus({preventScroll:true}); }catch(e){} });
+    v.addEventListener('play',function(){ [].forEach.call(document.querySelectorAll('.vid video'),function(o){ if(o!==v && !o.paused) o.pause(); }); var f=v.closest('.vid'); if(f) f.classList.add('is-playing'); }); });
+  /* bot check loads only where a form asks for it */
+  if(document.querySelector('.cf-turnstile')){ var ts=document.createElement('script'); ts.src='https://challenges.cloudflare.com/turnstile/v0/api.js'; ts.async=true; ts.defer=true; document.head.appendChild(ts); }
+  /* the receipt dialog shared by the enquiry and review forms */
+  var sent=document.getElementById('sent'), sentClose=null;
+  function openSent(o){
+    if(!sent) return;
+    sent.setAttribute('data-state',o.state);
+    document.getElementById('sent-kicker').textContent=o.kicker; document.getElementById('sent-title').textContent=o.title; document.getElementById('sent-lede').textContent=o.lede;
+    var dl=document.getElementById('sent-list'); dl.replaceChildren(); (o.rows||[]).forEach(function(r){ if(!r[1]) return; var dt=document.createElement('dt'), dd=document.createElement('dd'); dt.textContent=r[0]; dd.textContent=r[1]; dl.appendChild(dt); dl.appendChild(dd); });
+    document.getElementById('sent-ref').textContent=o.ref||'';
+    var ac=document.getElementById('sent-actions'); ac.replaceChildren(); (o.actions||[]).forEach(function(x){ var a=document.createElement('a'); a.className='btn '+(x.cls||'btn-secondary'); a.href=x.href; a.textContent=x.label; ac.appendChild(a); }); ac.hidden=!(o.actions&&o.actions.length);
+    sentClose=o.onClose||null;
+    if(sent.showModal){ if(!sent.open) sent.showModal(); } else { sent.setAttribute('open',''); }
+    document.getElementById('sent-title').focus();
+  }
+  if(sent){
+    document.getElementById('sent-close').addEventListener('click',function(){ if(sent.close) sent.close(); else { sent.removeAttribute('open'); sent.dispatchEvent(new Event('close')); } });
+    sent.addEventListener('click',function(e){ if(e.target===sent) sent.close(); });
+    sent.addEventListener('close',function(){ var f=sentClose; sentClose=null; if(f) f(); });
+  }
+  function mailHref(subject,rows){ var b='Hi Fitz,\n\n'+rows.filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n')+'\n\n(written on the website)'; if(b.length>1600) b=b.slice(0,1600)+'…'; return 'mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(b); }
+  function stamp(){ try{ return new Date().toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}); }catch(e){ return ''; } }
   /* mobile CTA bar exits while the form is in view */
   var bar=document.getElementById('ctabar'), form=document.getElementById('enquiry');
   if(bar && form && 'IntersectionObserver' in window){
     new IntersectionObserver(function(es){ es.forEach(function(x){ bar.hidden=x.isIntersecting && x.intersectionRatio>0.15; }); },{threshold:[0,0.15,0.5]}).observe(form);
   }
   /* lightbox */
-  var lb=document.getElementById('lightbox'), caps=["Thermal spotting from the ute, night job", "Thermal image, deer on a fence line", "Setting up for a night shift", "Pasture damage before a deer program", "Thermal optic and rifle, cased", "Thermal image, pigs at a dam", "Fence line after a kangaroo program", "Spotlight work along a tree line", "DJI Matrice 4T thermal drone, packed"], idx=0, invoker=null;
-  function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.style.setProperty('--ar','3/2'); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
+  var lb=document.getElementById('lightbox'), caps=["Through the thermal scope at 5x: four animals stand out hot against the cold ground.", "Rifle and thermal scope set up on the tripod beside the ute as the light goes.", "Fitz on the shooting sticks in tall eucalypt bush.", "Frosty hill country at first light, from the drone."], idx=0, invoker=null;
+  function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.classList.add('in-lb'); [].forEach.call(c.querySelectorAll('img,source'),function(x){ x.setAttribute('sizes','96vw'); x.removeAttribute('loading'); }); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
   if(lb && lb.showModal){
     [].forEach.call(document.querySelectorAll('[data-lb]'),function(b){ b.addEventListener('click',function(){ invoker=b; paint(+b.getAttribute('data-lb')); lb.setAttribute('data-lightbox-state','open'); lb.showModal(); document.getElementById('lb-close').focus(); }); });
     document.getElementById('lb-prev').addEventListener('click',function(){paint(idx-1)});
@@ -683,6 +758,7 @@ MEASURE :: (filled by the probe run — docs/verdicts-v3-2.txt)
     var sum=document.getElementById('err-summary'), list=document.getElementById('err-list');
     function showErrors(errs){ list.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ev.preventDefault(); var t=document.getElementById(x[0]); (t.querySelector('input')||t).focus(); t.scrollIntoView({block:'center'})}); li.appendChild(a); list.appendChild(li); }); sum.hidden=false; sum.focus(); }
     function succeed(){ var c=document.getElementById('confirm'); document.getElementById('confirm-name').textContent=document.getElementById('f-name').value.trim().split(' ')[0]||'there'; form.hidden=true; c.hidden=false; c.focus(); try{localStorage.removeItem(KEY)}catch(e){} }
+    var FIELD_IDS={name:'f-name',phone:'f-phone',email:'f-email',location:'f-loc',help:'f-help',message:'f-msg'};
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var errs=[];
@@ -692,26 +768,60 @@ MEASURE :: (filled by the probe run — docs/verdicts-v3-2.txt)
       sum.hidden=true;
       var btn=document.getElementById('f-submit'); btn.style.width=btn.getBoundingClientRect().width+'px'; btn.classList.add('is-busy'); btn.setAttribute('aria-disabled','true'); btn.disabled=true; btn.querySelector('.lbl').textContent='Sending';
       function reset(){ btn.classList.remove('is-busy'); btn.disabled=false; btn.removeAttribute('aria-disabled'); btn.style.width=''; btn.querySelector('.lbl').textContent='Send enquiry'; }
-      if(ARTIFACT){ setTimeout(function(){ reset(); succeed(); },900); return; }
       var fd=new FormData(form), payload={}; fd.forEach(function(v,k){ if(k==='help'){ (payload.help=payload.help||[]).push(v);} else payload[k]=v; });
+      var rows=[['Name',payload.name],['Phone',payload.phone],['Email',payload.email],['Location',payload.location],['Help with',(payload.help||[]).join(', ')],['Message',payload.message]];
+      var first=(payload.name||'').trim().split(' ')[0]||'there', subject='Enquiry: '+(payload.help||[]).join(', ')+' near '+payload.location;
+      var fallbackActions=function(){ return [{href:mailHref(subject,rows),label:'Email it to Fitz',cls:'btn-primary'},{href:'tel:'+E164,label:'Call '+PHONE}]; };
+      function delivered(ref){ openSent({state:'sent',kicker:'Enquiry sent',title:'Sent to Fitz',lede:'Thanks, '+first+'. Fitz has your enquiry and will ring '+payload.phone+', usually within two business days. This is what he received:',rows:rows,ref:(ref?'Reference '+ref+' · ':'')+stamp(),onClose:succeed}); }
+      function notYet(){ openSent({state:'fallback',kicker:'Not sent yet',title:'One more step',lede:'The website’s email isn’t switched on yet, so this hasn’t reached Fitz. Send it from your own email with the button below (it’s all filled in), or ring '+PHONE+'.',rows:rows,actions:fallbackActions()}); }
+      function failed(msg){ openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:(msg||'Something went wrong sending it.')+' Nothing reached Fitz. Send it from your own email, or ring '+PHONE+'.',rows:rows,actions:fallbackActions()}); }
+      if(ARTIFACT){ setTimeout(function(){ reset(); delivered('FFH-DEMO'); },900); return; }
       fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
-        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok && j.ok, j:j}; }); })
-        .then(function(res){ reset(); if(!res.ok){ showErrors([['f-submit', (res.j && res.j.error) || 'The enquiry could not be sent. Ring '+document.getElementById('c-phone').textContent+' instead.']]); return; } succeed(); })
-        .catch(function(){ reset(); showErrors([['f-submit','No connection. The enquiry was not sent; ring '+document.getElementById('c-phone').textContent+' instead.']]); });
+        .then(function(r){ return r.json().then(function(j){ return {status:r.status, j:j||{}}; },function(){ return {status:r.status, j:{}}; }); })
+        .then(function(res){ reset(); var j=res.j;
+          if(res.status===400 && j.fields){ showErrors(Object.keys(j.fields).map(function(k){ return [FIELD_IDS[k]||'f-submit', j.fields[k]]; })); return; }
+          if(j.ok && j.delivered){ delivered(j.ref); return; }
+          if(j.ok){ notYet(); return; }
+          failed(j.error); })
+        .catch(function(){ reset(); failed('No connection.'); });
     });
     document.getElementById('confirm-reset').addEventListener('click',function(e){ e.preventDefault(); form.reset(); document.getElementById('confirm').hidden=true; form.hidden=false; document.getElementById('f-name').focus(); });
   }
-  /* reviewer chrome */
-  var vb=document.getElementById('varbar'), tm=document.getElementById('t-motion'), tt=document.getElementById('t-topo'), tx=document.getElementById('t-xray'), ts=document.getElementById('t-spec'), th=document.getElementById('t-hide'), spec=document.getElementById('spec');
-  try{ if(localStorage.getItem('ffh-varbar')==='hidden') vb.hidden=true; }catch(e){}
-  th.addEventListener('click',function(){ vb.hidden=true; try{localStorage.setItem('ffh-varbar','hidden')}catch(e){} });
-  tm.addEventListener('click',function(){ var off=root.getAttribute('data-motion')==='off'; if(off){root.removeAttribute('data-motion');tm.querySelector('.long').textContent='Motion: on';tm.setAttribute('aria-pressed','false')} else {root.setAttribute('data-motion','off');tm.querySelector('.long').textContent='Motion: off (reduced-motion twin)';tm.setAttribute('aria-pressed','true')} });
-  if(tt) tt.addEventListener('click',function(){ var off=root.getAttribute('data-sheet')==='off'; if(off){root.removeAttribute('data-sheet');tt.querySelector('.long').textContent='Sheet: on';tt.setAttribute('aria-pressed','true')} else {root.setAttribute('data-sheet','off');tt.querySelector('.long').textContent='Sheet: off (v1 ground)';tt.setAttribute('aria-pressed','false')} });
-  var NAMES={"D0033": "Nature distilled / earthy", "D0039": "Grain & noise texture", "D0041": "Blueprint / schematic", "D0054": "8-point spacing system", "D0061": "Z-pattern flow", "D0063": "Single-column long-form", "D0067": "Card grid", "D0076": "Centered narrow measure", "D0080": "Container-query modules", "D0081": "Fluid intrinsic sizing", "D0083": "Auto-fit responsive cards", "D0087": "Mega-footer grid", "D0093": "Vertical timeline", "D0098": "Marginalia annotations", "D0101": "Fluid type scale", "D0106": "Display + body pairing", "D0108": "Neutral grotesque system", "D0140": "Small caps + tracking labels", "D0141": "All-caps eyebrow kickers", "D0142": "Tabular numerals", "D0144": "text-wrap balance & pretty", "D0149": "Dynamic line-length guard", "D0153": "Relative color derivation", "D0157": "High-contrast mode support", "D0158": "Semantic color tokens", "D0161": "60-30-10 distribution", "D0162": "Monochrome + single accent", "D0166": "Earthy distilled palette", "D0168": "Muted desaturated calm", "D0191": "Color-blind safe ramps", "D0192": "APCA contrast pairing", "D0197": "Status color system", "D0201": "Sticky header", "D0207": "Hamburger drawer", "D0220": "Smooth anchor scrolling", "D0226": "Footer sitemap", "D0228": "Skip-to-content link", "D0248": "Persistent dock / player", "D0251": "Solid primary button", "D0252": "Outline secondary", "D0253": "Ghost / tertiary", "D0260": "Icon button", "D0264": "Toggle button", "D0265": "Loading spinner-in-place", "D0280": "Sticky mobile CTA bar", "D0282": "Inline text link system", "D0297": "Section-end CTA rhythm", "D0300": "Min 44px hit area", "D0301": "Top-aligned labels", "D0307": "Validate-on-blur", "D0310": "Submit error summary", "D0311": "Field-level help affordance", "D0323": "Autofill-cooperative markup", "D0344": "Crash-proof draft restore", "D0346": "Optional-field marking", "D0347": "Grouped fieldsets", "D0351": "Standard content card", "D0353": "Outlined flat card", "D0367": "Testimonial card", "D0371": "Image-overlay caption card", "D0374": "Empty-slot ghost card", "D0375": "Accordion", "D0377": "Native details/summary", "D0381": "Native dialog element", "D0387": "Inline banner alert", "D0400": "Surface token hierarchy", "D0401": "Responsive srcset images", "D0402": "AVIF/WebP delivery", "D0404": "Native lazy loading", "D0408": "Aspect-ratio reservation", "D0416": "Lightbox viewer", "D0433": "Figure caption system", "D0436": "SVG illustration system", "D0443": "Descriptive alt strategy", "D0446": "Keyboard-traversable gallery", "D0447": "Image CDN transforms", "D0448": "Priority hint preloading", "D0451": "Fade-rise entrance", "D0453": "CSS view() reveals", "D0488": "Reduced-motion narrative path", "D0494": "Anchored scroll margins", "D0551": "44px minimum targets", "D0552": "Thumb-zone layout", "D0553": "Bottom-anchored actions", "D0580": "Complete tab order", "D0581": "Visible focus rings", "D0582": ":focus-visible styling", "D0583": "Skip links", "D0585": "Arrow-key grid navigation", "D0589": "Escape-closes-everything", "D0590": "Guarded enter-submit", "D0591": "Space/enter button parity", "D0592": "Modal focus trap", "D0593": "Focus return on close", "D0594": "Reduced-motion compliance", "D0595": "Voice-control compatibility", "D0597": "Live-region announcements", "D0598": "inputmode keyboards", "D0601": "Button state quartet", "D0603": "Loading-state button", "D0615": "Copy-confirm morph", "D0642": "Live region announcements", "D0643": "Reduced-motion fallback set", "D0644": "Focus-visible ring system", "D0651": "Duration token scale", "D0652": "Easing token library", "D0665": "@starting-style entry", "D0666": "transition-behavior allow-discrete", "D0668": "Height auto transitions", "D0673": "GPU-only property discipline", "D0693": "Reduced-motion variant set", "D0694": "Vestibular-safe constraints", "D0745": "Route announcement region", "D0859": "Last-updated timestamps", "D0860": "First-use empty state", "D0867": "Actionable error messages", "D0876": "Draft restoration prompt", "D0878": "Double-submit guard", "D0895": "Form error summary", "D1011": "color-mix() blending", "D1038": "Forced-colors adaptation", "D1150": "Trust-signal palette", "D1201": "Cascade layers (@layer)", "D1214": "Logical properties", "D1222": "interpolate-size auto", "D1225": "::details-content", "D1226": "field-sizing: content", "D1227": "accent-color", "D1243": "forced-colors adaptation", "D1248": "Utility + layer architecture", "D1251": "clamp() fluid sizing", "D1268": "Logical inset positioning", "D1278": "Safe-area insets", "D1296": "Print stylesheet layout", "D1300": "field-sizing: content", "D1323": "Fluid type with clamp", "D1333": "text-box-trim", "D1336": "font-display strategy", "D1350": "Type licensing audit", "D1493": "scroll-margin / padding", "D1649": "Progressive enhancement forms", "D1674": "Debounced autosave", "D1737": "Preview deployments", "D1749": "Structured data markup", "D1784": "Performance budgets in CI", "D1851": "Seeded PRNG", "D1856": "Perlin and simplex noise", "D2018": "Calm technology aesthetic", "D2019": "OS-native utilitarian", "D2035": "calc-size and interpolate-size", "D2037": "Stack layout primitive", "D2041": "Logical-property layout", "D2044": "Safe-area inset layout", "D2045": "content-visibility virtualization", "D2046": "contain-intrinsic-size reservation", "D2050": "Scroll-state layout adaptation", "D2052": "text-box-edge tuning", "D2069": "from-font underline metrics", "D2078": "feTurbulence grain", "D2108": "Sticky nav scroll-state", "D2113": "Multiple skip links", "D2114": "Landmark region jumps", "D2121": "Deep-link state restoration", "D2122": "Progressive disclosure nav", "D2124": "Wayfinding scent labels", "D2126": "command and commandfor", "D2137": "Pointer-coarse sizing", "D2138": "Pseudo-element hit expansion", "D2139": "Accessible-name discipline", "D2147": "Focus-visible-only ring", "D2152": "user-invalid styling", "D2156": "Constraint Validation messages", "D2160": "inputmode and enterkeyhint", "D2165": "Autocomplete token discipline", "D2171": "No-JS progressive form", "D2175": "Scroll-into-view on focus", "D2184": "dialog closedby control", "D2185": "Backdrop pseudo styling", "D2186": "Paint and layout containment", "D2187": "content-visibility cards", "D2188": "Link-overlay block card", "D2193": "Aspect-locked media card", "D2202": "decoding=async hints", "D2212": "Focal-point cropping", "D2213": "SVG symbol sprite system", "D2227": "animation-range phases", "D2233": "overscroll-behavior containment", "D2244": "scroll-margin chapter targets", "D2248": "Compositor-only scroll effects", "D2249": "Static reduced-motion narrative", "D2276": "inert background isolation", "D2282": "Voice-control name matching", "D2298": "Pointer-coarse target scaling", "D2301": "Perceived-instant budget", "D2306": "status versus alert roles", "D2312": "Success persistence tuning", "D2313": "Error recovery guidance", "D2314": "Debounce and throttle grammar", "D2318": "Micro-copy as feedback", "D2324": "Focus-return guarantee", "D2327": "Individual transform properties", "D2335": "Asymmetric enter and exit", "D2342": "Vestibular trigger audit", "D2343": "Reduced-motion granularity", "D2347": "Discrete property transitions", "D2410": "Contour isoline plot", "D2450": "Degradation ladder design", "D2504": "accent-color theming", "D2510": "prefers-contrast adaptation", "D2519": "theme-color meta tag", "D2647": "Safe-area landscape insets", "D2668": "Modern system font stack", "D2744": "Progressive enhancement ladder", "D3002": "Warm ivory ground, never white", "D3003": "Near-black ink, never black", "D3006": "Alpha-tint border tokens", "D3007": "Focus colour outside the palette", "D3009": "Three-layer colour indirection", "D3017": "Proportional lining numerals globally", "D3040": "Inset box-shadow hairlines", "D3051": "Four named easing tokens", "D3052": "Colour-only hover transitions", "D3077": "Shader-hash deterministic seeding", "D3128": "Partner logo wall", "D3135": "Complete sitemap as inventory", "D3171": "No-transform hover discipline", "D3187": "Static partner wall", "D3193": "Fluid headings, fixed body", "D3245": "Iteration-timeline case study", "D3359": "Config-hash regeneration", "D3373": "Mode-invariant brand accent", "D3404": "Dimming ink links", "D3425": "Commerce view() reveals", "D3428": "Flat tiles, dressed controls", "D3432": "Relative-color state layers", "D3453": "Reduced-motion as a hard gate", "D3458": "Optical tracking table", "D3465": "Invisible-link plus real-button pair", "D3468": "Non-round house durations", "D3746": "Forgiving-format input", "D3780": "Status dot with text twin", "D3790": "Step-by-step journey navigation", "D3792": "Transaction confirmation page", "D3796": "Third-party review badge strip", "D3813": "Plain-language policy summary", "D3821": "Disclosure at body contrast", "D4187": "Audit-badge footer", "D4198": "Alpha line tokens", "D4225": "Trust-claim copy triad", "D4262": "Scrolled hairline by self-timeline", "D4311": "Brand-chrome theme-color", "D4653": "Overline-numbered takeaway grid", "D4656": "Monoculture transition pair", "D4657": "Version-stamped token root", "D4980": "In-page Reduce-Motion Toggle", "D4987": "Carbon-Aware Interface Budget", "D5252": "Seasonal eight-step ground sheets", "D5639": "State-attribute dialog lightbox", "D5641": "Section-tracking document title", "D6468": "Parameter readout captions", "D6548": "OG Image At 1200 × 630"};
-  tx.addEventListener('click',function(){ var on=root.hasAttribute('data-xray'); if(on){root.removeAttribute('data-xray');tx.setAttribute('aria-pressed','false');[].forEach.call(document.querySelectorAll('[data-per]'),function(el){el.removeAttribute('title')})} else {root.setAttribute('data-xray','');tx.setAttribute('aria-pressed','true');[].forEach.call(document.querySelectorAll('[data-per]'),function(el){el.setAttribute('title',el.getAttribute('data-per').split(' ').map(function(i){return i+' '+(NAMES[i]||'')}).join('\n'))})} });
-  if(!('commandForElement' in HTMLButtonElement.prototype)){ ts.addEventListener('click',function(){ if(!spec.open) spec.showModal(); }); }
-  document.getElementById('spec-close').addEventListener('click',function(){ spec.close(); });
-  spec.addEventListener('click',function(e){ if(e.target===spec) spec.close(); });
+  /* reviews: published reviews are added beside the baked-in ones; the form posts to the review queue */
+  var rlists=document.querySelectorAll('[data-reviews]'), rform=document.getElementById('review-form');
+  function reviewCard(r){ var f=document.createElement('figure'); f.className='review'; var bq=document.createElement('blockquote'), q=document.createElement('q'); q.textContent=r.text; bq.appendChild(q); f.appendChild(bq);
+    var who=document.createElement('figcaption'); who.className='who'; who.textContent=[r.name,r.property,r.region].filter(Boolean).join(' · '); f.appendChild(who);
+    var m=document.createElement('p'); m.className='caption'; var d=''; try{ d=r.date?new Date(r.date).toLocaleDateString('en-AU',{month:'long',year:'numeric'}):''; }catch(e){} m.textContent=[r.service,d].filter(Boolean).join(' · '); f.appendChild(m);
+    if(r.reply){ var rp=document.createElement('p'); rp.className='reply'; rp.textContent='Fitz: '+r.reply; f.appendChild(rp); } return f; }
+  if((rlists.length || rform) && !ARTIFACT){
+    fetch('/api/reviews',{headers:{Accept:'application/json'}}).then(function(r){ return r.json(); }).then(function(j){
+      if(!j.enabled){ if(rform){ rform.hidden=true; document.getElementById('review-closed').hidden=false; } return; }
+      [].forEach.call(rlists,function(l){ var n=+l.getAttribute('data-reviews'), have=l.querySelectorAll('.review:not(.review-empty)').length, add=(j.reviews||[]).slice(0,Math.max(0,n-have)); if(!add.length) return; var e=l.querySelector('.review-empty'); if(e) e.remove(); add.forEach(function(r){ l.appendChild(reviewCard(r)); }); });
+    }).catch(function(){});
+  }
+  if(rform){
+    var rsum=document.getElementById('rv-summary'), rerrs=document.getElementById('rv-errs');
+    var rchecks=[['r-name',function(el){return /\S/.test(el.value)}],['r-region',function(el){return el.value!==''}],['r-property',function(el){return el.value!==''}],['r-service',function(el){return el.value!==''}],['r-text',function(el){return el.value.trim().length>=20}],['r-email',function(el){return el.value.trim()!=='' && el.checkValidity()}]];
+    rform.addEventListener('submit',function(e){
+      e.preventDefault(); var errs=[];
+      rchecks.forEach(function(c){ var el=document.getElementById(c[0]), ok=c[1](el), w=el.closest('.field'); w.classList.toggle('has-err',!ok); el.setAttribute('aria-invalid',ok?'false':'true'); if(!ok) errs.push([c[0],w.querySelector('.err').textContent]); });
+      var cons=rform.querySelector('input[name="consent"]'), cw=cons.closest('.field'); cw.classList.toggle('has-err',!cons.checked); if(!cons.checked) errs.push(['r-consent',cw.querySelector('.err').textContent]);
+      if(errs.length){ rerrs.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ ev.preventDefault(); var t=document.getElementById(x[0])||cons; t.focus(); t.scrollIntoView({block:'center'}); }); li.appendChild(a); rerrs.appendChild(li); }); rsum.hidden=false; rsum.focus(); return; }
+      rsum.hidden=true;
+      var p={}; new FormData(rform).forEach(function(v,k){ p[k]=v; }); p.consent=cons.checked;
+      var rows=[['Name',p.name],['Region',p.region],['Property',p.property],['Work',p.service],['Review',p.text]];
+      var btn=document.getElementById('r-submit'); btn.classList.add('is-busy'); btn.disabled=true; btn.querySelector('.lbl').textContent='Sending';
+      function done(){ btn.classList.remove('is-busy'); btn.disabled=false; btn.querySelector('.lbl').textContent='Send review'; }
+      var acts=function(){ return [{href:mailHref('A review for Fitz Feral Hunters',rows),label:'Email it to Fitz',cls:'btn-primary'}]; };
+      fetch(rform.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(p)})
+        .then(function(r){ return r.json().then(function(j){ return {status:r.status,j:j||{}}; },function(){ return {status:r.status,j:{}}; }); })
+        .then(function(res){ done(); var j=res.j;
+          if(j.ok){ openSent({state:'sent',kicker:'Review sent',title:'Thanks, it’s with Fitz',lede:'Every genuine review goes up, good or bad. Fitz checks that you’re a customer, then publishes it. This is what you sent:',rows:rows,ref:stamp(),onClose:function(){ rform.reset(); }}); return; }
+          if(res.status===400 && j.error){ rerrs.replaceChildren(); var li=document.createElement('li'); li.textContent=j.error; rerrs.appendChild(li); rsum.hidden=false; rsum.focus(); return; }
+          openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:(j.error||'Something went wrong sending it.')+' You can email the same review to Fitz instead.',rows:rows,actions:acts()}); })
+        .catch(function(){ done(); openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:'No connection. You can email the same review to Fitz instead.',rows:rows,actions:acts()}); });
+    });
+  }
 })();
 </script>
 </body>

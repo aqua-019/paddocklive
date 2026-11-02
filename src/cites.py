@@ -109,3 +109,11 @@ TOP = {
              "LENS-21","LENS-05","LENS-06","LENS-09","LENS-16","LENS-20"],
   "doctrine": ["DOC-01","DOC-02","DOC-03","DOC-04","DOC-05","TENSION-02","TENSION-03","TENSION-06"],
 }
+
+# v1.0 (SP-02): live features — real media, tap-to-call / click-to-copy, the receipt dialog, reviews
+PADDOCK.update({
+    "media":   ["D2211", "D0404", "D2201"],            # EXIF orientation correction · native lazy loading · sized srcset
+    "video":   ["D0404", "D6523", "D0441", "D0381"],   # lazy, motion-and-data preview gate (preload none), chaptered player, native controls
+    "sent":    ["D0381", "D0979", "D0592", "D2184", "D0642", "D0883"],  # native dialog receipt, focus, closedby, live region, consequence-explicit
+    "reviews": ["D0367", "D0860", "D3813", "D0642"],   # testimonial card, first-use empty state, plain-language policy, live region
+})

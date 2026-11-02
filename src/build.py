@@ -27,10 +27,21 @@ SHEET_MAP = SHEET and bool(S.get('sheet_map', False))   # the locality map + key
 SHEET_KEYS = {'topo', 'meta', 'scalebar', 'map', 'legend'}
 MAP_KEYS = {'map', 'legend'}
 TOPO_SCALE = 0.5   # v0.3.2: the 1200px tile is drawn at 600px — 3× the line density of v0.2
+# v1.0: production is the default build. `--review` (and the artifact) bring back the mockup chrome:
+# the varbar, spec sheet, X-ray, placeholder flags and data-per citations.
+REVIEW = ARTIFACT or '--review' in sys.argv
+MEDIA = {i['id']: i for i in json.loads((ROOT / 'content' / 'media.json').read_text())['items']}
+TURNSTILE = S.get('turnstile_site_key', '')
+from urllib.parse import quote as urlquote
 
 def esc(s): return html.escape(str(s), quote=True)
 
+def flag(text, style=''):
+    """A dashed placeholder note — review build only; production renders nothing."""
+    return f' <span class="flag"{style}>{esc(text)}</span>' if REVIEW else ''
+
 def per(key):
+    if not REVIEW: return ''
     if key in SHEET_KEYS and not SHEET: return ''
     if key in MAP_KEYS and not SHEET_MAP: return ''
     ids = list(cites.SHARED.get(key, [])) + list(X.get(key, []))
@@ -80,10 +91,89 @@ css += """
 .varbar .hide{margin-inline-start:4px}
 .varbar[hidden]{display:none}
 .notfound{padding-block:96px}
+@layer components{
+/* v1.0 · real photos and video in the registration-tick frame */
+figure.slot{margin:0}
+.slot.photo picture{display:contents}
+.slot.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot.video{background:var(--chrome)}
+.slot.video::before,.slot.video::after{display:none}
+.slot.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--chrome);z-index:1}
+.slot .corner,.slot .plate,.slot .dur{pointer-events:none}
+.slot.video .corner.bl,.slot.video .corner.br{display:none}
+.slot.video .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
+.slot.photo::before,.slot.photo::after{display:none}
+.slot.video .corner.tl{display:none}
+.slot.video .play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:var(--radius)}
+.slot.video .play span{width:68px;height:68px;border-radius:50%;background:var(--gold-light);display:grid;place-items:center;transition:background-color var(--t-hover,.2s) cubic-bezier(.165,.84,.44,1)}
+.slot.video .play span::before{content:"";margin-left:6px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent var(--chrome)}
+.slot.video .play:hover span{background:color-mix(in srgb, var(--gold-light), #ffffff 18%)}
+.slot.video .play:focus-visible{outline:3px solid var(--focus-dark);outline-offset:-6px}
+.slot .dur{position:absolute;left:10px;top:10px;z-index:2;font:600 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--foot-ink);background:color-mix(in srgb, var(--chrome) 78%, transparent);padding:5px 7px;border-radius:3px}
+.vid.is-playing .dur,.vid.is-playing .plate{display:none}
+.vid{margin:0;display:grid;gap:10px;min-width:0;align-content:start}
+.vid figcaption{font-size:var(--fs-small);color:var(--ink-2);max-width:60ch}
+.vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
+.band.drone .vid figcaption{color:color-mix(in srgb, var(--foot-ink) 78%, transparent)}
+.band.drone .vid figcaption b{color:var(--foot-ink)}
+.vids{list-style:none;margin:0;padding:0;display:grid;gap:28px}
+@media (min-width:700px){.vids{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.job-grid{display:grid;gap:24px}
+.job-grid .side{display:grid;gap:24px;align-content:start}
+@media (min-width:800px){.job-grid{grid-template-columns:minmax(0,.62fr) minmax(0,1fr);align-items:start}}
+@media (max-width:799px){.vid.tall .slot{--ar:4/5 !important}}
+h2.sub{font-size:var(--fs-h3);font-family:var(--font-cond);margin:8px 0 0}
+dialog.lightbox .slot.in-lb{aspect-ratio:auto;height:min(72vh,720px)}
+dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
+.about-photos .slot{--ar:4/5 !important}
+/* v1.0 · phone numbers and the toast */
+a.tel{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;font-weight:600}
+a.tel:hover{color:var(--gold-ink)}
+.site-foot a.tel:hover,.band.invert a.tel:hover{color:var(--gold-light)}
+.contact-list .kv .row a.tel,.contact-list .kv .row a.mail{font:600 clamp(20px, 1rem + 1vw, 26px)/1.2 var(--font-body);overflow-wrap:anywhere}
+.contact-list .kv .row a.mail{font-size:19px}
+a.mail{color:inherit}
+.hint-copy{display:none;font-size:var(--fs-caption);color:var(--ink-2);font-weight:500}
+@media (hover:hover) and (pointer:fine){.hint-copy{display:inline}.touch-only{display:none !important}}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:60;background:var(--chrome);color:var(--foot-ink);padding:12px 18px;border-radius:var(--radius);font-weight:600;font-size:var(--fs-small);box-shadow:inset 0 0 0 1px var(--gold);max-width:calc(100vw - 32px);opacity:0;visibility:hidden;transition:opacity .2s cubic-bezier(.165,.84,.44,1),visibility 0s linear .2s}
+.toast.on{opacity:1;visibility:visible;transition:opacity .2s cubic-bezier(.165,.84,.44,1),visibility 0s}
+@media (max-width:899px){.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){.toast,.toast.on{transition:none}}
+/* v1.0 · the receipt dialog */
+dialog.sent{border:0;padding:0;background:var(--bg);color:var(--ink);width:min(94vw,600px);max-width:none;max-height:min(90vh,820px);border-radius:var(--radius);box-shadow:inset 0 0 0 2px var(--ok);overscroll-behavior:contain}
+dialog.sent[data-state="fallback"],dialog.sent[data-state="failed"]{box-shadow:inset 0 0 0 2px var(--gold)}
+dialog.sent::backdrop{background:rgb(27 38 34 / .62)}
+dialog.sent .frame{display:grid;gap:14px;padding:24px}
+dialog.sent h2{margin:0;font-size:var(--fs-h2)}
+dialog.sent h2:focus-visible{outline:none}
+dialog.sent #sent-lede{margin:0}
+dialog.sent .eyebrow{margin:0;color:var(--ok)}
+dialog.sent[data-state="fallback"] .eyebrow,dialog.sent[data-state="failed"] .eyebrow{color:var(--gold-ink)}
+.sent-list{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 16px;margin:0;padding:14px 16px;background:var(--surface);border-radius:var(--radius);font-size:var(--fs-small)}
+.sent-list dt{font-weight:600;color:var(--ink-2);text-transform:uppercase;font-size:12px;letter-spacing:.06em;padding-top:2px}
+.sent-list dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
+#sent-ref:empty,#sent-actions[hidden]{display:none}
+dialog.sent[data-state="fallback"] #sent-close,dialog.sent[data-state="failed"] #sent-close{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="failed"] #sent-close:hover{background:var(--wash)}
+/* v1.0 · reviews */
+.review{border-radius:var(--radius);padding:20px;display:grid;gap:10px;align-content:start;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);margin:0;min-width:0}
+.review blockquote{margin:0}
+.review .who{font-size:var(--fs-caption);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+.review .caption{margin:0}
+.review .reply{margin:0;border-left:2px solid var(--gold);padding-left:12px;font-size:var(--fs-small);color:var(--ink-2)}
+.review-empty,.review-closed{grid-column:1/-1;box-shadow:inset 0 0 0 1px var(--line-strong)}
+.reviews-write{display:grid;gap:24px;max-width:44rem}
+.field select{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--ink);font:inherit}
+.field select:hover{border-color:var(--ink-2)}
+.consent label{display:flex;gap:12px;align-items:flex-start;font-weight:500;cursor:pointer}
+.consent input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
+.cf-turnstile{min-height:65px}
+}
 """
 
 PAGES = [("home", "/", "Home"), ("services", "/services", "Services"), ("about", "/about", "About"), ("gallery", "/gallery", "Gallery"), ("contact", "/contact", "Contact")]
-HREF = {k: h for k, h, _ in PAGES}
+EXTRA_PAGES = [("reviews", "/reviews", "Reviews")]     # linked from home, footer and sitemap; not in the main nav
+HREF = {k: h for k, h, _ in PAGES + EXTRA_PAGES}
 def href(key, anchor=''):
     if ARTIFACT: return f'#{key}'
     return HREF[key] + (f'#{anchor}' if anchor else '')
@@ -95,6 +185,7 @@ TITLES = {
   "about": (f"About · {S['name']}", f"Based in {S['base']}, working across {S['region']}. Licensed, insured, accountable. AHCPMG304 humane dispatch."),
   "gallery": (f"Gallery · {S['name']}", "Thermal images, night work, property damage and gear from pest control jobs across Victoria."),
   "contact": (f"Contact · {S['name']}", f"Ring {S['phone_display']} or send an enquiry. Based in {S['base']}, working across {S['region']}."),
+  "reviews": (f"Reviews · {S['name']}", "Reviews from farmers and landholders Fitz Feral Hunters has worked for, published good or bad. Leave a review of a job."),
 }
 
 # real grid references (MGA zone 55) for the base and every locality on the chips
@@ -129,17 +220,56 @@ def slot(kind, label, src="", ar=None, tag="Photo slot"):
                 f'<img src="{esc(src)}" alt="{esc(label)}" loading="lazy" decoding="async" width="1600" height="1200" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">{corners()}{plate}</figure>')
     cls = 'slot thermal' if kind == 'thermal' else 'slot'
     mark = {'thermal': 'Thermal', 'night': 'Night', 'property': 'Property', 'gear': 'Gear'}.get(kind, 'Photo')
-    return (f'<div class="{cls}"{style}{per("slot")}{per("frame")} role="img" aria-label="{esc(tag)}: {esc(label)}">'
-            f'<span class="mark" aria-hidden="true">{mark}</span><span class="tag">{esc(tag)} · client supplies</span>{plate}{corners()}'
-            f'<span class="label">{esc(label)}<small>{esc(kind)} · jpg/avif · alt text written per photo</small></span></div>')
+    tag_html = f'<span class="tag">{esc(tag)} · client supplies</span>' if REVIEW else ''
+    small = f'<small>{esc(kind)} · jpg/avif · alt text written per photo</small>' if REVIEW else ''
+    return (f'<div class="{cls}"{style}{per("slot")}{per("frame")} role="img" aria-label="{esc(label)}">'
+            f'<span class="mark" aria-hidden="true">{mark}</span>{tag_html}{plate}{corners()}'
+            f'<span class="label">{esc(label)}{small}</span></div>')
+
+def photo(mid, ar=None, sizes='(min-width:900px) 45vw, 100vw', eager=False):
+    """A real photo from content/media.json in the registration-tick frame. WebP with a JPEG fallback, sized srcset."""
+    m = MEDIA[mid]
+    sj = ', '.join(f'{j} {w}w' for w, j, _ in m['srcset']); sw = ', '.join(f'{wp} {w}w' for w, _, wp in m['srcset'])
+    load = ' fetchpriority="high"' if eager else ' loading="lazy"'
+    return (f'<figure class="slot photo"{per("slot")}{per("frame")}{per("media")} style="--ar:{ar or str(m["width"]) + "/" + str(m["height"])}" data-ratio="{m["width"]}/{m["height"]}">'
+            f'<picture><source type="image/webp" srcset="{sw}" sizes="{sizes}"><img src="{m["src"]}" srcset="{sj}" sizes="{sizes}" alt="{esc(m["alt"])}" width="{m["width"]}" height="{m["height"]}" decoding="async"{load}></picture>'
+            f'{corners()}<span class="plate">Location withheld</span></figure>')
+
+def pic(ref, label='', ar=None, **kw):
+    """A media id renders the real photo; anything else falls back to the labelled placeholder slot."""
+    if isinstance(ref, str) and ref in MEDIA: return photo(ref, ar=ar, **kw)
+    kind, lab, src = ref if isinstance(ref, (list, tuple)) else ('photo', label, '')
+    return slot(kind, lab, src, ar=ar)
+
+def mmss(s): s = round(s); return f'{s // 60}:{s % 60:02d}'
+
+def video_fig(mid, ar=None, cls=''):
+    """Native player, nothing downloaded until play (preload=none), poster, text description for screen readers."""
+    m = MEDIA[mid]
+    ar = ar or f'{m["width"]}/{m["height"]}'
+    return (f'<figure class="vid{" " + cls if cls else ""}"{per("video")}>'
+            f'<div class="slot video" style="--ar:{ar}"><video controls preload="none" playsinline poster="{m["poster_webp"]}" width="{m["width"]}" height="{m["height"]}" aria-label="Video: {esc(m["title"])}" aria-describedby="vd-{mid}">'
+            f'<source src="{m["src"]}" type="video/mp4"><a href="{m["src"]}">Download the video ({mmss(m["duration"])})</a></video>'
+            f'{corners()}<span class="plate">Location withheld</span><span class="dur num" aria-hidden="true">{mmss(m["duration"])}</span></div>'
+            f'<figcaption><b>{esc(m["title"])}</b> {esc(m["caption"])}</figcaption><p class="sr" id="vd-{mid}">{esc(m["description"])} Length {mmss(m["duration"])}, no sound.</p></figure>')
+
+def videos(kind=None, home=None):
+    return [i['id'] for i in MEDIA.values() if i['type'] == 'video' and (kind is None or i['kind'] == kind) and (home is None or bool(i.get('home')) == home)]
+
+def tel(label=None, cls='tel num'):
+    """Every phone number on the site. Touch phones dial; desktop copies (see the script)."""
+    return f'<a class="{cls}" href="tel:{S["phone_e164"]}">{label or S["phone_display"]}</a>'
+
+def mailto(cls='mail'):
+    return f'<a class="{cls}" href="mailto:{S["email"]}?subject={urlquote("Enquiry from the website")}">{S["email"]}</a>'
 
 def nav_links(current):
     return ''.join(f'<li><a href="{href(k)}"{route_attr(k)}{" aria-current=page" if (k == current and not ARTIFACT) else ""}>{t}</a></li>' for k, h, t in PAGES)
 
 def contact_line():
     return f'''<div class="contact-line"{per("contactline")}>
-        <div class="kv"><b>{ico("i-phone")}Phone</b><span class="num">{S['phone_display']}</span><button type="button" class="copy" data-copy="{S['phone_display']}" aria-label="Copy phone number">Copy</button></div>
-        <div class="kv"><b>{ico("i-mail")}Email</b><span>{S['email']}</span><button type="button" class="copy" data-copy="{S['email']}" aria-label="Copy email address">Copy</button></div>
+        <div class="kv"><b>{ico("i-phone")}Phone</b><span>{tel()}</span><span class="hint-copy">Click to copy</span></div>
+        <div class="kv"><b>{ico("i-mail")}Email</b><span>{mailto()}</span><button type="button" class="copy" data-copy="{S['email']}" aria-label="Copy email address">Copy</button></div>
         <div class="kv"><b>{ico("i-ext")}Follow</b><span><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram</a> · <a href="{S['facebook']}" target="_blank" rel="noopener">Facebook</a></span></div>
       </div>'''
 
@@ -162,7 +292,8 @@ def header(current):
 </header>'''
 
 def footer():
-    abn = esc(S['abn']) if S['abn'] else '<span class="flag" style="border-color:var(--foot-line);color:inherit">to be supplied</span>'
+    abn = esc(S['abn']) if S['abn'] else flag('to be supplied', ' style="border-color:var(--foot-line);color:inherit"').strip()
+    abn_span = f'<span>ABN {abn}</span>' if abn else ''
     return f'''
 <footer class="site-foot" id="footer"{per("footer")}>
   <div class="wrap">
@@ -170,14 +301,14 @@ def footer():
       <div class="stack" style="--gap:12px">
         <a class="logo foot-logo" href="{href('home')}"{route_attr('home')}{per("logo")}><img src="{asset('/brand/logo-lockup.png')}" alt="{esc(S['name'])} — {esc(S['tagline'])}" width="640" height="181" loading="lazy" decoding="async"></a>
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across {esc(S['region'])}.</p>
-        <p class="small num">{S['phone_display']} · {S['email']}</p>
+        <p class="small">{tel()} · {mailto()}</p>
       </div>
-      <div><h4>Pages</h4><ul>{nav_links(None)}</ul></div>
+      <div><h4>Pages</h4><ul>{nav_links(None)}<li><a href="{href('reviews')}">Reviews</a></li></ul></div>
       <div><h4>Elsewhere</h4><ul><li><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])}</a></li><li><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook</a></li><li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a></li></ul></div>
     </div>
     <div class="cred-strip" aria-label="Credentials">{''.join(f'<span>{esc(t)}</span>' for t, _ in S['credentials'][:7])}</div>
     {f'<div class="margin"{per("topo")}{per("meta")}><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>Grid MGA zone 55 · datum GDA2020</span><span>Contour interval 10 m · index 50 m</span><span>Base GR <span class="num">{BASE_GR}</span></span>{scalebar()}<span>Sheet styling after Victorian 1:25 000 topographic maps · field seed <span class="num">{esc(SEED)}</span></span></div>' if SHEET else ''}
-    <div class="legal"><span>&copy; {datetime.date.today().year} {esc(S['name'])}</span><span>{esc(S['base'])} VIC</span><span>ABN {abn}</span><span>Work carried out under Victorian codes of practice</span></div>
+    <div class="legal"><span>&copy; {datetime.date.today().year} {esc(S['name'])}</span><span>{esc(S['base'])} VIC</span>{abn_span}<span>Work carried out under Victorian codes of practice</span></div>
   </div>
 </footer>'''
 
@@ -189,6 +320,7 @@ def ctabar():
 </div>'''
 
 def varbar():
+    if not REVIEW: return ''
     other = esc(S['night_shift_url'])
     return f'''
 <div class="varbar" id="varbar"{per("varbar")} role="region" aria-label="Mockup controls">
@@ -205,6 +337,7 @@ def varbar():
 </div>'''
 
 def spec_dialog():
+    if not REVIEW: return ''
     spfile = (ROOT / 'docs' / ('SP-01e-ffh-paddock-v3-2.md' if SHEET else 'SP-01d-ffh-paddock-v3-1.md'))
     spfile = spfile.read_text() if spfile.exists() else '(SP record not found in docs/)'
     allids = []
@@ -336,7 +469,35 @@ def drone_band():
       <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Night work</b> ahead of the ground team</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
       <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a><a class="btn btn-quiet" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">or ask for a quote</a></div>
     </div>
-    {slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
+    {video_fig("drone-thermal-mob") if "drone-thermal-mob" in MEDIA else slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
+  </div>
+</section>'''
+
+REVIEW_POLICY = ("Every genuine review from someone Fitz has worked for goes up, good or bad. The only ones held back are spam, "
+                 "reviews from people he hasn't worked for, abuse, and anything that names a property's location or a person who hasn't agreed to it. "
+                 "Reviews are never edited.")
+
+def review_cards(limit):
+    """Testimonials Fitz supplies directly (content/site.json) are baked in; reviews published through the site are added by the script."""
+    cards = ''.join(f'<figure class="review reveal"><blockquote><q>{esc(q)}</q></blockquote><figcaption class="who">{esc(w)}</figcaption></figure>' for q, w in S['testimonials'][:limit])
+    empty = '' if S['testimonials'] else (f'<div class="review review-empty" id="review-empty"><b>No reviews on the site yet.</b>'
+                                          f'<p class="small" style="color:var(--ink-2);margin:0">If Fitz has done a job for you, yours can be the first. <a href="{href("reviews", "write")}">Leave a review</a>.</p></div>')
+    return cards + empty
+
+def jobs_band():
+    tall, *side = (videos(home=True) + [None, None, None])[:3]
+    if not tall: return ''
+    return f'''
+{divider("From the job")}
+<section class="band"{per("video")}>
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head reveal"><p class="eyebrow">From the job</p><h2>Drone, thermal and trail camera</h2>
+      <p class="measure">Real footage from properties across Victoria. Locations are never shown. Nothing plays or downloads until you press play.</p></div>
+    <div class="job-grid">
+      {video_fig(tall, cls="tall") if MEDIA[tall]['height'] > MEDIA[tall]['width'] else video_fig(tall)}
+      <div class="side">{''.join(video_fig(v) for v in side if v)}</div>
+    </div>
+    <div class="cta-row"><a class="btn btn-secondary" href="{href('gallery')}"{route_attr('gallery')}>All videos and photos</a></div>
   </div>
 </section>'''
 
@@ -352,14 +513,8 @@ def home_body():
       <a class="btn btn-secondary" href="{href('services','svc-'+k)}"{route_attr('services')} data-focus="svc-{k}">Details<span class="sr"> for {esc(t)}</span></a>
     </article>''' for k, t, d, _ in S['services'])
     steps = ''.join(f'<li class="reveal"><b>{esc(t)}</b><p>{esc(d)}</p></li>' for t, d in S['steps'])
-    if S['testimonials']:
-        quotes = ''.join(f'<figure class="ghost reveal" style="border-style:solid"><blockquote style="margin:0"><q>{esc(q)}</q></blockquote><figcaption class="who">{esc(w)}</figcaption></figure>' for q, w in S['testimonials'])
-        tnote = ''
-    else:
-        quotes = ''.join('<div class="ghost reveal"><q>Landholder quote to come. Fitz supplies real words from real jobs; nothing is written on their behalf.</q><span class="who">Name · property type · locality</span></div>' for _ in range(3))
-        tnote = '<p class="measure small">Three slots, held empty until Fitz supplies quotes with a name, property type and locality. A Google Business reviews link sits here once reviews exist; third-party scores outrank hand-picked quotes. <span class="flag">section hidden until quotes arrive</span></p>'
-    status_flag = '' if S.get('credentials_current') else ' <span class="flag">status line Fitz can edit</span>'
-    lede_flag = f' <span class="flag">{esc(S["lede_flag"])}</span>' if S.get('lede_flag') else ''
+    status_flag = '' if S.get('credentials_current') else flag('status line Fitz can edit')
+    lede_flag = flag(S['lede_flag']) if S.get('lede_flag') else ''
     chips = ''.join(f'<li>{esc(a)}{"<span class=gr>GR " + GR[a][0] + "</span>" if (SHEET and a in GR) else ""}</li>' for a in S['area'])
     return f'''
 <section class="hero wrap"{per("hero")}{per("hero-layout")}>
@@ -373,7 +528,7 @@ def home_body():
       {cta_row()}
       {contact_line()}
     </div>
-    {slot(hp[0], hp[1], hp[2], ar="4/5")}
+    {pic(hp, ar="4/5", sizes="(min-width:900px) 40vw, 100vw", eager=True) if isinstance(hp, str) else slot(hp[0], hp[1], hp[2], ar="4/5")}
   </div>
 </section>
 {divider("Credentials")}
@@ -383,7 +538,7 @@ def home_body():
       <p class="eyebrow">Licensed · insured · accountable</p>
       <h2>The paperwork is in order before the ute leaves the shed</h2>
       <p class="status"><i aria-hidden="true"></i> {esc(S['status_line'])}{status_flag}</p>
-      <p class="caption"><span class="flag">more credentials to come from Fitz</span> They slot into this wall as plates when they arrive.</p>
+      {'<p class="caption"><span class="flag">more credentials to come from Fitz</span> They slot into this wall as plates when they arrive.</p>' if REVIEW else ''}
     </div>
     <ol class="creds reveal" aria-label="Credentials">{creds_li}</ol>
   </div>
@@ -415,11 +570,14 @@ def home_body():
     </div>
   </div>
 </section>
-{divider("From the paddock")}
-<section class="band alt"{per("testimonials")}>
+{jobs_band()}
+{divider("Reviews")}
+<section class="band alt" id="reviews-home"{per("testimonials")}{per("reviews")}>
   <div class="wrap stack" style="--gap:28px">
-    <div class="sec-head reveal"><p class="eyebrow">From the paddock</p><h2>What landholders say</h2>{tnote}</div>
-    <div class="grid grid-3">{quotes}</div>
+    <div class="sec-head reveal"><p class="eyebrow">Reviews</p><h2>What landholders say</h2>
+      <p class="measure small" style="color:var(--ink-2)">{esc(REVIEW_POLICY)}</p></div>
+    <div class="grid grid-3" data-reviews="3" aria-live="polite">{review_cards(3)}</div>
+    <div class="cta-row"><a class="btn btn-secondary" href="{href('reviews', 'write')}">Leave a review</a><a class="btn btn-quiet" href="{href('reviews')}">Read all reviews</a></div>
   </div>
 </section>
 {divider("Service area")}
@@ -477,8 +635,10 @@ def services_body():
 </section>'''
 
 def about_body():
-    cur = esc(S['credentials_current']) if S.get('credentials_current') else '<span class="flag">month year</span>'
+    cur = esc(S['credentials_current']) if S.get('credentials_current') else flag('month year').strip()
+    current_line = (f'Credentials current as at {cur}. ' if cur else '') + 'Certificates of currency supplied on request before work starts.'
     a1, a2 = S['about_photos']
+    about_ph = lambda a: pic(a, sizes='(min-width:900px) 30vw, 50vw') if isinstance(a, str) else slot(*a)
     ledger = ''.join(f'<li><b>{esc(t)}</b><span class="lead" aria-hidden="true"></span><span>{esc(d)}</span></li>' for t, d in S['credentials'][:7])
     return f'''
 <section class="page" aria-labelledby="h-about"{per("about")}>
@@ -490,43 +650,49 @@ def about_body():
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
         <p>{esc(S['name'])} is one operator, licensed and insured{fn(4)}, doing feral animal control for farmers and landholders who want the job done properly and the place left as they found it.</p>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No trophies, no mess, no surprises for the neighbours{fn(3)}.</p>
-        <p><span class="flag">one or two lines about Fitz to come</span> Years on farms, where the hunting started, why the thermal kit: in his own words, kept short.</p>
+        {S.get('about_story') and f"<p>{esc(S['about_story'])}</p>" or ('<p><span class="flag">one or two lines about Fitz to come</span> Years on farms, where the hunting started, why the thermal kit: in his own words, kept short.</p>' if REVIEW else '')}
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
-        <p class="caption">Credentials current as at {cur}. Certificates of currency supplied on request before work starts.</p>
+        <p class="caption">{current_line}</p>
         <figure class="card-figure"{per("brand")}><img src="{asset('/brand/fitz-card.jpg')}" alt="The Fitz Feral Hunters card: rifle mark, Protecting Victoria's Farms, contract pest control, deer and feral management, thermal hunting, farm security, fully insured, 0499 866 580" width="1280" height="755" loading="lazy" decoding="async"><figcaption class="caption">The card, as supplied. The site's green, gold and cream are sampled from it.</figcaption></figure>
-        <div class="grid grid-2" style="margin-top:8px">{slot(*a1)}{slot(*a2)}</div>
+        <div class="grid grid-2 about-photos" style="margin-top:8px">{about_ph(a1)}{about_ph(a2)}</div>
       </div>
       {margin_notes('about')}
     </div>
   </div>
 </section>'''
 
+def gallery_photos():
+    return [p for p in S.get('gallery_photos', []) if p in MEDIA]
+
 def gallery_body():
-    g = S['gallery']
-    items = ''.join(f'''<li><figure style="margin:0"><button type="button" data-lb="{i}" aria-label="Open photo {i+1} of {len(g)}: {esc(c)}">{slot(k, c, src)}</button><figcaption><span class="mono" style="color:var(--ink-2)">Fig. {i+1:02d}</span> · {esc(c)}</figcaption></figure></li>''' for i, (k, c, src) in enumerate(g))
-    return f'''
-<section class="page" aria-labelledby="h-gallery"{per("gallery")}>
-  <div class="wrap stack" style="--gap:28px">
-    <div class="sec-head">{meta("Gallery")}<p class="eyebrow">Gallery</p><h1 id="h-gallery" tabindex="-1" style="font-size:var(--fs-h2)">From the job</h1>
-      <p class="measure">Thermal images, night work, property damage and gear. No property locations are shown and nobody's face appears without their say-so; every frame carries the plate that says so.</p></div>
-    <ul class="gal">{items}</ul>
-    <p class="caption">Each slot takes one client photo at 1600px wide, delivered as AVIF with a JPEG fallback and lazy-loaded below the fold. Alt text is written per photo, describing what the thermal shows, not just "thermal image".</p>
-  </div>
-</section>
+    g = gallery_photos()
+    vids = ''.join(f'<li>{video_fig(v, ar="16/10")}</li>' for v in videos())
+    items = ''.join(f'''<li><figure style="margin:0"><button type="button" data-lb="{i}" aria-label="Open photo {i+1} of {len(g)}: {esc(MEDIA[p]['title'])}">{photo(p, ar="4/3", sizes="(min-width:700px) 33vw, 50vw")}</button><figcaption><span class="mono" style="color:var(--ink-2)">Fig. {i+1:02d}</span> · {esc(MEDIA[p]['caption'])}</figcaption></figure></li>''' for i, p in enumerate(g))
+    lb = '' if not g else f'''
 <dialog class="lightbox" id="lightbox" closedby="any" aria-labelledby="lb-cap" data-lightbox-state="closed"{per("gallery")}>
   <div class="frame">
     <div class="bar"><span class="eyebrow num" id="lb-pos">1 of {len(g)}</span>
       <div style="display:flex;gap:8px"><button type="button" class="btn btn-secondary" id="lb-prev" aria-label="Previous photo">&larr;</button><button type="button" class="btn btn-secondary" id="lb-next" aria-label="Next photo">&rarr;</button><button type="button" class="btn btn-secondary" id="lb-close" aria-label="Close">&times;</button></div></div>
-    <div id="lb-slot">{slot(g[0][0], g[0][1], g[0][2], ar="3/2")}</div>
-    <p id="lb-cap" class="caption">{esc(g[0][1])}</p>
+    <div id="lb-slot"></div>
+    <p id="lb-cap" class="caption">{esc(MEDIA[g[0]]['caption'])}</p>
   </div>
 </dialog>'''
+    return f'''
+<section class="page" aria-labelledby="h-gallery"{per("gallery")}>
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head">{meta("Gallery")}<p class="eyebrow">Gallery</p><h1 id="h-gallery" tabindex="-1" style="font-size:var(--fs-h2)">From the job</h1>
+      <p class="measure">Drone, thermal and trail camera footage, and photos from the field. No property locations are shown and nobody appears without their say-so; every frame carries the plate that says so.</p></div>
+    <div class="stack" style="--gap:16px"><h2 class="sub">Video</h2><ul class="vids">{vids}</ul></div>
+    <div class="stack" style="--gap:16px"><h2 class="sub">Photos</h2><ul class="gal">{items}</ul></div>
+  </div>
+</section>{lb}'''
 
 def contact_body():
     checks = ''.join(f'<label><input type="checkbox" name="help" value="{esc(x)}"> {esc(x)}</label>' for x in ["Deer", "Kangaroos", "Pigs", "Foxes", "Rabbits", "Wild dogs", "Not sure yet"])
     action = '#contact' if ARTIFACT else '/api/enquiry'
-    note = ('Mockup: this review build does not send. On the live site the form posts to a server function that emails ' if ARTIFACT else 'Mockup: enquiries sent here are received by the site\'s server function and emailed to ') + S['email'] + (' and shows the confirmation below.' if ARTIFACT else ' once the mail key is configured; until then they are logged for testing.') + ' Without script the plain form still submits.'
+    note = (('Mockup: this review build does not send. On the live site the form posts to a server function that emails ' if ARTIFACT else 'Review build: enquiries are received by the site\'s server function and emailed to ') + S['email'] + (' and shows the confirmation below.' if ARTIFACT else ' once the mail key is configured.') + ' Without script the plain form still submits.') if REVIEW else ''
+    ts = f'<div class="cf-turnstile" data-sitekey="{esc(TURNSTILE)}" data-theme="light" data-size="flexible"></div>' if TURNSTILE else ''
     return f'''
 <section class="page" aria-labelledby="h-contact">
   <div class="wrap contact-grid">
@@ -534,10 +700,10 @@ def contact_body():
       <div class="sec-head" style="margin:0">{meta("Contact")}<p class="eyebrow">Contact</p><h1 id="h-contact" tabindex="-1" style="font-size:var(--fs-h2)">Ring, email or send the form</h1>
         <p class="measure">Phone is quickest. If I'm out on a job I'll ring back the same day where I can.</p></div>
       <div class="contact-list"{per("contactline")}>
-        <div class="kv"><b>{ico("i-phone")}Phone</b><div class="row"><span class="num" id="c-phone">{S['phone_display']}</span><button type="button" class="copy" data-copy="{S['phone_display']}" aria-label="Copy phone number">Copy</button><a class="btn btn-secondary" href="tel:{S['phone_e164']}">Call</a></div></div>
-        <div class="kv"><b>{ico("i-mail")}Email</b><div class="row"><span id="c-email" style="font-size:19px">{S['email']}</span><button type="button" class="copy" data-copy="{S['email']}" aria-label="Copy email address">Copy</button></div></div>
+        <div class="kv"><b>{ico("i-phone")}Phone</b><div class="row"><span>{tel()}</span><span class="hint-copy">Click to copy</span><a class="btn btn-secondary touch-only" href="tel:{S['phone_e164']}" aria-label="Call {S['phone_display']}">Call</a></div></div>
+        <div class="kv"><b>{ico("i-mail")}Email</b><div class="row"><span style="font-size:19px">{mailto()}</span><button type="button" class="copy" data-copy="{S['email']}" aria-label="Copy email address">Copy</button></div></div>
         <div class="kv"><b>{ico("i-pin")}Based in</b><div class="row"><span style="font-size:19px">{esc(S['base'])}, Gippsland VIC</span>{'<span class="mono" style="color:var(--ink-2)">GR <span class="num">' + BASE_GR + '</span> · MGA 55</span>' if SHEET else '<span class="mono" style="color:var(--ink-2)">Jobs anywhere in Victoria</span>'}</div></div>
-        <div class="kv"{per("socials")}><b>Follow the work</b><div class="socials"><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])} {ico("i-ext")}</a><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook · {esc(S['facebook_label'])} {ico("i-ext")} <span class="flag">confirm page URL</span></a></div></div>
+        <div class="kv"{per("socials")}><b>Follow the work</b><div class="socials"><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])} {ico("i-ext")}</a><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook · {esc(S['facebook_label'])} {ico("i-ext")}{flag('confirm page URL')}</a></div></div>
       </div>
     </div>
     <div>
@@ -551,8 +717,9 @@ def contact_body():
         <fieldset class="field" id="f-help"><legend>What do you need help with?</legend><span class="hint">Tick everything that applies.</span><div class="checks">{checks}</div><span class="err" id="e-help">Tick at least one. "Not sure yet" is fine.</span></fieldset>
         <div class="field"><label for="f-msg">Anything else <span style="font-weight:400;color:var(--ink-2)">(optional)</span></label><span class="hint">Damage, numbers, timing, access: whatever you've noticed.</span><textarea id="f-msg" name="message" enterkeyhint="done" maxlength="2000"></textarea></div>
         <div class="sr" aria-hidden="true"><label for="f-company">Leave this field empty</label><input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
+        {ts}
         <div class="cta-row"><button type="submit" class="btn btn-primary" id="f-submit"><span class="spin" aria-hidden="true"></span><span class="lbl">Send enquiry</span></button><span class="note" id="form-note">Your details go to Fitz only. No mailing list, nothing shared.</span></div>
-        <p class="note">{note}</p>
+        {f'<p class="note">{note}</p>' if note else ''}
       </form>
       <div class="confirm" id="confirm" role="status" tabindex="-1" hidden{per("confirm")}>
         <b>Enquiry received</b>
@@ -562,7 +729,60 @@ def contact_body():
       </div>
     </div>
   </div>
-</section>'''
+</section>{sent_dialog()}'''
+
+def sent_dialog():
+    """The receipt that opens over the page after a form is sent: what was sent, whether it reached Fitz, and a way through if it didn't."""
+    return f'''
+<dialog class="sent" id="sent" aria-labelledby="sent-title" aria-describedby="sent-lede" data-state="sent"{per("sent")}>
+  <div class="frame">
+    <p class="eyebrow" id="sent-kicker">Enquiry</p>
+    <h2 id="sent-title" tabindex="-1">Sent to Fitz</h2>
+    <p id="sent-lede"></p>
+    <dl class="sent-list" id="sent-list"></dl>
+    <p class="caption num" id="sent-ref"></p>
+    <div class="cta-row" id="sent-actions"></div>
+    <div class="cta-row"><button type="button" class="btn btn-primary" id="sent-close">Done</button></div>
+  </div>
+</dialog>'''
+
+REGIONS = S['area'] + ['Elsewhere in Victoria']
+PROPERTY_TYPES = ['Beef', 'Dairy', 'Sheep', 'Mixed farming', 'Lifestyle block', 'Horticulture or vineyard', 'Other']
+
+def reviews_body():
+    opt = lambda xs: ''.join(f'<option>{esc(x)}</option>' for x in xs)
+    services = [t for _, t, _, _ in S['services']] + (['Thermal drone scouting'] if S.get('thermal_drone') else []) + ['Other']
+    google = f'<a class="btn btn-secondary" href="{esc(S["google_review_url"])}" target="_blank" rel="noopener">Review us on Google {ico("i-ext")}</a>' if S.get('google_review_url') else ''
+    ts = f'<div class="cf-turnstile" data-sitekey="{esc(TURNSTILE)}" data-theme="light" data-size="flexible"></div>' if TURNSTILE else ''
+    return f'''
+<section class="page" aria-labelledby="h-reviews"{per("reviews")}>
+  <div class="wrap stack" style="--gap:32px">
+    <div class="sec-head">{meta("Reviews")}<p class="eyebrow">Reviews</p><h1 id="h-reviews" tabindex="-1" style="font-size:var(--fs-h2)">What landholders say</h1>
+      <p class="measure">{esc(REVIEW_POLICY)}</p></div>
+    <div class="grid grid-2" data-reviews="50" aria-live="polite">{review_cards(50)}</div>
+    <div class="reviews-write" id="write">
+      <div class="sec-head" style="margin:0"><h2>Leave a review</h2>
+        <p class="measure small" style="color:var(--ink-2)">For landholders Fitz has worked for. It goes to Fitz first and is published after a quick check that you're a customer. Your email is only used for that check and is never shown.</p>
+        {google}</div>
+      <form class="form" id="review-form" action="/api/reviews" method="post" novalidate{per("form")}>
+        <div class="summary" id="rv-summary" role="alert" tabindex="-1" hidden><b>Fix the following to send your review</b><ul id="rv-errs"></ul></div>
+        <div class="field"><label for="r-name">Your name</label><span class="hint">First name and last initial, e.g. Sam T.</span><input id="r-name" name="name" type="text" autocomplete="given-name" required maxlength="40"><span class="err">Enter your first name and last initial.</span></div>
+        <div class="grid grid-2" style="gap:20px">
+          <div class="field"><label for="r-region">Region</label><select id="r-region" name="region" required><option value="">Choose…</option>{opt(REGIONS)}</select><span class="err">Choose a region.</span></div>
+          <div class="field"><label for="r-property">Property type</label><select id="r-property" name="property" required><option value="">Choose…</option>{opt(PROPERTY_TYPES)}</select><span class="err">Choose a property type.</span></div>
+        </div>
+        <div class="field"><label for="r-service">Work Fitz did</label><select id="r-service" name="service" required><option value="">Choose…</option>{opt(services)}</select><span class="err">Choose the work Fitz did.</span></div>
+        <div class="field"><label for="r-text">Your review</label><span class="hint">What the problem was, what Fitz did, how it went. 20 to 800 characters. Please don't name the property or its location.</span><textarea id="r-text" name="text" required minlength="20" maxlength="800"></textarea><span class="err">Write at least 20 characters.</span></div>
+        <div class="field"><label for="r-email">Email</label><span class="hint">Only so Fitz can check you're a customer. Never shown.</span><input id="r-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"><span class="err">Enter a valid email address.</span></div>
+        <div class="field consent"><label><input type="checkbox" id="r-consent" name="consent" value="yes" required> OK to publish this review, with my first name, initial, region and property type, on this website.</label><span class="err">Tick to agree to publishing.</span></div>
+        <div class="sr" aria-hidden="true"><label for="r-company">Leave this field empty</label><input id="r-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
+        {ts}
+        <div class="cta-row"><button type="submit" class="btn btn-primary" id="r-submit"><span class="spin" aria-hidden="true"></span><span class="lbl">Send review</span></button></div>
+      </form>
+      <div class="review review-closed" id="review-closed" hidden><b>Reviews open soon</b><p class="small" style="margin:0;color:var(--ink-2)">The review form isn't switched on yet. In the meantime, call {tel()} or email {mailto()}.</p></div>
+    </div>
+  </div>
+</section>{sent_dialog()}'''
 
 def notfound_body():
     return f'''
@@ -572,7 +792,7 @@ def notfound_body():
     <h1 id="h-404" style="font-size:var(--fs-h2)">That page isn't here</h1>
     <p>The address may have been mistyped, or the page has moved. The five pages that exist are below, and the phone always works.</p>
     <ul>{''.join(f'<li><a href="{h}">{t}</a></li>' for _, h, t in PAGES)}</ul>
-    <p class="num">Call {S['phone_display']}</p>
+    <p>Call {tel()}</p>
   </div>
 </section>'''
 
@@ -601,14 +821,58 @@ SCRIPT = r"""
     window.addEventListener('hashchange',function(){show(current())}); window.addEventListener('popstate',function(){show(current())});
     show(current());
   }
-  /* copy buttons */
+  var PHONE=%%PHONE%%, E164=%%E164%%, EMAIL=%%EMAIL%%;
+  /* toast: one shared polite live region, created at load so the first message is announced */
+  var toastEl=document.createElement('div'), toastT=null; toastEl.className='toast'; toastEl.setAttribute('role','status'); toastEl.setAttribute('aria-live','polite'); document.body.appendChild(toastEl);
+  function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(function(){ toastEl.classList.remove('on'); },2400); }
+  function selectText(el){ try{ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); }catch(e){} }
+  function copyText(txt,ok,fail){ try{ navigator.clipboard.writeText(txt).then(ok,fail); }catch(err){ fail(); } }
+  /* copy buttons (email) */
   [].forEach.call(document.querySelectorAll('.copy'),function(b){
     b.addEventListener('click',function(){
-      var txt=b.getAttribute('data-copy'), done=function(){b.setAttribute('data-state','copied');b.textContent='Copied';setTimeout(function(){b.removeAttribute('data-state');b.textContent='Copy'},1600)};
-      function fallback(){ var el=b.previousElementSibling; if(el){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); } b.textContent='Select & copy'; setTimeout(function(){b.textContent='Copy'},1600); }
-      try{ navigator.clipboard.writeText(txt).then(done,fallback); }catch(err){ fallback(); }
+      var txt=b.getAttribute('data-copy'), done=function(){b.setAttribute('data-state','copied');b.textContent='Copied';toast('Copied — '+txt);setTimeout(function(){b.removeAttribute('data-state');b.textContent='Copy'},1600)};
+      function fallback(){ var el=b.previousElementSibling; if(el) selectText(el); toast('Press Ctrl+C (⌘C on Mac) to copy'); }
+      copyText(txt,done,fallback);
     });
   });
+  /* phone numbers: touch phones dial (the plain tel: link); anything with a fine pointer copies the number instead */
+  var touch=window.matchMedia?matchMedia('(hover: none) and (pointer: coarse)'):{matches:true};
+  function telLabels(){ root.setAttribute('data-input',touch.matches?'touch':'pointer'); [].forEach.call(document.querySelectorAll('a[href^="tel:"]'),function(a){ a.setAttribute('aria-label',(touch.matches?'Call ':'Copy phone number ')+PHONE); if(!touch.matches) a.title='Click to copy '+PHONE; else a.removeAttribute('title'); }); }
+  telLabels(); if(touch.addEventListener) touch.addEventListener('change',telLabels);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href^="tel:"]'); if(!a) return;
+    if(touch.matches || e.defaultPrevented || e.button!==0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    copyText(PHONE,function(){ toast('Number copied — '+PHONE); },function(){ selectText(a); toast('Press Ctrl+C (⌘C on Mac) to copy '+PHONE); });
+  });
+  /* videos: a play button over the poster (native controls take over once playing; without script the native controls show), one at a time */
+  [].forEach.call(document.querySelectorAll('.vid video'),function(v){
+    var b=document.createElement('button'); b.type='button'; b.className='play'; b.setAttribute('aria-label','Play video: '+(v.getAttribute('aria-label')||'').replace(/^Video: /,'')); b.innerHTML='<span aria-hidden="true"></span>';
+    v.controls=false; v.parentNode.appendChild(b);
+    b.addEventListener('click',function(){ v.controls=true; b.remove(); var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); try{ v.focus({preventScroll:true}); }catch(e){} });
+    v.addEventListener('play',function(){ [].forEach.call(document.querySelectorAll('.vid video'),function(o){ if(o!==v && !o.paused) o.pause(); }); var f=v.closest('.vid'); if(f) f.classList.add('is-playing'); }); });
+  /* bot check loads only where a form asks for it */
+  if(document.querySelector('.cf-turnstile')){ var ts=document.createElement('script'); ts.src='https://challenges.cloudflare.com/turnstile/v0/api.js'; ts.async=true; ts.defer=true; document.head.appendChild(ts); }
+  /* the receipt dialog shared by the enquiry and review forms */
+  var sent=document.getElementById('sent'), sentClose=null;
+  function openSent(o){
+    if(!sent) return;
+    sent.setAttribute('data-state',o.state);
+    document.getElementById('sent-kicker').textContent=o.kicker; document.getElementById('sent-title').textContent=o.title; document.getElementById('sent-lede').textContent=o.lede;
+    var dl=document.getElementById('sent-list'); dl.replaceChildren(); (o.rows||[]).forEach(function(r){ if(!r[1]) return; var dt=document.createElement('dt'), dd=document.createElement('dd'); dt.textContent=r[0]; dd.textContent=r[1]; dl.appendChild(dt); dl.appendChild(dd); });
+    document.getElementById('sent-ref').textContent=o.ref||'';
+    var ac=document.getElementById('sent-actions'); ac.replaceChildren(); (o.actions||[]).forEach(function(x){ var a=document.createElement('a'); a.className='btn '+(x.cls||'btn-secondary'); a.href=x.href; a.textContent=x.label; ac.appendChild(a); }); ac.hidden=!(o.actions&&o.actions.length);
+    sentClose=o.onClose||null;
+    if(sent.showModal){ if(!sent.open) sent.showModal(); } else { sent.setAttribute('open',''); }
+    document.getElementById('sent-title').focus();
+  }
+  if(sent){
+    document.getElementById('sent-close').addEventListener('click',function(){ if(sent.close) sent.close(); else { sent.removeAttribute('open'); sent.dispatchEvent(new Event('close')); } });
+    sent.addEventListener('click',function(e){ if(e.target===sent) sent.close(); });
+    sent.addEventListener('close',function(){ var f=sentClose; sentClose=null; if(f) f(); });
+  }
+  function mailHref(subject,rows){ var b='Hi Fitz,\n\n'+rows.filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n')+'\n\n(written on the website)'; if(b.length>1600) b=b.slice(0,1600)+'…'; return 'mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(b); }
+  function stamp(){ try{ return new Date().toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}); }catch(e){ return ''; } }
   /* mobile CTA bar exits while the form is in view */
   var bar=document.getElementById('ctabar'), form=document.getElementById('enquiry');
   if(bar && form && 'IntersectionObserver' in window){
@@ -616,7 +880,7 @@ SCRIPT = r"""
   }
   /* lightbox */
   var lb=document.getElementById('lightbox'), caps=%%CAPS%%, idx=0, invoker=null;
-  function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.style.setProperty('--ar','3/2'); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
+  function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.classList.add('in-lb'); [].forEach.call(c.querySelectorAll('img,source'),function(x){ x.setAttribute('sizes','96vw'); x.removeAttribute('loading'); }); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
   if(lb && lb.showModal){
     [].forEach.call(document.querySelectorAll('[data-lb]'),function(b){ b.addEventListener('click',function(){ invoker=b; paint(+b.getAttribute('data-lb')); lb.setAttribute('data-lightbox-state','open'); lb.showModal(); document.getElementById('lb-close').focus(); }); });
     document.getElementById('lb-prev').addEventListener('click',function(){paint(idx-1)});
@@ -642,6 +906,7 @@ SCRIPT = r"""
     var sum=document.getElementById('err-summary'), list=document.getElementById('err-list');
     function showErrors(errs){ list.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ev.preventDefault(); var t=document.getElementById(x[0]); (t.querySelector('input')||t).focus(); t.scrollIntoView({block:'center'})}); li.appendChild(a); list.appendChild(li); }); sum.hidden=false; sum.focus(); }
     function succeed(){ var c=document.getElementById('confirm'); document.getElementById('confirm-name').textContent=document.getElementById('f-name').value.trim().split(' ')[0]||'there'; form.hidden=true; c.hidden=false; c.focus(); try{localStorage.removeItem(KEY)}catch(e){} }
+    var FIELD_IDS={name:'f-name',phone:'f-phone',email:'f-email',location:'f-loc',help:'f-help',message:'f-msg'};
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var errs=[];
@@ -651,24 +916,70 @@ SCRIPT = r"""
       sum.hidden=true;
       var btn=document.getElementById('f-submit'); btn.style.width=btn.getBoundingClientRect().width+'px'; btn.classList.add('is-busy'); btn.setAttribute('aria-disabled','true'); btn.disabled=true; btn.querySelector('.lbl').textContent='Sending';
       function reset(){ btn.classList.remove('is-busy'); btn.disabled=false; btn.removeAttribute('aria-disabled'); btn.style.width=''; btn.querySelector('.lbl').textContent='Send enquiry'; }
-      if(ARTIFACT){ setTimeout(function(){ reset(); succeed(); },900); return; }
       var fd=new FormData(form), payload={}; fd.forEach(function(v,k){ if(k==='help'){ (payload.help=payload.help||[]).push(v);} else payload[k]=v; });
+      var rows=[['Name',payload.name],['Phone',payload.phone],['Email',payload.email],['Location',payload.location],['Help with',(payload.help||[]).join(', ')],['Message',payload.message]];
+      var first=(payload.name||'').trim().split(' ')[0]||'there', subject='Enquiry: '+(payload.help||[]).join(', ')+' near '+payload.location;
+      var fallbackActions=function(){ return [{href:mailHref(subject,rows),label:'Email it to Fitz',cls:'btn-primary'},{href:'tel:'+E164,label:'Call '+PHONE}]; };
+      function delivered(ref){ openSent({state:'sent',kicker:'Enquiry sent',title:'Sent to Fitz',lede:'Thanks, '+first+'. Fitz has your enquiry and will ring '+payload.phone+', usually within two business days. This is what he received:',rows:rows,ref:(ref?'Reference '+ref+' · ':'')+stamp(),onClose:succeed}); }
+      function notYet(){ openSent({state:'fallback',kicker:'Not sent yet',title:'One more step',lede:'The website’s email isn’t switched on yet, so this hasn’t reached Fitz. Send it from your own email with the button below (it’s all filled in), or ring '+PHONE+'.',rows:rows,actions:fallbackActions()}); }
+      function failed(msg){ openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:(msg||'Something went wrong sending it.')+' Nothing reached Fitz. Send it from your own email, or ring '+PHONE+'.',rows:rows,actions:fallbackActions()}); }
+      if(ARTIFACT){ setTimeout(function(){ reset(); delivered('FFH-DEMO'); },900); return; }
       fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
-        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok && j.ok, j:j}; }); })
-        .then(function(res){ reset(); if(!res.ok){ showErrors([['f-submit', (res.j && res.j.error) || 'The enquiry could not be sent. Ring '+document.getElementById('c-phone').textContent+' instead.']]); return; } succeed(); })
-        .catch(function(){ reset(); showErrors([['f-submit','No connection. The enquiry was not sent; ring '+document.getElementById('c-phone').textContent+' instead.']]); });
+        .then(function(r){ return r.json().then(function(j){ return {status:r.status, j:j||{}}; },function(){ return {status:r.status, j:{}}; }); })
+        .then(function(res){ reset(); var j=res.j;
+          if(res.status===400 && j.fields){ showErrors(Object.keys(j.fields).map(function(k){ return [FIELD_IDS[k]||'f-submit', j.fields[k]]; })); return; }
+          if(j.ok && j.delivered){ delivered(j.ref); return; }
+          if(j.ok){ notYet(); return; }
+          failed(j.error); })
+        .catch(function(){ reset(); failed('No connection.'); });
     });
     document.getElementById('confirm-reset').addEventListener('click',function(e){ e.preventDefault(); form.reset(); document.getElementById('confirm').hidden=true; form.hidden=false; document.getElementById('f-name').focus(); });
   }
-  /* reviewer chrome */
-  var vb=document.getElementById('varbar'), tm=document.getElementById('t-motion'), tt=document.getElementById('t-topo'), tx=document.getElementById('t-xray'), ts=document.getElementById('t-spec'), th=document.getElementById('t-hide'), spec=document.getElementById('spec');
+  /* reviews: published reviews are added beside the baked-in ones; the form posts to the review queue */
+  var rlists=document.querySelectorAll('[data-reviews]'), rform=document.getElementById('review-form');
+  function reviewCard(r){ var f=document.createElement('figure'); f.className='review'; var bq=document.createElement('blockquote'), q=document.createElement('q'); q.textContent=r.text; bq.appendChild(q); f.appendChild(bq);
+    var who=document.createElement('figcaption'); who.className='who'; who.textContent=[r.name,r.property,r.region].filter(Boolean).join(' · '); f.appendChild(who);
+    var m=document.createElement('p'); m.className='caption'; var d=''; try{ d=r.date?new Date(r.date).toLocaleDateString('en-AU',{month:'long',year:'numeric'}):''; }catch(e){} m.textContent=[r.service,d].filter(Boolean).join(' · '); f.appendChild(m);
+    if(r.reply){ var rp=document.createElement('p'); rp.className='reply'; rp.textContent='Fitz: '+r.reply; f.appendChild(rp); } return f; }
+  if((rlists.length || rform) && !ARTIFACT){
+    fetch('/api/reviews',{headers:{Accept:'application/json'}}).then(function(r){ return r.json(); }).then(function(j){
+      if(!j.enabled){ if(rform){ rform.hidden=true; document.getElementById('review-closed').hidden=false; } return; }
+      [].forEach.call(rlists,function(l){ var n=+l.getAttribute('data-reviews'), have=l.querySelectorAll('.review:not(.review-empty)').length, add=(j.reviews||[]).slice(0,Math.max(0,n-have)); if(!add.length) return; var e=l.querySelector('.review-empty'); if(e) e.remove(); add.forEach(function(r){ l.appendChild(reviewCard(r)); }); });
+    }).catch(function(){});
+  }
+  if(rform){
+    var rsum=document.getElementById('rv-summary'), rerrs=document.getElementById('rv-errs');
+    var rchecks=[['r-name',function(el){return /\S/.test(el.value)}],['r-region',function(el){return el.value!==''}],['r-property',function(el){return el.value!==''}],['r-service',function(el){return el.value!==''}],['r-text',function(el){return el.value.trim().length>=20}],['r-email',function(el){return el.value.trim()!=='' && el.checkValidity()}]];
+    rform.addEventListener('submit',function(e){
+      e.preventDefault(); var errs=[];
+      rchecks.forEach(function(c){ var el=document.getElementById(c[0]), ok=c[1](el), w=el.closest('.field'); w.classList.toggle('has-err',!ok); el.setAttribute('aria-invalid',ok?'false':'true'); if(!ok) errs.push([c[0],w.querySelector('.err').textContent]); });
+      var cons=rform.querySelector('input[name="consent"]'), cw=cons.closest('.field'); cw.classList.toggle('has-err',!cons.checked); if(!cons.checked) errs.push(['r-consent',cw.querySelector('.err').textContent]);
+      if(errs.length){ rerrs.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ ev.preventDefault(); var t=document.getElementById(x[0])||cons; t.focus(); t.scrollIntoView({block:'center'}); }); li.appendChild(a); rerrs.appendChild(li); }); rsum.hidden=false; rsum.focus(); return; }
+      rsum.hidden=true;
+      var p={}; new FormData(rform).forEach(function(v,k){ p[k]=v; }); p.consent=cons.checked;
+      var rows=[['Name',p.name],['Region',p.region],['Property',p.property],['Work',p.service],['Review',p.text]];
+      var btn=document.getElementById('r-submit'); btn.classList.add('is-busy'); btn.disabled=true; btn.querySelector('.lbl').textContent='Sending';
+      function done(){ btn.classList.remove('is-busy'); btn.disabled=false; btn.querySelector('.lbl').textContent='Send review'; }
+      var acts=function(){ return [{href:mailHref('A review for Fitz Feral Hunters',rows),label:'Email it to Fitz',cls:'btn-primary'}]; };
+      fetch(rform.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(p)})
+        .then(function(r){ return r.json().then(function(j){ return {status:r.status,j:j||{}}; },function(){ return {status:r.status,j:{}}; }); })
+        .then(function(res){ done(); var j=res.j;
+          if(j.ok){ openSent({state:'sent',kicker:'Review sent',title:'Thanks, it’s with Fitz',lede:'Every genuine review goes up, good or bad. Fitz checks that you’re a customer, then publishes it. This is what you sent:',rows:rows,ref:stamp(),onClose:function(){ rform.reset(); }}); return; }
+          if(res.status===400 && j.error){ rerrs.replaceChildren(); var li=document.createElement('li'); li.textContent=j.error; rerrs.appendChild(li); rsum.hidden=false; rsum.focus(); return; }
+          openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:(j.error||'Something went wrong sending it.')+' You can email the same review to Fitz instead.',rows:rows,actions:acts()}); })
+        .catch(function(){ done(); openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:'No connection. You can email the same review to Fitz instead.',rows:rows,actions:acts()}); });
+    });
+  }
+  /* reviewer chrome (review build only) */
+  var vb=document.getElementById('varbar'), tm=document.getElementById('t-motion'), tt=document.getElementById('t-topo'), tx=document.getElementById('t-xray'), ts2=document.getElementById('t-spec'), th=document.getElementById('t-hide'), spec=document.getElementById('spec');
+  if(!vb) return;
   try{ if(localStorage.getItem('ffh-varbar')==='hidden') vb.hidden=true; }catch(e){}
   th.addEventListener('click',function(){ vb.hidden=true; try{localStorage.setItem('ffh-varbar','hidden')}catch(e){} });
   tm.addEventListener('click',function(){ var off=root.getAttribute('data-motion')==='off'; if(off){root.removeAttribute('data-motion');tm.querySelector('.long').textContent='Motion: on';tm.setAttribute('aria-pressed','false')} else {root.setAttribute('data-motion','off');tm.querySelector('.long').textContent='Motion: off (reduced-motion twin)';tm.setAttribute('aria-pressed','true')} });
   if(tt) tt.addEventListener('click',function(){ var off=root.getAttribute('data-sheet')==='off'; if(off){root.removeAttribute('data-sheet');tt.querySelector('.long').textContent='Sheet: on';tt.setAttribute('aria-pressed','true')} else {root.setAttribute('data-sheet','off');tt.querySelector('.long').textContent='Sheet: off (v1 ground)';tt.setAttribute('aria-pressed','false')} });
   var NAMES=%%NAMES%%;
   tx.addEventListener('click',function(){ var on=root.hasAttribute('data-xray'); if(on){root.removeAttribute('data-xray');tx.setAttribute('aria-pressed','false');[].forEach.call(document.querySelectorAll('[data-per]'),function(el){el.removeAttribute('title')})} else {root.setAttribute('data-xray','');tx.setAttribute('aria-pressed','true');[].forEach.call(document.querySelectorAll('[data-per]'),function(el){el.setAttribute('title',el.getAttribute('data-per').split(' ').map(function(i){return i+' '+(NAMES[i]||'')}).join('\n'))})} });
-  if(!('commandForElement' in HTMLButtonElement.prototype)){ ts.addEventListener('click',function(){ if(!spec.open) spec.showModal(); }); }
+  if(!('commandForElement' in HTMLButtonElement.prototype)){ ts2.addEventListener('click',function(){ if(!spec.open) spec.showModal(); }); }
   document.getElementById('spec-close').addEventListener('click',function(){ spec.close(); });
   spec.addEventListener('click',function(e){ if(e.target===spec) spec.close(); });
 })();
@@ -685,7 +996,12 @@ def jsonld():
     }, ensure_ascii=False)
 
 def script():
-    return (SCRIPT.replace('%%CAPS%%', json.dumps([c for _, c, _ in S['gallery']])).replace('%%NAMES%%', json.dumps(NAMES, ensure_ascii=False))
+    src = SCRIPT
+    if not REVIEW:   # production: drop the varbar / X-ray / spec-sheet code
+        a, z = src.index('  /* reviewer chrome (review build only) */'), src.rindex('})();')
+        src = src[:a] + src[z:]
+    return (src.replace('%%CAPS%%', json.dumps([MEDIA[p]['caption'] for p in gallery_photos()])).replace('%%NAMES%%', json.dumps(NAMES if REVIEW else {}, ensure_ascii=False))
+                  .replace('%%PHONE%%', json.dumps(S['phone_display'])).replace('%%E164%%', json.dumps(S['phone_e164'])).replace('%%EMAIL%%', json.dumps(S['email']))
                   .replace('%%ARTIFACT%%', 'true' if ARTIFACT else 'false').replace('%%TITLES%%', json.dumps({k: TITLES[k][0] for k in TITLES})))
 
 def document(key, body, title, desc):
@@ -698,6 +1014,7 @@ def document(key, body, title, desc):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 {robots}<meta name="theme-color" content="#1b2622">
@@ -761,7 +1078,7 @@ def main():
         print(f'artifact → {out} ({out.stat().st_size/1024:.0f} KB) · {n_entries} entries · {len(allids)} citations · topo tile {len(TOPO_SVG)/1024:.0f} KB')
         return
     PUB.mkdir(exist_ok=True)
-    pages = {'home': home_body(), 'services': services_body(), 'about': about_body(), 'gallery': gallery_body(), 'contact': contact_body()}
+    pages = {'home': home_body(), 'services': services_body(), 'about': about_body(), 'gallery': gallery_body(), 'contact': contact_body(), 'reviews': reviews_body()}
     for key, body in pages.items():
         t, d = TITLES[key]
         (PUB / ('index.html' if key == 'home' else f'{key}.html')).write_text(document(key, body, t, d))
@@ -771,9 +1088,9 @@ def main():
     elif (PUB / 'topo-tile.svg').exists(): (PUB / 'topo-tile.svg').unlink()
     base = S['url'].rstrip('/'); today = datetime.date.today().isoformat()
     (PUB / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-        ''.join(f'  <url><loc>{base}{"" if h == "/" else h}</loc><lastmod>{today}</lastmod></url>\n' for _, h, _ in PAGES) + '</urlset>\n')
+        ''.join(f'  <url><loc>{base}{"" if h == "/" else h}</loc><lastmod>{today}</lastmod></url>\n' for _, h, _ in PAGES + EXTRA_PAGES) + '</urlset>\n')
     (PUB / 'robots.txt').write_text(('User-agent: *\nAllow: /\n' if S.get('indexable') else 'User-agent: *\nDisallow: /\n') + f'Sitemap: {base}/sitemap.xml\n')
-    print(f'built {len(pages)+1} pages into public/ · {n_entries} entries · {len(allids)} citations · topo tile {len(TOPO_SVG)/1024:.0f} KB')
+    print(f'built {len(pages)+1} pages into public/ ({"review" if REVIEW else "production"}) · {n_entries} entries · {len(allids)} citations · topo tile {len(TOPO_SVG)/1024:.0f} KB')
 
 if __name__ == '__main__':
     main()

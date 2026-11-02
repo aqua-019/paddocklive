@@ -1,0 +1,254 @@
+{
+ "_comment": "Photos and videos for the site. Originals live in media-src/ (gitignored, never committed). Run `python3 scripts/media.py` to encode anything new; it fills in src, poster, width, height, duration and bytes. Then `python3 src/build.py`. Every output is stripped of metadata (GPS included). kind: photo | drone | thermal | work | trailcam. home: true puts a video on the home page.",
+ "items": [
+  {
+   "id": "ute-thermal-rig",
+   "type": "photo",
+   "kind": "gear",
+   "source": "ute-thermal-rig.jpg",
+   "title": "Thermal rig on the tripod at dusk",
+   "caption": "Rifle and thermal scope set up on the tripod beside the ute as the light goes.",
+   "alt": "A wooden-stocked rifle with a thermal scope mounted on a tripod beside a cream four-wheel drive with a roof rack, green paddock and a dusk sky behind.",
+   "src": "/media/photo/ute-thermal-rig-960-5100e2e1.jpg",
+   "src_webp": "/media/photo/ute-thermal-rig-960-5100e2e1.webp",
+   "width": 960,
+   "height": 1280,
+   "srcset": [
+    [
+     960,
+     "/media/photo/ute-thermal-rig-960-5100e2e1.jpg",
+     "/media/photo/ute-thermal-rig-960-5100e2e1.webp"
+    ],
+    [
+     640,
+     "/media/photo/ute-thermal-rig-640-dc9cb71b.jpg",
+     "/media/photo/ute-thermal-rig-640-dc9cb71b.webp"
+    ]
+   ],
+   "bytes": 119661
+  },
+  {
+   "id": "fitz-on-sticks",
+   "type": "photo",
+   "kind": "work",
+   "source": "fitz-on-sticks.jpg",
+   "title": "Fitz on the shooting sticks",
+   "caption": "Fitz on the shooting sticks in tall eucalypt bush.",
+   "alt": "Fitz in a cap and a dark green oilskin coat aiming a scoped rifle off shooting sticks among tall eucalypts, leaf litter underfoot.",
+   "src": "/media/photo/fitz-on-sticks-727-1f8b4eee.jpg",
+   "src_webp": "/media/photo/fitz-on-sticks-727-1f8b4eee.webp",
+   "width": 727,
+   "height": 1280,
+   "srcset": [
+    [
+     727,
+     "/media/photo/fitz-on-sticks-727-1f8b4eee.jpg",
+     "/media/photo/fitz-on-sticks-727-1f8b4eee.webp"
+    ],
+    [
+     640,
+     "/media/photo/fitz-on-sticks-640-a2241f14.jpg",
+     "/media/photo/fitz-on-sticks-640-a2241f14.webp"
+    ]
+   ],
+   "bytes": 230496
+  },
+  {
+   "id": "thermal-scope-view",
+   "type": "photo",
+   "kind": "thermal",
+   "source": "thermal-scope-view.jpg",
+   "title": "Through the thermal scope",
+   "caption": "Through the thermal scope at 5x: four animals stand out hot against the cold ground.",
+   "alt": "Thermal scope view in grey with four animals glowing orange and yellow, the scope's on-screen readout across the top and the reticle beside them.",
+   "src": "/media/photo/thermal-scope-view-1024-5a6c7754.jpg",
+   "src_webp": "/media/photo/thermal-scope-view-1024-5a6c7754.webp",
+   "width": 1024,
+   "height": 768,
+   "srcset": [
+    [
+     1024,
+     "/media/photo/thermal-scope-view-1024-5a6c7754.jpg",
+     "/media/photo/thermal-scope-view-1024-5a6c7754.webp"
+    ],
+    [
+     640,
+     "/media/photo/thermal-scope-view-640-cf75da34.jpg",
+     "/media/photo/thermal-scope-view-640-cf75da34.webp"
+    ]
+   ],
+   "bytes": 81159
+  },
+  {
+   "id": "first-light-still",
+   "type": "photo",
+   "kind": "property",
+   "source": "pad11.mp4",
+   "frame_at": 25,
+   "title": "Gippsland hills at first light",
+   "caption": "Frosty hill country at first light, from the drone.",
+   "alt": "Aerial view at dawn of frost-covered rolling green paddocks, a gully of trees and a tree line in autumn colour.",
+   "src": "/media/photo/first-light-still-848-ced0607e.jpg",
+   "src_webp": "/media/photo/first-light-still-848-ced0607e.webp",
+   "width": 848,
+   "height": 464,
+   "srcset": [
+    [
+     848,
+     "/media/photo/first-light-still-848-ced0607e.jpg",
+     "/media/photo/first-light-still-848-ced0607e.webp"
+    ],
+    [
+     640,
+     "/media/photo/first-light-still-640-e022917b.jpg",
+     "/media/photo/first-light-still-640-e022917b.webp"
+    ]
+   ],
+   "bytes": 37532
+  },
+  {
+   "id": "drone-thermal-mob",
+   "type": "video",
+   "kind": "drone",
+   "source": "pad10.mp4",
+   "poster_at": 23.3,
+   "home": false,
+   "title": "Thermal drone: finding the mob",
+   "caption": "From the thermal drone: a mob picked up on an open hillside and followed into the timber, before anyone walks in.",
+   "description": "Black-and-white thermal footage from a drone flying over a hillside at night. Several animals show as bright white shapes, first in the open and then moving through scattered trees.",
+   "src": "/media/video/drone-thermal-mob-1147f4e4.mp4",
+   "width": 848,
+   "height": 672,
+   "duration": 46.7,
+   "bytes": 8993356,
+   "poster": "/media/photo/drone-thermal-mob-poster-848-ae60778d.jpg",
+   "poster_webp": "/media/photo/drone-thermal-mob-poster-848-ae60778d.webp"
+  },
+  {
+   "id": "deer-mob-hillside",
+   "type": "video",
+   "kind": "work",
+   "source": "pad8.mov",
+   "poster_at": 2,
+   "home": true,
+   "title": "Fallow deer on a hillside paddock",
+   "caption": "A mob of fallow deer moving up a steep paddock. Numbers like this are why landholders call.",
+   "description": "Phone video, filmed upright, of a large mob of fallow deer in mixed colours running up a steep green hillside under a grey sky, past a fence line.",
+   "src": "/media/video/deer-mob-hillside-8e1838f8.mp4",
+   "width": 464,
+   "height": 848,
+   "duration": 26.9,
+   "bytes": 1849039,
+   "poster": "/media/photo/deer-mob-hillside-poster-464-ac606385.jpg",
+   "poster_webp": "/media/photo/deer-mob-hillside-poster-464-ac606385.webp"
+  },
+  {
+   "id": "trailcam-stag-night",
+   "type": "video",
+   "kind": "trailcam",
+   "source": "pad5-trail.mp4",
+   "poster_at": 0.4,
+   "home": true,
+   "title": "Stag on the trail camera before dawn",
+   "caption": "Trail cameras show what moves through and when. This stag came past at 5:58 am.",
+   "description": "Black-and-white night footage from a trail camera on a bush track. An antlered stag walks across close to the camera and out of frame.",
+   "src": "/media/video/trailcam-stag-night-537ca029.mp4",
+   "width": 848,
+   "height": 464,
+   "duration": 20.0,
+   "bytes": 1284360,
+   "poster": "/media/photo/trailcam-stag-night-poster-848-7a264a09.jpg",
+   "poster_webp": "/media/photo/trailcam-stag-night-poster-848-7a264a09.webp"
+  },
+  {
+   "id": "drone-first-light",
+   "type": "video",
+   "kind": "drone",
+   "source": "pad11.mp4",
+   "trim": [
+    0,
+    60
+   ],
+   "poster_at": 25,
+   "title": "First light from the drone",
+   "caption": "A dawn flight over hill country: deer picked out in the paddock from the air, then the gullies and tree lines they use.",
+   "description": "Aerial drone footage at dawn over frosty rolling paddocks. Three deer graze in a paddock seen from directly above, then the drone flies along gullies and tree lines.",
+   "src": "/media/video/drone-first-light-bf4716bd.mp4",
+   "width": 848,
+   "height": 464,
+   "duration": 60.0,
+   "bytes": 3573096,
+   "poster": "/media/photo/drone-first-light-poster-848-caec9292.jpg",
+   "poster_webp": "/media/photo/drone-first-light-poster-848-caec9292.webp",
+   "home": true
+  },
+  {
+   "id": "thermal-canopy",
+   "type": "video",
+   "kind": "thermal",
+   "source": "pad1.mp4",
+   "poster_at": 4.8,
+   "title": "Heat signature in the canopy",
+   "caption": "Looking down through the canopy on thermal: one warm body stands out among cold leaves.",
+   "description": "Grey thermal footage looking down into a eucalypt canopy. A small bright white heat signature moves among the leaves and branches.",
+   "src": "/media/video/thermal-canopy-cc3091eb.mp4",
+   "width": 848,
+   "height": 672,
+   "duration": 14.5,
+   "bytes": 1321883,
+   "poster": "/media/photo/thermal-canopy-poster-848-5941cdf9.jpg",
+   "poster_webp": "/media/photo/thermal-canopy-poster-848-5941cdf9.webp"
+  },
+  {
+   "id": "deer-garden",
+   "type": "video",
+   "kind": "work",
+   "source": "pad3.mp4",
+   "poster_at": 7,
+   "title": "Deer in the garden beds",
+   "caption": "A deer feeding through garden plantings at close range.",
+   "description": "Daylight video looking down on a brown deer pushing through dense green garden plants.",
+   "src": "/media/video/deer-garden-a79a51a4.mp4",
+   "width": 848,
+   "height": 464,
+   "duration": 21.3,
+   "bytes": 2416815,
+   "poster": "/media/photo/deer-garden-poster-848-bce60a30.jpg",
+   "poster_webp": "/media/photo/deer-garden-poster-848-bce60a30.webp"
+  },
+  {
+   "id": "trailcam-kangaroo-day",
+   "type": "video",
+   "kind": "trailcam",
+   "source": "pad4-trail.mp4",
+   "poster_at": 0.5,
+   "title": "Kangaroo on the trail camera",
+   "caption": "A kangaroo crossing a bush track mid-morning, caught on a trail camera.",
+   "description": "Colour trail camera footage of a grassy slope among gum trees. A kangaroo hops across the track and out of frame.",
+   "src": "/media/video/trailcam-kangaroo-day-bce7a6b9.mp4",
+   "width": 848,
+   "height": 464,
+   "duration": 20.0,
+   "bytes": 4512497,
+   "poster": "/media/photo/trailcam-kangaroo-day-poster-848-8c7a621f.jpg",
+   "poster_webp": "/media/photo/trailcam-kangaroo-day-poster-848-8c7a621f.webp"
+  },
+  {
+   "id": "trailcam-night-visitor",
+   "type": "video",
+   "kind": "trailcam",
+   "source": "pad2.mp4",
+   "poster_at": 0.2,
+   "title": "Night visitor on the trail camera",
+   "caption": "A small night visitor on the trail camera at 4:15 am.",
+   "description": "Black-and-white night footage from a trail camera on a bush track; a small animal crosses the bottom of the frame.",
+   "src": "/media/video/trailcam-night-visitor-0d68a8dc.mp4",
+   "width": 848,
+   "height": 464,
+   "duration": 20.0,
+   "bytes": 728116,
+   "poster": "/media/photo/trailcam-night-visitor-poster-848-5f46a30c.jpg",
+   "poster_webp": "/media/photo/trailcam-night-visitor-poster-848-5f46a30c.webp"
+  }
+ ]
+}

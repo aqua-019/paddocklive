@@ -1,0 +1,19 @@
+VERIFIED :: SP-02 :: all :: production build carries no review chrome :: claimed=varbar/spec/flag/data-per = 0 on 7 pages measured=0,0,0,0,0,0,0 :: PER=production mode
+VERIFIED :: SP-02 :: gallery, home :: no video bytes until play; posters + preload=none :: claimed=0 mp4 requests measured=0 mp4 requests · 8 videos · posters true :: PER=D6523 · D0404 · LENS-06
+VERIFIED :: SP-02 :: gallery :: play button over each poster; text description linked :: claimed=play=videos, controls hidden until play measured=8/8, controls 0, descriptions true :: PER=D0441 · LAW-23
+VERIFIED :: SP-02 :: gallery :: pressing play hands over to native controls and starts the download :: claimed=controls on, button gone, request made measured=controls true, button false, requests 1, focus true (headless H.264 support: "") :: PER=D0381 · LAW-23
+VERIFIED :: SP-02 :: home (desktop) :: clicking a number copies it and announces a toast :: claimed=every visible number copies; URL unchanged measured=4 copied of 5 tel links (visible only) · url same true · toast "Number copied — 0499 866 580" role=status · label "Copy phone number 0499 866 580" :: PER=D0386 · D0642 · D2300
+VERIFIED :: SP-02 :: home (desktop) :: keyboard Enter on the number copies too :: claimed=copied measured=ok :: PER=LAW-23
+VERIFIED :: SP-02 :: home (iPhone 13) :: tapping a number is left to the dialler :: claimed=not default-prevented measured=prevented=false · input=touch · label "Call 0499 866 580" :: PER=D2300
+VERIFIED :: SP-02 :: all (390px) :: no horizontal scroll :: claimed=7/7 measured=7/7 :: PER=LENS-15
+VERIFIED :: SP-02 :: all (no JS) :: numbers stay tel: links; videos keep native controls :: claimed=true/true measured=true/true :: PER=progressive enhancement
+VERIFIED :: SP-02 :: contact :: no mail key yet: receipt says not sent, shows the enquiry, offers a filled-in email :: claimed=fallback + rows + mailto measured=fallback "One more step" · 6 rows · Email it to Fitz / Call 0499 866 580 · focus #sent-title :: PER=D0979 · D0381 · LENS-02
+VERIFIED :: SP-02 :: contact :: closing the not-sent receipt keeps the form filled :: claimed=form kept measured={"open":false,"form":true,"name":"Sam Taylor"} :: PER=D0342
+VERIFIED :: SP-02 :: contact :: mail on: "Sent to Fitz" receipt with reference; Esc closes to the inline confirmation :: claimed=sent, ref, then confirm measured=sent "Sent to Fitz" "Reference FFH-TEST1 · Mon, 2 Nov, 7:31 pm" → confirm true, focus #confirm :: PER=D0979 · D2184 · D0592
+VERIFIED :: SP-02 :: contact :: server field errors land on the right field :: claimed=#f-loc measured=#f-loc :: PER=LAW-23
+VERIFIED :: SP-02 :: reviews :: review goes to Fitz with a signed moderation link :: claimed=receipt + link measured=sent "Thanks, it’s with Fitz" · link issued :: PER=D0367 · D3813
+VERIFIED :: SP-02 :: reviews, home :: opening the link changes nothing; Publish puts it on /reviews and home :: claimed=0 before · 1 · 1 measured=0 before click · "Published" · /reviews 1 · home 1 :: PER=D0883 · D0367
+VERIFIED :: SP-02 :: all :: hover recolours only (no transform/shadow) incl. play and numbers :: claimed=0 changed of 19 measured=0 changed :: PER=D3171 · LAW-03
+VERIFIED :: SP-02 :: home, gallery :: new text contrast :: claimed=captions ≥7 · titles ≥12 · drone captions ≥7 · review meta ≥4.5 measured={"cap":7.76,"title":14.44,"drone":14.44,"review":7.23} :: PER=D0192 · LENS-15
+VERIFIED :: SP-02 :: gallery (390px) :: play target ≥ 44px (whole poster is the button) :: claimed=≥44 measured=68×68 :: PER=LAW-23
+VERIFIED :: SP-02 :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract

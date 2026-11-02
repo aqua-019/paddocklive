@@ -1,12 +1,17 @@
 {
-  "name": "paddock1",
-  "version": "0.1.0",
+  "name": "fitzferalhunters",
+  "version": "1.0.0",
   "private": true,
-  "description": "Fitz Feral Hunters — Paddock composition (D700 SP-01). Static site + one Vercel function.",
+  "description": "Fitz Feral Hunters \u2014 live site (from the D700 Paddock composition). Static site + Vercel functions.",
   "type": "module",
   "scripts": {
     "build": "python3 src/build.py",
-    "dev": "python3 src/build.py && vercel dev"
+    "build:review": "python3 src/build.py --review",
+    "media": "python3 scripts/media.py",
+    "dev": "node scripts/dev.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }

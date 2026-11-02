@@ -13,12 +13,12 @@ export const config = () => ({
 
 // ---------------------------------------------------------------- email (Resend)
 const RESEND = 'https://api.resend.com/emails';
-export async function sendMail({ to, subject, text, replyTo, from }) {
+export async function sendMail({ to, subject, text, html, replyTo, from }) {
   if (!process.env.RESEND_API_KEY) return { sent: false, reason: 'RESEND_API_KEY not set' };
   const r = await fetch(RESEND, {
     method: 'POST',
     headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: from || process.env.ENQUIRY_FROM || 'Fitz Feral Hunters site <onboarding@resend.dev>', to: Array.isArray(to) ? to : [to], reply_to: replyTo || undefined, subject, text }),
+    body: JSON.stringify({ from: from || process.env.ENQUIRY_FROM || 'Fitz Feral Hunters site <onboarding@resend.dev>', to: Array.isArray(to) ? to : [to], reply_to: replyTo || undefined, subject, text, html: html || undefined }),
   });
   if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`);
   const j = await r.json();
@@ -38,10 +38,10 @@ export async function redis(...cmd) {
   if (!r.ok) throw new Error(`Redis ${r.status}: ${await r.text()}`);
   return (await r.json()).result;
 }
-export async function logEnquiry(record) {
+export async function logEnquiry(record, ttlSec = 90 * 86400) {
   if (!redisEnv()) return { stored: false, reason: 'no store configured' };
   const id = `enq:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`;
-  await redis('SET', id, JSON.stringify(record));
+  await redis('SET', id, JSON.stringify(record), 'EX', ttlSec);      // enquiries are kept 90 days (see the privacy note)
   await redis('LPUSH', 'enquiries', id);
   await redis('LTRIM', 'enquiries', 0, 999);            // keep the last 1,000 ids in the index
   return { stored: true, id };
@@ -68,6 +68,8 @@ export async function verifyTurnstile(token, ip) {
 // ---------------------------------------------------------------- media (Vercel Blob)
 // Uploads happen from scripts/upload-media.py (or a future admin page); the site only reads public blob URLs.
 export function blobConfigured() { return !!process.env.BLOB_READ_WRITE_TOKEN; }
+
+export const redisConfigured = () => !!redisEnv();
 
 export function clientIp(req) {
   return (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket?.remoteAddress || '';

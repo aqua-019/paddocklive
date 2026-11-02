@@ -1,8 +1,13 @@
 {
-  "_comment": "Edit this file, run `python3 src/build.py`, commit — everything on the site that mentions contact details, credentials, services or localities is generated from here.",
+  "_comment": "Edit this file, run `python3 src/build.py`, commit — everything on the site that mentions contact details, credentials, services or localities is generated from here. v1.0: photos and videos are referenced by id from content/media.json. shot_list is the wish-list of photos to ask Fitz for (not rendered). google_review_url adds a \"Review us on Google\" button; turnstile_site_key switches on the bot check (secret key goes in Vercel env).",
   "name": "Fitz Feral Hunters",
   "tagline": "Protecting Victoria's Farms",
-  "descriptors": ["Contract pest control", "Deer & feral management", "Thermal hunting", "Farm security"],
+  "descriptors": [
+    "Contract pest control",
+    "Deer & feral management",
+    "Thermal hunting",
+    "Farm security"
+  ],
   "url": "https://fitzferalhunters.com.au",
   "indexable": false,
   "phone_display": "0499 866 580",
@@ -24,54 +29,171 @@
   "lede_flag": "swap for Instagram bio wording",
   "night_shift_url": "https://claude.ai/artifact/4PrRTSy2hk4rb2sk4bysiz",
   "credentials": [
-    ["Firearms licence", "Victorian firearms licence, current"],
-    ["Game Licence", "Victorian Game Licence (deer)"],
-    ["SSAA member", "Sporting Shooters' Association of Australia"],
-    ["Farmer Assist", "SSAA Farmer Assist accredited"],
-    ["First Aid", "Current first-aid certificate"],
-    ["AHCPMG304", "Humane dispatch, nationally recognised unit"],
-    ["$20m public liability", "Insured for every job"],
-    ["Certificates on request", "Currency documents supplied before work starts"]
+    [
+      "Firearms licence",
+      "Victorian firearms licence, current"
+    ],
+    [
+      "Game Licence",
+      "Victorian Game Licence (deer)"
+    ],
+    [
+      "SSAA member",
+      "Sporting Shooters' Association of Australia"
+    ],
+    [
+      "Farmer Assist",
+      "SSAA Farmer Assist accredited"
+    ],
+    [
+      "First Aid",
+      "Current first-aid certificate"
+    ],
+    [
+      "AHCPMG304",
+      "Humane dispatch, nationally recognised unit"
+    ],
+    [
+      "$20m public liability",
+      "Insured for every job"
+    ],
+    [
+      "Certificates on request",
+      "Currency documents supplied before work starts"
+    ]
   ],
   "services": [
-    ["deer", "Deer control", "Sambar and fallow deer hammering pasture, fences, crops and tree plantings. Thermal-assisted night work, planned around your stock and your neighbours.",
-     ["Damage assessment on the first visit", "Night and thermal work where deer move", "Carcass handling as agreed with you"]],
-    ["kangaroos", "Kangaroo culling", "Where numbers are hurting pasture, fences and water. Carried out under a valid Authority to Control Wildlife and the relevant code.",
-     ["Help with the ATCW paperwork", "Counts and a plan before any work", "Humane dispatch to the code, every animal"]],
-    ["pigs", "Feral pigs", "Dug-up paddocks, fouled dams and crop losses. Pigs move at night, so most pig work is thermal.",
-     ["Sign and camera assessment", "Night work around your stock", "Follow-up visits as numbers drop"]],
-    ["foxes", "Foxes", "Lamb and poultry losses, especially around lambing. Timed to the season and your stock.",
-     ["Pre-lambing programs", "Night spotlight and thermal work", "Reporting on what was taken"]],
-    ["rabbits", "Rabbits", "Warrens under the fence line and chewed-out pasture. Control planned alongside your own warren work.",
-     ["Warren mapping", "Shooting as part of a wider program", "Advice on ripping and follow-up"]],
-    ["wild-dogs", "Wild dogs", "Stock attacks and losses on the bush edge. Planned with you and your neighbours where it helps.",
-     ["Track and camera assessment", "Night and thermal work", "Coordination across boundaries"]]
+    [
+      "deer",
+      "Deer control",
+      "Sambar and fallow deer hammering pasture, fences, crops and tree plantings. Thermal-assisted night work, planned around your stock and your neighbours.",
+      [
+        "Damage assessment on the first visit",
+        "Night and thermal work where deer move",
+        "Carcass handling as agreed with you"
+      ]
+    ],
+    [
+      "kangaroos",
+      "Kangaroo culling",
+      "Where numbers are hurting pasture, fences and water. Carried out under a valid Authority to Control Wildlife and the relevant code.",
+      [
+        "Help with the ATCW paperwork",
+        "Counts and a plan before any work",
+        "Humane dispatch to the code, every animal"
+      ]
+    ],
+    [
+      "pigs",
+      "Feral pigs",
+      "Dug-up paddocks, fouled dams and crop losses. Pigs move at night, so most pig work is thermal.",
+      [
+        "Sign and camera assessment",
+        "Night work around your stock",
+        "Follow-up visits as numbers drop"
+      ]
+    ],
+    [
+      "foxes",
+      "Foxes",
+      "Lamb and poultry losses, especially around lambing. Timed to the season and your stock.",
+      [
+        "Pre-lambing programs",
+        "Night spotlight and thermal work",
+        "Reporting on what was taken"
+      ]
+    ],
+    [
+      "rabbits",
+      "Rabbits",
+      "Warrens under the fence line and chewed-out pasture. Control planned alongside your own warren work.",
+      [
+        "Warren mapping",
+        "Shooting as part of a wider program",
+        "Advice on ripping and follow-up"
+      ]
+    ],
+    [
+      "wild-dogs",
+      "Wild dogs",
+      "Stock attacks and losses on the bush edge. Planned with you and your neighbours where it helps.",
+      [
+        "Track and camera assessment",
+        "Night and thermal work",
+        "Coordination across boundaries"
+      ]
+    ]
   ],
   "thermal_drone": true,
   "steps": [
-    ["Contact", "Ring or send the enquiry form. Tell me the property, the animal and what it is costing you."],
-    ["Site visit and plan", "I walk the property with you, look at the damage and the ground, and we agree a plan, dates and safety arrangements."],
-    ["The job", "Planned, insured and done humanely under the codes. Stock, neighbours and access are sorted before the first night."],
-    ["Follow-up", "A short report on what was done and what to watch for, and a return visit if the numbers call for it."]
+    [
+      "Contact",
+      "Ring or send the enquiry form. Tell me the property, the animal and what it is costing you."
+    ],
+    [
+      "Site visit and plan",
+      "I walk the property with you, look at the damage and the ground, and we agree a plan, dates and safety arrangements."
+    ],
+    [
+      "The job",
+      "Planned, insured and done humanely under the codes. Stock, neighbours and access are sorted before the first night."
+    ],
+    [
+      "Follow-up",
+      "A short report on what was done and what to watch for, and a return visit if the numbers call for it."
+    ]
   ],
   "faq": [
-    ["Do you charge for the first visit?", "Pricing to be confirmed by Fitz. The honest default is to state the call-out and the hourly or per-night rate here, before anyone picks up the phone."],
-    ["Will you work around my stock and neighbours?", "Yes. That is what the site visit is for. Safe lines of fire, stock movements and neighbour notice are agreed before the first night."],
-    ["What happens to the carcasses?", "Handled and disposed of the way we agree in the plan. Some landholders want them removed, some want them left in a pit or a gully; both are fine."]
+    [
+      "Do you charge for the first visit?",
+      "Pricing to be confirmed by Fitz. The honest default is to state the call-out and the hourly or per-night rate here, before anyone picks up the phone."
+    ],
+    [
+      "Will you work around my stock and neighbours?",
+      "Yes. That is what the site visit is for. Safe lines of fire, stock movements and neighbour notice are agreed before the first night."
+    ],
+    [
+      "What happens to the carcasses?",
+      "Handled and disposed of the way we agree in the plan. Some landholders want them removed, some want them left in a pit or a gully; both are fine."
+    ]
   ],
   "testimonials": [],
-  "gallery": [
-    ["thermal", "Thermal spotting from the ute, night job", ""],
-    ["thermal", "Thermal image, deer on a fence line", ""],
-    ["night", "Setting up for a night shift", ""],
-    ["property", "Pasture damage before a deer program", ""],
-    ["gear", "Thermal optic and rifle, cased", ""],
-    ["thermal", "Thermal image, pigs at a dam", ""],
-    ["property", "Fence line after a kangaroo program", ""],
-    ["night", "Spotlight work along a tree line", ""],
-    ["gear", "DJI Matrice 4T thermal drone, packed", ""]
+  "hero_photo": "ute-thermal-rig",
+  "about_photos": [
+    "fitz-on-sticks",
+    "thermal-scope-view"
   ],
-  "hero_photo": ["thermal", "Thermal spotting from the ute, night job", ""],
-  "about_photos": [["gear", "Fitz with the thermal kit, Warragul", ""], ["property", "Gippsland paddock at first light", ""]],
-  "area": ["Gippsland", "Latrobe Valley", "South Gippsland", "East Gippsland", "Mornington Peninsula", "Yarra Valley & Dandenongs", "North East & High Country", "Goulburn Valley", "Central Victoria", "Western District", "Wimmera & Mallee", "Anywhere in Victoria by arrangement"]
+  "area": [
+    "Gippsland",
+    "Latrobe Valley",
+    "South Gippsland",
+    "East Gippsland",
+    "Mornington Peninsula",
+    "Yarra Valley & Dandenongs",
+    "North East & High Country",
+    "Goulburn Valley",
+    "Central Victoria",
+    "Western District",
+    "Wimmera & Mallee",
+    "Anywhere in Victoria by arrangement"
+  ],
+  "shot_list": [
+    "Thermal spotting from the ute, night job",
+    "Thermal image, deer on a fence line",
+    "Setting up for a night shift",
+    "Pasture damage before a deer program",
+    "Thermal optic and rifle, cased",
+    "Thermal image, pigs at a dam",
+    "Fence line after a kangaroo program",
+    "Spotlight work along a tree line",
+    "DJI Matrice 4T thermal drone, packed"
+  ],
+  "gallery_photos": [
+    "thermal-scope-view",
+    "ute-thermal-rig",
+    "fitz-on-sticks",
+    "first-light-still"
+  ],
+  "google_review_url": "",
+  "turnstile_site_key": ""
 }

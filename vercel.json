@@ -5,6 +5,9 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
+  "regions": [
+    "syd1"
+  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -138,6 +138,33 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .faq-group h2.sub{margin-bottom:8px}
 .cred-card h3{margin:0}
 details.faq p a{color:var(--ink);text-underline-offset:.16em}
+/* v1.1 · the sample report as proof: a hero link and a card that looks like the report's first page */
+.proof-link{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:8px 16px;border-radius:var(--radius);background:color-mix(in srgb, var(--gold-light) 30%, var(--bg));box-shadow:inset 0 0 0 1.5px var(--gold);color:var(--ink);text-decoration:none;font-size:var(--fs-small);justify-self:start;width:fit-content;max-width:100%;transition:background-color var(--t-hover) var(--ease-out)}
+.proof-link b{font-weight:700}
+.proof-link:hover{background:color-mix(in srgb, var(--gold-light) 55%, var(--bg))}
+.rc-ico{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.report-card{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:20px;align-items:center;padding:16px;border-radius:var(--radius);background:color-mix(in srgb, var(--gold-light) 18%, var(--bg));box-shadow:inset 0 0 0 2px var(--gold);color:var(--ink);text-decoration:none;max-width:40rem;transition:background-color var(--t-hover) var(--ease-out)}
+.report-card:hover{background:color-mix(in srgb, var(--gold-light) 34%, var(--bg))}
+.report-card:hover .rc-cta{background:color-mix(in srgb, var(--gold-light), #ffffff 14%)}
+.band.drone .report-card:focus-visible{outline-color:var(--focus-dark)}
+.rc-sheet{display:grid;gap:6px;align-content:start;background:#fbfaf7;border-top:3px solid var(--gold);border-radius:3px;padding:10px 10px 12px;box-shadow:inset 0 0 0 1px var(--line),0 1px 0 var(--line)}
+.rc-run{font:600 8.5px/1.2 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.rc-title{font:700 13px/1.05 var(--font-display);text-transform:uppercase;letter-spacing:.01em;color:var(--ink)}
+.rc-meta{display:grid;grid-template-columns:auto minmax(0,1fr);font-size:9px;line-height:1.3;box-shadow:inset 0 0 0 1px var(--line)}
+.rc-k{background:var(--chrome);color:var(--foot-ink);font-weight:600;padding:3px 6px;border-bottom:1px solid var(--foot-line)}
+.rc-v{padding:3px 6px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-sheet img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:2px}
+.rc-body{display:grid;gap:8px;align-content:center;justify-items:start}
+.rc-tag{display:inline-flex;align-items:center;gap:6px;font:600 var(--fs-eyebrow)/1.3 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--gold-ink)}
+.rc-tag .rc-ico{width:16px;height:16px}
+.rc-head{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;color:var(--ink)}
+.rc-text{font-size:var(--fs-small);color:var(--ink-2)}
+.rc-cta{margin-top:4px;white-space:nowrap}
+.contact-list .kv .row .hint-copy{font:500 var(--fs-caption)/1.3 var(--font-body);color:var(--ink-2)}
+.band.drone .report-card{background:var(--bg);box-shadow:inset 0 0 0 2px var(--gold-light)}
+.band.drone .report-card:hover{background:color-mix(in srgb, var(--gold-light) 22%, var(--bg))}
+.band.drone .report-card .rc-head{color:var(--ink)}
+@media (max-width:520px){.report-card{grid-template-columns:1fr;gap:14px}.rc-sheet{max-width:210px}.rc-meta{display:none}}
 /* v1.1 · the sample report: a document sheet on the topo ground */
 .report{background:var(--bg);box-shadow:inset 0 0 0 1px var(--line-strong);border-top:3px solid var(--gold);border-radius:var(--radius);padding:clamp(20px,4vw,48px);max-width:52rem;display:grid;gap:14px}
 .report>*{margin:0}
@@ -228,7 +255,7 @@ TITLES = {
 GR = {name: topo.grid_ref(la, lo) for name, la, lo in topo.LOCALITIES}
 BASE_GR = GR[S['base']][0] if S['base'] in GR else ''
 
-SPRITE = '''<svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol><symbol id="i-north" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8"/><path class="fill" d="M12 3l4.5 9h-9z"/></symbol></svg>'''
+SPRITE = '''<svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 11h7M9 14.5h7M9 18h4"/></symbol><symbol id="i-north" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8"/><path class="fill" d="M12 3l4.5 9h-9z"/></symbol></svg>'''
 def ico(name, cls="ico"): return f'<svg class="{cls}" aria-hidden="true"><use href="#{name}"/></svg>'
 
 def north(label="N"):
@@ -503,7 +530,8 @@ def drone_band():
       <h2>Thermal drone scouting with a DJI Matrice 4T</h2>
       <p class="measure">Before a program starts, the drone finds the mob, counts it and maps where it moves, by day or at night. Fewer wasted trips, a better plan, and a record you can keep.</p>
       <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Night work</b> ahead of the ground team</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
-      <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('drone-report')}">See a sample drone report</a><a class="btn btn-quiet" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a></div>
+      {report_card("on-dark")}
+      <p style="margin:0"><a class="btn btn-quiet" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a></p>
     </div>
     {video_fig("drone-thermal-mob") if "drone-thermal-mob" in MEDIA else slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
   </div>
@@ -562,6 +590,7 @@ def home_body():
       <p class="lede"{per("lede")}>{esc(S['lede'])}{lede_flag}</p>
       <p class="descriptors"{per("brand")}>{' <span aria-hidden="true">·</span> '.join(esc(x) for x in S['descriptors'])}</p>
       {cta_row()}
+      {proof_link()}
       {contact_line()}
     </div>
     {pic(hp, ar="4/5", sizes="(min-width:900px) 40vw, 100vw", eager=True) if isinstance(hp, str) else slot(hp[0], hp[1], hp[2], ar="4/5")}
@@ -644,9 +673,9 @@ def services_body():
       <ul>{''.join(f'<li>{esc(x)}</li>' for x in bullets)}</ul>
     </article>'''
     rows = ''.join(row(k, t, d, b) for k, t, d, b in S['services'])
-    drone = '''
+    drone = f'''
       <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone scouting</h3><p class="small" style="color:var(--ink-2)">A DJI Matrice 4T thermal drone for scouting, counts and night work: find the mob, map where it moves and plan the program before anyone walks in.</p></div>
-        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul><p style="grid-column:1/-1;margin:0"><a class="btn btn-secondary" href="/drone-report">See a sample drone report</a></p></article>''' if S.get('thermal_drone') else ''
+        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul><div style="grid-column:1/-1">{report_card()}</div></article>''' if S.get('thermal_drone') else ''
     faqs = ''.join(f'<details class="faq"><summary>{esc(g[1][0][0])}</summary><p>{answer(g[1][0][1])}</p></details>' for g in S['faq_groups'])
     clients = ''.join(f'<article class="tile"><h3>{esc(t)}</h3><p>{esc(d)}</p></article>' for t, d in S['clients'])
     return f'''
@@ -746,6 +775,7 @@ def contact_body():
         <div class="kv"><b>{ico("i-pin")}Based in</b><div class="row"><span style="font-size:19px">{esc(S['base'])}, Gippsland VIC</span>{'<span class="mono" style="color:var(--ink-2)">GR <span class="num">' + BASE_GR + '</span> · MGA 55</span>' if SHEET else '<span class="mono" style="color:var(--ink-2)">Jobs anywhere in Victoria</span>'}</div></div>
         <div class="kv"{per("socials")}><b>Follow the work</b><div class="socials"><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])} {ico("i-ext")}</a><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook · {esc(S['facebook_label'])} {ico("i-ext")}{flag('confirm page URL')}</a></div></div>
       </div>
+      <div class="stack" style="--gap:12px;margin-top:28px"><p class="eyebrow" style="margin:0">Still deciding?</p>{report_card()}</div>
     </div>
     <div>
       <form class="form" id="enquiry" action="{action}" method="post"{per("form")} aria-describedby="form-note">
@@ -873,6 +903,19 @@ def faq_body():
     <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a><a class="btn btn-quiet" href="{href('credentials')}"{route_attr('credentials')}>Credentials and insurance</a></div>
   </div>
 </section>'''
+
+def report_card(where=''):
+    """The sample report as a card that looks like the report's first page: the one piece of proof no competitor offers."""
+    R, f = REPORT, MEDIA['report-fig1']
+    rows = [r for r in R['meta'] if r[0] in ('Report date', 'Drone platform', 'Location')]
+    meta_rows = ''.join(f'<span class="rc-k">{esc(k)}</span><span class="rc-v">{esc(v.replace(" (withheld)", ""))}</span>' for k, v in rows)
+    return f'''<a class="report-card{" " + where if where else ""}" href="{href('drone-report')}"{per("report-card")}>
+      <span class="rc-sheet" aria-hidden="true"><span class="rc-run">Fitz Feral Hunters · Drone survey report</span><span class="rc-title">{esc(R['title'])}</span><span class="rc-meta">{meta_rows}</span><img src="{f['src']}" alt="" width="{f['width']}" height="{f['height']}" loading="lazy" decoding="async"></span>
+      <span class="rc-body"><span class="rc-tag">{ico("i-doc", "rc-ico")}Real job · sample report</span><span class="rc-head">See what a drone survey gives you</span><span class="rc-text">A real report from a Gippsland property: what was seen, the habitat, findings and next steps. Property details removed.</span><span class="btn btn-gold rc-cta">Read the report <span aria-hidden="true">&rarr;</span></span></span>
+    </a>'''
+
+def proof_link():
+    return f'<a class="proof-link" href="{href("drone-report")}"{per("report-card")}>{ico("i-doc", "rc-ico")}<span><b>Real job:</b> see a sample drone survey report</span><span aria-hidden="true">&rarr;</span></a>'
 
 def report_fig(mid):
     m = MEDIA[mid]

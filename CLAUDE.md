@@ -21,7 +21,7 @@ The client approved v0.3.2 exactly. Don't change tokens, type, the topographic s
 | Tap targets | ≥ 44px |
 | Small screens | No horizontal scroll at 390px. |
 | Motion | `prefers-reduced-motion` respected; nothing autoplays. |
-| D700 records | New visible components go through the `d700-compose` skill in diff mode (next record SP-04), with citations added to `src/cites.py`. |
+| D700 records | New visible components go through the `d700-compose` skill in diff mode (next record SP-05), with citations added to `src/cites.py`. |
 
 ## Build and run
 

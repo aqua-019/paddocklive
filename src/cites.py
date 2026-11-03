@@ -124,3 +124,9 @@ PADDOCK.update({
     "cred-detail": ["D3813", "D0367"],                      # plain-language policy summary, card pattern
     "clients":     ["D3813"],
 })
+
+# v1.1b (SP-04): the sample report as proof — hero link and report card
+PADDOCK.update({
+    "report-card": ["D0293", "D4643", "D3813"],   # social-proof inline CTA, evidence chip, plain-language summary
+    "report":      ["D3813", "D0433"],            # plain-language summary, figure captions
+})

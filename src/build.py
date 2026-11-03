@@ -127,8 +127,20 @@ h2.sub{font-size:var(--fs-h3);font-family:var(--font-cond);margin:8px 0 0}
 dialog.lightbox .slot.in-lb{aspect-ratio:auto;height:min(72vh,720px)}
 dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .about-photos .slot{--ar:4/5 !important}
+/* v1.1 · seven nav links: tighten between the drawer breakpoint and the full width */
+@media (min-width:900px) and (max-width:1199px){.site-head .datum{display:none !important}.nav a:not(.btn){padding:0 8px}.nav .nav-cta{margin-inline-start:4px}}
+@media (min-width:900px) and (max-width:1023px){.nav a:not(.btn){padding:0 6px;font-size:16px}.nav .nav-cta .btn{padding-inline:12px !important}}
+.faq-index ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.faq-index a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--radius);text-decoration:none;font-weight:600;transition:background-color var(--t-hover) var(--ease-out)}
+.faq-index a:hover{background:var(--wash)}
+.faq-group{scroll-margin-top:calc(var(--head-h) + 16px)}
+.faq-group h2.sub{margin-bottom:8px}
+.cred-card h3{margin:0}
+.stack>h2.sub+ol.creds{margin-block-start:24px}
+@media (min-width:700px){.creds.creds-6{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cred-card .eyebrow{margin:0}
 /* v1.0 · phone numbers and the toast */
-a.tel{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;font-weight:600}
+a.tel{white-space:nowrap;color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;font-weight:600}
 a.tel:hover{color:var(--gold-ink)}
 .site-foot a.tel:hover,.band.invert a.tel:hover{color:var(--gold-light)}
 .contact-list .kv .row a.tel,.contact-list .kv .row a.mail{font:600 clamp(20px, 1rem + 1vw, 26px)/1.2 var(--font-body);overflow-wrap:anywhere}
@@ -172,7 +184,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
 }
 """
 
-PAGES = [("home", "/", "Home"), ("services", "/services", "Services"), ("about", "/about", "About"), ("gallery", "/gallery", "Gallery"), ("contact", "/contact", "Contact")]
+PAGES = [("home", "/", "Home"), ("services", "/services", "Services"), ("credentials", "/credentials", "Credentials"), ("about", "/about", "About"), ("gallery", "/gallery", "Gallery"), ("faq", "/faq", "FAQ"), ("contact", "/contact", "Contact")]
 EXTRA_PAGES = [("reviews", "/reviews", "Reviews")]     # linked from home, footer and sitemap; not in the main nav
 HREF = {k: h for k, h, _ in PAGES + EXTRA_PAGES}
 def href(key, anchor=''):
@@ -186,6 +198,8 @@ TITLES = {
   "about": (f"About · {S['name']}", f"Based in {S['base']}, working across {S['region']}. Licensed, insured, accountable. AHCPMG304 humane dispatch."),
   "gallery": (f"Gallery · {S['name']}", "Thermal images, night work, property damage and gear from pest control jobs across Victoria."),
   "contact": (f"Contact · {S['name']}", f"Ring {S['phone_display']} or send an enquiry. Based in {S['base']}, working across {S['region']}."),
+  "credentials": (f"Credentials and insurance · {S['name']}", f"Licensed and insured feral animal control: firearms and Game licences, SSAA Farmer Assist, First Aid, AHCPMG304 humane dispatch and $20 million public liability with {S['insurer']}. Certificates on request."),
+  "faq": (f"FAQ · {S['name']}", "How quotes are worked out, carcass disposal, stock safety, neighbours and night noise, farm security, insurance and kangaroo permits: straight answers from Fitz Feral Hunters."),
   "reviews": (f"Reviews · {S['name']}", "Reviews from farmers and landholders Fitz Feral Hunters has worked for, published good or bad. Leave a review of a job."),
 }
 
@@ -444,7 +458,7 @@ NOTES = {
     ("Warragul", (f"Base of operations, grid reference {BASE_GR} on the MGA zone 55 grid." if SHEET else "Base of operations in West Gippsland; jobs anywhere in Victoria by arrangement.")),
     ("AHCPMG304", "A nationally recognised unit for humane dispatch; the standard every job is held to."),
     ("Codes", "Victorian codes of practice for the humane control of each species govern the method."),
-    ("Insurance", "$20 million public liability, with a certificate of currency available before work starts."),
+    ("Insurance", f"$20 million public liability with {S['insurer']}; a certificate of currency is available on request before work starts."),
   ],
 }
 def margin_notes(key):
@@ -512,7 +526,7 @@ def home_body():
       <h3>{esc(t)}</h3><p>{esc(d)}</p>
       <a class="stretch" href="{href('services','svc-'+k)}"{route_attr('services')} data-focus="svc-{k}" aria-hidden="true" tabindex="-1"></a>
       <a class="btn btn-secondary" href="{href('services','svc-'+k)}"{route_attr('services')} data-focus="svc-{k}">Details<span class="sr"> for {esc(t)}</span></a>
-    </article>''' for k, t, d, _ in S['services'])
+    </article>''' for k, t, d in [(k, t, d) for k, t, d, _ in S['services']] + EXTRA_TILES)
     steps = ''.join(f'<li class="reveal"><b>{esc(t)}</b><p>{esc(d)}</p></li>' for t, d in S['steps'])
     status_flag = '' if S.get('credentials_current') else flag('status line Fitz can edit')
     lede_flag = flag(S['lede_flag']) if S.get('lede_flag') else ''
@@ -542,6 +556,7 @@ def home_body():
       {'<p class="caption"><span class="flag">more credentials to come from Fitz</span> They slot into this wall as plates when they arrive.</p>' if REVIEW else ''}
     </div>
     <ol class="creds reveal" aria-label="Credentials">{creds_li}</ol>
+    <div class="cta-row"><a class="btn btn-secondary" href="{href('credentials')}"{route_attr('credentials')}>Credentials and insurance in full</a></div>
   </div>
 </section>
 {divider("Services")}
@@ -565,7 +580,7 @@ def home_body():
   <div class="wrap stack" style="--gap:28px">
     <div class="sec-head reveal"><p class="eyebrow">Why landholders call Fitz</p><h2>Turns up. Does it properly. Leaves it as found.</h2></div>
     <div class="triad reveal">
-      <div><b>Licensed and insured</b><p>Firearms and Game licences, SSAA Farmer Assist, First Aid and $20 million public liability. Certificates before the first visit.</p></div>
+      <div><b>Licensed and insured</b><p>Firearms and Game licences, SSAA Farmer Assist, First Aid and $20 million public liability with {esc(S['insurer'])}. Certificates on request.</p></div>
       <div><b>Planned, not improvised</b><p>Every job starts with a walk of the property and a written plan: stock, neighbours, access, safe lines of fire, dates.</p></div>
       <div><b>Humane under the codes</b><p>AHCPMG304 humane dispatch. Clean, legal and professional is the standard, not the upsell.</p></div>
     </div>
@@ -585,7 +600,7 @@ def home_body():
 <section class="band"{per("area")}{per("topo")}>
   <div class="wrap stack" style="--gap:24px">
     <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in {esc(S['base'])}, covering all of Victoria</h2>
-      <p class="measure">Gippsland is home ground, but the ute goes anywhere in the state: the Latrobe Valley, the Peninsula, the North East, the Western District and everywhere between. Ring and we'll work out the trip.</p></div>
+      <p class="measure">Gippsland comes first: it's home ground. Beyond it the ute goes anywhere in the state, for farms and private landholders, councils and land managers. Ring and we'll work out the trip.</p></div>
     {'<div class="area-grid reveal"><div class="map-scroll">' + locality_map() + '</div>' + legend() + '</div>' if SHEET_MAP else ''}
     <ul class="chips reveal" aria-label="Regions served">{chips}</ul>
   </div>
@@ -611,12 +626,14 @@ def services_body():
     drone = '''
       <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone scouting</h3><p class="small" style="color:var(--ink-2)">A DJI Matrice 4T thermal drone for scouting, counts and night work: find the mob, map where it moves and plan the program before anyone walks in.</p></div>
         <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul></article>''' if S.get('thermal_drone') else ''
-    faqs = ''.join(f'<details class="faq"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in S['faq'])
+    faqs = ''.join(f'<details class="faq"><summary>{esc(g[1][0][0])}</summary><p>{esc(g[1][0][1])}</p></details>' for g in S['faq_groups'])
+    clients = ''.join(f'<article class="tile"><h3>{esc(t)}</h3><p>{esc(d)}</p></article>' for t, d in S['clients'])
     return f'''
 <section class="page" aria-labelledby="h-services"{per("services")}>
   <div class="wrap stack" style="--gap:36px">
     <div class="sec-head">{meta("Services")}<p class="eyebrow">Services</p><h1 id="h-services" tabindex="-1" style="font-size:var(--fs-h2)">Pest and vermin control across Victoria</h1>
       <p class="measure">Every job is planned, insured and carried out humanely under the relevant Victorian codes of practice. Deer control on farms and kangaroo culling are the two most common call-outs; the rest of the list is below.</p></div>
+    <div class="stack" style="--gap:16px"{per("clients")}><h2 class="sub">Who I work for</h2><div class="grid grid-2">{clients}</div></div>
     <div class="notes-layout">
       <div>{rows}
         <article class="service" id="svc-night"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Night work and thermal</h3><p class="small" style="color:var(--ink-2)">Most feral animals move after dark. Thermal optics let me find them, count them and take them cleanly without lighting up the whole paddock.</p></div>
@@ -630,7 +647,7 @@ def services_body():
       <h3>Permits and codes, in plain language</h3>
       <p class="small" style="color:var(--ink-2)">Kangaroo control on private land needs an Authority to Control Wildlife{fn(notes['ATCW'])} from the Victorian government; I can help with the application. Deer are a game species and are taken under a Game Licence{fn(notes['Game Licence'])}. All work follows the relevant Victorian codes of practice for the humane control of the species involved.</p>
     </div>
-    <div{per("faq")}>{faqs}</div>
+    <div class="stack" style="--gap:12px;margin-top:16px"{per("faq")}><h2 class="sub">Common questions</h2><div>{faqs}</div><p><a class="btn btn-secondary" href="{href('faq')}"{route_attr('faq')}>All questions and answers</a></p></div>
     <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a><a class="btn btn-quiet num" href="tel:{S['phone_e164']}">or call {S['phone_display']}</a></div>
   </div>
 </section>'''
@@ -649,12 +666,13 @@ def about_body():
         {meta("About")}
         <p class="eyebrow">About</p>
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
-        <p>{esc(S['name'])} is one operator, licensed and insured{fn(4)}, doing feral animal control for farmers and landholders who want the job done properly and the place left as they found it.</p>
+        <p class="lede">{esc(S['about_story'])}</p>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No trophies, no mess, no surprises for the neighbours{fn(3)}.</p>
-        {S.get('about_story') and f"<p>{esc(S['about_story'])}</p>" or ('<p><span class="flag">one or two lines about Fitz to come</span> Years on farms, where the hunting started, why the thermal kit: in his own words, kept short.</p>' if REVIEW else '')}
+        <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms and private landholders, councils and land managers: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
         <p class="caption">{current_line}</p>
+        <p><a class="btn btn-secondary" href="{href('credentials')}"{route_attr('credentials')}>Credentials and insurance in full</a></p>
         <figure class="card-figure"{per("brand")}><img src="{asset('/brand/fitz-card.jpg')}" alt="The Fitz Feral Hunters card: rifle mark, Protecting Victoria's Farms, contract pest control, deer and feral management, thermal hunting, farm security, fully insured, 0499 866 580" width="1280" height="755" loading="lazy" decoding="async"><figcaption class="caption">The card, as supplied. The site's green, gold and cream are sampled from it.</figcaption></figure>
         <div class="grid grid-2 about-photos" style="margin-top:8px">{about_ph(a1)}{about_ph(a2)}</div>
       </div>
@@ -784,6 +802,55 @@ def reviews_body():
     </div>
   </div>
 </section>{sent_dialog()}'''
+
+EXTRA_TILES = [("night", "Night work and thermal", "Most feral animals move after dark. Thermal optics find them, count them and take them cleanly, without lighting up the paddock.")] + (
+    [("drone", "Thermal drone scouting", "A DJI Matrice 4T finds the mob, counts it and maps where it moves before anyone walks in.")] if S.get('thermal_drone') else [])
+
+def slug(t): return re.sub(r'[^a-z0-9]+', '-', t.lower()).strip('-')
+
+def credentials_body():
+    creds = [c for c in S['credentials'] if c[0] not in ('$20m public liability', 'Certificates on request')]
+    li = ''.join(f'<li><span class="eyebrow">Credential</span><b class="num">{esc(t)}</b><p>{esc(d)}</p></li>' for t, d in creds)
+    return f'''
+<section class="page" aria-labelledby="h-credentials"{per("creds")}>
+  <div class="wrap stack" style="--gap:36px">
+    <div class="sec-head">{meta("Credentials")}<p class="eyebrow">Credentials</p><h1 id="h-credentials" tabindex="-1" style="font-size:var(--fs-h2)">Licensed, insured and accountable</h1>
+      <p class="measure">Every job is done under current licences, a humane dispatch qualification and $20 million public liability insurance with {esc(S['insurer'])}. Certificates and currency documents are available on request, before any work starts.</p></div>
+    <div class="stack" style="--gap:16px"><h2 class="sub">Licences and accreditations</h2><ol class="creds creds-6" aria-label="Licences and accreditations">{li}</ol></div>
+    <div class="grid grid-2"{per("cred-detail")}>
+      <article class="tile cred-card"><p class="eyebrow">Insurance</p><h3>$20 million public liability</h3><p>Insured with {esc(S['insurer'])} for every job. A certificate of currency is available on request.</p></article>
+      <article class="tile cred-card"><p class="eyebrow">Paperwork</p><h3>Certificates on request</h3><p>Certificates and currency documents are supplied on request, before work starts. Licence and membership numbers are shared with you directly rather than published here.</p></article>
+    </div>
+    <div class="prose"{per("privacy")}>
+      <h2 class="sub">Codes and permits</h2>
+      <p>All work follows the relevant Victorian codes of practice for the humane control of each species, and every animal is dispatched to the standard of AHCPMG304, a nationally recognised unit.</p>
+      <p>Deer are a game species in Victoria and are taken under a Game Licence. Kangaroo control on private land needs an Authority to Control Wildlife (ATCW) from the Victorian government; I can help with the application.</p>
+    </div>
+    <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a><a class="btn btn-quiet" href="{href('faq')}"{route_attr('faq')}>Read the FAQ</a></div>
+  </div>
+</section>'''
+
+def faq_body():
+    groups = S['faq_groups']
+    index = ''.join(f'<li><a href="#faq-{slug(g)}">{esc(g)}</a></li>' for g, _ in groups)
+    body = ''.join(f'''
+    <div class="faq-group" id="faq-{slug(g)}"><h2 class="sub">{esc(g)}</h2><div>{''.join(f'<details class="faq"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in qs)}</div></div>''' for g, qs in groups)
+    return f'''
+<section class="page" aria-labelledby="h-faq"{per("faq")}>
+  <div class="wrap stack" style="--gap:32px">
+    <div class="sec-head">{meta("FAQ")}<p class="eyebrow">FAQ</p><h1 id="h-faq" tabindex="-1" style="font-size:var(--fs-h2)">Questions landholders ask</h1>
+      <p class="measure">Pricing, carcasses, stock, neighbours, paperwork. Anything not covered here, ring {tel()}.</p></div>
+    <nav class="faq-index" aria-label="Question topics"><ul>{index}</ul></nav>
+    {body}
+    <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a><a class="btn btn-quiet" href="{href('credentials')}"{route_attr('credentials')}>Credentials and insurance</a></div>
+  </div>
+</section>'''
+
+def extra_ld(key):
+    if key != 'faq': return ''
+    ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for _, qs in S['faq_groups'] for q, a in qs]}
+    return '\n<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>'
 
 def notfound_body():
     return f'''
@@ -992,8 +1059,9 @@ def jsonld():
       "description": TITLES['home'][1], "telephone": S['phone_e164'], "email": S['email'], "url": S['url'].rstrip('/') + '/',
       "image": S['url'].rstrip('/') + '/og-1200x630.png',
       "address": {"@type": "PostalAddress", "addressLocality": S['base'], "addressRegion": "VIC", "addressCountry": "AU"},
-      "areaServed": ["Victoria, Australia", "Gippsland"], "sameAs": [S['instagram']],
-      "knowsAbout": ["Deer control", "Kangaroo culling", "Feral pig control", "Fox control", "Rabbit control", "Wild dog control", "Thermal night work"],
+      "areaServed": ["Gippsland", "Victoria, Australia"], "sameAs": [S['instagram']],
+      "founder": {"@type": "Person", "name": S['owner']},
+      "knowsAbout": ["Deer control", "Kangaroo culling", "Feral pig control", "Fox control", "Rabbit control", "Wild dog control", "Thermal night work", "Thermal drone scouting", "Farm security"],
     }, ensure_ascii=False)
 
 def script():
@@ -1032,7 +1100,7 @@ def document(key, body, title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>{sheet_css}</style>
-<script type="application/ld+json">{jsonld()}</script>
+<script type="application/ld+json">{jsonld()}</script>{extra_ld(key)}
 </head>
 <body>
 {SPRITE}{varbar()}{header(key)}
@@ -1046,7 +1114,7 @@ def document(key, body, title, desc):
 def artifact_document():
     """Single document for the claude.ai artifact: no skeleton tags, hash-routed sections."""
     sections = ''.join(f'<section data-page="{k}" id="{k}" aria-labelledby="h-{k}">{b}</section>' for k, b in
-                       (('home', home_body()), ('services', services_body()), ('about', about_body()), ('gallery', gallery_body()), ('contact', contact_body())))
+                       (('home', home_body()), ('services', services_body()), ('credentials', credentials_body()), ('about', about_body()), ('gallery', gallery_body()), ('faq', faq_body()), ('contact', contact_body())))
     sheet_css = css + ("\n[data-sheet='off'] body::after{display:none}\n" if SHEET else "\n")
     return f'''<title>Fitz Feral Hunters Paddock</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1079,7 +1147,7 @@ def main():
         print(f'artifact → {out} ({out.stat().st_size/1024:.0f} KB) · {n_entries} entries · {len(allids)} citations · topo tile {len(TOPO_SVG)/1024:.0f} KB')
         return
     PUB.mkdir(exist_ok=True)
-    pages = {'home': home_body(), 'services': services_body(), 'about': about_body(), 'gallery': gallery_body(), 'contact': contact_body(), 'reviews': reviews_body()}
+    pages = {'home': home_body(), 'services': services_body(), 'credentials': credentials_body(), 'about': about_body(), 'gallery': gallery_body(), 'faq': faq_body(), 'contact': contact_body(), 'reviews': reviews_body()}
     for key, body in pages.items():
         t, d = TITLES[key]
         (PUB / ('index.html' if key == 'home' else f'{key}.html')).write_text(document(key, body, t, d))

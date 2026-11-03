@@ -1,5 +1,5 @@
 {
-  "_comment": "Edit this file, run `python3 src/build.py`, commit — everything on the site that mentions contact details, credentials, services or localities is generated from here. v1.0: photos and videos are referenced by id from content/media.json. shot_list is the wish-list of photos to ask Fitz for (not rendered). google_review_url adds a \"Review us on Google\" button; turnstile_site_key switches on the bot check (secret key goes in Vercel env).",
+  "_comment": "Edit this file, run `python3 src/build.py`, commit — everything on the site that mentions contact details, credentials, services or localities is generated from here. v1.0: photos and videos are referenced by id from content/media.json. shot_list is the wish-list of photos to ask Fitz for (not rendered). google_review_url adds a \"Review us on Google\" button; turnstile_site_key switches on the bot check (secret key goes in Vercel env). v1.1: owner, insurer, about_story, clients and faq_groups (the FAQ page; Services shows the first question of each group). Licence and membership numbers are never published (client decision, 3 Nov 2026).",
   "name": "Fitz Feral Hunters",
   "tagline": "Protecting Victoria's Farms",
   "descriptors": [
@@ -55,11 +55,11 @@
     ],
     [
       "$20m public liability",
-      "Insured for every job"
+      "Elders Insurance, every job covered"
     ],
     [
       "Certificates on request",
-      "Currency documents supplied before work starts"
+      "Certificates and currency documents available on request, before work starts"
     ]
   ],
   "services": [
@@ -122,6 +122,16 @@
         "Night and thermal work",
         "Coordination across boundaries"
       ]
+    ],
+    [
+      "farm-security",
+      "Farm security",
+      "After-hours monitoring and rapid response for properties with ongoing stock or asset risk.",
+      [
+        "Thermal drone or ground checks",
+        "Trail camera placement",
+        "Coordinated follow-up when animals are moving through at night"
+      ]
     ]
   ],
   "thermal_drone": true,
@@ -141,20 +151,6 @@
     [
       "Follow-up",
       "A short report on what was done and what to watch for, and a return visit if the numbers call for it."
-    ]
-  ],
-  "faq": [
-    [
-      "Do you charge for the first visit?",
-      "Pricing to be confirmed by Fitz. The honest default is to state the call-out and the hourly or per-night rate here, before anyone picks up the phone."
-    ],
-    [
-      "Will you work around my stock and neighbours?",
-      "Yes. That is what the site visit is for. Safe lines of fire, stock movements and neighbour notice are agreed before the first night."
-    ],
-    [
-      "What happens to the carcasses?",
-      "Handled and disposed of the way we agree in the plan. Some landholders want them removed, some want them left in a pit or a gully; both are fine."
     ]
   ],
   "testimonials": [],
@@ -195,5 +191,79 @@
     "first-light-still"
   ],
   "google_review_url": "",
-  "turnstile_site_key": ""
+  "turnstile_site_key": "",
+  "owner": "Robert Fitzgerald",
+  "insurer": "Elders Insurance",
+  "about_story": "I’m Robert Fitzgerald. I grew up in Korumburra as a country boy and I’m now based in Warragul. I’ve worked the land and handled firearms most of my adult life. Fitz Feral Hunters is the professional side of that: planned, insured, humane pest and vermin control for farmers and landholders across Gippsland and Victoria.",
+  "clients": [
+    [
+      "Farms and landholders",
+      "Deer, kangaroo and vermin programs on farms and private land, planned around your stock, your neighbours and your season."
+    ],
+    [
+      "Councils and land managers",
+      "Pest animal programs on reserves and public land, planned with your team and carried out under the relevant codes of practice."
+    ]
+  ],
+  "faq_groups": [
+    [
+      "Pricing and the plan",
+      [
+        [
+          "How are quotes worked out?",
+          "Usually a call-out fee for every visit except the first, where we walk the property and discuss the plan. After that we agree either a package or an hourly rate."
+        ],
+        [
+          "What happens to the carcasses?",
+          "Carcass disposal is always agreed with the landowner before work starts and written into the plan."
+        ],
+        [
+          "Where do you work?",
+          "Gippsland first, then anywhere in Victoria. I’m based in Warragul."
+        ],
+        [
+          "Who do you work for?",
+          "Farms and private landholders, and councils and land managers."
+        ]
+      ]
+    ],
+    [
+      "On the job",
+      [
+        [
+          "How do you keep stock safe?",
+          "Stock safety is the top priority on every job. Safe lines of fire, stock movements and access are planned and agreed before the first night."
+        ],
+        [
+          "What about the neighbours and night noise?",
+          "I run discreet operations. I can contact and notify neighbours if needed."
+        ],
+        [
+          "What does farm security involve?",
+          "After-hours monitoring and rapid response for properties with ongoing stock or asset risk: thermal drone or ground checks, trail camera placement, and coordinated follow-up when animals are moving through at night."
+        ],
+        [
+          "What does the thermal drone do?",
+          "Before a program starts, the DJI Matrice 4T finds the mob, counts it and maps where it moves, by day or at night. Fewer wasted trips and a better plan."
+        ]
+      ]
+    ],
+    [
+      "Licences, insurance and permits",
+      [
+        [
+          "Are you licensed and insured?",
+          "Yes. Firearms and Game licences, SSAA Farmer Assist, First Aid and AHCPMG304 for humane dispatch, and $20 million public liability with Elders Insurance."
+        ],
+        [
+          "Can I see your certificates?",
+          "Yes. Certificates and currency documents, including the certificate of currency for the insurance, are available on request before any work starts."
+        ],
+        [
+          "Do I need a permit for kangaroos?",
+          "Kangaroo control on private land needs an Authority to Control Wildlife (ATCW) from the Victorian government. I can help with the application."
+        ]
+      ]
+    ]
+  ]
 }

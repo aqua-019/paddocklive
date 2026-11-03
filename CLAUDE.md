@@ -3,7 +3,8 @@
 The live website for **Fitz Feral Hunters**: licensed, insured feral animal and vermin control for farmers and landholders. Based in Warragul, Gippsland, covering **all of Victoria**.
 
 - Phone `0499 866 580` (`+61499866580`), email `fitzferalhunters1@gmail.com`, Instagram `@gippsland_gunner`.
-- Built from Aqua's D700 design catalogue: the Paddock composition, SP-01 → SP-01e (mockups v0.1–0.3.2, repo `aqua-019/paddock1`), then SP-02 (v1.0, this repo).
+- Owner: Robert Fitzgerald (grew up in Korumburra, based in Warragul). Insurer: Elders Insurance, $20m public liability.
+- Built from Aqua's D700 design catalogue: the Paddock composition, SP-01 → SP-01e (mockups v0.1–0.3.2, repo `aqua-019/paddock1`), then SP-02 (v1.0) and SP-03 (v1.1, client content, FAQ and Credentials pages) in this repo.
 - The build plan is `docs/v1.0-prompts.md`. Prompts 1–5 are done in v1.0. Prompt 6 (domain, Resend domain, launch) waits on the domain and ABN.
 
 ## The design is frozen
@@ -19,7 +20,7 @@ The client approved v0.3.2 exactly. Don't change tokens, type, the topographic s
 | Tap targets | ≥ 44px |
 | Small screens | No horizontal scroll at 390px. |
 | Motion | `prefers-reduced-motion` respected; nothing autoplays. |
-| D700 records | New visible components go through the `d700-compose` skill in diff mode (next record SP-03), with citations added to `src/cites.py`. |
+| D700 records | New visible components go through the `d700-compose` skill in diff mode (next record SP-04), with citations added to `src/cites.py`. |
 
 ## Build and run
 
@@ -32,7 +33,7 @@ The client approved v0.3.2 exactly. Don't change tokens, type, the topographic s
 | `npm test` | Function tests (`node --test`, fetch stubbed, no keys needed). |
 
 Content lives in two files:
-- `content/site.json`: copy, credentials, services, FAQ, regions, photo ids, `google_review_url`, `turnstile_site_key`.
+- `content/site.json`: copy, owner, insurer, credentials, services, clients, `faq_groups` (the /faq page), regions, photo ids, `google_review_url`, `turnstile_site_key`.
 - `content/media.json`: every photo and video, with alt text and descriptions.
 
 The runtime has **no npm dependencies**. Functions call Resend, Upstash and Turnstile over plain `fetch` (`api/_lib/services.js`). Dev-only tools can be devDependencies.
@@ -49,6 +50,13 @@ The runtime has **no npm dependencies**. Functions call Resend, Upstash and Turn
 - Reviews are never edited or deleted. They are only declined for spam, non-customers, abuse, or a named location or person. This is ACCC guidance; keep the policy text on the page.
 - No star ratings and no AggregateRating schema.
 - Reviews need Redis. Without it the form shows "Reviews open soon".
+
+## Client decisions (3 Nov 2026)
+
+- **Never publish licence or membership numbers.** Certificates and currency documents are "available on request".
+- Works for farms and private landholders, and councils and land managers. Region priority: Gippsland first, then all of Victoria.
+- Google Business Profile: service-area business, address hidden. Setup kit in `docs/google-business-profile.md`.
+- A sample drone report (visual RGB survey, 22 Oct 2026) is coming. Anonymise it fully before it goes on the site.
 
 ## Rules
 

@@ -117,3 +117,10 @@ PADDOCK.update({
     "sent":    ["D0381", "D0979", "D0592", "D2184", "D0642", "D0883"],  # native dialog receipt, focus, closedby, live region, consequence-explicit
     "reviews": ["D0367", "D0860", "D3813", "D0642"],   # testimonial card, first-use empty state, plain-language policy, live region
 })
+
+# v1.1 (SP-03): client content — FAQ page, credentials page, who Fitz works for
+PADDOCK.update({
+    "faq":         ["D0377", "D1225", "D3074", "D3821"],    # native details/summary, ::details-content, disclosure state, body contrast
+    "cred-detail": ["D3813", "D0367"],                      # plain-language policy summary, card pattern
+    "clients":     ["D3813"],
+})

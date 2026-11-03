@@ -15,10 +15,12 @@ This is a static multi-page site with Vercel functions for Fitz Feral Hunters (W
   - Videos play in the native player with a play button over the poster. Nothing downloads until you press play.
   - Every file is re-encoded with all metadata stripped (GPS included).
 
+- **Pages:** Home, Services, Credentials, About, Gallery, FAQ, Contact (main nav), plus Reviews (footer and home). The FAQ and Credentials content is Fitz's own, from 3 Nov 2026.
+
 ## Layout
 
 ```
-content/site.json     copy, credentials, services, FAQ, regions, photo ids, google_review_url, turnstile_site_key
+content/site.json     copy, owner, insurer, credentials, services, clients, faq_groups, regions, photo ids, google_review_url, turnstile_site_key
 content/media.json    every photo and video: alt text, captions, descriptions (encoder fills in sizes and paths)
 src/build.py          generator → public/   (python3 src/build.py · --review for the mockup chrome)
 src/css.py · topo.py · cites.py
@@ -29,7 +31,7 @@ api/reviews.js        GET published reviews · POST a new (pending) review
 api/review-moderate.js, api/review-action.js   Fitz's publish/decline screens (signed links)
 api/_lib/             services (Resend, Upstash, Turnstile), store, reviews, page helpers
 tests/api.test.mjs    npm test
-docs/                 SP records, probe verdicts, the v1.0 prompt series
+docs/                 SP records, probe verdicts, the v1.0 prompt series, the Google Business Profile kit
 ```
 
 ## Switching things on (Vercel → Settings → Environment Variables)

@@ -568,6 +568,24 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .faq-group{scroll-margin-top:calc(var(--head-h) + 16px)}
 .faq-group h2.sub{margin-bottom:8px}
 .cred-card h3{margin:0}
+/* v1.1 · the sample report: a document sheet on the topo ground */
+.report{background:var(--bg);box-shadow:inset 0 0 0 1px var(--line-strong);border-top:3px solid var(--gold);border-radius:var(--radius);padding:clamp(20px,4vw,48px);max-width:52rem;display:grid;gap:14px}
+.report>*{margin:0}
+.report h2{font-size:var(--fs-h2)}
+.report h3{margin-top:14px;font-size:var(--fs-h3)}
+.report h4{font:700 15px/1.3 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-top:4px}
+.report ul,.report ol{padding-left:22px;display:grid;gap:6px}
+.report-run{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0}
+.report-head{display:grid;gap:8px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.report-head>*{margin:0}
+.report-sub{color:var(--ink-2)}
+.report-meta{display:grid;grid-template-columns:minmax(110px,auto) minmax(0,1fr);gap:0;margin:8px 0 0;font-size:var(--fs-small);box-shadow:inset 0 0 0 1px var(--line)}
+.report-meta dt{font-weight:600;background:var(--chrome);color:var(--foot-ink);padding:8px 12px;border-bottom:1px solid var(--foot-line)}
+.report-meta dd{margin:0;padding:8px 12px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.report-fig{margin:6px 0;max-width:34rem;display:grid;gap:8px}
+.report-fig figcaption{font-size:var(--fs-caption);color:var(--ink-2);font-style:italic}
+.report-foot{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:10px;margin-top:10px}
+.report-foot p{margin:0}
 .stack>h2.sub+ol.creds{margin-block-start:24px}
 @media (min-width:700px){.creds.creds-6{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .cred-card .eyebrow{margin:0}
@@ -689,7 +707,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across all of Victoria.</p>
         <p class="small"><a class="tel num" href="tel:+61499866580">0499 866 580</a> · <a class="mail" href="mailto:fitzferalhunters1@gmail.com?subject=Enquiry%20from%20the%20website">fitzferalhunters1@gmail.com</a></p>
       </div>
-      <div><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/credentials">Credentials</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li><li><a href="/reviews">Reviews</a></li></ul></div>
+      <div><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/credentials">Credentials</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li><li><a href="/reviews">Reviews</a></li><li><a href="/drone-report">Sample drone report</a></li></ul></div>
       <div><h4>Elsewhere</h4><ul><li><a href="https://www.instagram.com/gippsland_gunner/" target="_blank" rel="noopener">Instagram @gippsland_gunner</a></li><li><a href="https://www.facebook.com/search/top?q=Fitz%20Feral%20Hunters" target="_blank" rel="noopener">Facebook</a></li><li><a href="/contact#enquiry" data-focus="enquiry">Request a quote</a></li></ul></div>
     </div>
     <div class="cred-strip" aria-label="Credentials"><span>Firearms licence</span><span>Game Licence</span><span>SSAA member</span><span>Farmer Assist</span><span>First Aid</span><span>AHCPMG304</span><span>$20m public liability</span></div>
@@ -708,7 +726,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
   /* hash router (artifact build only): five sections, bare tokens */
   if(ARTIFACT){
     var pages=[].slice.call(document.querySelectorAll('[data-page]')), tokens=pages.map(function(p){return p.id});
-    var titles={"home": "Fitz Feral Hunters \u00b7 Pest & vermin control, Victoria", "services": "Services \u00b7 Fitz Feral Hunters", "about": "About \u00b7 Fitz Feral Hunters", "gallery": "Gallery \u00b7 Fitz Feral Hunters", "contact": "Contact \u00b7 Fitz Feral Hunters", "credentials": "Credentials and insurance \u00b7 Fitz Feral Hunters", "faq": "FAQ \u00b7 Fitz Feral Hunters", "reviews": "Reviews \u00b7 Fitz Feral Hunters"};
+    var titles={"home": "Fitz Feral Hunters \u00b7 Pest & vermin control, Victoria", "services": "Services \u00b7 Fitz Feral Hunters", "about": "About \u00b7 Fitz Feral Hunters", "gallery": "Gallery \u00b7 Fitz Feral Hunters", "contact": "Contact \u00b7 Fitz Feral Hunters", "credentials": "Credentials and insurance \u00b7 Fitz Feral Hunters", "faq": "FAQ \u00b7 Fitz Feral Hunters", "drone-report": "Sample drone survey report \u00b7 Fitz Feral Hunters", "reviews": "Reviews \u00b7 Fitz Feral Hunters"};
     var live=document.getElementById('route-live');
     function current(){var h=(location.hash||'#home').slice(1);return tokens.indexOf(h)>-1?h:'home'}
     function show(tok,focusId){

@@ -1,0 +1,49 @@
+{
+ "_comment": "The sample drone report on /drone-report. A real report (visual RGB survey, Gippsland, October 2026) supplied by Fitz on 3 Nov 2026, published with the property's details removed: no ABN, no 'Confidential' mark, month not day. The text is his.",
+ "title": "Drone property survey report",
+ "subtitle": "Visual aerial assessment, rural property, Gippsland VIC",
+ "meta": [
+  [
+   "Report date",
+   "October 2026"
+  ],
+  [
+   "Operator",
+   "Robert Fitzgerald, Fitz Feral Hunters"
+  ],
+  [
+   "Drone platform",
+   "DJI (visual RGB survey)"
+  ],
+  [
+   "Flight time",
+   "About 15–20 minutes, covering key paddocks and boundaries"
+  ],
+  [
+   "Location",
+   "Rural property, Gippsland, Victoria (withheld)"
+  ]
+ ],
+ "summary": "A visual drone survey was conducted over open pasture and adjacent timbered areas on the property. Multiple deer were observed grazing in open paddock. The property features rolling green hills, scattered mature trees, denser forest edges, and clear habitat corridors suitable for deer and other wildlife. No major pasture damage was immediately evident in the surveyed areas, though ongoing monitoring is recommended.",
+ "sightings": "Approximately 3–4 light-coloured deer (consistent with fallow does or similar) were observed in open pasture early in the flight. Animals appeared calm and grazing. No large mobs or additional animals were clearly visible in subsequent frames over the timbered edges.",
+ "habitat": "The property consists of improved green pasture on rolling hills, with prominent tree lines and denser eucalypt forest along boundaries and gullies. These timbered areas provide excellent cover, shelter, and movement corridors for deer and other wildlife. Fence lines and vehicle tracks are visible in places. Overall vegetation health appears good under current conditions.",
+ "findings": [
+  "Active deer presence confirmed in open areas during daylight hours.",
+  "Timbered edges and gullies offer significant cover – likely higher nocturnal activity.",
+  "No obvious widespread pasture damage or wallowing observed in the surveyed corridor.",
+  "Property layout is well suited to targeted control operations and further visual monitoring."
+ ],
+ "recommendations": [
+  "Conduct additional daytime visual drone surveys or ground-based monitoring to further assess activity patterns, numbers, and preferred areas.",
+  "Implement targeted culling or monitoring program focused on tree-line edges and known grazing areas.",
+  "Consider strategic fencing improvements along high-pressure boundaries if pasture pressure increases.",
+  "Repeat visual surveys seasonally to track population trends and damage risk."
+ ],
+ "conclusion": "The visual survey successfully confirmed deer activity and provided a clear overview of habitat structure. While numbers appear modest in open areas during daylight, the extensive cover suggests a larger population may be present. Fitz Feral Hunters is available to provide further visual surveying, culling, and reporting services.",
+ "prepared": [
+  "Robert Fitzgerald",
+  "Fitz Feral Hunters",
+  "AHCPMG304 qualified · Public liability to $20M"
+ ],
+ "disclaimer": "Report prepared following visual drone survey. All observations are based on footage and conditions at the time of flight. Recommendations are general in nature and should be discussed further for site-specific implementation."
+}

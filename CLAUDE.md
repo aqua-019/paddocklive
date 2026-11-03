@@ -56,7 +56,7 @@ The runtime has **no npm dependencies**. Functions call Resend, Upstash and Turn
 - **Never publish licence or membership numbers.** Certificates and currency documents are "available on request".
 - Works for farms and private landholders, and councils and land managers. Region priority: Gippsland first, then all of Victoria.
 - Google Business Profile: service-area business, address hidden. Setup kit in `docs/google-business-profile.md`.
-- A sample drone report (visual RGB survey, 22 Oct 2026) is coming. Anonymise it fully before it goes on the site.
+- The sample drone report (visual RGB survey, Oct 2026) is live at `/drone-report` from `content/report.json`. It's published without the ABN, the "Confidential" mark or the exact date, and the figures are cropped clean from his report.
 
 ## Rules
 

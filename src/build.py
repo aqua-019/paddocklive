@@ -31,6 +31,7 @@ TOPO_SCALE = 0.5   # v0.3.2: the 1200px tile is drawn at 600px — 3× the line 
 # the varbar, spec sheet, X-ray, placeholder flags and data-per citations.
 REVIEW = ARTIFACT or '--review' in sys.argv
 MEDIA = {i['id']: i for i in json.loads((ROOT / 'content' / 'media.json').read_text())['items']}
+REPORT = json.loads((ROOT / 'content' / 'report.json').read_text())
 TURNSTILE = S.get('turnstile_site_key', '')
 from urllib.parse import quote as urlquote
 
@@ -136,6 +137,24 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .faq-group{scroll-margin-top:calc(var(--head-h) + 16px)}
 .faq-group h2.sub{margin-bottom:8px}
 .cred-card h3{margin:0}
+/* v1.1 · the sample report: a document sheet on the topo ground */
+.report{background:var(--bg);box-shadow:inset 0 0 0 1px var(--line-strong);border-top:3px solid var(--gold);border-radius:var(--radius);padding:clamp(20px,4vw,48px);max-width:52rem;display:grid;gap:14px}
+.report>*{margin:0}
+.report h2{font-size:var(--fs-h2)}
+.report h3{margin-top:14px;font-size:var(--fs-h3)}
+.report h4{font:700 15px/1.3 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-top:4px}
+.report ul,.report ol{padding-left:22px;display:grid;gap:6px}
+.report-run{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0}
+.report-head{display:grid;gap:8px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.report-head>*{margin:0}
+.report-sub{color:var(--ink-2)}
+.report-meta{display:grid;grid-template-columns:minmax(110px,auto) minmax(0,1fr);gap:0;margin:8px 0 0;font-size:var(--fs-small);box-shadow:inset 0 0 0 1px var(--line)}
+.report-meta dt{font-weight:600;background:var(--chrome);color:var(--foot-ink);padding:8px 12px;border-bottom:1px solid var(--foot-line)}
+.report-meta dd{margin:0;padding:8px 12px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.report-fig{margin:6px 0;max-width:34rem;display:grid;gap:8px}
+.report-fig figcaption{font-size:var(--fs-caption);color:var(--ink-2);font-style:italic}
+.report-foot{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:10px;margin-top:10px}
+.report-foot p{margin:0}
 .stack>h2.sub+ol.creds{margin-block-start:24px}
 @media (min-width:700px){.creds.creds-6{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .cred-card .eyebrow{margin:0}
@@ -185,7 +204,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
 """
 
 PAGES = [("home", "/", "Home"), ("services", "/services", "Services"), ("credentials", "/credentials", "Credentials"), ("about", "/about", "About"), ("gallery", "/gallery", "Gallery"), ("faq", "/faq", "FAQ"), ("contact", "/contact", "Contact")]
-EXTRA_PAGES = [("reviews", "/reviews", "Reviews")]     # linked from home, footer and sitemap; not in the main nav
+EXTRA_PAGES = [("reviews", "/reviews", "Reviews"), ("drone-report", "/drone-report", "Sample drone report")]     # linked from home, footer and sitemap; not in the main nav
 HREF = {k: h for k, h, _ in PAGES + EXTRA_PAGES}
 def href(key, anchor=''):
     if ARTIFACT: return f'#{key}'
@@ -200,6 +219,7 @@ TITLES = {
   "contact": (f"Contact · {S['name']}", f"Ring {S['phone_display']} or send an enquiry. Based in {S['base']}, working across {S['region']}."),
   "credentials": (f"Credentials and insurance · {S['name']}", f"Licensed and insured feral animal control: firearms and Game licences, SSAA Farmer Assist, First Aid, AHCPMG304 humane dispatch and $20 million public liability with {S['insurer']}. Certificates on request."),
   "faq": (f"FAQ · {S['name']}", "How quotes are worked out, carcass disposal, stock safety, neighbours and night noise, farm security, insurance and kangaroo permits: straight answers from Fitz Feral Hunters."),
+  "drone-report": (f"Sample drone survey report · {S['name']}", "A real drone survey report from a rural property in Gippsland, with the property's details removed: what was seen, the habitat, findings and recommendations."),
   "reviews": (f"Reviews · {S['name']}", "Reviews from farmers and landholders Fitz Feral Hunters has worked for, published good or bad. Leave a review of a job."),
 }
 
@@ -318,7 +338,7 @@ def footer():
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across {esc(S['region'])}.</p>
         <p class="small">{tel()} · {mailto()}</p>
       </div>
-      <div><h4>Pages</h4><ul>{nav_links(None)}<li><a href="{href('reviews')}">Reviews</a></li></ul></div>
+      <div><h4>Pages</h4><ul>{nav_links(None)}<li><a href="{href('reviews')}">Reviews</a></li><li><a href="{href('drone-report')}">Sample drone report</a></li></ul></div>
       <div><h4>Elsewhere</h4><ul><li><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])}</a></li><li><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook</a></li><li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a></li></ul></div>
     </div>
     <div class="cred-strip" aria-label="Credentials">{''.join(f'<span>{esc(t)}</span>' for t, _ in S['credentials'][:7])}</div>
@@ -482,7 +502,7 @@ def drone_band():
       <h2>Thermal drone scouting with a DJI Matrice 4T</h2>
       <p class="measure">Before a program starts, the drone finds the mob, counts it and maps where it moves, by day or at night. Fewer wasted trips, a better plan, and a record you can keep.</p>
       <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Night work</b> ahead of the ground team</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
-      <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a><a class="btn btn-quiet" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">or ask for a quote</a></div>
+      <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a><a class="btn btn-quiet" href="{href('drone-report')}">See a sample report</a></div>
     </div>
     {video_fig("drone-thermal-mob") if "drone-thermal-mob" in MEDIA else slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
   </div>
@@ -625,7 +645,7 @@ def services_body():
     rows = ''.join(row(k, t, d, b) for k, t, d, b in S['services'])
     drone = '''
       <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone scouting</h3><p class="small" style="color:var(--ink-2)">A DJI Matrice 4T thermal drone for scouting, counts and night work: find the mob, map where it moves and plan the program before anyone walks in.</p></div>
-        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul></article>''' if S.get('thermal_drone') else ''
+        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li><li><a href="/drone-report">See a sample report</a></li></ul></article>''' if S.get('thermal_drone') else ''
     faqs = ''.join(f'<details class="faq"><summary>{esc(g[1][0][0])}</summary><p>{esc(g[1][0][1])}</p></details>' for g in S['faq_groups'])
     clients = ''.join(f'<article class="tile"><h3>{esc(t)}</h3><p>{esc(d)}</p></article>' for t, d in S['clients'])
     return f'''
@@ -843,6 +863,41 @@ def faq_body():
     <nav class="faq-index" aria-label="Question topics"><ul>{index}</ul></nav>
     {body}
     <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a><a class="btn btn-quiet" href="{href('credentials')}"{route_attr('credentials')}>Credentials and insurance</a></div>
+  </div>
+</section>'''
+
+def report_fig(mid):
+    m = MEDIA[mid]
+    return (f'<figure class="report-fig"><div class="slot photo" style="--ar:{m["width"]}/{m["height"]}"><picture><source type="image/webp" srcset="{m["src_webp"]}">'
+            f'<img src="{m["src"]}" alt="{esc(m["alt"])}" width="{m["width"]}" height="{m["height"]}" loading="lazy" decoding="async"></picture>{corners()}<span class="plate">Location withheld</span></div>'
+            f'<figcaption>{esc(m["caption"])}</figcaption></figure>')
+
+def report_body():
+    R = REPORT
+    meta_rows = ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in R['meta'])
+    return f'''
+<section class="page" aria-labelledby="h-drone-report"{per("report")}>
+  <div class="wrap stack" style="--gap:32px">
+    <div class="sec-head">{meta("Sample report")}<p class="eyebrow">Drone scouting · sample report</p><h1 id="h-drone-report" tabindex="-1" style="font-size:var(--fs-h2)">What a drone survey gives you</h1>
+      <p class="measure">A real report from a drone survey on a rural property in Gippsland, October 2026, with the property's details removed. Every scouting job ends with a report like this: what was seen, what the ground is like, and what to do next.</p>
+      <p class="caption measure">This survey used a standard visual (RGB) camera. Thermal surveys with the DJI Matrice 4T use the same format and add heat signatures, which find animals in cover and at night.</p></div>
+    <article class="report" aria-labelledby="report-title">
+      <header class="report-head">
+        <p class="report-run">Fitz Feral Hunters · Drone survey report</p>
+        <h2 id="report-title">{esc(R['title'])}</h2>
+        <p class="report-sub">{esc(R['subtitle'])}</p>
+        <dl class="report-meta">{meta_rows}</dl>
+      </header>
+      <h3>1. Executive summary</h3><p>{esc(R['summary'])}</p>
+      <h3>2. Key observations</h3>
+      <h4>Animal sightings</h4><p>{esc(R['sightings'])}</p>{report_fig('report-fig1')}
+      <h4>Habitat and terrain</h4><p>{esc(R['habitat'])}</p>{report_fig('report-fig2')}
+      <h3>3. Findings</h3><ul>{''.join(f'<li>{esc(x)}</li>' for x in R['findings'])}</ul>
+      <h3>4. Recommendations</h3><ol>{''.join(f'<li>{esc(x)}</li>' for x in R['recommendations'])}</ol>
+      <h3>5. Conclusion</h3><p>{esc(R['conclusion'])}</p>
+      <footer class="report-foot"><p><b>Prepared by</b><br>{'<br>'.join(esc(x) for x in R['prepared'])}</p><p class="caption">{esc(R['disclaimer'])}</p></footer>
+    </article>
+    <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Ask for a drone survey</a><a class="btn btn-quiet" href="{href('services','svc-drone')}"{route_attr('services')}>Drone scouting details</a></div>
   </div>
 </section>'''
 
@@ -1147,7 +1202,7 @@ def main():
         print(f'artifact → {out} ({out.stat().st_size/1024:.0f} KB) · {n_entries} entries · {len(allids)} citations · topo tile {len(TOPO_SVG)/1024:.0f} KB')
         return
     PUB.mkdir(exist_ok=True)
-    pages = {'home': home_body(), 'services': services_body(), 'credentials': credentials_body(), 'about': about_body(), 'gallery': gallery_body(), 'faq': faq_body(), 'contact': contact_body(), 'reviews': reviews_body()}
+    pages = {'home': home_body(), 'services': services_body(), 'credentials': credentials_body(), 'about': about_body(), 'gallery': gallery_body(), 'faq': faq_body(), 'contact': contact_body(), 'reviews': reviews_body(), 'drone-report': report_body()}
     for key, body in pages.items():
         t, d = TITLES[key]
         (PUB / ('index.html' if key == 'home' else f'{key}.html')).write_text(document(key, body, t, d))

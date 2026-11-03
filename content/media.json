@@ -249,6 +249,48 @@
    "bytes": 728116,
    "poster": "/media/photo/trailcam-night-visitor-poster-848-5f46a30c.jpg",
    "poster_webp": "/media/photo/trailcam-night-visitor-poster-848-5f46a30c.webp"
+  },
+  {
+   "id": "report-fig1",
+   "type": "photo",
+   "kind": "drone",
+   "source": "report-fig1.jpg",
+   "title": "Deer in open pasture",
+   "caption": "Figure 1: Deer observed in open pasture (approx. 5 seconds into flight)",
+   "alt": "Aerial view of a frosty green paddock on a slope, with three light-coloured deer grazing in the open and a timbered edge at the top right.",
+   "src": "/media/photo/report-fig1-512-4d5fcd03.jpg",
+   "src_webp": "/media/photo/report-fig1-512-4d5fcd03.webp",
+   "width": 512,
+   "height": 287,
+   "srcset": [
+    [
+     512,
+     "/media/photo/report-fig1-512-4d5fcd03.jpg",
+     "/media/photo/report-fig1-512-4d5fcd03.webp"
+    ]
+   ],
+   "bytes": 16532
+  },
+  {
+   "id": "report-fig2",
+   "type": "photo",
+   "kind": "drone",
+   "source": "report-fig2.jpg",
+   "title": "Paddock and tree-line interface",
+   "caption": "Figure 2: Typical paddock and tree-line interface (mid-flight)",
+   "alt": "Aerial view of a dense stand of tall eucalypts along a gully, with open paddock and scattered trees and shrubs below it.",
+   "src": "/media/photo/report-fig2-508-51e2f0bd.jpg",
+   "src_webp": "/media/photo/report-fig2-508-51e2f0bd.webp",
+   "width": 508,
+   "height": 285,
+   "srcset": [
+    [
+     508,
+     "/media/photo/report-fig2-508-51e2f0bd.jpg",
+     "/media/photo/report-fig2-508-51e2f0bd.webp"
+    ]
+   ],
+   "bytes": 25496
   }
  ]
 }

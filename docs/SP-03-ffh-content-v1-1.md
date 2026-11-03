@@ -12,16 +12,18 @@ Delta:
 - Home: nine service tiles (six species, farm security, night and thermal, thermal drone) for a full 3×3; a "Credentials and insurance in full" link under the wall; triad and service-area copy name Elders and the region priority
 - About: Robert Fitzgerald's bio in his words leads; insurance line names Elders; link to the Credentials page
 - LocalBusiness schema: founder Robert Fitzgerald; knowsAbout adds thermal drone scouting and farm security
+- /drone-report: his real survey report (visual RGB, Gippsland, Oct 2026) rebuilt as a document sheet in the site's type, with the two figures in the location-withheld frame. Removed before publishing: the ABN, the "Confidential" footer, the exact day. Linked from the drone band, the drone service and the footer.
 
-SP-03 :: Fitz Feral Hunters :: SURFACES=credentials (new) · faq (new) · services · home · about · header :: CITES=SP-02 set + D0377 · D1225 · D3074 · D3821 · D3813 · D0367 :: FLOOR=unchanged + 4 delta asserts
+SP-03 :: Fitz Feral Hunters :: SURFACES=credentials (new) · faq (new) · drone-report (new) · services · home · about · header :: CITES=SP-02 set + D0377 · D1225 · D3074 · D3821 · D3813 · D0367 :: FLOOR=unchanged + 5 delta asserts
 
 ## ASSERT lines (delta)
 ASSERT :: header (900/1024/1280) :: seven nav links and the quote button fit on one row with no overflow :: PER=LENS-15
 ASSERT :: faq :: 11 answers as native disclosures; FAQPage schema lists the same 11; every topic link resolves; one H1 :: PER=D0377 · D3074
 ASSERT :: credentials, about, services, home :: Elders Insurance named; 0 licence or membership numbers; bio, farm security, clients, nine tiles, founder in schema :: PER=LENS-02 · D3813
-ASSERT :: home, about, gallery, credentials :: every image loads after scrolling :: PER=D0404
+ASSERT :: home, about, gallery, credentials, drone-report :: every image loads after scrolling :: PER=D0404
+ASSERT :: drone-report :: 5 sections, 2 figures, one H1; no ABN, 'Confidential' or exact date; linked from the drone service :: PER=LENS-02 · LENS-07
 
-MEASURE :: probe 23/23 VERIFIED (docs/verdicts-v1-1.txt; SP-02 asserts re-run unchanged) · npm test 13/13 · rig: Playwright Chromium against scripts/dev.mjs
+MEASURE :: probe rounds=2 (round 1: a review left in the dev server's memory store by an earlier run — fresh server) · final 24/24 VERIFIED (docs/verdicts-v1-1.txt; SP-02 asserts re-run unchanged) · npm test 13/13 · rig: Playwright Chromium against scripts/dev.mjs
 
 FOLD :: LENS-02 → when a client withholds a detail (licence numbers), say on the page why it's absent and how to get it; an unexplained gap reads as something to hide :: Fitz Feral Hunters v1.1
 FOLD :: D0377 → a FAQ in the client's own sentences, grouped by the moment the reader is in (pricing, on the job, paperwork), beats a long flat list; keep one question per group on the service page and link the rest :: Fitz Feral Hunters v1.1

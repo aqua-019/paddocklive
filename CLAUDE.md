@@ -3,6 +3,7 @@
 The live website for **Fitz Feral Hunters**: licensed, insured feral animal and vermin control for farmers and landholders. Based in Warragul, Gippsland, covering **all of Victoria**.
 
 - Phone `0499 866 580` (`+61499866580`), email `fitzferalhunters1@gmail.com`, Instagram `@gippsland_gunner`.
+- Domain: **fitzferalhunters.com** (attached to the Vercel project; `url` in site.json). Still `indexable: false` until launch.
 - Owner: Robert Fitzgerald (grew up in Korumburra, based in Warragul). Insurer: Elders Insurance, $20m public liability.
 - Built from Aqua's D700 design catalogue: the Paddock composition, SP-01 → SP-01e (mockups v0.1–0.3.2, repo `aqua-019/paddock1`), then SP-02 (v1.0) and SP-03 (v1.1, client content, FAQ and Credentials pages) in this repo.
 - The build plan is `docs/v1.0-prompts.md`. Prompts 1–5 are done in v1.0. Prompt 6 (domain, Resend domain, launch) waits on the domain and ABN.

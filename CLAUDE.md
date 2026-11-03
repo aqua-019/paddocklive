@@ -6,7 +6,7 @@ The live website for **Fitz Feral Hunters**: licensed, insured feral animal and 
 - Domain: **fitzferalhunters.com** (attached to the Vercel project; `url` in site.json). Still `indexable: false` until launch.
 - Owner: Robert Fitzgerald (grew up in Korumburra, based in Warragul). Insurer: Elders Insurance, $20m public liability.
 - Built from Aqua's D700 design catalogue: the Paddock composition, SP-01 → SP-01e (mockups v0.1–0.3.2, repo `aqua-019/paddock1`), then SP-02 (v1.0) and SP-03 (v1.1, client content, FAQ and Credentials pages) in this repo.
-- The build plan is `docs/v1.0-prompts.md`. Prompts 1–5 are done in v1.0. Prompt 6 (domain, Resend domain, launch) waits on the domain and ABN.
+- The build plan is `docs/v1.0-prompts.md`. Prompts 1–5 are done in v1.0. Prompt 6 (Resend domain, privacy page, launch) is what's left; the domain and ABN are in.
 
 ## The design is frozen
 
@@ -54,6 +54,7 @@ The runtime has **no npm dependencies**. Functions call Resend, Upstash and Turn
 
 ## Client decisions (3 Nov 2026)
 
+- ABN 22 477 254 408 shows in the footer and as `taxID` in the schema (approved by Aqua, 3 Nov 2026). It stays off the sample report.
 - **Never publish licence or membership numbers.** Certificates and currency documents are "available on request".
 - Works for farms and private landholders, and councils and land managers. Region priority: Gippsland first, then all of Victoria.
 - Google Business Profile: service-area business, address hidden. Setup kit in `docs/google-business-profile.md`.

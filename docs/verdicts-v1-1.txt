@@ -9,11 +9,11 @@ VERIFIED :: SP-03 :: all (390px) :: no horizontal scroll :: claimed=10/10 measur
 VERIFIED :: SP-03 :: all (no JS) :: numbers stay tel: links; videos keep native controls :: claimed=true/true measured=true/true :: PER=progressive enhancement
 VERIFIED :: SP-03 :: contact :: no mail key yet: receipt says not sent, shows the enquiry, offers a filled-in email :: claimed=fallback + rows + mailto measured=fallback "One more step" · 6 rows · Email it to Fitz / Call 0499 866 580 · focus #sent-title :: PER=D0979 · D0381 · LENS-02
 VERIFIED :: SP-03 :: contact :: closing the not-sent receipt keeps the form filled :: claimed=form kept measured={"open":false,"form":true,"name":"Sam Taylor"} :: PER=D0342
-VERIFIED :: SP-03 :: contact :: mail on: "Sent to Fitz" receipt with reference; Esc closes to the inline confirmation :: claimed=sent, ref, then confirm measured=sent "Sent to Fitz" "Reference FFH-TEST1 · Tue, 3 Nov, 6:50 pm" → confirm true, focus #confirm :: PER=D0979 · D2184 · D0592
+VERIFIED :: SP-03 :: contact :: mail on: "Sent to Fitz" receipt with reference; Esc closes to the inline confirmation :: claimed=sent, ref, then confirm measured=sent "Sent to Fitz" "Reference FFH-TEST1 · Tue, 3 Nov, 8:51 pm" → confirm true, focus #confirm :: PER=D0979 · D2184 · D0592
 VERIFIED :: SP-03 :: contact :: server field errors land on the right field :: claimed=#f-loc measured=#f-loc :: PER=LAW-23
 VERIFIED :: SP-03 :: reviews :: review goes to Fitz with a signed moderation link :: claimed=receipt + link measured=sent "Thanks, it’s with Fitz" · link issued :: PER=D0367 · D3813
 VERIFIED :: SP-03 :: reviews, home :: opening the link changes nothing; Publish puts it on /reviews and home :: claimed=0 before · 1 · 1 measured=0 before click · "Published" · /reviews 1 · home 1 :: PER=D0883 · D0367
-VERIFIED :: SP-03 :: all :: hover recolours only (no transform/shadow) incl. play and numbers :: claimed=0 changed of 19 measured=0 changed :: PER=D3171 · LAW-03
+VERIFIED :: SP-03 :: all :: hover recolours only (no transform/shadow) incl. play and numbers :: claimed=0 changed of 20 measured=0 changed :: PER=D3171 · LAW-03
 VERIFIED :: SP-03 :: home, gallery :: new text contrast :: claimed=captions ≥7 · titles ≥12 · drone captions ≥7 · review meta ≥4.5 measured={"cap":7.76,"title":14.44,"drone":14.44,"review":7.23} :: PER=D0192 · LENS-15
 VERIFIED :: SP-03 :: gallery (390px) :: play target ≥ 44px (whole poster is the button) :: claimed=≥44 measured=68×68 :: PER=LAW-23
 VERIFIED :: SP-03 :: header (900/1024/1280) :: seven nav links + quote button fit on one row :: claimed=one row, no overflow measured=true/true/true :: PER=LENS-15
@@ -21,4 +21,5 @@ VERIFIED :: SP-03 :: faq :: 11 client answers as disclosures, FAQPage schema, to
 VERIFIED :: SP-03 :: credentials, about, services, home :: client content in place; no licence or membership numbers anywhere :: claimed=Elders, 0 numbers, bio, farm security, clients, 9 tiles, founder measured=elders true · numbers 0 · creds 6 · bio true · farm true · clients true · tiles 9 · founder Robert Fitzgerald :: PER=LENS-02 · D3813
 VERIFIED :: SP-03 :: home, about, gallery, credentials, drone-report :: every image loads after scrolling :: claimed=0 broken measured=0,0,0,0,0 :: PER=D0404
 VERIFIED :: SP-03 :: drone-report :: sample report: 5 sections, 2 figures, no ABN / Confidential / exact date; linked from the drone service :: claimed=0 leaks · 1 h1 · 2 figs · 5 sections · linked measured=0 · 1 · 2 · 5 · true :: PER=LENS-02 · LENS-07
+VERIFIED :: SP-03 :: footer, home, faq :: ABN in the footer on every page; the sample report is the drone band's main button and is linked from the FAQ :: claimed=true · true · true measured=true · true · true :: PER=LENS-02
 VERIFIED :: SP-03 :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract

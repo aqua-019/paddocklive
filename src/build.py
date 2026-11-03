@@ -137,6 +137,7 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .faq-group{scroll-margin-top:calc(var(--head-h) + 16px)}
 .faq-group h2.sub{margin-bottom:8px}
 .cred-card h3{margin:0}
+details.faq p a{color:var(--ink);text-underline-offset:.16em}
 /* v1.1 · the sample report: a document sheet on the topo ground */
 .report{background:var(--bg);box-shadow:inset 0 0 0 1px var(--line-strong);border-top:3px solid var(--gold);border-radius:var(--radius);padding:clamp(20px,4vw,48px);max-width:52rem;display:grid;gap:14px}
 .report>*{margin:0}
@@ -502,7 +503,7 @@ def drone_band():
       <h2>Thermal drone scouting with a DJI Matrice 4T</h2>
       <p class="measure">Before a program starts, the drone finds the mob, counts it and maps where it moves, by day or at night. Fewer wasted trips, a better plan, and a record you can keep.</p>
       <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Night work</b> ahead of the ground team</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
-      <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a><a class="btn btn-quiet" href="{href('drone-report')}">See a sample report</a></div>
+      <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('drone-report')}">See a sample drone report</a><a class="btn btn-quiet" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a></div>
     </div>
     {video_fig("drone-thermal-mob") if "drone-thermal-mob" in MEDIA else slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
   </div>
@@ -645,8 +646,8 @@ def services_body():
     rows = ''.join(row(k, t, d, b) for k, t, d, b in S['services'])
     drone = '''
       <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone scouting</h3><p class="small" style="color:var(--ink-2)">A DJI Matrice 4T thermal drone for scouting, counts and night work: find the mob, map where it moves and plan the program before anyone walks in.</p></div>
-        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li><li><a href="/drone-report">See a sample report</a></li></ul></article>''' if S.get('thermal_drone') else ''
-    faqs = ''.join(f'<details class="faq"><summary>{esc(g[1][0][0])}</summary><p>{esc(g[1][0][1])}</p></details>' for g in S['faq_groups'])
+        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul><p style="grid-column:1/-1;margin:0"><a class="btn btn-secondary" href="/drone-report">See a sample drone report</a></p></article>''' if S.get('thermal_drone') else ''
+    faqs = ''.join(f'<details class="faq"><summary>{esc(g[1][0][0])}</summary><p>{answer(g[1][0][1])}</p></details>' for g in S['faq_groups'])
     clients = ''.join(f'<article class="tile"><h3>{esc(t)}</h3><p>{esc(d)}</p></article>' for t, d in S['clients'])
     return f'''
 <section class="page" aria-labelledby="h-services"{per("services")}>
@@ -667,7 +668,7 @@ def services_body():
       <h3>Permits and codes, in plain language</h3>
       <p class="small" style="color:var(--ink-2)">Kangaroo control on private land needs an Authority to Control Wildlife{fn(notes['ATCW'])} from the Victorian government; I can help with the application. Deer are a game species and are taken under a Game Licence{fn(notes['Game Licence'])}. All work follows the relevant Victorian codes of practice for the humane control of the species involved.</p>
     </div>
-    <div class="stack" style="--gap:12px;margin-top:16px"{per("faq")}><h2 class="sub">Common questions</h2><div>{faqs}</div><p><a class="btn btn-secondary" href="{href('faq')}"{route_attr('faq')}>All questions and answers</a></p></div>
+    <div class="stack" style="--gap:12px;margin-top:36px"{per("faq")}><h2 class="sub">Common questions</h2><div>{faqs}</div><p><a class="btn btn-secondary" href="{href('faq')}"{route_attr('faq')}>All questions and answers</a></p></div>
     <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a><a class="btn btn-quiet num" href="tel:{S['phone_e164']}">or call {S['phone_display']}</a></div>
   </div>
 </section>'''
@@ -721,7 +722,8 @@ def gallery_body():
 <section class="page" aria-labelledby="h-gallery"{per("gallery")}>
   <div class="wrap stack" style="--gap:28px">
     <div class="sec-head">{meta("Gallery")}<p class="eyebrow">Gallery</p><h1 id="h-gallery" tabindex="-1" style="font-size:var(--fs-h2)">From the job</h1>
-      <p class="measure">Drone, thermal and trail camera footage, and photos from the field. No property locations are shown and nobody appears without their say-so; every frame carries the plate that says so.</p></div>
+      <p class="measure">Drone, thermal and trail camera footage, and photos from the field. No property locations are shown and nobody appears without their say-so; every frame carries the plate that says so.</p>
+      <p><a class="btn btn-secondary" href="{href('drone-report')}">See a sample drone report</a></p></div>
     <div class="stack" style="--gap:16px"><h2 class="sub">Video</h2><ul class="vids">{vids}</ul></div>
     <div class="stack" style="--gap:16px"><h2 class="sub">Photos</h2><ul class="gal">{items}</ul></div>
   </div>
@@ -850,11 +852,17 @@ def credentials_body():
   </div>
 </section>'''
 
+def answer(a):
+    """FAQ answer text, escaped, with [text](/path) turned into a link to one of the site's own pages."""
+    return re.sub(r'\[([^\]]+)\]\((/[a-z0-9\-#/]*)\)', lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', esc(a))
+
+def plain(a): return re.sub(r'\[([^\]]+)\]\((/[a-z0-9\-#/]*)\)', r'\1', a)
+
 def faq_body():
     groups = S['faq_groups']
     index = ''.join(f'<li><a href="#faq-{slug(g)}">{esc(g)}</a></li>' for g, _ in groups)
     body = ''.join(f'''
-    <div class="faq-group" id="faq-{slug(g)}"><h2 class="sub">{esc(g)}</h2><div>{''.join(f'<details class="faq"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in qs)}</div></div>''' for g, qs in groups)
+    <div class="faq-group" id="faq-{slug(g)}"><h2 class="sub">{esc(g)}</h2><div>{''.join(f'<details class="faq"><summary>{esc(q)}</summary><p>{answer(a)}</p></details>' for q, a in qs)}</div></div>''' for g, qs in groups)
     return f'''
 <section class="page" aria-labelledby="h-faq"{per("faq")}>
   <div class="wrap stack" style="--gap:32px">
@@ -904,7 +912,7 @@ def report_body():
 def extra_ld(key):
     if key != 'faq': return ''
     ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for _, qs in S['faq_groups'] for q, a in qs]}
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": plain(a)}} for _, qs in S['faq_groups'] for q, a in qs]}
     return '\n<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>'
 
 def notfound_body():
@@ -1115,7 +1123,7 @@ def jsonld():
       "image": S['url'].rstrip('/') + '/og-1200x630.png',
       "address": {"@type": "PostalAddress", "addressLocality": S['base'], "addressRegion": "VIC", "addressCountry": "AU"},
       "areaServed": ["Gippsland", "Victoria, Australia"], "sameAs": [S['instagram']],
-      "founder": {"@type": "Person", "name": S['owner']},
+      "founder": {"@type": "Person", "name": S['owner']}, **({"taxID": "ABN " + S['abn']} if S.get('abn') else {}),
       "knowsAbout": ["Deer control", "Kangaroo culling", "Feral pig control", "Fox control", "Rabbit control", "Wild dog control", "Thermal night work", "Thermal drone scouting", "Farm security"],
     }, ensure_ascii=False)
 

@@ -29,7 +29,7 @@ Google's own steps: [Sign up for a Business Profile](https://support.google.com/
 ## Description (678 of 750 characters)
 
 ```
-Licensed, insured feral animal and vermin control for farms, private landholders, councils and land managers. Based in Warragul, working across Gippsland first, then all of Victoria. Deer control, kangaroo control under a valid ATCW, feral pigs, foxes, rabbits and wild dogs, with thermal night work and DJI Matrice 4T thermal drone scouting. Farm security: after-hours monitoring and rapid response for properties with ongoing stock or asset risk. Every job is planned and agreed before the first night, carried out humanely to AHCPMG304 and the Victorian codes of practice, and insured with Elders Insurance for $20 million public liability. Certificates available on request.
+Licensed, insured feral animal and vermin control for farms, private landholders and land managers. Based in Warragul, working across Gippsland first, then all of Victoria. Deer control, kangaroo control under a valid ATCW, feral pigs, foxes, rabbits and wild dogs, with thermal night work and DJI Matrice 4T thermal drone scouting. Farm security: after-hours monitoring and rapid response for properties with ongoing stock or asset risk. Every job is planned and agreed before the first night, carried out humanely to AHCPMG304 and the Victorian codes of practice, and insured with Elders Insurance for $20 million public liability. Certificates available on request.
 ```
 
 ## Services to list in the profile

@@ -747,7 +747,7 @@ def home_body():
 <section class="band"{per("area")}{per("topo")}>
   <div class="wrap stack" style="--gap:24px">
     <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in {esc(S['base'])}, covering all of Victoria</h2>
-      <p class="measure">Gippsland comes first: it's home ground. Beyond it the 4WD goes anywhere in the state, for farms and private landholders, councils and land managers. Ring and we'll work out the trip.</p></div>
+      <p class="measure">Gippsland comes first: it's home ground. Beyond it the 4WD goes anywhere in the state, for farms, private landholders and land managers. Ring and we'll work out the trip.</p></div>
     {'<div class="area-grid reveal"><div class="map-scroll">' + locality_map() + '</div>' + legend() + '</div>' if SHEET_MAP else ''}
     <ul class="chips reveal" aria-label="Regions served">{chips}</ul>
   </div>
@@ -814,7 +814,7 @@ def about_body():
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
         <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 640px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No mess and no surprises for the neighbours{fn(3)}.</p>
-        <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms and private landholders, councils and land managers: Gippsland first, then anywhere in Victoria.</p>
+        <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms, private landholders and land managers: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
         <p class="caption">{current_line}</p>

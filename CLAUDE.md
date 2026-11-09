@@ -67,7 +67,8 @@ The runtime has **no npm dependencies**. Functions call Resend, Upstash and Turn
 
 - The call bar (`.cta-bar`) hides while the home hero's own buttons or the enquiry form are on screen; the footer carries the bar's height as bottom padding, so nothing sits under it.
 - Checked at 320, 360, 390, 430 wide and 844×390 landscape: no overflow, tap targets ≥ 44px, no form text under 16px (iOS zoom).
-- Media captions are the client's words (9 Nov 2026 edits); the About bio uses the square `fitz-portrait` only.
+- Media captions are the client's words (9 Nov 2026 edits). The home hero is `fitz-hero` (Fitz at sunset); the About bio is one large square `fitz-portrait` showing his full figure, not just his face.
+- Every gallery video sits in the same 16:9 frame; thumbnails fill it (cover) and the clip shows uncropped once playing.
 
 ## Rules
 

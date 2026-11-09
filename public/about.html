@@ -549,7 +549,9 @@ figure.slot{margin:0}
 .vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
 .band.drone .vid figcaption{color:color-mix(in srgb, var(--foot-ink) 78%, transparent)}
 .band.drone .vid figcaption b{color:var(--foot-ink)}
-.vids{list-style:none;margin:0;padding:0;display:grid;gap:28px}
+.vids{list-style:none;margin:0;padding:0;display:grid;gap:28px;align-items:start}
+.vids .slot.video video{object-fit:cover}
+.vids .vid.is-playing .slot.video video{object-fit:contain}
 @media (min-width:700px){.vids{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .job-grid{display:grid;gap:24px}
 .job-grid .side{display:grid;gap:24px;align-content:start}
@@ -572,11 +574,11 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .cred-card h3{margin:0}
 details.faq p a{color:var(--ink);text-underline-offset:.16em}
 /* v1.0 final · About: the bio with one square portrait */
-.bio{display:grid;gap:20px;align-items:start}
-.bio .slot{max-width:300px;width:100%}
+.bio{display:grid;gap:24px;align-items:start}
+.bio .slot{max-width:640px;width:100%}
 .bio .slot .plate{display:none}
 .bio .lede{margin:0}
-@media (min-width:700px){.bio{grid-template-columns:240px minmax(0,1fr);gap:28px}.bio .slot{max-width:none}}
+
 /* v1.0 final · mobile pass */
 html{text-size-adjust:100%;-webkit-tap-highlight-color:color-mix(in srgb, var(--gold) 22%, transparent)}
 .nf-links{list-style:none;padding:0;display:grid;gap:0}
@@ -598,7 +600,6 @@ html{text-size-adjust:100%;-webkit-tap-highlight-color:color-mix(in srgb, var(--
   .tile .btn{min-height:44px;padding:0;border:0;background:none;text-decoration:underline;text-underline-offset:.18em;font-size:var(--fs-small);flex-direction:row;flex-wrap:nowrap;gap:6px}
   .tile .btn::after{content:"→";position:static;inset:auto;text-decoration:none;display:inline-block}
   .tile .btn:hover{background:none;color:var(--gold-ink)}
-  .vids .vid.upright .slot{max-width:420px}
   .proof-link{width:100%}
 }
 @media (max-width:359px){
@@ -727,7 +728,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
         <p class="meta"><b>Sheet</b><span>About</span><span class="lead" aria-hidden="true"></span><span>GR <span class="num">063 758</span></span><span>MGA 55 · GDA2020</span></p>
         <p class="eyebrow">About</p>
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in Warragul<sup class="fn" aria-label="note 1">1</sup>, working across all of Victoria</h1>
-        <div class="bio"><figure class="slot photo" style="--ar:1/1" data-ratio="948/948"><picture><source type="image/webp" srcset="/media/photo/fitz-portrait-948-7c71510d.webp 948w, /media/photo/fitz-portrait-640-a198882e.webp 640w" sizes="(min-width:700px) 240px, 100vw"><img src="/media/photo/fitz-portrait-948-7c71510d.jpg" srcset="/media/photo/fitz-portrait-948-7c71510d.jpg 948w, /media/photo/fitz-portrait-640-a198882e.jpg 640w" sizes="(min-width:700px) 240px, 100vw" alt="Robert Fitzgerald in a cap and olive fleece with binoculars on his chest, looking out over Gippsland hill country at sunset." width="948" height="948" decoding="async" fetchpriority="high"></picture><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="plate">Location withheld</span></figure><p class="lede">I’m Robert Fitzgerald. I grew up in Korumburra as a country boy and I’m now based in Warragul. I’ve worked the land and handled firearms most of my adult life. Fitz Feral Hunters is the professional side of that: planned, insured, humane pest and vermin control for farmers and landholders across Gippsland and Victoria.</p></div>
+        <div class="bio"><figure class="slot photo" style="--ar:1/1" data-ratio="1200/1200"><picture><source type="image/webp" srcset="/media/photo/fitz-portrait-1200-61c8b649.webp 1200w, /media/photo/fitz-portrait-640-3e29f43a.webp 640w" sizes="(min-width:700px) 640px, 100vw"><img src="/media/photo/fitz-portrait-1200-61c8b649.jpg" srcset="/media/photo/fitz-portrait-1200-61c8b649.jpg 1200w, /media/photo/fitz-portrait-640-3e29f43a.jpg 640w" sizes="(min-width:700px) 640px, 100vw" alt="Robert Fitzgerald standing on a grassy Gippsland hillside at sunset in a cap, olive fleece and gloves, binoculars on his chest, beside a spotting scope on a tripod." width="1200" height="1200" decoding="async" fetchpriority="high"></picture><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="plate">Location withheld</span></figure><p class="lede">I’m Robert Fitzgerald. I grew up in Korumburra as a country boy and I’m now based in Warragul. I’ve worked the land and handled firearms most of my adult life. Fitz Feral Hunters is the professional side of that: planned, insured, humane pest and vermin control for farmers and landholders across Gippsland and Victoria.</p></div>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304<sup class="fn" aria-label="note 2">2</sup>, and a short report after. No trophies, no mess, no surprises for the neighbours<sup class="fn" aria-label="note 3">3</sup>.</p>
         <p>I'm insured with Elders Insurance for $20 million public liability<sup class="fn" aria-label="note 4">4</sup>, and I work for farms and private landholders, councils and land managers: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>

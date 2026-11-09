@@ -117,7 +117,9 @@ figure.slot{margin:0}
 .vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
 .band.drone .vid figcaption{color:color-mix(in srgb, var(--foot-ink) 78%, transparent)}
 .band.drone .vid figcaption b{color:var(--foot-ink)}
-.vids{list-style:none;margin:0;padding:0;display:grid;gap:28px}
+.vids{list-style:none;margin:0;padding:0;display:grid;gap:28px;align-items:start}
+.vids .slot.video video{object-fit:cover}
+.vids .vid.is-playing .slot.video video{object-fit:contain}
 @media (min-width:700px){.vids{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .job-grid{display:grid;gap:24px}
 .job-grid .side{display:grid;gap:24px;align-content:start}
@@ -140,11 +142,11 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .cred-card h3{margin:0}
 details.faq p a{color:var(--ink);text-underline-offset:.16em}
 /* v1.0 final · About: the bio with one square portrait */
-.bio{display:grid;gap:20px;align-items:start}
-.bio .slot{max-width:300px;width:100%}
+.bio{display:grid;gap:24px;align-items:start}
+.bio .slot{max-width:640px;width:100%}
 .bio .slot .plate{display:none}
 .bio .lede{margin:0}
-@media (min-width:700px){.bio{grid-template-columns:240px minmax(0,1fr);gap:28px}.bio .slot{max-width:none}}
+
 /* v1.0 final · mobile pass */
 html{text-size-adjust:100%;-webkit-tap-highlight-color:color-mix(in srgb, var(--gold) 22%, transparent)}
 .nf-links{list-style:none;padding:0;display:grid;gap:0}
@@ -166,7 +168,6 @@ html{text-size-adjust:100%;-webkit-tap-highlight-color:color-mix(in srgb, var(--
   .tile .btn{min-height:44px;padding:0;border:0;background:none;text-decoration:underline;text-underline-offset:.18em;font-size:var(--fs-small);flex-direction:row;flex-wrap:nowrap;gap:6px}
   .tile .btn::after{content:"→";position:static;inset:auto;text-decoration:none;display:inline-block}
   .tile .btn:hover{background:none;color:var(--gold-ink)}
-  .vids .vid.upright .slot{max-width:420px}
   .proof-link{width:100%}
 }
 @media (max-width:359px){
@@ -756,7 +757,7 @@ def about_body():
         {meta("About")}
         <p class="eyebrow">About</p>
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
-        <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 240px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
+        <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 640px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No trophies, no mess, no surprises for the neighbours{fn(3)}.</p>
         <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms and private landholders, councils and land managers: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>
@@ -775,7 +776,7 @@ def gallery_photos():
 
 def gallery_body():
     g = gallery_photos()
-    vids = ''.join(f'<li>{video_fig(v, ar=("3/4" if MEDIA[v]["height"] > MEDIA[v]["width"] else "1/1" if MEDIA[v]["height"] == MEDIA[v]["width"] else "16/10"), cls=("upright" if MEDIA[v]["height"] >= MEDIA[v]["width"] else ""))}</li>' for v in videos())
+    vids = ''.join(f'<li>{video_fig(v, ar="16/9")}</li>' for v in videos())   # one frame size for every clip
     items = ''.join(f'''<li><figure style="margin:0"><button type="button" data-lb="{i}" aria-label="Open photo {i+1} of {len(g)}: {esc(MEDIA[p]['title'])}">{photo(p, ar="4/3", sizes="(min-width:700px) 33vw, 50vw")}</button><figcaption><span class="mono" style="color:var(--ink-2)">Fig. {i+1:02d}</span> · {esc(MEDIA[p]['caption'])}</figcaption></figure></li>''' for i, p in enumerate(g))
     lb = '' if not g else f'''
 <dialog class="lightbox" id="lightbox" closedby="any" aria-labelledby="lb-cap" data-lightbox-state="closed"{per("gallery")}>

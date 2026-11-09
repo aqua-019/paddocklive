@@ -709,7 +709,7 @@ def home_body():
 <section class="band"{per("services-grid")}>
   <div class="wrap stack" style="--gap:28px">
     <div class="sec-head reveal"><p class="eyebrow">Services</p><h2>What I'm called out for</h2>
-      <p class="measure">Deer and kangaroo work is most of it. The rest is the usual Victorian list: pigs, foxes, rabbits and wild dogs, night and thermal where it counts.</p></div>
+      <p class="measure">Deer, rabbit and fox work is most of it. The rest is kangaroos, pigs and wild dogs. Night and thermal where it counts.</p></div>
     <div class="grid grid-3">{tiles}</div>
   </div>
 </section>

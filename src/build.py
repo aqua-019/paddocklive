@@ -813,7 +813,7 @@ def about_body():
         <p class="eyebrow">About</p>
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
         <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 640px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
-        <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No trophies, no mess, no surprises for the neighbours{fn(3)}.</p>
+        <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No mess and no surprises for the neighbours{fn(3)}.</p>
         <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms and private landholders, councils and land managers: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>

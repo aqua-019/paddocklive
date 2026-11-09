@@ -111,9 +111,9 @@
    "kind": "property",
    "source": "pad11.mp4",
    "frame_at": 25,
-   "title": "Gippsland hills at first light",
-   "caption": "Frosty hill country at first light, from the drone.",
-   "alt": "Aerial view at dawn of frost-covered rolling green paddocks, a gully of trees and a tree line in autumn colour.",
+   "title": "Gippsland hills from the drone",
+   "caption": "Frosty hill country on a clear morning, from the drone.",
+   "alt": "Aerial view on a frosty morning of rolling green paddocks, a gully of trees and a tree line in autumn colour.",
    "src": "/media/photo/first-light-still-848-ced0607e.jpg",
    "src_webp": "/media/photo/first-light-still-848-ced0607e.webp",
    "width": 848,
@@ -148,7 +148,9 @@
    "duration": 46.7,
    "bytes": 8993356,
    "poster": "/media/photo/drone-thermal-mob-poster-848-ae60778d.jpg",
-   "poster_webp": "/media/photo/drone-thermal-mob-poster-848-ae60778d.webp"
+   "poster_webp": "/media/photo/drone-thermal-mob-poster-848-ae60778d.webp",
+   "hidden": true,
+   "hidden_reason": "Night drone footage. Off the site until Fitz holds approval to fly at night (Fitz, 9 Nov 2026: no night drone claims)."
   },
   {
    "id": "thermal-stock-check",
@@ -236,9 +238,9 @@
     60
    ],
    "poster_at": 25,
-   "title": "First light from the drone",
-   "caption": "A dawn flight over hill country: deer picked out in the paddock from the air, then the gullies and tree lines they use.",
-   "description": "Aerial drone footage at dawn over frosty rolling paddocks. Three deer graze in a paddock seen from directly above, then the drone flies along gullies and tree lines.",
+   "title": "Early morning from the drone",
+   "caption": "An early-morning flight over hill country: deer picked out in the paddock from the air, then the gullies and tree lines they use.",
+   "description": "Aerial drone footage on a frosty morning over rolling paddocks. Three deer graze in a paddock seen from directly above, then the drone flies along gullies and tree lines.",
    "src": "/media/video/drone-first-light-bf4716bd.mp4",
    "width": 848,
    "height": 464,

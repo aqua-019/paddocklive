@@ -940,7 +940,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
     drawer.addEventListener('toggle',function(){ drawer.querySelector('summary').setAttribute('aria-expanded', drawer.open?'true':'false'); });
   }
   /* lightbox */
-  var lb=document.getElementById('lightbox'), caps=["Thermal monocular used to spot deer on the hill.", "Rifle and thermal scope setup.", "Fitz working.", "Rifle and thermal on the tripod, the ute parked up the slope.", "Set up on the fence line, looking across the gully.", "Frosty hill country at first light, from the drone."], idx=0, invoker=null;
+  var lb=document.getElementById('lightbox'), caps=["Thermal monocular used to spot deer on the hill.", "Rifle and thermal scope setup.", "Fitz working.", "Rifle and thermal on the tripod, the ute parked up the slope.", "Set up on the fence line, looking across the gully.", "Frosty hill country on a clear morning, from the drone."], idx=0, invoker=null;
   function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.classList.add('in-lb'); [].forEach.call(c.querySelectorAll('img,source'),function(x){ x.setAttribute('sizes','96vw'); x.removeAttribute('loading'); }); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
   if(lb && lb.showModal){
     [].forEach.call(document.querySelectorAll('[data-lb]'),function(b){ b.addEventListener('click',function(){ invoker=b; paint(+b.getAttribute('data-lb')); lb.setAttribute('data-lightbox-state','open'); lb.showModal(); document.getElementById('lb-close').focus(); }); });

@@ -128,7 +128,7 @@
       "Farm security",
       "After-hours monitoring and rapid response for properties with ongoing stock or asset risk.",
       [
-        "Thermal drone or ground checks",
+        "Thermal ground checks, and daytime drone checks of stock and fences",
         "Trail camera placement",
         "Coordinated follow-up when animals are moving through at night"
       ]
@@ -241,11 +241,11 @@
         ],
         [
           "What does farm security involve?",
-          "After-hours monitoring and rapid response for properties with ongoing stock or asset risk: thermal drone or ground checks, trail camera placement, and coordinated follow-up when animals are moving through at night."
+          "After-hours monitoring and rapid response for properties with ongoing stock or asset risk: thermal ground checks, daytime drone checks of stock and fences, trail camera placement, and coordinated follow-up on the ground when animals are moving through at night."
         ],
         [
           "What does the thermal drone do?",
-          "Before a program starts, the DJI Matrice 4T finds the mob, counts it and maps where it moves, by day or at night. Fewer wasted trips and a better plan. [See a sample report](/drone-report)."
+          "Before a program starts, the DJI Matrice 4T surveys the property in daylight: it finds the mob, counts it and maps where it moves. Fewer wasted trips and a better plan. [See a sample report](/drone-report)."
         ]
       ]
     ],

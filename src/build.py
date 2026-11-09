@@ -407,7 +407,7 @@ def video_fig(mid, ar=None, cls=''):
             f'<figcaption><b>{esc(m["title"])}</b> {esc(m["caption"])}</figcaption><p class="sr" id="vd-{mid}">{esc(m["description"])} Length {mmss(m["duration"])}, no sound.</p></figure>')
 
 def videos(kind=None, home=None):
-    return [i['id'] for i in MEDIA.values() if i['type'] == 'video' and (kind is None or i['kind'] == kind) and (home is None or bool(i.get('home')) == home)]
+    return [i['id'] for i in MEDIA.values() if i['type'] == 'video' and not i.get('hidden') and (kind is None or i['kind'] == kind) and (home is None or bool(i.get('home')) == home)]
 
 def tel(label=None, cls='tel num'):
     """Every phone number on the site. Touch phones dial; desktop copies (see the script)."""
@@ -624,12 +624,12 @@ def drone_band():
     <div class="stack reveal" style="--gap:16px">
       <p class="eyebrow">New capability</p>
       <h2>Thermal drone scouting with a DJI Matrice 4T</h2>
-      <p class="measure">Before a program starts, the drone finds the mob, counts it and maps where it moves, by day or at night. Fewer wasted trips, a better plan, and a record you can keep.</p>
-      <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Night work</b> ahead of the ground team</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
+      <p class="measure">Before a program starts, a daytime drone survey finds the mob, counts it and maps where it moves. Fewer wasted trips, a better plan, and a record you can keep.</p>
+      <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Mapping</b> the gullies, tree lines and tracks they use</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
       {report_card("on-dark")}
       <p style="margin:0"><a class="btn btn-quiet" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a></p>
     </div>
-    {video_fig("drone-thermal-mob") if "drone-thermal-mob" in MEDIA else slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
+    {photo("first-light-still", ar="4/3", sizes="(min-width:900px) 560px, 100vw") if "first-light-still" in MEDIA else slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
   </div>
 </section>'''
 
@@ -771,8 +771,8 @@ def services_body():
     </article>'''
     rows = ''.join(row(k, t, d, b) for k, t, d, b in S['services'])
     drone = f'''
-      <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone scouting</h3><p class="small" style="color:var(--ink-2)">A DJI Matrice 4T thermal drone for scouting, counts and night work: find the mob, map where it moves and plan the program before anyone walks in.</p></div>
-        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul><div style="grid-column:1/-1">{report_card()}</div></article>''' if S.get('thermal_drone') else ''
+      <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone scouting</h3><p class="small" style="color:var(--ink-2)">A DJI Matrice 4T thermal drone for daytime scouting, counts and property surveys: find the mob, map where it moves and plan the program before anyone walks in.</p></div>
+        <ul><li>Pre-program counts and mob location</li><li>Daytime surveys ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul><div style="grid-column:1/-1">{report_card()}</div></article>''' if S.get('thermal_drone') else ''
     faqs = ''.join(f'<details class="faq"><summary>{esc(g[1][0][0])}</summary><p>{answer(g[1][0][1])}</p></details>' for g in S['faq_groups'])
     clients = ''.join(f'<article class="tile"><h3>{esc(t)}</h3><p>{esc(d)}</p></article>' for t, d in S['clients'])
     return f'''
@@ -984,7 +984,7 @@ def reviews_body():
 </section>{sent_dialog()}'''
 
 EXTRA_TILES = [("night", "Night work and thermal", "Most feral animals move after dark. Thermal optics find them, count them and take them cleanly, without lighting up the paddock.")] + (
-    [("drone", "Thermal drone scouting", "A DJI Matrice 4T finds the mob, counts it and maps where it moves before anyone walks in.")] if S.get('thermal_drone') else [])
+    [("drone", "Thermal drone scouting", "Daytime surveys with a DJI Matrice 4T: find the mob, count it and map where it moves before anyone walks in.")] if S.get('thermal_drone') else [])
 
 def slug(t): return re.sub(r'[^a-z0-9]+', '-', t.lower()).strip('-')
 
@@ -1059,7 +1059,7 @@ def report_body():
   <div class="wrap stack" style="--gap:32px">
     <div class="sec-head">{meta("Sample report")}<p class="eyebrow">Drone scouting · sample report</p><h1 id="h-drone-report" tabindex="-1" style="font-size:var(--fs-h2)">What a drone survey gives you</h1>
       <p class="measure">A real report from a drone survey on a rural property in Gippsland, October 2026, with the property's details removed. Every scouting job ends with a report like this: what was seen, what the ground is like, and what to do next.</p>
-      <p class="caption measure">This survey used a standard visual (RGB) camera. Thermal surveys with the DJI Matrice 4T use the same format and add heat signatures, which find animals in cover and at night.</p></div>
+      <p class="caption measure">This survey used a standard visual (RGB) camera. Thermal surveys with the DJI Matrice 4T use the same format and add heat signatures, which pick out animals in cover and timber.</p></div>
     <article class="report" aria-labelledby="report-title">
       <header class="report-head">
         <p class="report-run">Fitz Feral Hunters · Drone survey report</p>

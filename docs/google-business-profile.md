@@ -26,15 +26,15 @@ Google's own steps: [Sign up for a Business Profile](https://support.google.com/
    - the thermal scope view
    - the logo: `public/brand/logo-lockup-plate.jpg`
 
-## Description (678 of 750 characters)
+## Description (674 of 750 characters)
 
 ```
-Licensed, insured feral animal and vermin control for farms, private landholders and land managers. Based in Warragul, working across Gippsland first, then all of Victoria. Deer control, kangaroo control under a valid ATCW, feral pigs, foxes, rabbits and wild dogs, with thermal night work and DJI Matrice 4T thermal drone scouting. Farm security: after-hours monitoring and rapid response for properties with ongoing stock or asset risk. Every job is planned and agreed before the first night, carried out humanely to AHCPMG304 and the Victorian codes of practice, and insured with Elders Insurance for $20 million public liability. Certificates available on request.
+Licensed, insured feral animal and vermin control for farms and private landholders. Based in Warragul, working across Gippsland first, then all of Victoria. Deer, rabbit and fox control, kangaroo control under a valid ATCW, feral pigs and wild dogs, with thermal night work on the ground and daytime DJI Matrice 4T thermal drone surveys. Farm security: after-hours monitoring and rapid response for properties with ongoing stock or asset risk. Every job is planned and agreed before the first night, carried out humanely to AHCPMG304 and the Victorian codes of practice, and insured with Elders Insurance for $20 million public liability. Certificates available on request.
 ```
 
 ## Services to list in the profile
 
-Deer control · Kangaroo control · Feral pig control · Fox control · Rabbit control · Wild dog control · Night work and thermal · Thermal drone scouting · Farm security
+Deer control · Rabbit control · Fox control · Kangaroo control · Feral pig control · Wild dog control · Night work and thermal · Thermal drone scouting · Farm security
 
 ## After it's verified: connect it to the site
 

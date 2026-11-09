@@ -25,7 +25,7 @@
   "status_line": "Taking enquiries across Victoria",
   "credentials_current": "",
   "headline": "Professional pest & vermin control across Victoria",
-  "lede": "Licensed, insured feral animal control for farmers and landholders. Deer, kangaroos, pigs, foxes, rabbits and wild dogs, planned properly, done humanely, and the place left as I found it.",
+  "lede": "Licensed, insured feral animal control for farmers and landholders. Deer, rabbits, foxes, kangaroos, pigs and wild dogs, planned properly, done humanely, and the place left as I found it.",
   "lede_flag": "swap for Instagram bio wording",
   "night_shift_url": "https://claude.ai/artifact/4PrRTSy2hk4rb2sk4bysiz",
   "credentials": [
@@ -74,6 +74,26 @@
       ]
     ],
     [
+      "rabbits",
+      "Rabbits",
+      "Warrens under the fence line and chewed-out pasture. Control planned alongside your own warren work.",
+      [
+        "Warren mapping",
+        "Shooting as part of a wider program",
+        "Advice on ripping and follow-up"
+      ]
+    ],
+    [
+      "foxes",
+      "Foxes",
+      "Lamb and poultry losses, especially around lambing. Timed to the season and your stock.",
+      [
+        "Pre-lambing programs",
+        "Night spotlight and thermal work",
+        "Reporting on what was taken"
+      ]
+    ],
+    [
       "kangaroos",
       "Kangaroo culling",
       "Where numbers are hurting pasture, fences and water. Carried out under a valid Authority to Control Wildlife and the relevant code.",
@@ -91,26 +111,6 @@
         "Sign and camera assessment",
         "Night work around your stock",
         "Follow-up visits as numbers drop"
-      ]
-    ],
-    [
-      "foxes",
-      "Foxes",
-      "Lamb and poultry losses, especially around lambing. Timed to the season and your stock.",
-      [
-        "Pre-lambing programs",
-        "Night spotlight and thermal work",
-        "Reporting on what was taken"
-      ]
-    ],
-    [
-      "rabbits",
-      "Rabbits",
-      "Warrens under the fence line and chewed-out pasture. Control planned alongside your own warren work.",
-      [
-        "Warren mapping",
-        "Shooting as part of a wider program",
-        "Advice on ripping and follow-up"
       ]
     ],
     [
@@ -199,11 +199,7 @@
   "clients": [
     [
       "Farms and landholders",
-      "Deer, kangaroo and vermin programs on farms and private land, planned around your stock, your neighbours and your season."
-    ],
-    [
-      "Land managers",
-      "Pest animal programs on reserves and public land, planned with your team and carried out under the relevant codes of practice."
+      "Deer, rabbit, fox and other pest programs on farms and private land, planned around your stock, your neighbours and your season."
     ]
   ],
   "faq_groups": [
@@ -224,7 +220,7 @@
         ],
         [
           "Who do you work for?",
-          "Farms, private landholders and land managers."
+          "Farms and private landholders."
         ]
       ]
     ],

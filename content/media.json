@@ -141,16 +141,14 @@
    "home": false,
    "title": "Thermal drone: finding the mob",
    "caption": "From the thermal drone: a mob picked up on an open hillside and followed into the timber, before anyone walks in.",
-   "description": "Black-and-white thermal footage from a drone flying over a hillside at night. Several animals show as bright white shapes, first in the open and then moving through scattered trees.",
+   "description": "Black-and-white thermal footage from a drone flying over a hillside at first light. Several animals show as bright white shapes, first in the open and then moving through scattered trees.",
    "src": "/media/video/drone-thermal-mob-1147f4e4.mp4",
    "width": 848,
    "height": 672,
    "duration": 46.7,
    "bytes": 8993356,
    "poster": "/media/photo/drone-thermal-mob-poster-848-ae60778d.jpg",
-   "poster_webp": "/media/photo/drone-thermal-mob-poster-848-ae60778d.webp",
-   "hidden": true,
-   "hidden_reason": "Night drone footage. Off the site until Fitz holds approval to fly at night (Fitz, 9 Nov 2026: no night drone claims)."
+   "poster_webp": "/media/photo/drone-thermal-mob-poster-848-ae60778d.webp"
   },
   {
    "id": "thermal-stock-check",

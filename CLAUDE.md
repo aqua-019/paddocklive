@@ -66,8 +66,8 @@ The runtime has one npm dependency, `@vercel/blob` (pinned, review photos only).
 
 - ABN 22 477 254 408 shows in the footer and as `taxID` in the schema (approved by Aqua, 3 Nov 2026). It stays off the sample report.
 - **Never publish licence or membership numbers.** Certificates and currency documents are "available on request".
-- **No night drone claims** (Fitz, 9 Nov 2026). Flying at night needs a licence he doesn't hold yet; he's booked on the course and drone credentials go up at the end of November. Until then the drone is daytime only (surveys, counts, mapping, stock and fence checks). Night and thermal work on the ground is fine. The night drone clip `drone-thermal-mob` is `hidden` in media.json.
-- Works for farms, private landholders and land managers. **Don't say councils** (Fitz, 9 Nov 2026: he hasn't worked for a council yet). Region priority: Gippsland first, then all of Victoria.
+- **No night drone claims** (Fitz, 9 Nov 2026). Flying at night needs a licence he doesn't hold yet; he's booked on the course and drone credentials go up at the end of November. Until then the drone is daytime only (surveys, counts, mapping, stock and fence checks). Night and thermal work on the ground is fine. Fitz confirms all supplied drone footage was shot by day or at first light, so the clips themselves are fine; the copy just never says the drone flies at night.
+- Works for **farms and private landholders**. Don't say councils, land managers or public land (Fitz, 9 Nov 2026: none yet). Main work, in his order: deer, rabbits and foxes, then kangaroos, pigs and wild dogs. Region priority: Gippsland first, then all of Victoria.
 - Google Business Profile: service-area business, address hidden. Setup kit in `docs/google-business-profile.md`.
 - The sample drone report (visual RGB survey, Oct 2026) is live at `/drone-report` from `content/report.json`. It's published without the ABN, the "Confidential" mark or the exact date, and the figures are cropped clean from his report.
 

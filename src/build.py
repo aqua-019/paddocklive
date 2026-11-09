@@ -330,8 +330,8 @@ def href(key, anchor=''):
 def route_attr(key): return f' data-route="{key}"' if ARTIFACT else ''
 
 TITLES = {
-  "home": (f"{S['name']} · Pest & vermin control, Victoria", "Professional pest control across Victoria: deer control, kangaroo culling, pigs, foxes, rabbits and wild dogs for farmers and landholders. Licensed, insured, humane. Based in Warragul, Gippsland."),
-  "services": (f"Services · {S['name']}", "Deer control, kangaroo culling, feral pigs, foxes, rabbits and wild dogs anywhere in Victoria. Night and thermal work, planned, insured and humane under the Victorian codes."),
+  "home": (f"{S['name']} · Pest & vermin control, Victoria", "Professional pest control across Victoria: deer, rabbit and fox control, kangaroo culling, pigs and wild dogs for farmers and landholders. Licensed, insured, humane. Based in Warragul, Gippsland."),
+  "services": (f"Services · {S['name']}", "Deer, rabbit and fox control, kangaroo culling, feral pigs and wild dogs anywhere in Victoria. Night and thermal work, planned, insured and humane under the Victorian codes."),
   "about": (f"About · {S['name']}", f"Based in {S['base']}, working across {S['region']}. Licensed, insured, accountable. AHCPMG304 humane dispatch."),
   "gallery": (f"Gallery · {S['name']}", "Thermal images, night work, property damage and gear from pest control jobs across Victoria."),
   "contact": (f"Contact · {S['name']}", f"Ring {S['phone_display']} or send an enquiry. Based in {S['base']}, working across {S['region']}."),
@@ -629,7 +629,7 @@ def drone_band():
       {report_card("on-dark")}
       <p style="margin:0"><a class="btn btn-quiet" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a></p>
     </div>
-    {photo("first-light-still", ar="4/3", sizes="(min-width:900px) 560px, 100vw") if "first-light-still" in MEDIA else slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
+    {video_fig("drone-thermal-mob") if "drone-thermal-mob" in MEDIA and not MEDIA["drone-thermal-mob"].get("hidden") else photo("first-light-still", ar="4/3", sizes="(min-width:900px) 560px, 100vw")}
   </div>
 </section>'''
 
@@ -747,7 +747,7 @@ def home_body():
 <section class="band"{per("area")}{per("topo")}>
   <div class="wrap stack" style="--gap:24px">
     <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in {esc(S['base'])}, covering all of Victoria</h2>
-      <p class="measure">Gippsland comes first: it's home ground. Beyond it the 4WD goes anywhere in the state, for farms, private landholders and land managers. Ring and we'll work out the trip.</p></div>
+      <p class="measure">Gippsland comes first: it's home ground. Beyond it the 4WD goes anywhere in the state, for farms and private landholders. Ring and we'll work out the trip.</p></div>
     {'<div class="area-grid reveal"><div class="map-scroll">' + locality_map() + '</div>' + legend() + '</div>' if SHEET_MAP else ''}
     <ul class="chips reveal" aria-label="Regions served">{chips}</ul>
   </div>
@@ -779,8 +779,8 @@ def services_body():
 <section class="page" aria-labelledby="h-services"{per("services")}>
   <div class="wrap stack" style="--gap:36px">
     <div class="sec-head">{meta("Services")}<p class="eyebrow">Services</p><h1 id="h-services" tabindex="-1" style="font-size:var(--fs-h2)">Pest and vermin control across Victoria</h1>
-      <p class="measure">Every job is planned, insured and carried out humanely under the relevant Victorian codes of practice. Deer control on farms and kangaroo culling are the two most common call-outs; the rest of the list is below.</p></div>
-    <div class="stack" style="--gap:16px"{per("clients")}><h2 class="sub">Who I work for</h2><div class="grid grid-2">{clients}</div></div>
+      <p class="measure">Every job is planned, insured and carried out humanely under the relevant Victorian codes of practice. Deer, rabbit and fox work are the most common call-outs; the rest of the list is below.</p></div>
+    <div class="stack" style="--gap:16px"{per("clients")}><h2 class="sub">Who I work for</h2><div class="grid{" grid-2" if len(S["clients"]) > 1 else ""}">{clients}</div></div>
     <div class="notes-layout">
       <div>{rows}
         <article class="service" id="svc-night"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Night work and thermal</h3><p class="small" style="color:var(--ink-2)">Most feral animals move after dark. Thermal optics let me find them, count them and take them cleanly without lighting up the whole paddock.</p></div>
@@ -814,7 +814,7 @@ def about_body():
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
         <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 640px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No mess and no surprises for the neighbours{fn(3)}.</p>
-        <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms, private landholders and land managers: Gippsland first, then anywhere in Victoria.</p>
+        <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms and private landholders: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
         <p class="caption">{current_line}</p>
@@ -855,7 +855,7 @@ def gallery_body():
 </section>{lb}'''
 
 def contact_body():
-    checks = ''.join(f'<label><input type="checkbox" name="help" value="{esc(x)}"> {esc(x)}</label>' for x in ["Deer", "Kangaroos", "Pigs", "Foxes", "Rabbits", "Wild dogs", "Not sure yet"])
+    checks = ''.join(f'<label><input type="checkbox" name="help" value="{esc(x)}"> {esc(x)}</label>' for x in ["Deer", "Rabbits", "Foxes", "Kangaroos", "Pigs", "Wild dogs", "Not sure yet"])
     action = '#contact' if ARTIFACT else '/api/enquiry'
     note = (('Mockup: this review build does not send. On the live site the form posts to a server function that emails ' if ARTIFACT else 'Review build: enquiries are received by the site\'s server function and emailed to ') + S['email'] + (' and shows the confirmation below.' if ARTIFACT else ' once the mail key is configured.') + ' Without script the plain form still submits.') if REVIEW else ''
     ts = f'<div class="cf-turnstile" data-sitekey="{esc(TURNSTILE)}" data-theme="light" data-size="flexible"></div>' if TURNSTILE else ''
@@ -1344,7 +1344,7 @@ def jsonld():
       "address": {"@type": "PostalAddress", "addressLocality": S['base'], "addressRegion": "VIC", "addressCountry": "AU"},
       "areaServed": ["Gippsland", "Victoria, Australia"], "sameAs": [S['instagram']],
       "founder": {"@type": "Person", "name": S['owner']}, **({"taxID": "ABN " + S['abn']} if S.get('abn') else {}),
-      "knowsAbout": ["Deer control", "Kangaroo culling", "Feral pig control", "Fox control", "Rabbit control", "Wild dog control", "Thermal night work", "Thermal drone scouting", "Farm security"],
+      "knowsAbout": ["Deer control", "Rabbit control", "Fox control", "Kangaroo culling", "Feral pig control", "Wild dog control", "Thermal night work", "Thermal drone scouting", "Farm security"],
     }, ensure_ascii=False)
 
 def script():

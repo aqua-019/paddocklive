@@ -1,5 +1,7 @@
 # Resend setup: switching on the website's email
 
+**Status (9 Nov 2026): done.** Fitz's Resend account (fitzferalhunters1@gmail.com, Aqua invited as a team member), domain fitzferalhunters.com in Tokyo, records added to Vercel DNS, API key (sending access, restricted to the domain) in `RESEND_API_KEY`, plus `ENQUIRY_TO` and `ENQUIRY_FROM`. `AUTO_REPLY` is off until Fitz says yes. If the site's main domain moves to .com.au, add that domain in Resend the same way and change `ENQUIRY_FROM`.
+
 The code is ready. Everything below is account setup, done once with Fitz. Until it's done, the contact form tells visitors their enquiry **hasn't** been sent and offers them a pre-filled email to Fitz instead, so nothing is lost and nobody is told "sent" when it wasn't.
 
 **What switches on:**
@@ -45,15 +47,15 @@ This makes mail come from `enquiries@fitzferalhunters.com` instead of Resend's t
    - Name: `fitzferalhunters.com`
    - Region: any; Tokyo (ap-northeast-1) is nearest to Australia.
 2. **Turn off open and click tracking** in the domain's settings. This is transactional mail to one inbox, and tracking links can trip spam filters.
-3. **Copy Resend's DNS records into Vercel:** Vercel → Domains → fitzferalhunters.com → DNS Records → Add. Or paste them to Claude, which can add them through the Vercel connection. Resend gives about three records:
+3. **Copy Resend's DNS records into Vercel:** Vercel → Domains → fitzferalhunters.com → DNS Records → Add. Or let Claude add them through the Vercel connection. Since late 2026 Resend gives three records (sending runs on its "Forge" servers, so the old MX + SPF pair is now two CNAMEs):
 
    | Type | Name | Value |
    |---|---|---|
-   | TXT | `resend._domainkey` | the DKIM key Resend shows (`p=…`) |
-   | MX | `send` | `feedback-smtp.<region>.amazonses.com`, priority 10 |
-   | TXT | `send` | `v=spf1 include:amazonses.com ~all` |
+   | TXT | `resend._domainkey` | the DKIM key Resend shows (`p=MIGf…`, copy it with the copy button; the table shortens it) |
+   | CNAME | `rsend` | `rsend-apne1.forge.rmta.net` (the `apne1` part is the Tokyo region) |
+   | CNAME | `send` | `send.forge.rmta.net` |
 
-   Copy the exact values from Resend: the region part and the DKIM key are specific to the account. Leave Vercel's own ALIAS and CAA records alone.
+   Copy the exact values from Resend: the DKIM key is specific to the account. Leave Vercel's own ALIAS and CAA records alone, and don't use Resend's "Auto configure" / "Go to Vercel" button unless the Resend account is linked to the same Vercel team that owns the domain.
 4. **Recommended:** add a DMARC record too.
 
    | Type | Name | Value |

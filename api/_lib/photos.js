@@ -1,4 +1,4 @@
-// Review photos. Stored in a PRIVATE Vercel Blob store (BLOB_READ_WRITE_TOKEN), so nothing a reviewer uploads
+// Review photos. Stored in a PRIVATE Vercel Blob store (paddocklive-review-photos, syd1), so nothing a reviewer uploads
 // is reachable until Fitz publishes the review; /api/review-photo serves them. In local dev and tests
 // (FFH_MEMORY_STORE=1, not on Vercel) they're kept in memory.
 // Every photo is re-checked and stripped of metadata here (EXIF, GPS, comments), whatever the browser sent.
@@ -9,8 +9,9 @@ const mem = globalThis.__ffhPhotos || (globalThis.__ffhPhotos = new Map());
 export const MAX_PHOTOS = 3;
 export const MAX_BYTES = 1_000_000;      // the browser shrinks photos to about 1600px first; 3 of these stay under Vercel's 4.5 MB request limit
 
+/** On Vercel the SDK signs in with the project's OIDC token + BLOB_STORE_ID first, then falls back to BLOB_READ_WRITE_TOKEN. */
 export function kind() {
-  if (process.env.BLOB_READ_WRITE_TOKEN) return 'blob';
+  if (process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN) return 'blob';
   if (!process.env.VERCEL && process.env.FFH_MEMORY_STORE === '1') return 'memory';
   return null;
 }

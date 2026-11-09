@@ -819,7 +819,7 @@ def about_body():
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
         <p class="caption">{current_line}</p>
         <p><a class="btn btn-secondary" href="{href('credentials')}"{route_attr('credentials')}>Credentials and insurance in full</a></p>
-        <figure class="card-figure"{per("brand")}><img src="{asset('/brand/fitz-card.jpg')}" alt="The Fitz Feral Hunters card: rifle mark, Protecting Victoria's Farms, contract pest control, deer and feral management, thermal hunting, farm security, fully insured, 0499 866 580" width="1280" height="755" loading="lazy" decoding="async"><figcaption class="caption">The card, as supplied. The site's green, gold and cream are sampled from it.</figcaption></figure>
+        <figure class="card-figure"{per("brand")}><img src="{asset('/brand/fitz-card.jpg')}" alt="The Fitz Feral Hunters card: rifle mark, Protecting Victoria's Farms, contract pest control, deer and feral management, thermal hunting, farm security, fully insured, 0499 866 580" width="1280" height="755" loading="lazy" decoding="async"></figure>
       </div>
       {margin_notes('about')}
     </div>

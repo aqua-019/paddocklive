@@ -697,7 +697,7 @@ def home_body():
   <div class="wrap stack" style="--gap:28px">
     <div class="sec-head reveal">
       <p class="eyebrow">Licensed · insured · accountable</p>
-      <h2>The paperwork is in order before the ute leaves the shed</h2>
+      <h2>The paperwork is in order before the 4WD leaves the shed</h2>
       <p class="status"><i aria-hidden="true"></i> {esc(S['status_line'])}{status_flag}</p>
       {'<p class="caption"><span class="flag">more credentials to come from Fitz</span> They slot into this wall as plates when they arrive.</p>' if REVIEW else ''}
     </div>

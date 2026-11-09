@@ -97,7 +97,7 @@ export async function verifyTurnstile(token, ip) {
 }
 
 // ---------------------------------------------------------------- media (Vercel Blob)
-// Uploads happen from scripts/upload-media.py (or a future admin page); the site only reads public blob URLs.
+// Review photos use a PRIVATE Blob store through api/_lib/photos.js; site media is served from public/media.
 export function blobConfigured() { return !!process.env.BLOB_READ_WRITE_TOKEN; }
 
 export const redisConfigured = () => !!redisEnv();

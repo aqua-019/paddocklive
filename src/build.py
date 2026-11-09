@@ -270,11 +270,59 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
 .consent label{display:flex;gap:12px;align-items:flex-start;font-weight:500;cursor:pointer}
 .consent input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
 .cf-turnstile{min-height:65px}
+/* v1.2 · one gold Contact button in the nav and drawer */
+.drawer li.drawer-cta{padding-top:12px}
+.drawer li.drawer-cta a.btn{justify-content:center;box-shadow:none;color:var(--chrome);font-weight:700;padding:0 20px}
+.drawer li.drawer-cta a.btn:hover,.drawer li.drawer-cta a.btn[aria-current="page"]{color:var(--chrome)}
+/* v1.2 · reviews: stars, verified jobs, photos */
+.rv-stars{display:inline-flex;gap:2px;color:var(--gold)}
+.rv-stars svg{width:18px;height:18px;fill:currentColor;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round}
+.rv-stars svg.off{fill:transparent}
+.rv-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.rv-verified{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-caption);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ok)}
+.rv-verified svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.rv-photos,.rv-picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0;max-width:22rem}
+.rv-photos a{display:block;border-radius:var(--radius);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line);min-height:44px}
+.rv-photos img,.rv-picks img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--surface)}
+.rv-sum{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.rv-sum .rv-stars svg{width:24px;height:24px}
+.rv-sum b{font:700 var(--fs-h3)/1 var(--font-cond);letter-spacing:.01em}
+.rv-sum span:last-child{color:var(--ink-2);font-size:var(--fs-small)}
+.rv-how{border-radius:var(--radius);padding:20px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-strong);display:grid;gap:10px}
+.rv-how ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:var(--fs-small)}
+.rv-invite{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:var(--radius);box-shadow:inset 0 0 0 2px var(--ok);background:var(--surface);margin:0}
+.rv-invite .ico{color:var(--ok);margin-top:3px}
+.rv-invite.is-old{box-shadow:inset 0 0 0 2px var(--gold)}
+.rv-invite.is-old .ico{color:var(--gold)}
+.rate .opts{display:flex;gap:2px;margin-inline-start:-6px;position:relative}
+.rate .row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.rate label{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius);cursor:pointer}
+.rate label svg{width:34px;height:34px;fill:transparent;stroke:var(--ink-2);stroke-width:1.4;stroke-linejoin:round;transition:fill var(--t-hover) var(--ease-out),stroke var(--t-hover) var(--ease-out)}
+:where(.rate:has(input[value="1"]:checked)) .opts label:nth-of-type(-n+1) svg,
+:where(.rate:has(input[value="2"]:checked)) .opts label:nth-of-type(-n+2) svg,
+:where(.rate:has(input[value="3"]:checked)) .opts label:nth-of-type(-n+3) svg,
+:where(.rate:has(input[value="4"]:checked)) .opts label:nth-of-type(-n+4) svg,
+:where(.rate:has(input[value="5"]:checked)) .opts label:nth-of-type(-n+5) svg{fill:var(--gold);stroke:var(--gold)}
+@media (hover:hover){.rate .opts:hover label svg{fill:transparent;stroke:var(--ink-2)}.rate .opts label:hover svg,.rate .opts label:has(~ label:hover) svg{fill:var(--gold-light);stroke:var(--gold)}}
+.rate input:focus-visible + label{outline:2px solid var(--focus);outline-offset:-2px}
+.rate legend,#r-photos-field legend{padding:0}
+.rate-out{font-weight:600;color:var(--ink-2);font-size:var(--fs-small)}
+.field.rate.has-err label svg{stroke:var(--err)}
+.field .count{font-size:var(--fs-caption);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.field .count.is-ok{color:var(--ok);font-weight:600}
+.pick-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pick-in:focus-visible + .btn{outline:2px solid var(--focus);outline-offset:2px}
+.rv-picks:empty{display:none}
+.rv-picks li{display:grid;gap:4px}
+.rv-picks .rm{min-height:44px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:transparent;cursor:pointer;font-weight:600;font-size:var(--fs-small);transition:background-color var(--t-hover) var(--ease-out)}
+.rv-picks .rm:hover{background:var(--wash)}
+.rv-head-cta{justify-self:start}
 }
 """
 
-PAGES = [("home", "/", "Home"), ("services", "/services", "Services"), ("credentials", "/credentials", "Credentials"), ("about", "/about", "About"), ("gallery", "/gallery", "Gallery"), ("faq", "/faq", "FAQ"), ("contact", "/contact", "Contact")]
-EXTRA_PAGES = [("reviews", "/reviews", "Reviews"), ("drone-report", "/drone-report", "Sample drone report")]     # linked from home, footer and sitemap; not in the main nav
+PAGES = [("home", "/", "Home"), ("services", "/services", "Services"), ("credentials", "/credentials", "Credentials"), ("about", "/about", "About"), ("gallery", "/gallery", "Gallery"), ("faq", "/faq", "FAQ"), ("reviews", "/reviews", "Reviews"), ("contact", "/contact", "Contact")]
+EXTRA_PAGES = [("drone-report", "/drone-report", "Sample drone report")]     # linked from home, services, footer and sitemap; not in the main nav
+NAV_BUTTON = "contact"      # v1.2: Contact is the one gold button at the end of the nav, not a text link as well
 HREF = {k: h for k, h, _ in PAGES + EXTRA_PAGES}
 def href(key, anchor=''):
     if ARTIFACT: return f'#{key}'
@@ -290,14 +338,14 @@ TITLES = {
   "credentials": (f"Credentials and insurance · {S['name']}", f"Licensed and insured feral animal control: firearms and Game licences, SSAA Farmer Assist, First Aid, AHCPMG304 humane dispatch and $20 million public liability with {S['insurer']}. Certificates on request."),
   "faq": (f"FAQ · {S['name']}", "How quotes are worked out, carcass disposal, stock safety, neighbours and night noise, farm security, insurance and kangaroo permits: straight answers from Fitz Feral Hunters."),
   "drone-report": (f"Sample drone survey report · {S['name']}", "A real drone survey report from a rural property in Gippsland, with the property's details removed: what was seen, the habitat, findings and recommendations."),
-  "reviews": (f"Reviews · {S['name']}", "Reviews from farmers and landholders Fitz Feral Hunters has worked for, published good or bad. Leave a review of a job."),
+  "reviews": (f"Reviews · {S['name']}", "Star-rated reviews from farmers and landholders Fitz Feral Hunters has worked for, each matched to a real job and published good or bad. Leave a review of a job."),
 }
 
 # real grid references (MGA zone 55) for the base and every locality on the chips
 GR = {name: topo.grid_ref(la, lo) for name, la, lo in topo.LOCALITIES}
 BASE_GR = GR[S['base']][0] if S['base'] in GR else ''
 
-SPRITE = '''<svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 11h7M9 14.5h7M9 18h4"/></symbol><symbol id="i-north" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8"/><path class="fill" d="M12 3l4.5 9h-9z"/></symbol></svg>'''
+SPRITE = '''<svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 11h7M9 14.5h7M9 18h4"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.75 5.9 6.45.75-4.8 4.4 1.3 6.35L12 17l-5.7 3.2 1.3-6.35-4.8-4.4 6.45-.75z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol><symbol id="i-north" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8"/><path class="fill" d="M12 3l4.5 9h-9z"/></symbol></svg>'''
 def ico(name, cls="ico"): return f'<svg class="{cls}" aria-hidden="true"><use href="#{name}"/></svg>'
 
 def north(label="N"):
@@ -368,8 +416,14 @@ def tel(label=None, cls='tel num'):
 def mailto(cls='mail'):
     return f'<a class="{cls}" href="mailto:{S["email"]}?subject={urlquote("Enquiry from the website")}">{S["email"]}</a>'
 
-def nav_links(current):
-    return ''.join(f'<li><a href="{href(k)}"{route_attr(k)}{" aria-current=page" if (k == current and not ARTIFACT) else ""}>{t}</a></li>' for k, h, t in PAGES)
+def nav_links(current, skip=(NAV_BUTTON,)):
+    return ''.join(f'<li><a href="{href(k)}"{route_attr(k)}{" aria-current=page" if (k == current and not ARTIFACT) else ""}>{t}</a></li>' for k, h, t in PAGES if k not in skip)
+
+def contact_button(current, drawer=False):
+    """The one gold Contact button (nav and drawer). Other pages' "Request a quote" buttons still go straight to the form."""
+    cur = ' aria-current="page"' if current == 'contact' and not ARTIFACT else ''
+    if drawer: return f'<li class="drawer-cta"><a class="btn btn-gold" href="{href("contact")}"{route_attr("contact")}{cur}>Contact</a></li>'
+    return f'<li class="nav-cta"><a class="btn btn-gold" href="{href("contact")}"{route_attr("contact")}{cur} style="min-height:44px;padding-inline:20px">Contact</a></li>'
 
 def contact_line():
     return f'''<div class="contact-line"{per("contactline")}>
@@ -391,8 +445,8 @@ def header(current):
   <div class="wrap">
     <a class="logo" href="{href('home')}"{route_attr('home')}{per("wordmark")}{per("logo")}><img src="{asset('/brand/logo-lockup.png')}" alt="{esc(S['name'])} — {esc(S['tagline'])}" width="640" height="181" decoding="async" fetchpriority="high"></a>
     {north()}
-    <nav class="nav" aria-label="Primary"{per("nav")}><ul>{nav_links(current)}<li class="nav-cta"><a class="btn btn-gold" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
-    <details class="drawer" id="drawer"{per("burger")}><summary aria-label="Menu" aria-expanded="false">Menu</summary><ul>{nav_links(current)}<li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
+    <nav class="nav" aria-label="Primary"{per("nav")}><ul>{nav_links(current)}{contact_button(current)}</ul></nav>
+    <details class="drawer" id="drawer"{per("burger")}><summary aria-label="Menu" aria-expanded="false">Menu</summary><ul>{nav_links(current)}{contact_button(current, drawer=True)}</ul></details>
   </div>
 </header>'''
 
@@ -408,7 +462,7 @@ def footer():
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across {esc(S['region'])}.</p>
         <p class="small">{tel()} · {mailto()}</p>
       </div>
-      <div><h4>Pages</h4><ul>{nav_links(None)}<li><a href="{href('reviews')}">Reviews</a></li><li><a href="{href('drone-report')}">Sample drone report</a></li></ul></div>
+      <div><h4>Pages</h4><ul>{nav_links(None, skip=())}<li><a href="{href('drone-report')}">Sample drone report</a></li></ul></div>
       <div><h4>Elsewhere</h4><ul><li><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])}</a></li><li><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook</a></li><li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a></li></ul></div>
     </div>
     <div class="cred-strip" aria-label="Credentials">{''.join(f'<span>{esc(t)}</span>' for t, _ in S['credentials'][:7])}</div>
@@ -579,9 +633,9 @@ def drone_band():
   </div>
 </section>'''
 
-REVIEW_POLICY = ("Every genuine review from someone Fitz has worked for goes up, good or bad. The only ones held back are spam, "
-                 "reviews from people he hasn't worked for, abuse, and anything that names a property's location or a person who hasn't agreed to it. "
-                 "Reviews are never edited.")
+REVIEW_POLICY = ("Every genuine review from someone Fitz has worked for goes up, good or bad, whatever the star rating, and each one is matched to a real job first. "
+                 "The only ones held back are spam, reviews from people he hasn't worked for, abuse, and anything that names a property's location or a person who hasn't agreed to it. "
+                 "Reviews are never edited. A photo that shows where a property is, a number plate or someone's face is left off.")
 
 def review_cards(limit):
     """Testimonials Fitz supplies directly (content/site.json) are baked in; reviews published through the site are added by the script."""
@@ -684,6 +738,7 @@ def home_body():
   <div class="wrap stack" style="--gap:28px">
     <div class="sec-head reveal"><p class="eyebrow">Reviews</p><h2>What landholders say</h2>
       <p class="measure small" style="color:var(--ink-2)">{esc(REVIEW_POLICY)}</p></div>
+    <div class="rv-sum" data-review-summary hidden></div>
     <div class="grid grid-3" data-reviews="3" aria-live="polite">{review_cards(3)}</div>
     <div class="cta-row"><a class="btn btn-secondary" href="{href('reviews', 'write')}">Leave a review</a><a class="btn btn-quiet" href="{href('reviews')}">Read all reviews</a></div>
   </div>
@@ -861,32 +916,64 @@ def sent_dialog():
 REGIONS = S['area'] + ['Elsewhere in Victoria']
 PROPERTY_TYPES = ['Beef', 'Dairy', 'Sheep', 'Mixed farming', 'Lifestyle block', 'Horticulture or vineyard', 'Other']
 
+REVIEW_SERVICES = [t for _, t, _, _ in S['services']] + (['Thermal drone scouting'] if S.get('thermal_drone') else []) + ['Other']
+STAR_WORDS = ['', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']
+
+def month_options():
+    """The last 24 months, newest first, then "earlier". The page script rebuilds this list from today's date."""
+    t = datetime.date.today(); y, m = t.year, t.month; out = []
+    for _ in range(24):
+        out.append(f'<option value="{y}-{m:02d}">{datetime.date(y, m, 1).strftime("%B %Y")}</option>')
+        m -= 1
+        if m == 0: y, m = y - 1, 12
+    return ''.join(out) + '<option value="earlier">More than two years ago</option>'
+
 def reviews_body():
     opt = lambda xs: ''.join(f'<option>{esc(x)}</option>' for x in xs)
-    services = [t for _, t, _, _ in S['services']] + (['Thermal drone scouting'] if S.get('thermal_drone') else []) + ['Other']
     google = f'<a class="btn btn-secondary" href="{esc(S["google_review_url"])}" target="_blank" rel="noopener">Review us on Google {ico("i-ext")}</a>' if S.get('google_review_url') else ''
     ts = f'<div class="cf-turnstile" data-sitekey="{esc(TURNSTILE)}" data-theme="light" data-size="flexible"></div>' if TURNSTILE else ''
+    stars = ''.join(f'<input class="sr" type="radio" name="rating" id="r-star-{n}" value="{n}" required><label for="r-star-{n}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg><span class="sr">{n} star{"s" if n > 1 else ""}, {STAR_WORDS[n].lower()}</span></label>' for n in range(1, 6))
     return f'''
 <section class="page" aria-labelledby="h-reviews"{per("reviews")}>
   <div class="wrap stack" style="--gap:32px">
     <div class="sec-head">{meta("Reviews")}<p class="eyebrow">Reviews</p><h1 id="h-reviews" tabindex="-1" style="font-size:var(--fs-h2)">What landholders say</h1>
-      <p class="measure">{esc(REVIEW_POLICY)}</p></div>
+      <p class="measure">{esc(REVIEW_POLICY)}</p>
+      <div class="rv-sum" data-review-summary hidden></div>
+      <a class="btn btn-secondary rv-head-cta" href="#write">Leave a review</a></div>
     <div class="grid grid-2" data-reviews="50" aria-live="polite">{review_cards(50)}</div>
     <div class="reviews-write" id="write">
       <div class="sec-head" style="margin:0"><h2>Leave a review</h2>
-        <p class="measure small" style="color:var(--ink-2)">For landholders Fitz has worked for. It goes to Fitz first and is published after a quick check that you're a customer. Your email is only used for that check and is never shown.</p>
+        <p class="measure small" style="color:var(--ink-2)">For landholders Fitz has worked for. It goes to Fitz first and is published once he's matched it to your job. Your email and phone number are only used for that check and are never shown.</p>
         {google}</div>
+      <div class="rv-how"{per("verify")}><h3>How Fitz knows it's a real job</h3>
+        <ol><li><b>Got a review link from Fitz after the job?</b> Use that. Your review shows as a verified job.</li>
+          <li><b>No link?</b> Tell us the month of the job and the phone number or email you booked with. Fitz matches it to his records before anything goes up.</li>
+          <li>Reviews that can't be matched to a job he did aren't published.</li></ol></div>
       <form class="form" id="review-form" action="/api/reviews" method="post" novalidate{per("form")}>
+        <p class="rv-invite" id="r-invite-note" hidden>{ico("i-check")}<span id="r-invite-text">You're using Fitz's review link, so your review will show as a <b>verified job</b>.</span></p>
+        <input type="hidden" name="invite" id="r-invite" value="">
         <div class="summary" id="rv-summary" role="alert" tabindex="-1" hidden><b>Fix the following to send your review</b><ul id="rv-errs"></ul></div>
+        <fieldset class="field rate" id="r-rating"><legend>Your rating</legend><span class="hint">Every rating is published, from one star to five.</span>
+          <div class="row"><div class="opts">{stars}</div><span class="rate-out" id="r-rate-out" aria-hidden="true">Tap a star</span></div>
+          <span class="err">Choose a star rating from 1 to 5.</span></fieldset>
         <div class="field"><label for="r-name">Your name</label><span class="hint">First name and last initial, e.g. Sam T.</span><input id="r-name" name="name" type="text" autocomplete="given-name" required maxlength="40"><span class="err">Enter your first name and last initial.</span></div>
         <div class="grid grid-2" style="gap:20px">
           <div class="field"><label for="r-region">Region</label><select id="r-region" name="region" required><option value="">Choose…</option>{opt(REGIONS)}</select><span class="err">Choose a region.</span></div>
           <div class="field"><label for="r-property">Property type</label><select id="r-property" name="property" required><option value="">Choose…</option>{opt(PROPERTY_TYPES)}</select><span class="err">Choose a property type.</span></div>
+          <div class="field"><label for="r-service">Work Fitz did</label><select id="r-service" name="service" required><option value="">Choose…</option>{opt(REVIEW_SERVICES)}</select><span class="err">Choose the work Fitz did.</span></div>
+          <div class="field"><label for="r-month">When was the job?</label><select id="r-month" name="jobMonth" required><option value="">Choose…</option>{month_options()}</select><span class="err">Choose the month of the job.</span></div>
         </div>
-        <div class="field"><label for="r-service">Work Fitz did</label><select id="r-service" name="service" required><option value="">Choose…</option>{opt(services)}</select><span class="err">Choose the work Fitz did.</span></div>
-        <div class="field"><label for="r-text">Your review</label><span class="hint">What the problem was, what Fitz did, how it went. 20 to 800 characters. Please don't name the property or its location.</span><textarea id="r-text" name="text" required minlength="20" maxlength="800"></textarea><span class="err">Write at least 20 characters.</span></div>
-        <div class="field"><label for="r-email">Email</label><span class="hint">Only so Fitz can check you're a customer. Never shown.</span><input id="r-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"><span class="err">Enter a valid email address.</span></div>
-        <div class="field consent"><label><input type="checkbox" id="r-consent" name="consent" value="yes" required> OK to publish this review, with my first name, initial, region and property type, on this website.</label><span class="err">Tick to agree to publishing.</span></div>
+        <div class="field"><label for="r-text">Your review</label><span class="hint" id="r-text-hint">What the problem was, what Fitz did, and how it went. At least 250 characters, about four or five sentences. Please don't name the property or where it is.</span><textarea id="r-text" name="text" required minlength="250" maxlength="2000" rows="7" aria-describedby="r-text-hint r-count"></textarea><span class="count" id="r-count">At least 250 characters</span><span class="err">Write at least 250 characters.</span></div>
+        <fieldset class="field" id="r-photos-field" hidden{per("photos")}><legend>Photos (optional, up to 3)</legend>
+          <span class="hint">The problem, the job or the result. Location details are stripped from the files, and Fitz checks every photo before it goes up, so leave out faces, number plates and anything that shows where the property is.</span>
+          <ul class="rv-picks" id="r-picks"></ul>
+          <div class="pick-row"><input class="sr pick-in" type="file" id="r-photos" accept="image/*" multiple><label class="btn btn-secondary" for="r-photos" id="r-photos-btn">Add photos</label></div>
+          <span class="err" id="r-photos-err"></span></fieldset>
+        <div class="grid grid-2" style="gap:20px">
+          <div class="field"><label for="r-email">Email</label><span class="hint">Only so Fitz can match your job. Never shown.</span><input id="r-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"><span class="err">Enter a valid email address.</span></div>
+          <div class="field"><label for="r-phone">Phone you booked with <span style="font-weight:400">(optional)</span></label><span class="hint">Helps Fitz match your job. Never shown.</span><input id="r-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30"><span class="err">Check the number, or leave it blank.</span></div>
+        </div>
+        <div class="field consent"><label><input type="checkbox" id="r-consent" name="consent" value="yes" required> OK to publish this review on this website with my star rating, first name and initial, region, property type, the month of the job, and any photos Fitz approves.</label><span class="err">Tick to agree to publishing.</span></div>
         <div class="sr" aria-hidden="true"><label for="r-company">Leave this field empty</label><input id="r-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
         {ts}
         <div class="cta-row"><button type="submit" class="btn btn-primary" id="r-submit"><span class="spin" aria-hidden="true"></span><span class="lbl">Send review</span></button></div>
@@ -1160,37 +1247,76 @@ SCRIPT = r"""
     });
     document.getElementById('confirm-reset').addEventListener('click',function(e){ e.preventDefault(); form.reset(); document.getElementById('confirm').hidden=true; form.hidden=false; document.getElementById('f-name').focus(); });
   }
-  /* reviews: published reviews are added beside the baked-in ones; the form posts to the review queue */
-  var rlists=document.querySelectorAll('[data-reviews]'), rform=document.getElementById('review-form');
-  function reviewCard(r){ var f=document.createElement('figure'); f.className='review'; var bq=document.createElement('blockquote'), q=document.createElement('q'); q.textContent=r.text; bq.appendChild(q); f.appendChild(bq);
+  /* reviews: stars, verified jobs and photos. Published reviews are added beside the baked-in ones; the form posts to the review queue */
+  var rlists=document.querySelectorAll('[data-reviews]'), rform=document.getElementById('review-form'), rsums=document.querySelectorAll('[data-review-summary]'), pfield=document.getElementById('r-photos-field');
+  var SVGNS='http://www.w3.org/2000/svg', WORDS=['','Poor','Fair','Good','Very good','Excellent'];
+  function svgUse(id,cls){ var v=document.createElementNS(SVGNS,'svg'); v.setAttribute('viewBox','0 0 24 24'); v.setAttribute('aria-hidden','true'); if(cls) v.setAttribute('class',cls); var u=document.createElementNS(SVGNS,'use'); u.setAttribute('href','#'+id); v.appendChild(u); return v; }
+  function starRow(n,label){ var s=document.createElement('span'); s.className='rv-stars'; if(label){ s.setAttribute('role','img'); s.setAttribute('aria-label',label); } else s.setAttribute('aria-hidden','true'); for(var i=1;i<=5;i++) s.appendChild(svgUse('i-star',i>n?'off':'')); return s; }
+  function monthName(m,long){ var x=/^(\d{4})-(\d\d)$/.exec(m||''); if(!x) return m==='earlier'?'More than two years ago':''; try{ return new Date(+x[1],+x[2]-1,15).toLocaleDateString('en-AU',{month:long?'long':'short',year:'numeric'}); }catch(e){ return m; } }
+  function reviewCard(r){ var f=document.createElement('figure'); f.className='review';
+    if(r.rating || r.verified){ var top=document.createElement('div'); top.className='rv-top'; if(r.rating) top.appendChild(starRow(r.rating,'Rated '+r.rating+' out of 5'));
+      if(r.verified){ var v=document.createElement('span'); v.className='rv-verified'; v.appendChild(svgUse('i-check')); v.appendChild(document.createTextNode('Verified job')); v.title=r.via==='link'?'Sent through the review link Fitz gave the customer after the job':'Fitz matched this review to a job he did'; top.appendChild(v); }
+      f.appendChild(top); }
+    var bq=document.createElement('blockquote'), q=document.createElement('q'); q.textContent=r.text; bq.appendChild(q); f.appendChild(bq);
+    if(r.photos && r.photos.length){ var ul=document.createElement('ul'); ul.className='rv-photos'; r.photos.forEach(function(p,i){ var li=document.createElement('li'), a=document.createElement('a'), im=document.createElement('img'); a.href=p.src; a.target='_blank'; a.rel='noopener'; a.setAttribute('aria-label','Photo '+(i+1)+' from '+r.name+'’s review, full size'); im.src=p.src; im.alt=''; im.loading='lazy'; im.decoding='async'; if(p.w){ im.width=p.w; im.height=p.h; } a.appendChild(im); li.appendChild(a); ul.appendChild(li); }); f.appendChild(ul); }
     var who=document.createElement('figcaption'); who.className='who'; who.textContent=[r.name,r.property,r.region].filter(Boolean).join(' · '); f.appendChild(who);
-    var m=document.createElement('p'); m.className='caption'; var d=''; try{ d=r.date?new Date(r.date).toLocaleDateString('en-AU',{month:'long',year:'numeric'}):''; }catch(e){} m.textContent=[r.service,d].filter(Boolean).join(' · '); f.appendChild(m);
+    var m=document.createElement('p'); m.className='caption'; var d=r.jobMonth&&r.jobMonth!=='earlier'?'Job '+monthName(r.jobMonth):''; if(!d){ try{ d=r.date?new Date(r.date).toLocaleDateString('en-AU',{month:'short',year:'numeric'}):''; }catch(e){} } m.textContent=[r.service,d].filter(Boolean).join(' · '); f.appendChild(m);
     if(r.reply){ var rp=document.createElement('p'); rp.className='reply'; rp.textContent='Fitz: '+r.reply; f.appendChild(rp); } return f; }
-  if((rlists.length || rform) && !ARTIFACT){
+  function fillSummary(s){ if(!s || !s.count) return; [].forEach.call(rsums,function(el){ el.replaceChildren(); var b=document.createElement('b'), t=document.createElement('span'); b.textContent=(Math.round(s.average*10)/10).toFixed(1)+' out of 5'; t.textContent='from '+s.count+' review'+(s.count===1?'':'s'); el.appendChild(starRow(Math.round(s.average))); el.appendChild(b); el.appendChild(t); el.hidden=false; }); }
+  if((rlists.length || rform || rsums.length) && !ARTIFACT){
     fetch('/api/reviews',{headers:{Accept:'application/json'}}).then(function(r){ return r.json(); }).then(function(j){
       if(!j.enabled){ if(rform){ rform.hidden=true; document.getElementById('review-closed').hidden=false; } return; }
+      fillSummary(j.summary);
+      if(j.photos && pfield) pfield.hidden=false;
       [].forEach.call(rlists,function(l){ var n=+l.getAttribute('data-reviews'), have=l.querySelectorAll('.review:not(.review-empty)').length, add=(j.reviews||[]).slice(0,Math.max(0,n-have)); if(!add.length) return; var e=l.querySelector('.review-empty'); if(e) e.remove(); add.forEach(function(r){ l.appendChild(reviewCard(r)); }); });
     }).catch(function(){});
   }
   if(rform){
-    var rsum=document.getElementById('rv-summary'), rerrs=document.getElementById('rv-errs');
-    var rchecks=[['r-name',function(el){return /\S/.test(el.value)}],['r-region',function(el){return el.value!==''}],['r-property',function(el){return el.value!==''}],['r-service',function(el){return el.value!==''}],['r-text',function(el){return el.value.trim().length>=20}],['r-email',function(el){return el.value.trim()!=='' && el.checkValidity()}]];
+    var rsum=document.getElementById('rv-summary'), rerrs=document.getElementById('rv-errs'), MIN=250, MAX=2000;
+    var rtext=document.getElementById('r-text'), rcount=document.getElementById('r-count'), rout=document.getElementById('r-rate-out'), rmonth=document.getElementById('r-month');
+    function count(){ var n=rtext.value.trim().length; rcount.textContent=n<MIN?(n+' of '+MIN+' characters, '+(MIN-n)+' to go'):(n+' characters. That’s enough; up to '+MAX+'.'); rcount.classList.toggle('is-ok',n>=MIN); }
+    rtext.addEventListener('input',count); count();
+    rform.addEventListener('change',function(e){ if(e.target.name==='rating'){ rout.textContent=e.target.value+' out of 5 · '+WORDS[+e.target.value]; document.getElementById('r-rating').classList.remove('has-err'); } });
+    /* the month list, rebuilt from today's date so it never goes stale */
+    (function(){ var keep=rmonth.value, now=new Date(), y=now.getFullYear(), m=now.getMonth()+1, o=['<option value="">Choose…</option>'];
+      for(var i=0;i<24;i++){ var v=y+'-'+(m<10?'0':'')+m; o.push('<option value="'+v+'">'+monthName(v,true)+'</option>'); if(--m===0){ m=12; y--; } }
+      o.push('<option value="earlier">More than two years ago</option>'); rmonth.innerHTML=o.join(''); rmonth.value=keep; })();
+    function pick(id,val){ var el=document.getElementById(id); if(!el||!val) return; [].forEach.call(el.options,function(o){ if((o.value||o.textContent)===val) el.value=o.value; }); }
+    /* Fitz's review link: ?invite=… (checked on the server; read here only to fill in what he already knows) */
+    var inv=''; try{ inv=new URLSearchParams(location.search).get('invite')||''; }catch(e){}
+    if(/^[A-Za-z0-9_-]{10,400}\.[A-Za-z0-9_-]{22}$/.test(inv)){
+      document.getElementById('r-invite').value=inv; var note=document.getElementById('r-invite-note'); note.hidden=false;
+      try{ var pl=JSON.parse(decodeURIComponent(escape(atob(inv.split('.')[0].replace(/-/g,'+').replace(/_/g,'/')))));
+        if(pl.n && !document.getElementById('r-name').value) document.getElementById('r-name').value=pl.n; pick('r-service',pl.s); pick('r-month',pl.m);
+        if(pl.e && pl.e<Date.now()){ note.classList.add('is-old'); document.getElementById('r-invite-text').textContent='This review link has expired. You can still leave a review; Fitz will match it to the job himself.'; }
+      }catch(e){}
+    }
+    /* photos: shrunk to 1600px JPEG in the browser (which also drops the location data); the server strips again */
+    var pin=document.getElementById('r-photos'), plist=document.getElementById('r-picks'), perr=document.getElementById('r-photos-err'), pbtn=document.getElementById('r-photos-btn'), picks=[];
+    function shrink(file){ return new Promise(function(ok,no){ var u=URL.createObjectURL(file), im=new Image(); im.onload=function(){ var w=im.naturalWidth, h=im.naturalHeight, k=Math.min(1,1600/Math.max(w,h)), c=document.createElement('canvas'); c.width=Math.max(1,Math.round(w*k)); c.height=Math.max(1,Math.round(h*k)); var x=c.getContext('2d'); x.fillStyle='#ffffff'; x.fillRect(0,0,c.width,c.height); x.drawImage(im,0,0,c.width,c.height); URL.revokeObjectURL(u); var q=.82, d=c.toDataURL('image/jpeg',q); while(d.length*.75>900000 && q>.45){ q-=.12; d=c.toDataURL('image/jpeg',q); } if(d.indexOf('data:image/jpeg')!==0) return no(); ok({data:d,w:c.width,h:c.height}); }; im.onerror=function(){ URL.revokeObjectURL(u); no(); }; im.src=u; }); }
+    function drawPicks(){ plist.replaceChildren(); picks.forEach(function(p,i){ var li=document.createElement('li'), im=document.createElement('img'), b=document.createElement('button'); im.src=p.data; im.alt='Photo '+(i+1)+' to attach'; b.type='button'; b.className='rm'; b.textContent='Remove'; b.setAttribute('aria-label','Remove photo '+(i+1)); b.addEventListener('click',function(){ picks.splice(i,1); drawPicks(); (picks.length?plist.querySelector('.rm'):pin).focus(); }); li.appendChild(im); li.appendChild(b); plist.appendChild(li); }); var full=picks.length>=3; pbtn.hidden=full; pin.disabled=full; pbtn.textContent=picks.length?'Add another photo':'Add photos'; }
+    function photoErr(t){ perr.textContent=t; pfield.classList.toggle('has-err',!!t); }
+    pin.addEventListener('change',function(){ var files=[].slice.call(pin.files||[]), room=3-picks.length; pin.value=''; photoErr(''); if(files.length>room){ photoErr('Up to 3 photos. The first '+room+' '+(room===1?'was':'were')+' added.'); files=files.slice(0,room); }
+      Promise.all(files.map(function(f){ return shrink(f).catch(function(){ return null; }); })).then(function(rs){ var bad=0; rs.forEach(function(r){ if(r) picks.push(r); else bad++; }); if(bad) photoErr((bad===1?'One photo':bad+' photos')+' couldn’t be read. Try a JPEG or PNG.'); drawPicks(); }); });
+    var rchecks=[['r-name',function(el){return /\S/.test(el.value)}],['r-region',function(el){return el.value!==''}],['r-property',function(el){return el.value!==''}],['r-service',function(el){return el.value!==''}],['r-month',function(el){return el.value!==''}],['r-text',function(el){return el.value.trim().length>=MIN}],['r-email',function(el){return el.value.trim()!=='' && el.checkValidity()}],['r-phone',function(el){ var d=el.value.replace(/\D/g,''); return el.value.trim()==='' || (d.length>=8 && d.length<=15); }]];
     rform.addEventListener('submit',function(e){
       e.preventDefault(); var errs=[];
-      rchecks.forEach(function(c){ var el=document.getElementById(c[0]), ok=c[1](el), w=el.closest('.field'); w.classList.toggle('has-err',!ok); el.setAttribute('aria-invalid',ok?'false':'true'); if(!ok) errs.push([c[0],w.querySelector('.err').textContent]); });
+      var rated=rform.querySelector('input[name="rating"]:checked'), rw=document.getElementById('r-rating'); rw.classList.toggle('has-err',!rated); if(!rated) errs.push(['r-star-1',rw.querySelector('.err').textContent]);
+      rchecks.forEach(function(c){ var el=document.getElementById(c[0]), ok=c[1](el), w=el.closest('.field'); w.classList.toggle('has-err',!ok); el.setAttribute('aria-invalid',ok?'false':'true'); if(!ok) errs.push([c[0],c[0]==='r-text'?'Write at least '+MIN+' characters (you have '+el.value.trim().length+').':w.querySelector('.err').textContent]); });
       var cons=rform.querySelector('input[name="consent"]'), cw=cons.closest('.field'); cw.classList.toggle('has-err',!cons.checked); if(!cons.checked) errs.push(['r-consent',cw.querySelector('.err').textContent]);
-      if(errs.length){ rerrs.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ ev.preventDefault(); var t=document.getElementById(x[0])||cons; t.focus(); t.scrollIntoView({block:'center'}); }); li.appendChild(a); rerrs.appendChild(li); }); rsum.hidden=false; rsum.focus(); return; }
+      if(errs.length){ rerrs.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ ev.preventDefault(); var t=document.getElementById(x[0])||cons; t.focus(); (t.closest('.field')||t).scrollIntoView({block:'center'}); }); li.appendChild(a); rerrs.appendChild(li); }); rsum.hidden=false; rsum.focus(); return; }
       rsum.hidden=true;
-      var p={}; new FormData(rform).forEach(function(v,k){ p[k]=v; }); p.consent=cons.checked;
-      var rows=[['Name',p.name],['Region',p.region],['Property',p.property],['Work',p.service],['Review',p.text]];
-      var btn=document.getElementById('r-submit'); btn.classList.add('is-busy'); btn.disabled=true; btn.querySelector('.lbl').textContent='Sending';
+      var p={}; new FormData(rform).forEach(function(v,k){ if(typeof v==='string') p[k]=v; }); p.consent=cons.checked; p.rating=+rated.value; if(picks.length) p.photos=picks.map(function(x){ return x.data; });
+      var rows=[['Rating','★★★★★☆☆☆☆☆'.slice(5-p.rating,10-p.rating)+'  '+p.rating+' out of 5'],['Name',p.name],['Region',p.region],['Property',p.property],['Work',p.service],['Job',monthName(p.jobMonth,true)],['Review',p.text],['Photos',picks.length?picks.length+' attached':'']];
+      var btn=document.getElementById('r-submit'); btn.classList.add('is-busy'); btn.disabled=true; btn.querySelector('.lbl').textContent=picks.length?'Sending photos':'Sending';
       function done(){ btn.classList.remove('is-busy'); btn.disabled=false; btn.querySelector('.lbl').textContent='Send review'; }
-      var acts=function(){ return [{href:mailHref('A review for Fitz Feral Hunters',rows),label:'Email it to Fitz',cls:'btn-primary'}]; };
+      var acts=function(){ return [{href:mailHref('A review for Fitz Feral Hunters',rows.concat(picks.length?[['Photos','(attach them to this email)']]:[])),label:'Email it to Fitz',cls:'btn-primary'}]; };
       fetch(rform.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(p)})
         .then(function(r){ return r.json().then(function(j){ return {status:r.status,j:j||{}}; },function(){ return {status:r.status,j:{}}; }); })
         .then(function(res){ done(); var j=res.j;
-          if(j.ok){ openSent({state:'sent',kicker:'Review sent',title:'Thanks, it’s with Fitz',lede:'Every genuine review goes up, good or bad. Fitz checks that you’re a customer, then publishes it. This is what you sent:',rows:rows,ref:stamp(),onClose:function(){ rform.reset(); }}); return; }
-          if(res.status===400 && j.error){ rerrs.replaceChildren(); var li=document.createElement('li'); li.textContent=j.error; rerrs.appendChild(li); rsum.hidden=false; rsum.focus(); return; }
+          if(j.ok){ var lede=(j.verified?'It came through Fitz’s review link, so it’ll show as a verified job once he publishes it.':'Fitz matches it to your job, then publishes it.')+' Every genuine review goes up, good or bad.'+(j.note?' '+j.note:'')+' This is what you sent:';
+            openSent({state:'sent',kicker:'Review sent',title:'Thanks, it’s with Fitz',lede:lede,rows:rows,ref:stamp(),onClose:function(){ rform.reset(); picks=[]; drawPicks(); count(); rout.textContent='Tap a star'; }}); return; }
+          if(res.status===400 && j.error){ rerrs.replaceChildren(); (j.errors||[j.error]).forEach(function(t){ var li=document.createElement('li'); li.textContent=t; rerrs.appendChild(li); }); rsum.hidden=false; rsum.focus(); return; }
           openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:(j.error||'Something went wrong sending it.')+' You can email the same review to Fitz instead.',rows:rows,actions:acts()}); })
         .catch(function(){ done(); openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:'No connection. You can email the same review to Fitz instead.',rows:rows,actions:acts()}); });
     });
@@ -1309,6 +1435,9 @@ def main():
     for key, body in pages.items():
         t, d = TITLES[key]
         (PUB / ('index.html' if key == 'home' else f'{key}.html')).write_text(document(key, body, t, d))
+    pathlib.Path(__file__).resolve().parent.parent.joinpath('api/_lib/site-options.js').write_text(
+        '// Generated by src/build.py from content/site.json. Do not edit by hand.\n'
+        f'export const SERVICES = {json.dumps(REVIEW_SERVICES)};\nexport const REGIONS = {json.dumps(REGIONS)};\nexport const PROPERTY_TYPES = {json.dumps(PROPERTY_TYPES)};\n')
     (PUB / '404.html').write_text(document('404', notfound_body(), f"Page not found · {S['name']}", "That page isn't here."))
     (PUB / 'favicon.svg').write_text(FAVICON)
     if SHEET: (PUB / 'topo-tile.svg').write_text(TOPO_SVG)

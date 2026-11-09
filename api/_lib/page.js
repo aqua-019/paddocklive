@@ -40,8 +40,12 @@ main.warn{box-shadow:inset 0 0 0 2px var(--gold)}
 h1{font:700 1.7rem/1.05 "Barlow Condensed","Arial Narrow",sans-serif;text-transform:uppercase;margin:0}
 p{margin:0}a{color:inherit}.muted{color:var(--ink-2);font-size:15px}
 dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;padding:14px;background:var(--bg);border-radius:4px;font-size:15px}dt{font-weight:600;color:var(--ink-2);text-transform:uppercase;font-size:12px;letter-spacing:.06em;padding-top:2px}dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
-form{display:grid;gap:12px}label{font-weight:600;display:grid;gap:6px}select,textarea{font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);min-height:48px}
+form{display:grid;gap:12px}label{font-weight:600;display:grid;gap:6px}select,textarea,input[type=text],input[type=month],input[type=url]{font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);min-height:48px}
 .row{display:flex;flex-wrap:wrap;gap:10px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:4px;border:1.5px solid var(--line);font:600 16px/1 Barlow,system-ui,sans-serif;text-decoration:none;color:var(--ink);background:transparent;cursor:pointer}
 .btn.go{background:#2c3a35;border-color:#2c3a35;color:#f8f6f2}.btn.no{border-color:var(--err);color:var(--err)}
+label.check{display:flex;gap:10px;align-items:flex-start;min-height:44px}label.check input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:#2c3a35}
+.stars{color:var(--gold);letter-spacing:2px;font-size:20px}.ok{color:var(--ok);font-weight:600}.gold{color:var(--gold);font-weight:600}
+.ph{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:0;padding:0;list-style:none}.ph a{display:block}.ph img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block;background:var(--bg)}
+.link{font:15px/1.4 ui-monospace,Menlo,monospace;padding:12px;background:var(--bg);border-radius:4px;overflow-wrap:anywhere;user-select:all}
 </style></head><body><main${/class="warn"/.test(body) ? ' class="warn"' : ''}>${body.replace('class="warn"', '')}</main></body></html>`;
 }

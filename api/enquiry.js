@@ -5,7 +5,9 @@
 // Without RESEND_API_KEY nothing is emailed: the response says delivered:false and the page offers the visitor
 // a pre-filled email to Fitz instead, so no visitor is ever told "sent" when it wasn't.
 import { sendMail, logEnquiry, rateLimit, verifyTurnstile, clientIp, config } from './_lib/services.js';
-import { page, esc, clean, oneLine, parseBody, wantsJson, PHONE, PHONE_E164, OWNER_EMAIL } from './_lib/page.js';
+import * as reviews from './_lib/reviews.js';
+import { SERVICES } from './_lib/site-options.js';
+import { page, esc, clean, oneLine, parseBody, wantsJson, PHONE, PHONE_E164, OWNER_EMAIL, siteBase } from './_lib/page.js';
 
 const TO = () => process.env.ENQUIRY_TO || OWNER_EMAIL;
 const isTest = () => process.env.VERCEL_ENV !== 'production';
@@ -32,16 +34,25 @@ function melbourneTime(d = new Date()) {
   catch { return d.toISOString(); }
 }
 
-export function ownerEmail(e, r) {
+/** A review link for this customer, for Fitz to text them after the job ("Sam Taylor" → "Sam T."). */
+export function reviewLinkFor(e, base) {
+  if (!base) return null;
+  const [first, ...rest] = e.name.trim().split(/\s+/);
+  const name = rest.length ? `${first} ${rest[rest.length - 1][0].toUpperCase()}.` : first;
+  return reviews.inviteLink(base, { name, service: e.help.find(h => SERVICES.includes(h)) || '' });
+}
+
+export function ownerEmail(e, r, base) {
   const subject = `${isTest() ? '[TEST] ' : ''}New job enquiry — ${e.help.join(', ')} — ${e.location}`;
   const when = melbourneTime();
   const telHref = 'tel:' + e.phone.replace(/[^\d+]/g, '');
+  const rl = reviewLinkFor(e, base);
   const text = [
     `New enquiry from the website (${r}, ${when})`, '',
     `Name: ${e.name}`, `Phone: ${e.phone}`, `Email: ${e.email || '(not given)'}`, `Location: ${e.location}`,
     `Help with: ${e.help.join(', ')}`, '', e.message || '(no message)', '',
     e.email ? 'Reply to this email to answer them directly.' : 'No email given: ring them back.',
-  ].join('\n');
+  ].join('\n') + (rl ? `\n\nAfter the job, text them this review link. A review sent through it shows as a verified job:\n${rl}` : '');
   const row = (k, v) => `<tr><td style="padding:6px 14px 6px 0;color:#4a5550;font:600 12px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;vertical-align:top">${k}</td><td style="padding:6px 0;font:16px/1.45 Arial,sans-serif;color:#1b2622">${v}</td></tr>`;
   const html = `<div style="max-width:560px;font-family:Arial,sans-serif;color:#1b2622">
 <p style="font:700 20px/1.2 Arial,sans-serif;margin:0 0 4px">New job enquiry</p>
@@ -54,7 +65,8 @@ ${row('Location', esc(e.location))}
 ${row('Help with', esc(e.help.join(', ')))}
 ${row('Message', esc(e.message || '(no message)').replace(/\n/g, '<br>'))}
 </table>
-<p style="margin:18px 0 0;font-size:14px;color:#4a5550">${e.email ? 'Hit Reply to answer them directly.' : 'No email given: tap the number to ring them back.'}</p></div>`;
+<p style="margin:18px 0 0;font-size:14px;color:#4a5550">${e.email ? 'Hit Reply to answer them directly.' : 'No email given: tap the number to ring them back.'}</p>${rl ? `
+<p style="margin:18px 0 0;font-size:14px;color:#4a5550">After the job, text them this review link. A review sent through it shows as a verified job:<br><a href="${esc(rl)}" style="color:#1b2622;word-break:break-all">${esc(rl)}</a></p>` : ''}</div>`;
   return { subject, text, html };
 }
 
@@ -102,13 +114,13 @@ export default async function handler(req, res) {
 
   const received = { name: e.name, phone: e.phone, email: e.email, location: e.location, help: e.help, message: e.message };
   if (!config().mail) {
-    console.log(`[enquiry] ${r} received, not emailed (RESEND_API_KEY not set)\n` + ownerEmail(e, r).text);
+    console.log(`[enquiry] ${r} received, not emailed (RESEND_API_KEY not set)\n` + ownerEmail(e, r, siteBase(req)).text);
     return reply(200, { ok: true, delivered: false, ref: r, received, reason: 'mail-not-configured' },
       `<h1 class="warn">One more step</h1><p>The website's email isn't switched on yet, so this hasn't reached Fitz.</p><p><a class="btn go" href="${esc(mailtoFor(e))}">Email it to Fitz</a> <a class="btn" href="tel:${PHONE_E164}">Call ${PHONE}</a></p>${back}`);
   }
 
   try {
-    const m = ownerEmail(e, r);
+    const m = ownerEmail(e, r, siteBase(req));
     await sendMail({ to: TO(), subject: m.subject, text: m.text, html: m.html, replyTo: e.email || undefined, idempotencyKey: `enquiry/${r}`, tags: [{ name: 'type', value: 'enquiry' }] });
   } catch (err) {
     console.error('[enquiry] send failed', r, err.message);

@@ -130,3 +130,10 @@ PADDOCK.update({
     "report-card": ["D0293", "D4643", "D3813"],   # social-proof inline CTA, evidence chip, plain-language summary
     "report":      ["D3813", "D0433"],            # plain-language summary, figure captions
 })
+
+# v1.2 (SP-06): one gold Contact button; reviews with stars, photos and a verified job
+PADDOCK.update({
+    "reviews": ["D0367", "D0860", "D3813", "D0642", "D3778", "D0312"],   # + star rating as a radio group with visible numeric output, live character count
+    "verify":  ["D1150", "D3813", "D3796"],     # verified state in a calm trust colour, plain-language how-it-works, no fake social proof
+    "photos":  ["D0335", "D2211"],              # upload previews with per-file remove, EXIF orientation honoured on the browser re-encode
+})

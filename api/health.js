@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     mail,
     enquiries: ready ? 'emailed to Fitz' : 'not emailed yet: visitors are offered a pre-filled email instead',
     store: { configured: store.kind() === 'redis', reachable: storeOk },
-    reviews: { enabled: store.kind() !== null, moderationLinks: !!(process.env.REVIEW_SECRET && process.env.REVIEW_SECRET.length >= 16) },
+    reviews: { enabled: store.kind() !== null, moderationLinks: !!(process.env.REVIEW_SECRET && process.env.REVIEW_SECRET.length >= 16), reviewLinks: !!(process.env.REVIEW_SECRET && process.env.REVIEW_SECRET.length >= 16), photos: !!process.env.BLOB_READ_WRITE_TOKEN },
     botCheck: c.turnstile,
   });
 }

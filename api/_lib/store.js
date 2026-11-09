@@ -23,6 +23,12 @@ export async function set(key, value) {
   if (kind() === 'redis') return redis('SET', key, value);
   mem.kv.set(key, value); return 'OK';
 }
+/** Set only if the key doesn't exist yet. Returns true if this call set it (used to make review links single-use). */
+export async function setnx(key, value) {
+  if (kind() === 'redis') return (await redis('SET', key, value, 'NX')) === 'OK';
+  if (mem.kv.has(key)) return false;
+  mem.kv.set(key, value); return true;
+}
 export async function zadd(key, score, member) {
   if (kind() === 'redis') return redis('ZADD', key, score, member);
   const z = mem.z.get(key) || new Map(); z.set(member, score); mem.z.set(key, z); return 1;

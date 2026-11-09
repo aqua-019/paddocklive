@@ -66,6 +66,10 @@
     {
       "source": "/review/moderate",
       "destination": "/api/review-moderate"
+    },
+    {
+      "source": "/review/invite",
+      "destination": "/api/review-invite"
     }
   ]
 }

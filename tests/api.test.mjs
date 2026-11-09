@@ -8,10 +8,11 @@ process.env.REVIEW_SECRET = 'test-secret-0123456789abcdef';
 
 const calls = [];
 let resendStatus = 200;
+let resendBody = '';
 globalThis.fetch = async (url, opts = {}) => {
   let body = null; try { body = typeof opts.body === 'string' ? JSON.parse(opts.body) : opts.body ? String(opts.body) : null; } catch { body = String(opts.body); }
-  calls.push({ url: String(url), body });
-  if (String(url).includes('api.resend.com')) return new Response(JSON.stringify({ id: 'em_1' }), { status: resendStatus });
+  calls.push({ url: String(url), body, headers: opts.headers || {} });
+  if (String(url).includes('api.resend.com')) return new Response(resendStatus === 200 ? JSON.stringify({ id: 'em_1' }) : (resendBody || JSON.stringify({ message: 'error' })), { status: resendStatus });
   if (String(url).includes('turnstile')) return new Response(JSON.stringify({ success: String(opts.body).includes('response=good') }));
   return new Response('{}');
 };
@@ -20,6 +21,8 @@ const { default: enquiry } = await import('../api/enquiry.js');
 const { default: reviewsApi } = await import('../api/reviews.js');
 const { default: moderate } = await import('../api/review-moderate.js');
 const { default: action } = await import('../api/review-action.js');
+const { default: health } = await import('../api/health.js');
+const services = await import('../api/_lib/services.js');
 const reviews = await import('../api/_lib/reviews.js');
 const store = await import('../api/_lib/store.js');
 
@@ -34,7 +37,7 @@ function call(handler, { method = 'POST', body = {}, json = true, query = {}, he
 
 const good = { name: 'Sam Taylor', phone: '0412 345 678', email: 'sam@example.com', location: 'Neerim South', help: ['Deer', 'Foxes'], message: 'Deer in the lucerne most nights.' };
 
-beforeEach(() => { calls.length = 0; resendStatus = 200; delete process.env.RESEND_API_KEY; delete process.env.TURNSTILE_SECRET_KEY; delete process.env.VERCEL_ENV; store._resetMemory(); });
+beforeEach(() => { calls.length = 0; resendStatus = 200; resendBody = ''; delete process.env.ENQUIRY_FROM; delete process.env.RESEND_API_KEY; delete process.env.TURNSTILE_SECRET_KEY; delete process.env.VERCEL_ENV; store._resetMemory(); });
 
 test('enquiry without a mail key: ok, not delivered, nothing sent, receipt echoed', async () => {
   const r = await call(enquiry, { body: good });
@@ -134,4 +137,44 @@ test('reviews off without a store', async () => {
   assert.equal(r.json.enabled, false);
   assert.equal((await call(reviewsApi, { body: review })).status, 503);
   process.env.FFH_MEMORY_STORE = '1';
+});
+
+test('mail: each enquiry email carries an idempotency key and a type tag', async () => {
+  process.env.RESEND_API_KEY = 're_test';
+  const r = await call(enquiry, { body: good });
+  const c = calls.find(x => x.url.includes('resend'));
+  assert.equal(c.headers['Idempotency-Key'], `enquiry/${r.json.ref}`);
+  assert.deepEqual(c.body.tags, [{ name: 'type', value: 'enquiry' }]);
+  assert.match(c.body.from, /onboarding@resend\.dev/);
+});
+
+test('mail: ENQUIRY_FROM is used once set; auto-reply goes out only with AUTO_REPLY=1', async () => {
+  process.env.RESEND_API_KEY = 're_test'; process.env.ENQUIRY_FROM = 'Fitz Feral Hunters <enquiries@fitzferalhunters.com>'; process.env.AUTO_REPLY = '1';
+  await call(enquiry, { body: good });
+  const sent = calls.filter(x => x.url.includes('resend'));
+  assert.equal(sent.length, 2);
+  assert.equal(sent[0].body.from, 'Fitz Feral Hunters <enquiries@fitzferalhunters.com>');
+  assert.deepEqual(sent[1].body.to, ['sam@example.com']);
+  delete process.env.AUTO_REPLY;
+});
+
+test('mail: a Resend refusal is explained in plain words in the error', async () => {
+  process.env.RESEND_API_KEY = 're_test'; resendStatus = 403;
+  resendBody = JSON.stringify({ message: 'You can only send testing emails to your own email address' });
+  await assert.rejects(services.sendMail({ to: 'x@example.com', subject: 's', text: 't' }), /test sender only delivers to the Resend account owner/);
+  assert.match(services.resendHint(403, 'The fitzferalhunters.com domain is not verified'), /not verified/);
+  assert.match(services.resendHint(401, ''), /API key/);
+});
+
+test('health: reports what is switched on, never a secret', async () => {
+  process.env.RESEND_API_KEY = 're_secret_value'; process.env.ENQUIRY_FROM = 'Fitz Feral Hunters <enquiries@fitzferalhunters.com>';
+  const r = await call(health, { method: 'GET' });
+  assert.equal(r.status, 200); assert.equal(r.json.mail.configured, true);
+  assert.match(r.json.mail.sender, /fitzferalhunters\.com/);
+  assert.equal(JSON.stringify(r.json).includes('re_secret_value'), false);
+  assert.equal(r.headers['cache-control'], 'no-store');
+  process.env.ENQUIRY_FROM = 'enquiries at fitz';
+  assert.match((await call(health, { method: 'GET' })).json.mail.sender, /badly formatted/);
+  delete process.env.RESEND_API_KEY;
+  assert.match((await call(health, { method: 'GET' })).json.enquiries, /not emailed yet/);
 });

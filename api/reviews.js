@@ -63,8 +63,8 @@ export default async function handler(req, res) {
     link ? `Publish or decline it here (link works for ${reviews.LINK_DAYS} days):\n${link}` : 'REVIEW_SECRET is not set, so no moderation link could be made.', '',
     'Every genuine review from a customer should go up, good or bad. Decline only spam, people you have not worked for, abuse, or anything naming a location or a person who has not agreed.'].join('\n');
   if (config().mail) {
-    await sendMail({ to: process.env.ENQUIRY_TO || OWNER_EMAIL, subject: `${process.env.VERCEL_ENV !== 'production' ? '[TEST] ' : ''}New review from ${r.name}, ${r.region}`, text, replyTo: r.email })
-      .catch(err => console.error('[reviews] notify failed', err));
+    await sendMail({ to: process.env.ENQUIRY_TO || OWNER_EMAIL, subject: `${process.env.VERCEL_ENV !== 'production' ? '[TEST] ' : ''}New review from ${r.name}, ${r.region}`, text, replyTo: r.email, idempotencyKey: `review/${rec.id}`, tags: [{ name: 'type', value: 'review' }] })
+      .catch(err => console.error('[reviews] notify failed', err.message));
   } else {
     console.log('[reviews] new pending review, not emailed (RESEND_API_KEY not set)\n' + text);
   }

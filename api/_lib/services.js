@@ -12,15 +12,46 @@ export const config = () => ({
 });
 
 // ---------------------------------------------------------------- email (Resend)
+// Until a domain is verified in Resend, mail goes from Resend's test sender, which only delivers to the
+// address the Resend account was created with. Set ENQUIRY_FROM (e.g. "Fitz Feral Hunters <enquiries@fitzferalhunters.com>")
+// once fitzferalhunters.com is verified. See docs/resend-setup.md.
 const RESEND = 'https://api.resend.com/emails';
-export async function sendMail({ to, subject, text, html, replyTo, from }) {
+export const TEST_SENDER = 'Fitz Feral Hunters website <onboarding@resend.dev>';
+export const fromAddress = () => (process.env.ENQUIRY_FROM || '').trim() || TEST_SENDER;
+export function fromCheck() {
+  const raw = (process.env.ENQUIRY_FROM || '').trim();
+  if (!raw) return { set: false, domain: 'resend.dev', note: 'test sender: delivers only to the Resend account owner' };
+  const m = raw.match(/<([^<>\s@]+)@([^<>\s@]+\.[^<>\s@]+)>$/) || raw.match(/^([^<>\s@]+)@([^<>\s@]+\.[^<>\s@]+)$/);
+  return m ? { set: true, domain: m[2].toLowerCase(), valid: true } : { set: true, valid: false, note: 'ENQUIRY_FROM should look like: Fitz Feral Hunters <enquiries@fitzferalhunters.com>' };
+}
+
+/** A plain-words reason for a Resend failure, for the function logs. */
+export function resendHint(status, body) {
+  const t = String(body || '');
+  if (status === 401 || /api key is invalid|missing api key/i.test(t)) return 'the API key is wrong or was revoked: create a new one in Resend and update RESEND_API_KEY';
+  if (status === 403 && /resend\.dev|testing emails|own email address/i.test(t)) return 'the test sender only delivers to the Resend account owner: verify fitzferalhunters.com and set ENQUIRY_FROM, or create the Resend account with the ENQUIRY_TO address';
+  if (status === 403 && /not verified|verify/i.test(t)) return 'the ENQUIRY_FROM domain is not verified in Resend yet: check its DNS records';
+  if (status === 403) return 'the API key cannot send from this address (a key restricted to another domain?)';
+  if (status === 422) return 'Resend rejected the message fields (often a badly formatted ENQUIRY_FROM)';
+  if (status === 429) return 'Resend rate limit reached: wait a moment';
+  return 'see the Resend dashboard → Logs';
+}
+
+export async function sendMail({ to, subject, text, html, replyTo, from, idempotencyKey, tags }) {
   if (!process.env.RESEND_API_KEY) return { sent: false, reason: 'RESEND_API_KEY not set' };
+  const headers = { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' };
+  // Resend keeps an idempotency key for 24 hours: a retried request with the same key is not sent twice.
+  if (idempotencyKey) headers['Idempotency-Key'] = String(idempotencyKey).slice(0, 256);
   const r = await fetch(RESEND, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: from || process.env.ENQUIRY_FROM || 'Fitz Feral Hunters site <onboarding@resend.dev>', to: Array.isArray(to) ? to : [to], reply_to: replyTo || undefined, subject, text, html: html || undefined }),
+    method: 'POST', headers,
+    body: JSON.stringify({ from: from || fromAddress(), to: Array.isArray(to) ? to : [to], reply_to: replyTo || undefined, subject, text, html: html || undefined, tags: tags || undefined }),
   });
-  if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`);
+  if (!r.ok) {
+    const body = await r.text();
+    const err = new Error(`Resend ${r.status}: ${body.slice(0, 300)} — ${resendHint(r.status, body)}`);
+    err.status = r.status;
+    throw err;
+  }
   const j = await r.json();
   return { sent: true, id: j.id };
 }

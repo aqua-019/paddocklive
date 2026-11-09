@@ -156,8 +156,7 @@
   "testimonials": [],
   "hero_photo": "ute-thermal-rig",
   "about_photos": [
-    "fitz-on-sticks",
-    "thermal-scope-view"
+    "fitz-portrait"
   ],
   "area": [
     "Gippsland",
@@ -188,6 +187,8 @@
     "thermal-scope-view",
     "ute-thermal-rig",
     "fitz-on-sticks",
+    "rig-hillside-ute",
+    "rig-fenceline",
     "first-light-still"
   ],
   "google_review_url": "",

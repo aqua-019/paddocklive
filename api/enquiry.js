@@ -109,16 +109,16 @@ export default async function handler(req, res) {
 
   try {
     const m = ownerEmail(e, r);
-    await sendMail({ to: TO(), subject: m.subject, text: m.text, html: m.html, replyTo: e.email || undefined });
+    await sendMail({ to: TO(), subject: m.subject, text: m.text, html: m.html, replyTo: e.email || undefined, idempotencyKey: `enquiry/${r}`, tags: [{ name: 'type', value: 'enquiry' }] });
   } catch (err) {
-    console.error('[enquiry] send failed', r, err);
+    console.error('[enquiry] send failed', r, err.message);
     return reply(502, { ok: false, delivered: false, ref: r, received, error: "The website couldn't send it." },
       `<h1 class="warn">Not sent</h1><p>The website couldn't send it. Nothing reached Fitz.</p><p><a class="btn go" href="${esc(mailtoFor(e))}">Email it to Fitz</a> <a class="btn" href="tel:${PHONE_E164}">Call ${PHONE}</a></p>${back}`);
   }
 
   if (config().autoReply && process.env.ENQUIRY_FROM && e.email) {
     const c = customerReply(e);
-    await sendMail({ to: e.email, subject: c.subject, text: c.text, replyTo: TO() }).catch(err => console.error('[enquiry] auto-reply failed', err));
+    await sendMail({ to: e.email, subject: c.subject, text: c.text, replyTo: TO(), idempotencyKey: `enquiry-reply/${r}`, tags: [{ name: 'type', value: 'auto-reply' }] }).catch(err => console.error('[enquiry] auto-reply failed', err.message));
   }
 
   return reply(200, { ok: true, delivered: true, ref: r, received },

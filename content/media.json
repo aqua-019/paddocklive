@@ -7,7 +7,7 @@
    "kind": "gear",
    "source": "ute-thermal-rig.jpg",
    "title": "Thermal rig on the tripod at dusk",
-   "caption": "Rifle and thermal scope set up on the tripod beside the ute as the light goes.",
+   "caption": "Rifle and thermal scope setup.",
    "alt": "A wooden-stocked rifle with a thermal scope mounted on a tripod beside a cream four-wheel drive with a roof rack, green paddock and a dusk sky behind.",
    "src": "/media/photo/ute-thermal-rig-960-5100e2e1.jpg",
    "src_webp": "/media/photo/ute-thermal-rig-960-5100e2e1.webp",
@@ -32,8 +32,8 @@
    "type": "photo",
    "kind": "work",
    "source": "fitz-on-sticks.jpg",
-   "title": "Fitz on the shooting sticks",
-   "caption": "Fitz on the shooting sticks in tall eucalypt bush.",
+   "title": "Fitz working",
+   "caption": "Fitz working.",
    "alt": "Fitz in a cap and a dark green oilskin coat aiming a scoped rifle off shooting sticks among tall eucalypts, leaf litter underfoot.",
    "src": "/media/photo/fitz-on-sticks-727-1f8b4eee.jpg",
    "src_webp": "/media/photo/fitz-on-sticks-727-1f8b4eee.webp",
@@ -58,9 +58,9 @@
    "type": "photo",
    "kind": "thermal",
    "source": "thermal-scope-view.jpg",
-   "title": "Through the thermal scope",
-   "caption": "Through the thermal scope at 5x: four animals stand out hot against the cold ground.",
-   "alt": "Thermal scope view in grey with four animals glowing orange and yellow, the scope's on-screen readout across the top and the reticle beside them.",
+   "title": "Thermal monocular view",
+   "caption": "Thermal monocular used to spot deer on the hill.",
+   "alt": "Thermal monocular view in grey, with four deer showing hot in orange and yellow on a hillside and the readout across the top.",
    "src": "/media/photo/thermal-scope-view-1024-5a6c7754.jpg",
    "src_webp": "/media/photo/thermal-scope-view-1024-5a6c7754.webp",
    "width": 1024,
@@ -125,6 +125,28 @@
    "poster_webp": "/media/photo/drone-thermal-mob-poster-848-ae60778d.webp"
   },
   {
+   "id": "thermal-stock-check",
+   "type": "video",
+   "kind": "thermal",
+   "source": "padd5-cattle-clear-id.mp4",
+   "trim": [
+    0,
+    9.4
+   ],
+   "poster_at": 3.6,
+   "home": false,
+   "title": "Stock identified on thermal",
+   "caption": "The landholder's cattle, clearly identified on thermal. Stock is checked and the line confirmed clear before any work starts.",
+   "description": "Thermal footage through a round eyepiece of two cattle grazing on a dark paddock, their bodies showing white and warm spots in yellow and orange, with the device's readout along the bottom.",
+   "src": "/media/video/thermal-stock-check-b222c0c5.mp4",
+   "width": 848,
+   "height": 848,
+   "duration": 9.4,
+   "bytes": 665513,
+   "poster": "/media/photo/thermal-stock-check-poster-848-7c4d5b61.jpg",
+   "poster_webp": "/media/photo/thermal-stock-check-poster-848-7c4d5b61.webp"
+  },
+  {
    "id": "deer-mob-hillside",
    "type": "video",
    "kind": "work",
@@ -141,6 +163,24 @@
    "bytes": 1849039,
    "poster": "/media/photo/deer-mob-hillside-poster-464-ac606385.jpg",
    "poster_webp": "/media/photo/deer-mob-hillside-poster-464-ac606385.webp"
+  },
+  {
+   "id": "deer-crossing-hill",
+   "type": "video",
+   "kind": "work",
+   "source": "padd1.mov",
+   "poster_at": 3.5,
+   "home": false,
+   "title": "Deer crossing the hill",
+   "caption": "A line of deer working across open hill country, spotted from the tree line below.",
+   "description": "Phone video, filmed upright, of a line of deer walking across a steep grassy hillside under a blue sky, with eucalypts in the foreground.",
+   "src": "/media/video/deer-crossing-hill-e41c653e.mp4",
+   "width": 464,
+   "height": 848,
+   "duration": 21.0,
+   "bytes": 2262607,
+   "poster": "/media/photo/deer-crossing-hill-poster-464-14b44889.jpg",
+   "poster_webp": "/media/photo/deer-crossing-hill-poster-464-14b44889.webp"
   },
   {
    "id": "trailcam-stag-night",
@@ -205,9 +245,9 @@
    "kind": "work",
    "source": "pad3.mp4",
    "poster_at": 7,
-   "title": "Deer in the garden beds",
-   "caption": "A deer feeding through garden plantings at close range.",
-   "description": "Daylight video looking down on a brown deer pushing through dense green garden plants.",
+   "title": "Sambar deer in the forest",
+   "caption": "A sambar deer located in the forest.",
+   "description": "Daylight video looking down on a sambar deer moving through dense green forest undergrowth.",
    "src": "/media/video/deer-garden-a79a51a4.mp4",
    "width": 848,
    "height": 464,
@@ -291,6 +331,84 @@
     ]
    ],
    "bytes": 25496
+  },
+  {
+   "id": "fitz-portrait",
+   "type": "photo",
+   "kind": "work",
+   "source": "fitz-portrait.jpg",
+   "title": "Robert Fitzgerald",
+   "caption": "Robert Fitzgerald, Fitz Feral Hunters.",
+   "alt": "Robert Fitzgerald in a cap and olive fleece with binoculars on his chest, looking out over Gippsland hill country at sunset.",
+   "src": "/media/photo/fitz-portrait-948-7c71510d.jpg",
+   "src_webp": "/media/photo/fitz-portrait-948-7c71510d.webp",
+   "width": 948,
+   "height": 948,
+   "srcset": [
+    [
+     948,
+     "/media/photo/fitz-portrait-948-7c71510d.jpg",
+     "/media/photo/fitz-portrait-948-7c71510d.webp"
+    ],
+    [
+     640,
+     "/media/photo/fitz-portrait-640-a198882e.jpg",
+     "/media/photo/fitz-portrait-640-a198882e.webp"
+    ]
+   ],
+   "bytes": 91478
+  },
+  {
+   "id": "rig-hillside-ute",
+   "type": "photo",
+   "kind": "gear",
+   "source": "rig-hillside-ute.jpg",
+   "title": "Set up on the hillside",
+   "caption": "Rifle and thermal on the tripod, the ute parked up the slope.",
+   "alt": "A rifle with a thermal scope on a tripod on a grassy slope, with a cream four-wheel drive parked by a fence line above under a clear blue sky.",
+   "src": "/media/photo/rig-hillside-ute-960-4188f821.jpg",
+   "src_webp": "/media/photo/rig-hillside-ute-960-4188f821.webp",
+   "width": 960,
+   "height": 1280,
+   "srcset": [
+    [
+     960,
+     "/media/photo/rig-hillside-ute-960-4188f821.jpg",
+     "/media/photo/rig-hillside-ute-960-4188f821.webp"
+    ],
+    [
+     640,
+     "/media/photo/rig-hillside-ute-640-21b337b1.jpg",
+     "/media/photo/rig-hillside-ute-640-21b337b1.webp"
+    ]
+   ],
+   "bytes": 183037
+  },
+  {
+   "id": "rig-fenceline",
+   "type": "photo",
+   "kind": "gear",
+   "source": "rig-fenceline.jpg",
+   "title": "On the fence line",
+   "caption": "Set up on the fence line, looking across the gully.",
+   "alt": "A rifle on a carbon tripod beside a timber and wire fence, looking across a treed gully to green hills under a clear sky.",
+   "src": "/media/photo/rig-fenceline-960-250875d7.jpg",
+   "src_webp": "/media/photo/rig-fenceline-960-250875d7.webp",
+   "width": 960,
+   "height": 1280,
+   "srcset": [
+    [
+     960,
+     "/media/photo/rig-fenceline-960-250875d7.jpg",
+     "/media/photo/rig-fenceline-960-250875d7.webp"
+    ],
+    [
+     640,
+     "/media/photo/rig-fenceline-640-67783227.jpg",
+     "/media/photo/rig-fenceline-640-67783227.webp"
+    ]
+   ],
+   "bytes": 289864
   }
  ]
 }

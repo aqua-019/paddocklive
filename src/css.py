@@ -303,7 +303,7 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .cta-bar{position:fixed;inset-inline:0;bottom:0;z-index:15;display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--bg);box-shadow:inset 0 1px 0 var(--line-strong);padding:8px var(--gutter-r) calc(8px + env(safe-area-inset-bottom,0px)) var(--gutter-l)}
 .cta-bar .btn{min-height:48px;padding-inline:12px}
 @media (min-width:900px){.cta-bar{display:none}}
-@media (max-width:899px){main{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}}
+@media (max-width:899px){.site-foot{padding-bottom:calc(40px + 72px + env(safe-area-inset-bottom,0px))}}
 
 /* compare slider (SP-02 set-piece) */
 .compare{margin:0;--split:50%}

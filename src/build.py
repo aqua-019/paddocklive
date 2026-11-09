@@ -134,10 +134,51 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .faq-index ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
 .faq-index a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--radius);text-decoration:none;font-weight:600;transition:background-color var(--t-hover) var(--ease-out)}
 .faq-index a:hover{background:var(--wash)}
-.faq-group{scroll-margin-top:calc(var(--head-h) + 16px)}
+.faq-group,.g-block{scroll-margin-top:calc(var(--head-h) + 16px)}
+.faq-index .count{margin-inline-start:8px;font-weight:500;color:var(--ink-2)}
 .faq-group h2.sub{margin-bottom:8px}
 .cred-card h3{margin:0}
 details.faq p a{color:var(--ink);text-underline-offset:.16em}
+/* v1.0 final · About: the bio with one square portrait */
+.bio{display:grid;gap:20px;align-items:start}
+.bio .slot{max-width:300px;width:100%}
+.bio .slot .plate{display:none}
+.bio .lede{margin:0}
+@media (min-width:700px){.bio{grid-template-columns:240px minmax(0,1fr);gap:28px}.bio .slot{max-width:none}}
+/* v1.0 final · mobile pass */
+html{text-size-adjust:100%;-webkit-tap-highlight-color:color-mix(in srgb, var(--gold) 22%, transparent)}
+.nf-links{list-style:none;padding:0;display:grid;gap:0}
+.nf-links a{display:flex;align-items:center;min-height:44px}
+.cta-bar .ico{width:18px;height:18px;flex:none}
+.cta-bar .btn{white-space:nowrap;gap:8px}
+.cta-bar{transition:translate .2s cubic-bezier(.165,.84,.44,1),visibility 0s linear 0s}
+.cta-bar[data-off]{translate:0 calc(100% + 2px);visibility:hidden;transition:translate .2s cubic-bezier(.895,.03,.685,.22),visibility 0s linear .2s}
+@media (prefers-reduced-motion:reduce){.cta-bar,.cta-bar[data-off]{transition:none}}
+.contact-list .kv .row a.tel,.contact-list .kv .row a.mail,.site-foot p a.tel,.site-foot p a.mail{display:inline-block;padding-block:11px;margin-block:-11px}
+.site-foot .cols{display:grid;gap:28px}
+@media (max-width:699px){
+  .site-foot .cols>div:nth-child(2) ul{grid-template-columns:1fr 1fr;column-gap:16px}
+  .contact-line{gap:4px 20px}
+  .contact-line .kv{flex-wrap:wrap;row-gap:0}
+  .contact-line .kv span a{overflow-wrap:normal;word-break:normal}
+  .contact-line .kv b{font-size:13px}
+  .tile{padding:18px 18px 12px;gap:8px}
+  .tile .btn{min-height:44px;padding:0;border:0;background:none;text-decoration:underline;text-underline-offset:.18em;font-size:var(--fs-small);flex-direction:row;flex-wrap:nowrap;gap:6px}
+  .tile .btn::after{content:"→";position:static;inset:auto;text-decoration:none;display:inline-block}
+  .tile .btn:hover{background:none;color:var(--gold-ink)}
+  .vids .vid.upright .slot{max-width:420px}
+  .proof-link{width:100%}
+}
+@media (max-width:359px){
+  .cta-bar .bar-long{display:none}
+  .cta-bar .btn{padding-inline:8px;font-size:16px}
+  .cta-row .btn{flex:1 1 100%}
+}
+@media (orientation:landscape) and (max-height:500px){
+  .site-head{position:relative}
+  .cta-bar{padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+  .cta-bar .btn{min-height:44px}
+}
 /* v1.1 · the sample report as proof: a hero link and a card that looks like the report's first page */
 .proof-link{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:8px 16px;border-radius:var(--radius);background:color-mix(in srgb, var(--gold-light) 30%, var(--bg));box-shadow:inset 0 0 0 1.5px var(--gold);color:var(--ink);text-decoration:none;font-size:var(--fs-small);justify-self:start;width:fit-content;max-width:100%;transition:background-color var(--t-hover) var(--ease-out)}
 .proof-link b{font-weight:700}
@@ -350,7 +391,7 @@ def header(current):
     <a class="logo" href="{href('home')}"{route_attr('home')}{per("wordmark")}{per("logo")}><img src="{asset('/brand/logo-lockup.png')}" alt="{esc(S['name'])} — {esc(S['tagline'])}" width="640" height="181" decoding="async" fetchpriority="high"></a>
     {north()}
     <nav class="nav" aria-label="Primary"{per("nav")}><ul>{nav_links(current)}<li class="nav-cta"><a class="btn btn-gold" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
-    <details class="drawer" id="drawer"{per("burger")}><summary aria-label="Menu">Menu</summary><ul>{nav_links(current)}<li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
+    <details class="drawer" id="drawer"{per("burger")}><summary aria-label="Menu" aria-expanded="false">Menu</summary><ul>{nav_links(current)}<li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
   </div>
 </header>'''
 
@@ -378,7 +419,7 @@ def footer():
 def ctabar():
     return f'''
 <div class="cta-bar" id="ctabar"{per("ctabar")}>
-  <a class="btn btn-secondary num" href="tel:{S['phone_e164']}">Call {S['phone_display']}</a>
+  <a class="btn btn-secondary num" href="tel:{S['phone_e164']}">{ico("i-phone")}<span class="bar-long">Call</span>{S['phone_display']}</a>
   <a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a>
 </div>'''
 
@@ -705,8 +746,7 @@ def services_body():
 def about_body():
     cur = esc(S['credentials_current']) if S.get('credentials_current') else flag('month year').strip()
     current_line = (f'Credentials current as at {cur}. ' if cur else '') + 'Certificates of currency supplied on request before work starts.'
-    a1, a2 = S['about_photos']
-    about_ph = lambda a: pic(a, sizes='(min-width:900px) 30vw, 50vw') if isinstance(a, str) else slot(*a)
+    portrait = S['about_photos'][0]
     ledger = ''.join(f'<li><b>{esc(t)}</b><span class="lead" aria-hidden="true"></span><span>{esc(d)}</span></li>' for t, d in S['credentials'][:7])
     return f'''
 <section class="page" aria-labelledby="h-about"{per("about")}>
@@ -716,7 +756,7 @@ def about_body():
         {meta("About")}
         <p class="eyebrow">About</p>
         <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
-        <p class="lede">{esc(S['about_story'])}</p>
+        <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 240px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No trophies, no mess, no surprises for the neighbours{fn(3)}.</p>
         <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms and private landholders, councils and land managers: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>
@@ -724,7 +764,6 @@ def about_body():
         <p class="caption">{current_line}</p>
         <p><a class="btn btn-secondary" href="{href('credentials')}"{route_attr('credentials')}>Credentials and insurance in full</a></p>
         <figure class="card-figure"{per("brand")}><img src="{asset('/brand/fitz-card.jpg')}" alt="The Fitz Feral Hunters card: rifle mark, Protecting Victoria's Farms, contract pest control, deer and feral management, thermal hunting, farm security, fully insured, 0499 866 580" width="1280" height="755" loading="lazy" decoding="async"><figcaption class="caption">The card, as supplied. The site's green, gold and cream are sampled from it.</figcaption></figure>
-        <div class="grid grid-2 about-photos" style="margin-top:8px">{about_ph(a1)}{about_ph(a2)}</div>
       </div>
       {margin_notes('about')}
     </div>
@@ -736,7 +775,7 @@ def gallery_photos():
 
 def gallery_body():
     g = gallery_photos()
-    vids = ''.join(f'<li>{video_fig(v, ar="16/10")}</li>' for v in videos())
+    vids = ''.join(f'<li>{video_fig(v, ar=("3/4" if MEDIA[v]["height"] > MEDIA[v]["width"] else "1/1" if MEDIA[v]["height"] == MEDIA[v]["width"] else "16/10"), cls=("upright" if MEDIA[v]["height"] >= MEDIA[v]["width"] else ""))}</li>' for v in videos())
     items = ''.join(f'''<li><figure style="margin:0"><button type="button" data-lb="{i}" aria-label="Open photo {i+1} of {len(g)}: {esc(MEDIA[p]['title'])}">{photo(p, ar="4/3", sizes="(min-width:700px) 33vw, 50vw")}</button><figcaption><span class="mono" style="color:var(--ink-2)">Fig. {i+1:02d}</span> · {esc(MEDIA[p]['caption'])}</figcaption></figure></li>''' for i, p in enumerate(g))
     lb = '' if not g else f'''
 <dialog class="lightbox" id="lightbox" closedby="any" aria-labelledby="lb-cap" data-lightbox-state="closed"{per("gallery")}>
@@ -753,8 +792,9 @@ def gallery_body():
     <div class="sec-head">{meta("Gallery")}<p class="eyebrow">Gallery</p><h1 id="h-gallery" tabindex="-1" style="font-size:var(--fs-h2)">From the job</h1>
       <p class="measure">Drone, thermal and trail camera footage, and photos from the field. No property locations are shown and nobody appears without their say-so; every frame carries the plate that says so.</p>
       <p><a class="btn btn-secondary" href="{href('drone-report')}">See a sample drone report</a></p></div>
-    <div class="stack" style="--gap:16px"><h2 class="sub">Video</h2><ul class="vids">{vids}</ul></div>
-    <div class="stack" style="--gap:16px"><h2 class="sub">Photos</h2><ul class="gal">{items}</ul></div>
+    <nav class="faq-index" aria-label="Gallery sections"><ul><li><a href="#g-video">Video <span class="count num">{len(videos())}</span></a></li><li><a href="#g-photos">Photos <span class="count num">{len(g)}</span></a></li></ul></nav>
+    <div class="stack g-block" id="g-video" style="--gap:16px"><h2 class="sub">Video</h2><ul class="vids">{vids}</ul></div>
+    <div class="stack g-block" id="g-photos" style="--gap:16px;margin-top:48px"><h2 class="sub">Photos</h2><ul class="gal">{items}</ul></div>
   </div>
 </section>{lb}'''
 
@@ -964,8 +1004,8 @@ def notfound_body():
   <div class="wrap prose">
     <p class="eyebrow">404</p>
     <h1 id="h-404" style="font-size:var(--fs-h2)">That page isn't here</h1>
-    <p>The address may have been mistyped, or the page has moved. The five pages that exist are below, and the phone always works.</p>
-    <ul>{''.join(f'<li><a href="{h}">{t}</a></li>' for _, h, t in PAGES)}</ul>
+    <p>The address may have been mistyped, or the page has moved. The main pages are below, and the phone always works.</p>
+    <ul class="nf-links">{''.join(f'<li><a href="{h}">{t}</a></li>' for _, h, t in PAGES)}</ul>
     <p>Call {tel()}</p>
   </div>
 </section>'''
@@ -1048,9 +1088,19 @@ SCRIPT = r"""
   function mailHref(subject,rows){ var b='Hi Fitz,\n\n'+rows.filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n')+'\n\n(written on the website)'; if(b.length>1600) b=b.slice(0,1600)+'…'; return 'mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(b); }
   function stamp(){ try{ return new Date().toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}); }catch(e){ return ''; } }
   /* mobile CTA bar exits while the form is in view */
-  var bar=document.getElementById('ctabar'), form=document.getElementById('enquiry');
-  if(bar && form && 'IntersectionObserver' in window){
-    new IntersectionObserver(function(es){ es.forEach(function(x){ bar.hidden=x.isIntersecting && x.intersectionRatio>0.15; }); },{threshold:[0,0.15,0.5]}).observe(form);
+  var bar=document.getElementById('ctabar'), form=document.getElementById('enquiry'), heroCta=document.querySelector('.hero .cta-row');
+  if(bar && 'IntersectionObserver' in window){
+    var seen=new Map();
+    var io=new IntersectionObserver(function(es){ es.forEach(function(x){ seen.set(x.target, x.target===form ? (x.isIntersecting && x.intersectionRatio>0.15) : x.isIntersecting); });
+      var off=false; seen.forEach(function(v){ if(v) off=true; }); bar.toggleAttribute('data-off', off); bar.inert=off; },{threshold:[0,0.15,0.5]});
+    if(form) io.observe(form); if(heroCta) io.observe(heroCta);
+  }
+  /* the mobile menu closes on Escape, on a tap outside it, and after choosing a page */
+  var drawer=document.getElementById('drawer');
+  if(drawer){
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape' && drawer.open){ drawer.open=false; drawer.querySelector('summary').focus(); } });
+    document.addEventListener('click',function(e){ if(drawer.open && !drawer.contains(e.target)) drawer.open=false; });
+    drawer.addEventListener('toggle',function(){ drawer.querySelector('summary').setAttribute('aria-expanded', drawer.open?'true':'false'); });
   }
   /* lightbox */
   var lb=document.getElementById('lightbox'), caps=%%CAPS%%, idx=0, invoker=null;
@@ -1195,6 +1245,7 @@ def document(key, body, title, desc):
 {robots}<meta name="theme-color" content="#1b2622">
 <link rel="canonical" href="{canonical}">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{esc(S['name'])}">
 <meta property="og:title" content="{esc(title)}">

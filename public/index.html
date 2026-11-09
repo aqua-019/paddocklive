@@ -10,6 +10,7 @@
 <meta name="theme-color" content="#1b2622">
 <link rel="canonical" href="https://fitzferalhunters.com">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fitz Feral Hunters">
 <meta property="og:title" content="Fitz Feral Hunters · Pest &amp; vermin control, Victoria">
@@ -340,7 +341,7 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .cta-bar{position:fixed;inset-inline:0;bottom:0;z-index:15;display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--bg);box-shadow:inset 0 1px 0 var(--line-strong);padding:8px var(--gutter-r) calc(8px + env(safe-area-inset-bottom,0px)) var(--gutter-l)}
 .cta-bar .btn{min-height:48px;padding-inline:12px}
 @media (min-width:900px){.cta-bar{display:none}}
-@media (max-width:899px){main{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}}
+@media (max-width:899px){.site-foot{padding-bottom:calc(40px + 72px + env(safe-area-inset-bottom,0px))}}
 
 /* compare slider (SP-02 set-piece) */
 .compare{margin:0;--split:50%}
@@ -565,10 +566,51 @@ dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
 .faq-index ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
 .faq-index a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--radius);text-decoration:none;font-weight:600;transition:background-color var(--t-hover) var(--ease-out)}
 .faq-index a:hover{background:var(--wash)}
-.faq-group{scroll-margin-top:calc(var(--head-h) + 16px)}
+.faq-group,.g-block{scroll-margin-top:calc(var(--head-h) + 16px)}
+.faq-index .count{margin-inline-start:8px;font-weight:500;color:var(--ink-2)}
 .faq-group h2.sub{margin-bottom:8px}
 .cred-card h3{margin:0}
 details.faq p a{color:var(--ink);text-underline-offset:.16em}
+/* v1.0 final · About: the bio with one square portrait */
+.bio{display:grid;gap:20px;align-items:start}
+.bio .slot{max-width:300px;width:100%}
+.bio .slot .plate{display:none}
+.bio .lede{margin:0}
+@media (min-width:700px){.bio{grid-template-columns:240px minmax(0,1fr);gap:28px}.bio .slot{max-width:none}}
+/* v1.0 final · mobile pass */
+html{text-size-adjust:100%;-webkit-tap-highlight-color:color-mix(in srgb, var(--gold) 22%, transparent)}
+.nf-links{list-style:none;padding:0;display:grid;gap:0}
+.nf-links a{display:flex;align-items:center;min-height:44px}
+.cta-bar .ico{width:18px;height:18px;flex:none}
+.cta-bar .btn{white-space:nowrap;gap:8px}
+.cta-bar{transition:translate .2s cubic-bezier(.165,.84,.44,1),visibility 0s linear 0s}
+.cta-bar[data-off]{translate:0 calc(100% + 2px);visibility:hidden;transition:translate .2s cubic-bezier(.895,.03,.685,.22),visibility 0s linear .2s}
+@media (prefers-reduced-motion:reduce){.cta-bar,.cta-bar[data-off]{transition:none}}
+.contact-list .kv .row a.tel,.contact-list .kv .row a.mail,.site-foot p a.tel,.site-foot p a.mail{display:inline-block;padding-block:11px;margin-block:-11px}
+.site-foot .cols{display:grid;gap:28px}
+@media (max-width:699px){
+  .site-foot .cols>div:nth-child(2) ul{grid-template-columns:1fr 1fr;column-gap:16px}
+  .contact-line{gap:4px 20px}
+  .contact-line .kv{flex-wrap:wrap;row-gap:0}
+  .contact-line .kv span a{overflow-wrap:normal;word-break:normal}
+  .contact-line .kv b{font-size:13px}
+  .tile{padding:18px 18px 12px;gap:8px}
+  .tile .btn{min-height:44px;padding:0;border:0;background:none;text-decoration:underline;text-underline-offset:.18em;font-size:var(--fs-small);flex-direction:row;flex-wrap:nowrap;gap:6px}
+  .tile .btn::after{content:"→";position:static;inset:auto;text-decoration:none;display:inline-block}
+  .tile .btn:hover{background:none;color:var(--gold-ink)}
+  .vids .vid.upright .slot{max-width:420px}
+  .proof-link{width:100%}
+}
+@media (max-width:359px){
+  .cta-bar .bar-long{display:none}
+  .cta-bar .btn{padding-inline:8px;font-size:16px}
+  .cta-row .btn{flex:1 1 100%}
+}
+@media (orientation:landscape) and (max-height:500px){
+  .site-head{position:relative}
+  .cta-bar{padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+  .cta-bar .btn{min-height:44px}
+}
 /* v1.1 · the sample report as proof: a hero link and a card that looks like the report's first page */
 .proof-link{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:8px 16px;border-radius:var(--radius);background:color-mix(in srgb, var(--gold-light) 30%, var(--bg));box-shadow:inset 0 0 0 1.5px var(--gold);color:var(--ink);text-decoration:none;font-size:var(--fs-small);justify-self:start;width:fit-content;max-width:100%;transition:background-color var(--t-hover) var(--ease-out)}
 .proof-link b{font-weight:700}
@@ -673,7 +715,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
     <a class="logo" href="/"><img src="/brand/logo-lockup.png" alt="Fitz Feral Hunters — Protecting Victoria&#x27;s Farms" width="640" height="181" decoding="async" fetchpriority="high"></a>
     <span class="datum" title="Grid: MGA zone 55, GDA2020"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>N · MGA 55</span></span>
     <nav class="nav" aria-label="Primary"><ul><li><a href="/" aria-current=page>Home</a></li><li><a href="/services">Services</a></li><li><a href="/credentials">Credentials</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li><li class="nav-cta"><a class="btn btn-gold" href="/contact#enquiry" data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
-    <details class="drawer" id="drawer"><summary aria-label="Menu">Menu</summary><ul><li><a href="/" aria-current=page>Home</a></li><li><a href="/services">Services</a></li><li><a href="/credentials">Credentials</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li><li><a href="/contact#enquiry" data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
+    <details class="drawer" id="drawer"><summary aria-label="Menu" aria-expanded="false">Menu</summary><ul><li><a href="/" aria-current=page>Home</a></li><li><a href="/services">Services</a></li><li><a href="/credentials">Credentials</a></li><li><a href="/about">About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li><li><a href="/contact#enquiry" data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
   </div>
 </header>
 <main id="main">
@@ -862,7 +904,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
   </div>
 </footer>
 <div class="cta-bar" id="ctabar">
-  <a class="btn btn-secondary num" href="tel:+61499866580">Call 0499 866 580</a>
+  <a class="btn btn-secondary num" href="tel:+61499866580"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span class="bar-long">Call</span>0499 866 580</a>
   <a class="btn btn-primary" href="/contact#enquiry" data-focus="enquiry">Request a quote</a>
 </div>
 <script>
@@ -941,12 +983,22 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
   function mailHref(subject,rows){ var b='Hi Fitz,\n\n'+rows.filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n')+'\n\n(written on the website)'; if(b.length>1600) b=b.slice(0,1600)+'…'; return 'mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(b); }
   function stamp(){ try{ return new Date().toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}); }catch(e){ return ''; } }
   /* mobile CTA bar exits while the form is in view */
-  var bar=document.getElementById('ctabar'), form=document.getElementById('enquiry');
-  if(bar && form && 'IntersectionObserver' in window){
-    new IntersectionObserver(function(es){ es.forEach(function(x){ bar.hidden=x.isIntersecting && x.intersectionRatio>0.15; }); },{threshold:[0,0.15,0.5]}).observe(form);
+  var bar=document.getElementById('ctabar'), form=document.getElementById('enquiry'), heroCta=document.querySelector('.hero .cta-row');
+  if(bar && 'IntersectionObserver' in window){
+    var seen=new Map();
+    var io=new IntersectionObserver(function(es){ es.forEach(function(x){ seen.set(x.target, x.target===form ? (x.isIntersecting && x.intersectionRatio>0.15) : x.isIntersecting); });
+      var off=false; seen.forEach(function(v){ if(v) off=true; }); bar.toggleAttribute('data-off', off); bar.inert=off; },{threshold:[0,0.15,0.5]});
+    if(form) io.observe(form); if(heroCta) io.observe(heroCta);
+  }
+  /* the mobile menu closes on Escape, on a tap outside it, and after choosing a page */
+  var drawer=document.getElementById('drawer');
+  if(drawer){
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape' && drawer.open){ drawer.open=false; drawer.querySelector('summary').focus(); } });
+    document.addEventListener('click',function(e){ if(drawer.open && !drawer.contains(e.target)) drawer.open=false; });
+    drawer.addEventListener('toggle',function(){ drawer.querySelector('summary').setAttribute('aria-expanded', drawer.open?'true':'false'); });
   }
   /* lightbox */
-  var lb=document.getElementById('lightbox'), caps=["Through the thermal scope at 5x: four animals stand out hot against the cold ground.", "Rifle and thermal scope set up on the tripod beside the ute as the light goes.", "Fitz on the shooting sticks in tall eucalypt bush.", "Frosty hill country at first light, from the drone."], idx=0, invoker=null;
+  var lb=document.getElementById('lightbox'), caps=["Thermal monocular used to spot deer on the hill.", "Rifle and thermal scope setup.", "Fitz working.", "Rifle and thermal on the tripod, the ute parked up the slope.", "Set up on the fence line, looking across the gully.", "Frosty hill country at first light, from the drone."], idx=0, invoker=null;
   function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.classList.add('in-lb'); [].forEach.call(c.querySelectorAll('img,source'),function(x){ x.setAttribute('sizes','96vw'); x.removeAttribute('loading'); }); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
   if(lb && lb.showModal){
     [].forEach.call(document.querySelectorAll('[data-lb]'),function(b){ b.addEventListener('click',function(){ invoker=b; paint(+b.getAttribute('data-lb')); lb.setAttribute('data-lightbox-state','open'); lb.showModal(); document.getElementById('lb-close').focus(); }); });

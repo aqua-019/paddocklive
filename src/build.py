@@ -747,7 +747,7 @@ def home_body():
 <section class="band"{per("area")}{per("topo")}>
   <div class="wrap stack" style="--gap:24px">
     <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in {esc(S['base'])}, covering all of Victoria</h2>
-      <p class="measure">Gippsland comes first: it's home ground. Beyond it the ute goes anywhere in the state, for farms and private landholders, councils and land managers. Ring and we'll work out the trip.</p></div>
+      <p class="measure">Gippsland comes first: it's home ground. Beyond it the 4WD goes anywhere in the state, for farms and private landholders, councils and land managers. Ring and we'll work out the trip.</p></div>
     {'<div class="area-grid reveal"><div class="map-scroll">' + locality_map() + '</div>' + legend() + '</div>' if SHEET_MAP else ''}
     <ul class="chips reveal" aria-label="Regions served">{chips}</ul>
   </div>

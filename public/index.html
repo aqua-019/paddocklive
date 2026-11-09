@@ -919,7 +919,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
 <section class="band">
   <div class="wrap stack" style="--gap:24px">
     <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in Warragul, covering all of Victoria</h2>
-      <p class="measure">Gippsland comes first: it's home ground. Beyond it the ute goes anywhere in the state, for farms and private landholders, councils and land managers. Ring and we'll work out the trip.</p></div>
+      <p class="measure">Gippsland comes first: it's home ground. Beyond it the 4WD goes anywhere in the state, for farms and private landholders, councils and land managers. Ring and we'll work out the trip.</p></div>
     
     <ul class="chips reveal" aria-label="Regions served"><li>Gippsland</li><li>Latrobe Valley</li><li>South Gippsland</li><li>East Gippsland</li><li>Mornington Peninsula</li><li>Yarra Valley &amp; Dandenongs</li><li>North East &amp; High Country</li><li>Goulburn Valley</li><li>Central Victoria</li><li>Western District</li><li>Wimmera &amp; Mallee</li><li>Anywhere in Victoria by arrangement</li></ul>
   </div>
@@ -1047,7 +1047,7 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
     drawer.addEventListener('toggle',function(){ drawer.querySelector('summary').setAttribute('aria-expanded', drawer.open?'true':'false'); });
   }
   /* lightbox */
-  var lb=document.getElementById('lightbox'), caps=["Thermal monocular used to spot deer on the hill.", "Rifle and thermal scope setup.", "Fitz working.", "Rifle and thermal on the tripod, the ute parked up the slope.", "Set up on the fence line, looking across the gully.", "Frosty hill country on a clear morning, from the drone."], idx=0, invoker=null;
+  var lb=document.getElementById('lightbox'), caps=["Thermal monocular used to spot deer on the hill.", "Rifle and thermal scope setup.", "Fitz working.", "Rifle and thermal on the tripod, the 4WD parked up the slope.", "Set up on the fence line, looking across the gully.", "Frosty hill country on a clear morning, from the drone."], idx=0, invoker=null;
   function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.classList.add('in-lb'); [].forEach.call(c.querySelectorAll('img,source'),function(x){ x.setAttribute('sizes','96vw'); x.removeAttribute('loading'); }); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
   if(lb && lb.showModal){
     [].forEach.call(document.querySelectorAll('[data-lb]'),function(b){ b.addEventListener('click',function(){ invoker=b; paint(+b.getAttribute('data-lb')); lb.setAttribute('data-lightbox-state','open'); lb.showModal(); document.getElementById('lb-close').focus(); }); });

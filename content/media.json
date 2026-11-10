@@ -6,26 +6,26 @@
    "type": "photo",
    "kind": "work",
    "source": "fitz-hero.jpg",
-   "title": "Fitz at sunset",
-   "caption": "Fitz on a Gippsland hillside at sunset.",
-   "alt": "Robert Fitzgerald in a cap and olive fleece with binoculars, standing beside a spotting scope on a tripod and looking out over Gippsland hill country at sunset.",
-   "src": "/media/photo/fitz-hero-1004-fb7e5d67.jpg",
-   "src_webp": "/media/photo/fitz-hero-1004-fb7e5d67.webp",
-   "width": 1004,
-   "height": 1256,
+   "title": "Fitz set up in the paddock",
+   "caption": "Fitz set up in a Gippsland paddock, rifle and thermal scope on the tripod.",
+   "alt": "Robert Fitzgerald in a cap and olive fleece, binoculars on his chest, standing in a grassy paddock in low light beside his rifle and thermal scope on a tripod, with tall gum trees behind.",
+   "src": "/media/photo/fitz-hero-806-9a8152f3.jpg",
+   "src_webp": "/media/photo/fitz-hero-806-9a8152f3.webp",
+   "width": 806,
+   "height": 1008,
    "srcset": [
     [
-     1004,
-     "/media/photo/fitz-hero-1004-fb7e5d67.jpg",
-     "/media/photo/fitz-hero-1004-fb7e5d67.webp"
+     806,
+     "/media/photo/fitz-hero-806-9a8152f3.jpg",
+     "/media/photo/fitz-hero-806-9a8152f3.webp"
     ],
     [
      640,
-     "/media/photo/fitz-hero-640-295fee7f.jpg",
-     "/media/photo/fitz-hero-640-295fee7f.webp"
+     "/media/photo/fitz-hero-640-5c8bfe3b.jpg",
+     "/media/photo/fitz-hero-640-5c8bfe3b.webp"
     ]
    ],
-   "bytes": 171518
+   "bytes": 63590
   },
   {
    "id": "ute-thermal-rig",
@@ -365,24 +365,24 @@
    "source": "fitz-portrait.jpg",
    "title": "Robert Fitzgerald",
    "caption": "Robert Fitzgerald, Fitz Feral Hunters.",
-   "alt": "Robert Fitzgerald standing on a grassy Gippsland hillside at sunset in a cap, olive fleece and gloves, binoculars on his chest, beside a spotting scope on a tripod.",
-   "src": "/media/photo/fitz-portrait-1200-61c8b649.jpg",
-   "src_webp": "/media/photo/fitz-portrait-1200-61c8b649.webp",
-   "width": 1200,
-   "height": 1200,
+   "alt": "Robert Fitzgerald in a cap and olive fleece, binoculars on his chest, standing in a grassy paddock in low light beside his rifle and thermal scope on a tripod, with tall gum trees behind.",
+   "src": "/media/photo/fitz-portrait-806-dd3164ba.jpg",
+   "src_webp": "/media/photo/fitz-portrait-806-dd3164ba.webp",
+   "width": 806,
+   "height": 806,
    "srcset": [
     [
-     1200,
-     "/media/photo/fitz-portrait-1200-61c8b649.jpg",
-     "/media/photo/fitz-portrait-1200-61c8b649.webp"
+     806,
+     "/media/photo/fitz-portrait-806-dd3164ba.jpg",
+     "/media/photo/fitz-portrait-806-dd3164ba.webp"
     ],
     [
      640,
-     "/media/photo/fitz-portrait-640-3e29f43a.jpg",
-     "/media/photo/fitz-portrait-640-3e29f43a.webp"
+     "/media/photo/fitz-portrait-640-47b9787d.jpg",
+     "/media/photo/fitz-portrait-640-47b9787d.webp"
     ]
    ],
-   "bytes": 198394
+   "bytes": 64508
   },
   {
    "id": "rig-hillside-ute",

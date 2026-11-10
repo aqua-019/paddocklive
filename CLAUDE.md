@@ -75,7 +75,7 @@ The runtime has one npm dependency, `@vercel/blob` (pinned, review photos only).
 
 - The call bar (`.cta-bar`) hides while the home hero's own buttons or the enquiry form are on screen; the footer carries the bar's height as bottom padding, so nothing sits under it.
 - Checked at 320, 360, 390, 430 wide and 844×390 landscape: no overflow, tap targets ≥ 44px, no form text under 16px (iOS zoom).
-- Media captions are the client's words (9 Nov 2026 edits). The home hero is `fitz-hero` (Fitz at sunset); the About bio is one large square `fitz-portrait` showing his full figure, not just his face.
+- Media captions are the client's words (9 Nov 2026 edits). The home hero is `fitz-hero` and the About bio is one large square `fitz-portrait`, both cropped from the photo Fitz chose on 9 Nov 2026 (him in the paddock beside his rifle and thermal on the tripod, 806×1280 original): the hero 4:5, the bio square, each showing his full figure, not just his face.
 - Every gallery video sits in the same 16:9 frame; thumbnails fill it (cover) and the clip shows uncropped once playing.
 
 ## Rules

@@ -1,6 +1,6 @@
 # Resend setup: switching on the website's email
 
-**Status (9 Nov 2026): done.** Fitz's Resend account (fitzferalhunters1@gmail.com, Aqua invited as a team member), domain fitzferalhunters.com in Tokyo, records added to Vercel DNS, API key (sending access, restricted to the domain) in `RESEND_API_KEY`, plus `ENQUIRY_TO` and `ENQUIRY_FROM`. `AUTO_REPLY` is off until Fitz says yes. If the site's main domain moves to .com.au, add that domain in Resend the same way and change `ENQUIRY_FROM`.
+**Status (9 Nov 2026): done.** Fitz's Resend account (fitzferalhunters1@gmail.com, Aqua invited as a team member), domain fitzferalhunters.com in Tokyo, records added to Vercel DNS, API key (sending access, restricted to the domain) in `RESEND_API_KEY`, plus `ENQUIRY_TO` and `ENQUIRY_FROM`. `AUTO_REPLY` is off until Fitz says yes. The site moved to fitzferalhunters.com.au on 10 Nov 2026; mail keeps sending from fitzferalhunters.com, which needs no change (a sender domain doesn't have to match the site's address).
 
 The code is ready. Everything below is account setup, done once with Fitz. Until it's done, the contact form tells visitors their enquiry **hasn't** been sent and offers them a pre-filled email to Fitz instead, so nothing is lost and nobody is told "sent" when it wasn't.
 
@@ -15,7 +15,7 @@ The code is ready. Everything below is account setup, done once with Fitz. Until
   - `api/_lib/services.js` (`sendMail`)
   - `api/enquiry.js`
   - `api/reviews.js`
-- **Check after any change:** `https://fitzferalhunters.com/api/health` (booleans only, no secrets).
+- **Check after any change:** `https://fitzferalhunters.com.au/api/health` (booleans only, no secrets).
 
 ## Part 1 — the account and a key (10 minutes, needs Fitz)
 

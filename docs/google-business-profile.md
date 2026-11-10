@@ -17,7 +17,7 @@ Google's own steps: [Sign up for a Business Profile](https://support.google.com/
    - then larger areas if Google offers them, e.g. Gippsland or Victoria
 6. **Contact.**
    - Phone: `0499 866 580`
-   - Website: the live site URL (the domain once it's set up; until then, leave blank or add later)
+   - Website: `https://fitzferalhunters.com.au`
 7. **Verify.** Choose **Verify now** and follow Google's prompts (often a short video showing the business: vehicle, equipment, tools).
 8. **Hours.** Ask Fitz. "Open 24 hours" isn't recommended unless he really answers the phone at night; consider stating calls and texts are welcome any time in the description instead.
 9. **Photos.** Upload from `public/media/photo/` (all metadata already stripped):

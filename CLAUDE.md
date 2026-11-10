@@ -3,11 +3,13 @@
 The live website for **Fitz Feral Hunters**: licensed, insured feral animal and vermin control for farmers and landholders. Based in Warragul, Gippsland, covering **all of Victoria**.
 
 - Phone `0499 866 580` (`+61499866580`), email `fitzferalhunters1@gmail.com`, Instagram `@gippsland_gunner`.
-- Domain: **fitzferalhunters.com** (attached to the Vercel project; `url` in site.json). Still `indexable: false` until launch.
+- Domain: **fitzferalhunters.com.au** is the main address (`url` in site.json; connected 10 Nov 2026). Still `indexable: false` until launch.
+  - fitzferalhunters.com.au, .au and .online (bought by Fitz through VentraIP, nameservers pointed at Vercel) and fitzferalhunters.com (registered through Vercel) all use Vercel DNS.
+  - Every other address (www.fitzferalhunters.com.au, fitzferalhunters.au, fitzferalhunters.online, fitzferalhunters.com and their www) is a 308 redirect to fitzferalhunters.com.au, set in the project's Domains settings. Paths carry through.
+  - Mail still sends from `enquiries@fitzferalhunters.com` (Resend is verified on that domain); that's separate from the site's address.
 - Owner: Robert Fitzgerald (grew up in Korumburra, based in Warragul). Insurer: Elders Insurance, $20m public liability.
 - Built from Aqua's D700 design catalogue: the Paddock composition, SP-01 → SP-01e (mockups v0.1–0.3.2, repo `aqua-019/paddock1`), then SP-02 (v1.0), SP-03 (v1.1, client content, FAQ and Credentials pages), SP-04/05 (report proof, mobile) and SP-06 (v1.2, Contact button, star-rated reviews) in this repo.
 - The build plan is `docs/v1.0-prompts.md`. Prompts 1–5 are done in v1.0. Prompt 6: Resend is live (9 Nov 2026, mail from `enquiries@fitzferalhunters.com`); the privacy page and launch are what's left.
-- Fitz has bought fitzferalhunters.com.au and fitzferalhunters.au (VentraIP); they still need adding to Vercel.
 
 ## The design is frozen
 

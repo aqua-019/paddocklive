@@ -100,9 +100,8 @@ figure.slot{margin:0}
 .slot.video{background:var(--chrome)}
 .slot.video::before,.slot.video::after{display:none}
 .slot.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--chrome);z-index:1}
-.slot .corner,.slot .plate,.slot .dur{pointer-events:none}
+.slot .corner,.slot .dur{pointer-events:none}
 .slot.video .corner.bl,.slot.video .corner.br{display:none}
-.slot.video .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
 .slot.photo::before,.slot.photo::after{display:none}
 .slot.video .corner.tl{display:none}
 .slot.video .play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:var(--radius)}
@@ -111,7 +110,7 @@ figure.slot{margin:0}
 .slot.video .play:hover span{background:color-mix(in srgb, var(--gold-light), #ffffff 18%)}
 .slot.video .play:focus-visible{outline:3px solid var(--focus-dark);outline-offset:-6px}
 .slot .dur{position:absolute;left:10px;top:10px;z-index:2;font:600 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--foot-ink);background:color-mix(in srgb, var(--chrome) 78%, transparent);padding:5px 7px;border-radius:3px}
-.vid.is-playing .dur,.vid.is-playing .plate{display:none}
+.vid.is-playing .dur{display:none}
 .vid{margin:0;display:grid;gap:10px;min-width:0;align-content:start}
 .vid figcaption{font-size:var(--fs-small);color:var(--ink-2);max-width:60ch}
 .vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
@@ -144,7 +143,6 @@ details.faq p a{color:var(--ink);text-underline-offset:.16em}
 /* v1.0 final · About: the bio with one square portrait */
 .bio{display:grid;gap:24px;align-items:start}
 .bio .slot{max-width:640px;width:100%}
-.bio .slot .plate{display:none}
 .bio .lede{margin:0}
 
 /* v1.0 final · mobile pass */
@@ -365,18 +363,17 @@ def corners():
     return '<i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i>'
 
 def slot(kind, label, src="", ar=None, tag="Photo slot"):
-    """A ratio-locked photo with registration ticks and a privacy plate. With a src it renders a real lazy image."""
+    """A ratio-locked photo with registration ticks. With a src it renders a real lazy image."""
     style = f' style="--ar:{ar}"' if ar else ''
-    plate = '<span class="plate">Location withheld</span>'
     if src:
         return (f'<figure class="slot photo"{per("slot")}{per("frame")} style="margin:0{";--ar:"+ar if ar else ""}">'
-                f'<img src="{esc(src)}" alt="{esc(label)}" loading="lazy" decoding="async" width="1600" height="1200" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">{corners()}{plate}</figure>')
+                f'<img src="{esc(src)}" alt="{esc(label)}" loading="lazy" decoding="async" width="1600" height="1200" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">{corners()}</figure>')
     cls = 'slot thermal' if kind == 'thermal' else 'slot'
     mark = {'thermal': 'Thermal', 'night': 'Night', 'property': 'Property', 'gear': 'Gear'}.get(kind, 'Photo')
     tag_html = f'<span class="tag">{esc(tag)} · client supplies</span>' if REVIEW else ''
     small = f'<small>{esc(kind)} · jpg/avif · alt text written per photo</small>' if REVIEW else ''
     return (f'<div class="{cls}"{style}{per("slot")}{per("frame")} role="img" aria-label="{esc(label)}">'
-            f'<span class="mark" aria-hidden="true">{mark}</span>{tag_html}{plate}{corners()}'
+            f'<span class="mark" aria-hidden="true">{mark}</span>{tag_html}{corners()}'
             f'<span class="label">{esc(label)}{small}</span></div>')
 
 def photo(mid, ar=None, sizes='(min-width:900px) 45vw, 100vw', eager=False):
@@ -386,7 +383,7 @@ def photo(mid, ar=None, sizes='(min-width:900px) 45vw, 100vw', eager=False):
     load = ' fetchpriority="high"' if eager else ' loading="lazy"'
     return (f'<figure class="slot photo"{per("slot")}{per("frame")}{per("media")} style="--ar:{ar or str(m["width"]) + "/" + str(m["height"])}" data-ratio="{m["width"]}/{m["height"]}">'
             f'<picture><source type="image/webp" srcset="{sw}" sizes="{sizes}"><img src="{m["src"]}" srcset="{sj}" sizes="{sizes}" alt="{esc(m["alt"])}" width="{m["width"]}" height="{m["height"]}" decoding="async"{load}></picture>'
-            f'{corners()}<span class="plate">Location withheld</span></figure>')
+            f'{corners()}</figure>')
 
 def pic(ref, label='', ar=None, **kw):
     """A media id renders the real photo; anything else falls back to the labelled placeholder slot."""
@@ -403,7 +400,7 @@ def video_fig(mid, ar=None, cls=''):
     return (f'<figure class="vid{" " + cls if cls else ""}"{per("video")}>'
             f'<div class="slot video" style="--ar:{ar}"><video controls preload="none" playsinline poster="{m["poster_webp"]}" width="{m["width"]}" height="{m["height"]}" aria-label="Video: {esc(m["title"])}" aria-describedby="vd-{mid}">'
             f'<source src="{m["src"]}" type="video/mp4"><a href="{m["src"]}">Download the video ({mmss(m["duration"])})</a></video>'
-            f'{corners()}<span class="plate">Location withheld</span><span class="dur num" aria-hidden="true">{mmss(m["duration"])}</span></div>'
+            f'{corners()}<span class="dur num" aria-hidden="true">{mmss(m["duration"])}</span></div>'
             f'<figcaption><b>{esc(m["title"])}</b> {esc(m["caption"])}</figcaption><p class="sr" id="vd-{mid}">{esc(m["description"])} Length {mmss(m["duration"])}, no sound.</p></figure>')
 
 def videos(kind=None, home=None):
@@ -606,9 +603,8 @@ NOTES = {
   ],
 }
 def margin_notes(key):
-    rows = ''.join(f'<p><sup>{i+1}</sup><span><b style="font-weight:600;color:var(--ink)">{esc(t)}.</b> {esc(d)}</span></p>' for i, (t, d) in enumerate(NOTES[key]))
+    rows = ''.join(f'<p><span class="n">{i+1}</span><span><b style="font-weight:600;color:var(--ink)">{esc(t)} –</b> {esc(d)}</span></p>' for i, (t, d) in enumerate(NOTES[key]))
     return f'<aside class="margin-notes" aria-label="Notes"{per("marginalia")}><h4>Notes</h4>{rows}</aside>'
-def fn(n): return f'<sup class="fn" aria-label="note {n}">{n}</sup>'
 
 # ---------------------------------------------------------------- page bodies
 def divider(label):
@@ -761,12 +757,10 @@ def home_body():
 </section>'''
 
 def services_body():
-    notes = {k: i + 1 for i, (k, _) in enumerate(NOTES['services'])}
     def row(k, t, d, bullets):
-        marks = {'deer': fn(notes['Sambar']) + fn(notes['Fallow']), 'kangaroos': fn(notes['ATCW']), 'foxes': fn(notes['Foxes']), 'rabbits': fn(notes['Rabbits'])}.get(k, '')
         return f'''
     <article class="service" id="svc-{k}">
-      <div class="stack" style="--gap:8px"><h3 tabindex="-1">{esc(t)}{marks}</h3><p class="small" style="color:var(--ink-2)">{esc(d)}</p></div>
+      <div class="stack" style="--gap:8px"><h3 tabindex="-1">{esc(t)}</h3><p class="small" style="color:var(--ink-2)">{esc(d)}</p></div>
       <ul>{''.join(f'<li>{esc(x)}</li>' for x in bullets)}</ul>
     </article>'''
     rows = ''.join(row(k, t, d, b) for k, t, d, b in S['services'])
@@ -792,7 +786,7 @@ def services_body():
       <h3>What a job includes</h3>
       <ul><li>A site visit and a written plan: stock, neighbours, access, dates and safety.</li><li>Humane dispatch to AHCPMG304 and the code for each species.</li><li>Carcass handling and disposal as agreed with you.</li><li>A short report afterwards and a follow-up if the numbers call for it.</li></ul>
       <h3>Permits and codes, in plain language</h3>
-      <p class="small" style="color:var(--ink-2)">Kangaroo control on private land needs an Authority to Control Wildlife{fn(notes['ATCW'])} from the Victorian government; I can help with the application. Deer are a game species and are taken under a Game Licence{fn(notes['Game Licence'])}. All work follows the relevant Victorian codes of practice for the humane control of the species involved.</p>
+      <p class="small" style="color:var(--ink-2)">Kangaroo control on private land needs an Authority to Control Wildlife from the Victorian government; I can help with the application. Deer are a game species and are taken under a Game Licence. All work follows the relevant Victorian codes of practice for the humane control of the species involved.</p>
     </div>
     <div class="stack" style="--gap:12px;margin-top:36px"{per("faq")}><h2 class="sub">Common questions</h2><div>{faqs}</div><p><a class="btn btn-secondary" href="{href('faq')}"{route_attr('faq')}>All questions and answers</a></p></div>
     <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a><a class="btn btn-quiet num" href="tel:{S['phone_e164']}">or call {S['phone_display']}</a></div>
@@ -811,10 +805,10 @@ def about_body():
       <div class="prose">
         {meta("About")}
         <p class="eyebrow">About</p>
-        <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
+        <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}, working across all of Victoria</h1>
         <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 640px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
-        <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No mess and no surprises for the neighbours{fn(3)}.</p>
-        <p>I'm insured with {esc(S['insurer'])} for $20 million public liability{fn(4)}, and I work for farms and private landholders: Gippsland first, then anywhere in Victoria.</p>
+        <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304, and a short report after. No mess and no surprises for the neighbours.</p>
+        <p>I'm insured with {esc(S['insurer'])} for $20 million public liability, and I work for farms and private landholders: Gippsland first, then anywhere in Victoria.</p>
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
         <p class="caption">{current_line}</p>
@@ -846,7 +840,7 @@ def gallery_body():
 <section class="page" aria-labelledby="h-gallery"{per("gallery")}>
   <div class="wrap stack" style="--gap:28px">
     <div class="sec-head">{meta("Gallery")}<p class="eyebrow">Gallery</p><h1 id="h-gallery" tabindex="-1" style="font-size:var(--fs-h2)">From the job</h1>
-      <p class="measure">Drone, thermal and trail camera footage, and photos from the field. No property locations are shown and nobody appears without their say-so; every frame carries the plate that says so.</p>
+      <p class="measure">Drone, thermal and trail camera footage, and photos from the field. No property locations are shown and nobody appears without their say-so.</p>
       <p><a class="btn btn-secondary" href="{href('drone-report')}">See a sample drone report</a></p></div>
     <nav class="faq-index" aria-label="Gallery sections"><ul><li><a href="#g-video">Video <span class="count num">{len(videos())}</span></a></li><li><a href="#g-photos">Photos <span class="count num">{len(g)}</span></a></li></ul></nav>
     <div class="stack g-block" id="g-video" style="--gap:16px"><h2 class="sub">Video</h2><ul class="vids">{vids}</ul></div>
@@ -1048,7 +1042,7 @@ def proof_link():
 def report_fig(mid):
     m = MEDIA[mid]
     return (f'<figure class="report-fig"><div class="slot photo" style="--ar:{m["width"]}/{m["height"]}"><picture><source type="image/webp" srcset="{m["src_webp"]}">'
-            f'<img src="{m["src"]}" alt="{esc(m["alt"])}" width="{m["width"]}" height="{m["height"]}" loading="lazy" decoding="async"></picture>{corners()}<span class="plate">Location withheld</span></div>'
+            f'<img src="{m["src"]}" alt="{esc(m["alt"])}" width="{m["width"]}" height="{m["height"]}" loading="lazy" decoding="async"></picture>{corners()}</div>'
             f'<figcaption>{esc(m["caption"])}</figcaption></figure>')
 
 def report_body():

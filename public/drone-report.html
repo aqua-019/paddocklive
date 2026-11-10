@@ -242,7 +242,6 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .band.drone :focus-visible{outline-color:var(--focus-dark)}
 .band.drone .slot{--scrim:linear-gradient(to top, rgb(27 38 34 / .9), rgb(27 38 34 / .1) 70%);box-shadow:inset 0 0 0 1px var(--foot-line)}
 .band.drone .slot .tag{color:var(--gold-light);border-color:var(--foot-line);background:color-mix(in srgb, var(--chrome) 70%, transparent)}
-.band.drone .slot .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
 
 /* trust triad */
 .triad{display:grid;gap:24px}
@@ -456,14 +455,13 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 .margin-notes{display:grid;gap:14px;font-size:var(--fs-caption);line-height:1.45;color:var(--ink-2);border-left:1px solid var(--line-strong);padding-left:16px;position:sticky;top:calc(var(--head-h) + 24px)}
 @media (max-width:899px){.margin-notes{position:static;border-left:0;padding-left:0;border-top:1px dotted var(--line-strong);padding-top:14px}}
 .margin-notes p{display:grid;grid-template-columns:2ch 1fr;gap:6px}
-.margin-notes sup,.fn{font:700 10px/1 var(--font-mono);color:var(--ink);vertical-align:super;margin-left:2px}
+.margin-notes .n{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .margin-notes h4{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-box:normal}
 
-/* photo frames: registration ticks + privacy plate */
+/* photo frames: registration ticks */
 .slot .corner{position:absolute;width:12px;height:12px;z-index:2;border:1.5px solid color-mix(in srgb, var(--foot-ink) 85%, transparent)}
 .slot .corner.tl{top:8px;left:8px;border-right:0;border-bottom:0}.slot .corner.tr{top:8px;right:8px;border-left:0;border-bottom:0}
 .slot .corner.bl{bottom:8px;left:8px;border-right:0;border-top:0}.slot .corner.br{bottom:8px;right:8px;border-left:0;border-top:0}
-.slot .plate{position:absolute;right:10px;top:10px;z-index:2;font:600 9px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:color-mix(in srgb, var(--bg) 78%, transparent);padding:3px 6px;border-radius:3px}
 .slot .label{inset-inline:22px;bottom:22px}
 
 /* ledger list with dotted leaders */
@@ -532,9 +530,8 @@ figure.slot{margin:0}
 .slot.video{background:var(--chrome)}
 .slot.video::before,.slot.video::after{display:none}
 .slot.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--chrome);z-index:1}
-.slot .corner,.slot .plate,.slot .dur{pointer-events:none}
+.slot .corner,.slot .dur{pointer-events:none}
 .slot.video .corner.bl,.slot.video .corner.br{display:none}
-.slot.video .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
 .slot.photo::before,.slot.photo::after{display:none}
 .slot.video .corner.tl{display:none}
 .slot.video .play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:var(--radius)}
@@ -543,7 +540,7 @@ figure.slot{margin:0}
 .slot.video .play:hover span{background:color-mix(in srgb, var(--gold-light), #ffffff 18%)}
 .slot.video .play:focus-visible{outline:3px solid var(--focus-dark);outline-offset:-6px}
 .slot .dur{position:absolute;left:10px;top:10px;z-index:2;font:600 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--foot-ink);background:color-mix(in srgb, var(--chrome) 78%, transparent);padding:5px 7px;border-radius:3px}
-.vid.is-playing .dur,.vid.is-playing .plate{display:none}
+.vid.is-playing .dur{display:none}
 .vid{margin:0;display:grid;gap:10px;min-width:0;align-content:start}
 .vid figcaption{font-size:var(--fs-small);color:var(--ink-2);max-width:60ch}
 .vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
@@ -576,7 +573,6 @@ details.faq p a{color:var(--ink);text-underline-offset:.16em}
 /* v1.0 final · About: the bio with one square portrait */
 .bio{display:grid;gap:24px;align-items:start}
 .bio .slot{max-width:640px;width:100%}
-.bio .slot .plate{display:none}
 .bio .lede{margin:0}
 
 /* v1.0 final · mobile pass */
@@ -782,8 +778,8 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
       </header>
       <h3>1. Executive summary</h3><p>A visual drone survey was conducted over open pasture and adjacent timbered areas on the property. Multiple deer were observed grazing in open paddock. The property features rolling green hills, scattered mature trees, denser forest edges, and clear habitat corridors suitable for deer and other wildlife. No major pasture damage was immediately evident in the surveyed areas, though ongoing monitoring is recommended.</p>
       <h3>2. Key observations</h3>
-      <h4>Animal sightings</h4><p>Approximately 3–4 light-coloured deer (consistent with fallow does or similar) were observed in open pasture early in the flight. Animals appeared calm and grazing. No large mobs or additional animals were clearly visible in subsequent frames over the timbered edges.</p><figure class="report-fig"><div class="slot photo" style="--ar:512/287"><picture><source type="image/webp" srcset="/media/photo/report-fig1-512-4d5fcd03.webp"><img src="/media/photo/report-fig1-512-4d5fcd03.jpg" alt="Aerial view of a frosty green paddock on a slope, with three light-coloured deer grazing in the open and a timbered edge at the top right." width="512" height="287" loading="lazy" decoding="async"></picture><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="plate">Location withheld</span></div><figcaption>Figure 1: Deer observed in open pasture (approx. 5 seconds into flight)</figcaption></figure>
-      <h4>Habitat and terrain</h4><p>The property consists of improved green pasture on rolling hills, with prominent tree lines and denser eucalypt forest along boundaries and gullies. These timbered areas provide excellent cover, shelter, and movement corridors for deer and other wildlife. Fence lines and vehicle tracks are visible in places. Overall vegetation health appears good under current conditions.</p><figure class="report-fig"><div class="slot photo" style="--ar:508/285"><picture><source type="image/webp" srcset="/media/photo/report-fig2-508-51e2f0bd.webp"><img src="/media/photo/report-fig2-508-51e2f0bd.jpg" alt="Aerial view of a dense stand of tall eucalypts along a gully, with open paddock and scattered trees and shrubs below it." width="508" height="285" loading="lazy" decoding="async"></picture><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="plate">Location withheld</span></div><figcaption>Figure 2: Typical paddock and tree-line interface (mid-flight)</figcaption></figure>
+      <h4>Animal sightings</h4><p>Approximately 3–4 light-coloured deer (consistent with fallow does or similar) were observed in open pasture early in the flight. Animals appeared calm and grazing. No large mobs or additional animals were clearly visible in subsequent frames over the timbered edges.</p><figure class="report-fig"><div class="slot photo" style="--ar:512/287"><picture><source type="image/webp" srcset="/media/photo/report-fig1-512-4d5fcd03.webp"><img src="/media/photo/report-fig1-512-4d5fcd03.jpg" alt="Aerial view of a frosty green paddock on a slope, with three light-coloured deer grazing in the open and a timbered edge at the top right." width="512" height="287" loading="lazy" decoding="async"></picture><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i></div><figcaption>Figure 1: Deer observed in open pasture (approx. 5 seconds into flight)</figcaption></figure>
+      <h4>Habitat and terrain</h4><p>The property consists of improved green pasture on rolling hills, with prominent tree lines and denser eucalypt forest along boundaries and gullies. These timbered areas provide excellent cover, shelter, and movement corridors for deer and other wildlife. Fence lines and vehicle tracks are visible in places. Overall vegetation health appears good under current conditions.</p><figure class="report-fig"><div class="slot photo" style="--ar:508/285"><picture><source type="image/webp" srcset="/media/photo/report-fig2-508-51e2f0bd.webp"><img src="/media/photo/report-fig2-508-51e2f0bd.jpg" alt="Aerial view of a dense stand of tall eucalypts along a gully, with open paddock and scattered trees and shrubs below it." width="508" height="285" loading="lazy" decoding="async"></picture><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i></div><figcaption>Figure 2: Typical paddock and tree-line interface (mid-flight)</figcaption></figure>
       <h3>3. Findings</h3><ul><li>Active deer presence confirmed in open areas during daylight hours.</li><li>Timbered edges and gullies offer significant cover – likely higher nocturnal activity.</li><li>No obvious widespread pasture damage or wallowing observed in the surveyed corridor.</li><li>Property layout is well suited to targeted control operations and further visual monitoring.</li></ul>
       <h3>4. Recommendations</h3><ol><li>Conduct additional daytime visual drone surveys or ground-based monitoring to further assess activity patterns, numbers, and preferred areas.</li><li>Implement targeted culling or monitoring program focused on tree-line edges and known grazing areas.</li><li>Consider strategic fencing improvements along high-pressure boundaries if pasture pressure increases.</li><li>Repeat visual surveys seasonally to track population trends and damage risk.</li></ol>
       <h3>5. Conclusion</h3><p>The visual survey successfully confirmed deer activity and provided a clear overview of habitat structure. While numbers appear modest in open areas during daylight, the extensive cover suggests a larger population may be present. Fitz Feral Hunters is available to provide further visual surveying, culling, and reporting services.</p>

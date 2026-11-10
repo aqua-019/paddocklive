@@ -19,7 +19,7 @@ The client approved v0.3.2 exactly. Don't change tokens, type, the topographic s
 |---|---|
 | Type | Cinzel 700 for h1/h2; Barlow Condensed for h3, plates and labels; Barlow for body. |
 | Body text | 17px |
-| New components | Reuse existing tokens and patterns: `.band`, `.slot` frame with registration ticks and "Location withheld" plate, `.btn-*`, `.review`, `dialog.sent`. |
+| New components | Reuse existing tokens and patterns: `.band`, `.slot` frame with registration ticks (no plate), `.btn-*`, `.review`, `dialog.sent`. |
 | Hover | Colour changes only; no transform or shadow changes on hover. |
 | Tap targets | ≥ 44px |
 | Small screens | No horizontal scroll at 390px. |
@@ -71,6 +71,7 @@ The runtime has one npm dependency, `@vercel/blob` (pinned, review photos only).
 - **No night drone claims** (Fitz, 9 Nov 2026). Flying at night needs a licence he doesn't hold yet; he's booked on the course and drone credentials go up at the end of November. Until then the drone is daytime only (surveys, counts, mapping, stock and fence checks). Night and thermal work on the ground is fine. Fitz confirms all supplied drone footage was shot by day or at first light, so the clips themselves are fine; the copy just never says the drone flies at night.
 - Works for **farms and private landholders**. Don't say councils, land managers or public land (Fitz, 9 Nov 2026: none yet). Main work, in his order: deer, rabbits and foxes, then kangaroos, pigs and wild dogs. Region priority: Gippsland first, then all of Victoria.
 - Google Business Profile: service-area business, address hidden. Setup kit in `docs/google-business-profile.md`.
+- **No "Location withheld" plate** on any photo or video, and **no raised footnote numbers** in the text (Fitz, 10 Nov 2026). The Notes lists on Services and About stay, numbered 1, 2, 3… on the line, each written "Name – description".
 - The sample drone report (visual RGB survey, Oct 2026) is live at `/drone-report` from `content/report.json`. It's published without the ABN, the "Confidential" mark or the exact date, and the figures are cropped clean from his report.
 
 ## Mobile

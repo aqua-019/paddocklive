@@ -242,7 +242,6 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .band.drone :focus-visible{outline-color:var(--focus-dark)}
 .band.drone .slot{--scrim:linear-gradient(to top, rgb(27 38 34 / .9), rgb(27 38 34 / .1) 70%);box-shadow:inset 0 0 0 1px var(--foot-line)}
 .band.drone .slot .tag{color:var(--gold-light);border-color:var(--foot-line);background:color-mix(in srgb, var(--chrome) 70%, transparent)}
-.band.drone .slot .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
 
 /* trust triad */
 .triad{display:grid;gap:24px}
@@ -456,14 +455,13 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 .margin-notes{display:grid;gap:14px;font-size:var(--fs-caption);line-height:1.45;color:var(--ink-2);border-left:1px solid var(--line-strong);padding-left:16px;position:sticky;top:calc(var(--head-h) + 24px)}
 @media (max-width:899px){.margin-notes{position:static;border-left:0;padding-left:0;border-top:1px dotted var(--line-strong);padding-top:14px}}
 .margin-notes p{display:grid;grid-template-columns:2ch 1fr;gap:6px}
-.margin-notes sup,.fn{font:700 10px/1 var(--font-mono);color:var(--ink);vertical-align:super;margin-left:2px}
+.margin-notes .n{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .margin-notes h4{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-box:normal}
 
-/* photo frames: registration ticks + privacy plate */
+/* photo frames: registration ticks */
 .slot .corner{position:absolute;width:12px;height:12px;z-index:2;border:1.5px solid color-mix(in srgb, var(--foot-ink) 85%, transparent)}
 .slot .corner.tl{top:8px;left:8px;border-right:0;border-bottom:0}.slot .corner.tr{top:8px;right:8px;border-left:0;border-bottom:0}
 .slot .corner.bl{bottom:8px;left:8px;border-right:0;border-top:0}.slot .corner.br{bottom:8px;right:8px;border-left:0;border-top:0}
-.slot .plate{position:absolute;right:10px;top:10px;z-index:2;font:600 9px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:color-mix(in srgb, var(--bg) 78%, transparent);padding:3px 6px;border-radius:3px}
 .slot .label{inset-inline:22px;bottom:22px}
 
 /* ledger list with dotted leaders */
@@ -532,9 +530,8 @@ figure.slot{margin:0}
 .slot.video{background:var(--chrome)}
 .slot.video::before,.slot.video::after{display:none}
 .slot.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--chrome);z-index:1}
-.slot .corner,.slot .plate,.slot .dur{pointer-events:none}
+.slot .corner,.slot .dur{pointer-events:none}
 .slot.video .corner.bl,.slot.video .corner.br{display:none}
-.slot.video .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
 .slot.photo::before,.slot.photo::after{display:none}
 .slot.video .corner.tl{display:none}
 .slot.video .play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:var(--radius)}
@@ -543,7 +540,7 @@ figure.slot{margin:0}
 .slot.video .play:hover span{background:color-mix(in srgb, var(--gold-light), #ffffff 18%)}
 .slot.video .play:focus-visible{outline:3px solid var(--focus-dark);outline-offset:-6px}
 .slot .dur{position:absolute;left:10px;top:10px;z-index:2;font:600 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--foot-ink);background:color-mix(in srgb, var(--chrome) 78%, transparent);padding:5px 7px;border-radius:3px}
-.vid.is-playing .dur,.vid.is-playing .plate{display:none}
+.vid.is-playing .dur{display:none}
 .vid{margin:0;display:grid;gap:10px;min-width:0;align-content:start}
 .vid figcaption{font-size:var(--fs-small);color:var(--ink-2);max-width:60ch}
 .vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
@@ -576,7 +573,6 @@ details.faq p a{color:var(--ink);text-underline-offset:.16em}
 /* v1.0 final · About: the bio with one square portrait */
 .bio{display:grid;gap:24px;align-items:start}
 .bio .slot{max-width:640px;width:100%}
-.bio .slot .plate{display:none}
 .bio .lede{margin:0}
 
 /* v1.0 final · mobile pass */
@@ -776,19 +772,19 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
     <div class="notes-layout">
       <div>
     <article class="service" id="svc-deer">
-      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Deer control<sup class="fn" aria-label="note 1">1</sup><sup class="fn" aria-label="note 2">2</sup></h3><p class="small" style="color:var(--ink-2)">Sambar and fallow deer hammering pasture, fences, crops and tree plantings. Thermal-assisted night work, planned around your stock and your neighbours.</p></div>
+      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Deer control</h3><p class="small" style="color:var(--ink-2)">Sambar and fallow deer hammering pasture, fences, crops and tree plantings. Thermal-assisted night work, planned around your stock and your neighbours.</p></div>
       <ul><li>Damage assessment on the first visit</li><li>Night and thermal work where deer move</li><li>Carcass handling as agreed with you</li></ul>
     </article>
     <article class="service" id="svc-rabbits">
-      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Rabbits<sup class="fn" aria-label="note 4">4</sup></h3><p class="small" style="color:var(--ink-2)">Warrens under the fence line and chewed-out pasture. Control planned alongside your own warren work.</p></div>
+      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Rabbits</h3><p class="small" style="color:var(--ink-2)">Warrens under the fence line and chewed-out pasture. Control planned alongside your own warren work.</p></div>
       <ul><li>Warren mapping</li><li>Shooting as part of a wider program</li><li>Advice on ripping and follow-up</li></ul>
     </article>
     <article class="service" id="svc-foxes">
-      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Foxes<sup class="fn" aria-label="note 3">3</sup></h3><p class="small" style="color:var(--ink-2)">Lamb and poultry losses, especially around lambing. Timed to the season and your stock.</p></div>
+      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Foxes</h3><p class="small" style="color:var(--ink-2)">Lamb and poultry losses, especially around lambing. Timed to the season and your stock.</p></div>
       <ul><li>Pre-lambing programs</li><li>Night spotlight and thermal work</li><li>Reporting on what was taken</li></ul>
     </article>
     <article class="service" id="svc-kangaroos">
-      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Kangaroo culling<sup class="fn" aria-label="note 5">5</sup></h3><p class="small" style="color:var(--ink-2)">Where numbers are hurting pasture, fences and water. Carried out under a valid Authority to Control Wildlife and the relevant code.</p></div>
+      <div class="stack" style="--gap:8px"><h3 tabindex="-1">Kangaroo culling</h3><p class="small" style="color:var(--ink-2)">Where numbers are hurting pasture, fences and water. Carried out under a valid Authority to Control Wildlife and the relevant code.</p></div>
       <ul><li>Help with the ATCW paperwork</li><li>Counts and a plan before any work</li><li>Humane dispatch to the code, every animal</li></ul>
     </article>
     <article class="service" id="svc-pigs">
@@ -811,13 +807,13 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
       <span class="rc-body"><span class="rc-tag"><svg class="rc-ico" aria-hidden="true"><use href="#i-doc"/></svg>Real job · sample report</span><span class="rc-head">See what a drone survey gives you</span><span class="rc-text">A real report from a Gippsland property: what was seen, the habitat, findings and next steps. Property details removed.</span><span class="btn btn-gold rc-cta">Read the report <span aria-hidden="true">&rarr;</span></span></span>
     </a></div></article>
       </div>
-      <aside class="margin-notes" aria-label="Notes"><h4>Notes</h4><p><sup>1</sup><span><b style="font-weight:600;color:var(--ink)">Sambar.</b> Introduced to Victoria in the 1860s; now the main deer species on the state&#x27;s bush edge.</span></p><p><sup>2</sup><span><b style="font-weight:600;color:var(--ink)">Fallow.</b> In Australia since the 1830s; paddock and plantation damage, often in daylight.</span></p><p><sup>3</sup><span><b style="font-weight:600;color:var(--ink)">Foxes.</b> Released in Victoria in the 1850s for hunting; lambing losses follow the season.</span></p><p><sup>4</sup><span><b style="font-weight:600;color:var(--ink)">Rabbits.</b> Twenty-four released at Barwon Park, Winchelsea, in 1859. The rest is history.</span></p><p><sup>5</sup><span><b style="font-weight:600;color:var(--ink)">ATCW.</b> Authority to Control Wildlife, issued by the Victorian government under the Wildlife Act 1975.</span></p><p><sup>6</sup><span><b style="font-weight:600;color:var(--ink)">Game Licence.</b> Issued by the Game Management Authority; deer are a game species in Victoria.</span></p></aside>
+      <aside class="margin-notes" aria-label="Notes"><h4>Notes</h4><p><span class="n">1</span><span><b style="font-weight:600;color:var(--ink)">Sambar –</b> Introduced to Victoria in the 1860s; now the main deer species on the state&#x27;s bush edge.</span></p><p><span class="n">2</span><span><b style="font-weight:600;color:var(--ink)">Fallow –</b> In Australia since the 1830s; paddock and plantation damage, often in daylight.</span></p><p><span class="n">3</span><span><b style="font-weight:600;color:var(--ink)">Foxes –</b> Released in Victoria in the 1850s for hunting; lambing losses follow the season.</span></p><p><span class="n">4</span><span><b style="font-weight:600;color:var(--ink)">Rabbits –</b> Twenty-four released at Barwon Park, Winchelsea, in 1859. The rest is history.</span></p><p><span class="n">5</span><span><b style="font-weight:600;color:var(--ink)">ATCW –</b> Authority to Control Wildlife, issued by the Victorian government under the Wildlife Act 1975.</span></p><p><span class="n">6</span><span><b style="font-weight:600;color:var(--ink)">Game Licence –</b> Issued by the Game Management Authority; deer are a game species in Victoria.</span></p></aside>
     </div>
     <div class="prose">
       <h3>What a job includes</h3>
       <ul><li>A site visit and a written plan: stock, neighbours, access, dates and safety.</li><li>Humane dispatch to AHCPMG304 and the code for each species.</li><li>Carcass handling and disposal as agreed with you.</li><li>A short report afterwards and a follow-up if the numbers call for it.</li></ul>
       <h3>Permits and codes, in plain language</h3>
-      <p class="small" style="color:var(--ink-2)">Kangaroo control on private land needs an Authority to Control Wildlife<sup class="fn" aria-label="note 5">5</sup> from the Victorian government; I can help with the application. Deer are a game species and are taken under a Game Licence<sup class="fn" aria-label="note 6">6</sup>. All work follows the relevant Victorian codes of practice for the humane control of the species involved.</p>
+      <p class="small" style="color:var(--ink-2)">Kangaroo control on private land needs an Authority to Control Wildlife from the Victorian government; I can help with the application. Deer are a game species and are taken under a Game Licence. All work follows the relevant Victorian codes of practice for the humane control of the species involved.</p>
     </div>
     <div class="stack" style="--gap:12px;margin-top:36px"><h2 class="sub">Common questions</h2><div><details class="faq"><summary>How are quotes worked out?</summary><p>Usually a call-out fee for every visit except the first, where we walk the property and discuss the plan. After that we agree either a package or an hourly rate.</p></details><details class="faq"><summary>How do you keep stock safe?</summary><p>Stock safety is the top priority on every job. Safe lines of fire, stock movements and access are planned and agreed before the first night.</p></details><details class="faq"><summary>Are you licensed and insured?</summary><p>Yes. Firearms and Game licences, SSAA Farmer Assist, First Aid and AHCPMG304 for humane dispatch, and $20 million public liability with Elders Insurance.</p></details></div><p><a class="btn btn-secondary" href="/faq">All questions and answers</a></p></div>
     <div class="cta-row"><a class="btn btn-primary" href="/contact#enquiry" data-focus="enquiry">Request a quote</a><a class="btn btn-quiet num" href="tel:+61499866580">or call 0499 866 580</a></div>

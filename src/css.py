@@ -204,7 +204,6 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .band.drone :focus-visible{outline-color:var(--focus-dark)}
 .band.drone .slot{--scrim:linear-gradient(to top, rgb(27 38 34 / .9), rgb(27 38 34 / .1) 70%);box-shadow:inset 0 0 0 1px var(--foot-line)}
 .band.drone .slot .tag{color:var(--gold-light);border-color:var(--foot-line);background:color-mix(in srgb, var(--chrome) 70%, transparent)}
-.band.drone .slot .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
 
 /* trust triad */
 .triad{display:grid;gap:24px}
@@ -418,14 +417,13 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 .margin-notes{display:grid;gap:14px;font-size:var(--fs-caption);line-height:1.45;color:var(--ink-2);border-left:1px solid var(--line-strong);padding-left:16px;position:sticky;top:calc(var(--head-h) + 24px)}
 @media (max-width:899px){.margin-notes{position:static;border-left:0;padding-left:0;border-top:1px dotted var(--line-strong);padding-top:14px}}
 .margin-notes p{display:grid;grid-template-columns:2ch 1fr;gap:6px}
-.margin-notes sup,.fn{font:700 10px/1 var(--font-mono);color:var(--ink);vertical-align:super;margin-left:2px}
+.margin-notes .n{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .margin-notes h4{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-box:normal}
 
-/* photo frames: registration ticks + privacy plate */
+/* photo frames: registration ticks */
 .slot .corner{position:absolute;width:12px;height:12px;z-index:2;border:1.5px solid color-mix(in srgb, var(--foot-ink) 85%, transparent)}
 .slot .corner.tl{top:8px;left:8px;border-right:0;border-bottom:0}.slot .corner.tr{top:8px;right:8px;border-left:0;border-bottom:0}
 .slot .corner.bl{bottom:8px;left:8px;border-right:0;border-top:0}.slot .corner.br{bottom:8px;right:8px;border-left:0;border-top:0}
-.slot .plate{position:absolute;right:10px;top:10px;z-index:2;font:600 9px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:color-mix(in srgb, var(--bg) 78%, transparent);padding:3px 6px;border-radius:3px}
 .slot .label{inset-inline:22px;bottom:22px}
 
 /* ledger list with dotted leaders */

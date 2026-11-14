@@ -1,0 +1,137 @@
+<div class="mock-strip" role="note"><div class="wrap"><b>Mockup</b><span>Sample products, prices and photos</span><span>Nothing is charged or sent</span></div></div>
+
+<section class="page" id="v-shop" data-view="shop" aria-labelledby="h-shop">
+  <div class="wrap">
+    <div class="sec-head"><p class="meta"><b>Sheet</b><span>Shop</span><span class="lead" aria-hidden="true"></span><span>GR <span class="num">063 758</span></span><span>MGA 55 · GDA2020</span></p><p class="eyebrow">Shop</p><h1 id="h-shop" tabindex="-1" style="font-size:var(--fs-h2)">Caps, tees and gear</h1>
+      <p class="measure">Fitz Feral Hunters gear for clients, mates and anyone who likes the work. Posted from Warragul to anywhere in Australia. Prices are in Australian dollars and include GST.</p></div>
+    <ul class="filters" aria-label="Show"><li><button type="button" data-filter="all" aria-pressed="true">All</button></li><li><button type="button" data-filter="Apparel" aria-pressed="false">Apparel</button></li><li><button type="button" data-filter="Headwear" aria-pressed="false">Headwear</button></li><li><button type="button" data-filter="Accessories" aria-pressed="false">Accessories</button></li></ul>
+    <ul class="pgrid" id="grid"></ul>
+    <div class="ship-strip">
+      <p><svg class="i" aria-hidden="true"><use href="#i-truck"/></svg><span><b>Postage Australia-wide</b><span class="num">$10.95</span> by Australia Post, or free on orders over <span class="num">$100</span>.</span></p>
+      <p><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span><b>Pick up in Warragul</b>Free. Fitz texts you when it's ready.</span></p>
+      <p><svg class="i" aria-hidden="true"><use href="#i-swap"/></svg><span><b>Wrong size?</b>Swap it within 30 days if it's unworn.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="v-item" data-view="item" aria-labelledby="h-item" hidden>
+  <div class="wrap" id="item-body"></div>
+</section>
+
+<section class="page" id="v-cart" data-view="cart" aria-labelledby="h-cart" hidden>
+  <div class="wrap">
+    <div class="sec-head"><p class="meta"><b>Sheet</b><span>Shop · Cart</span><span class="lead" aria-hidden="true"></span><span>MGA 55 · GDA2020</span></p><p class="eyebrow">Shop</p><h1 id="h-cart" tabindex="-1" style="font-size:var(--fs-h2)">Your cart</h1></div>
+    <div id="cart-body"></div>
+  </div>
+</section>
+
+<section class="page" id="v-checkout" data-view="checkout" aria-labelledby="h-checkout" hidden>
+  <div class="wrap">
+    <div class="sec-head"><p class="meta"><b>Sheet</b><span>Shop · Checkout</span><span class="lead" aria-hidden="true"></span><span>MGA 55 · GDA2020</span></p><p class="eyebrow">Shop</p><h1 id="h-checkout" tabindex="-1" style="font-size:var(--fs-h2)">Checkout</h1></div>
+    <div class="handoff" role="note"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg><p><b>On the live shop, this step is Shopify's secure checkout.</b> It asks for the same details, carries Fitz's logo and colours, and takes the payment. This mockup has no card fields and charges nothing.</p></div>
+    <div id="co-empty" hidden></div>
+    <div class="co" id="co">
+      <details class="co-mob" id="co-mob"><summary><span>Order summary</span><b class="num" id="co-mob-total"></b></summary><div class="co-sum-inner" id="co-sum-m"></div></details>
+      <form class="co-form" id="co-form" novalidate aria-describedby="co-note">
+        <div class="summary" id="co-err" role="alert" tabindex="-1" hidden><b>Check these details</b><ul id="co-err-list"></ul></div>
+        <div class="express" role="group" aria-labelledby="xp-h"><p class="xp-h" id="xp-h">Express checkout</p><div class="xp-row"><button type="button" class="btn btn-secondary" data-xp="Apple Pay">Apple Pay</button><button type="button" class="btn btn-secondary" data-xp="Google Pay">Google Pay</button><button type="button" class="btn btn-secondary" data-xp="PayPal">PayPal</button></div><p class="or"><span>Or enter your details</span></p></div>
+        <p class="helper"><span>Mockup helper</span><button type="button" class="btn btn-quiet" id="co-fill">Fill in sample details</button></p>
+
+        <fieldset class="sec" id="sec-contact"><legend>Contact</legend>
+          <div class="field"><label for="c-email">Email</label><span class="hint">For the receipt and the tracking number.</span><input id="c-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"><span class="err" id="e-c-email">Enter an email address, like name@example.com.</span></div>
+          <label class="consent"><input type="checkbox" id="c-news" name="news"> Email me when new gear comes in</label>
+        </fieldset>
+
+        <fieldset class="sec" id="sec-delivery"><legend>Delivery</legend>
+          <div class="choice" role="radiogroup" aria-label="Delivery method">
+            <label class="row"><input type="radio" name="method" value="ship" id="m-ship" checked><span><b>Post it to me</b><small>Australia Post, anywhere in Australia</small></span></label>
+            <label class="row"><input type="radio" name="method" value="pickup" id="m-pickup"><span><b>Pick up in Warragul</b><small>Free. Fitz texts you when it's ready</small></span><span class="amt">Free</span></label>
+          </div>
+          <div id="ship-fields" class="sec" style="gap:16px">
+            <div class="field"><label for="d-country">Country</label><select id="d-country" name="country" autocomplete="country-name"><option>Australia</option></select></div>
+            <div class="f2">
+              <div class="field"><label for="d-first">First name</label><input id="d-first" name="first" type="text" autocomplete="shipping given-name" required maxlength="80"><span class="err" id="e-d-first">Enter your first name.</span></div>
+              <div class="field"><label for="d-last">Last name</label><input id="d-last" name="last" type="text" autocomplete="shipping family-name" required maxlength="80"><span class="err" id="e-d-last">Enter your last name.</span></div>
+            </div>
+            <div class="field"><label for="d-addr">Street address</label><input id="d-addr" name="address" type="text" autocomplete="shipping address-line1" required maxlength="160"><span class="err" id="e-d-addr">Enter the street address.</span></div>
+            <div class="field"><label for="d-apt">Unit, apartment or RMB <span style="font-weight:400;color:var(--ink-2)">(optional)</span></label><input id="d-apt" name="apt" type="text" autocomplete="shipping address-line2" maxlength="120"></div>
+            <div class="f3">
+              <div class="field"><label for="d-sub">Suburb or town</label><input id="d-sub" name="suburb" type="text" autocomplete="shipping address-level2" required maxlength="80"><span class="err" id="e-d-sub">Enter the suburb or town.</span></div>
+              <div class="field"><label for="d-state">State</label><select id="d-state" name="state" autocomplete="shipping address-level1" required><option value="">Choose</option><option>VIC</option><option>NSW</option><option>QLD</option><option>SA</option><option>WA</option><option>TAS</option><option>NT</option><option>ACT</option></select><span class="err" id="e-d-state">Choose a state or territory.</span></div>
+              <div class="field"><label for="d-pc">Postcode</label><input id="d-pc" name="postcode" type="text" inputmode="numeric" autocomplete="shipping postal-code" required maxlength="4" pattern="[0-9]{4}"><span class="err" id="e-d-pc">Enter the four-digit postcode.</span></div>
+            </div>
+            <div class="field"><label for="d-phone">Phone <span style="font-weight:400;color:var(--ink-2)">(optional)</span></label><span class="hint">For delivery updates from Australia Post.</span><input id="d-phone" name="phone" type="tel" autocomplete="shipping tel" inputmode="tel" maxlength="40"></div>
+          </div>
+          <div id="pickup-fields" class="pickup" hidden>
+            <p class="note-box">Pick up from Warragul once Fitz texts that it's ready. He'll arrange a time that suits. No street address is needed.</p>
+            <div class="f2">
+              <div class="field"><label for="p-first">First name</label><input id="p-first" name="pfirst" type="text" autocomplete="given-name" maxlength="80"><span class="err" id="e-p-first">Enter your first name.</span></div>
+              <div class="field"><label for="p-last">Last name</label><input id="p-last" name="plast" type="text" autocomplete="family-name" maxlength="80"><span class="err" id="e-p-last">Enter your last name.</span></div>
+            </div>
+            <div class="field"><label for="p-phone">Mobile</label><span class="hint">Fitz texts this number when your order is ready.</span><input id="p-phone" name="pphone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40"><span class="err" id="e-p-phone">Enter a mobile number with at least eight digits.</span></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="sec" id="sec-postage"><legend>Postage</legend>
+          <div class="choice">
+            <label class="row"><input type="radio" name="post" value="parcel" id="s-parcel" checked><span><b>Parcel Post</b><small>Australia Post · 2 to 6 business days</small></span><span class="amt num" id="amt-parcel">$10.95</span></label>
+            <label class="row"><input type="radio" name="post" value="express" id="s-express"><span><b>Express Post</b><small>Australia Post · 1 to 3 business days</small></span><span class="amt num">$16.95</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="sec" id="sec-pay"><legend>Payment</legend>
+          <span class="hint" style="font-size:var(--fs-caption);color:var(--ink-2);margin-top:-8px">Paid securely on Shopify. Fitz never sees your card number.</span>
+          <div class="choice">
+            <label class="row"><input type="radio" name="pay" value="card" id="pm-card" checked><span><b>Credit or debit card</b><small>Visa, Mastercard, Amex</small></span></label>
+            <div class="sub" id="sub-card"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg><p>On the live shop, Shopify's secure card form goes here. This mockup leaves it out on purpose.</p></div>
+            <label class="row"><input type="radio" name="pay" value="paypal" id="pm-paypal"><span><b>PayPal</b><small>You'll finish paying on PayPal</small></span></label>
+            <div class="sub" id="sub-paypal" hidden><svg class="i" aria-hidden="true"><use href="#i-ext"/></svg><p>After you select Pay now, PayPal opens to finish the payment, then brings you back here.</p></div>
+            <label class="row"><input type="radio" name="pay" value="afterpay" id="pm-afterpay"><span><b>Afterpay</b><small>Four fortnightly payments</small></span></label>
+            <div class="sub" id="sub-afterpay" hidden><svg class="i" aria-hidden="true"><use href="#i-ext"/></svg><p id="afterpay-note">Four payments, every two weeks. Afterpay opens to finish the payment.</p></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="sec" id="sec-bill"><legend>Billing address</legend>
+          <div class="choice" id="bill-choice">
+            <label class="row" id="bill-same-row"><input type="radio" name="bill" value="same" id="b-same" checked><span><b>Same as the delivery address</b></span></label>
+            <label class="row"><input type="radio" name="bill" value="other" id="b-other"><span><b>Use a different billing address</b></span></label>
+          </div>
+          <div id="bill-fields" class="sec" style="gap:16px" hidden>
+            <div class="f2">
+              <div class="field"><label for="b-first">First name</label><input id="b-first" name="bfirst" type="text" autocomplete="billing given-name" maxlength="80"><span class="err" id="e-b-first">Enter the first name on the card.</span></div>
+              <div class="field"><label for="b-last">Last name</label><input id="b-last" name="blast" type="text" autocomplete="billing family-name" maxlength="80"><span class="err" id="e-b-last">Enter the last name on the card.</span></div>
+            </div>
+            <div class="field"><label for="b-addr">Street address</label><input id="b-addr" name="baddress" type="text" autocomplete="billing address-line1" maxlength="160"><span class="err" id="e-b-addr">Enter the billing street address.</span></div>
+            <div class="f3">
+              <div class="field"><label for="b-sub">Suburb or town</label><input id="b-sub" name="bsuburb" type="text" autocomplete="billing address-level2" maxlength="80"><span class="err" id="e-b-sub">Enter the suburb or town.</span></div>
+              <div class="field"><label for="b-state">State</label><select id="b-state" name="bstate" autocomplete="billing address-level1"><option value="">Choose</option><option>VIC</option><option>NSW</option><option>QLD</option><option>SA</option><option>WA</option><option>TAS</option><option>NT</option><option>ACT</option></select><span class="err" id="e-b-state">Choose a state or territory.</span></div>
+              <div class="field"><label for="b-pc">Postcode</label><input id="b-pc" name="bpostcode" type="text" inputmode="numeric" autocomplete="billing postal-code" maxlength="4" pattern="[0-9]{4}"><span class="err" id="e-b-pc">Enter the four-digit postcode.</span></div>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="cta-row"><button type="submit" class="btn btn-primary pay" id="co-pay"><span class="spin" aria-hidden="true"></span><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg><span class="lbl">Pay now</span></button></div>
+        <p class="note" id="co-note">Mockup: selecting Pay now shows the confirmation page. Nothing is charged and no order is sent.</p>
+      </form>
+      <aside class="co-sum" id="co-sum-d" aria-labelledby="co-sum-h"></aside>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="v-done" data-view="done" aria-labelledby="h-done" hidden>
+  <div class="wrap" id="done-body"></div>
+</section>
+
+<dialog class="cart-drawer" id="cart-drawer" aria-labelledby="cd-title">
+  <div class="cd-frame">
+    <div class="cd-head"><h2 id="cd-title" tabindex="-1">Added to your cart</h2><button type="button" class="icon-btn" id="cd-close" aria-label="Close cart"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="cd-body"><ul class="lines" id="cd-lines"></ul></div>
+    <div class="cd-foot">
+      <dl class="totals"><dt class="grand">Subtotal</dt><dd class="grand num" id="cd-sub"></dd></dl>
+      <p class="small" id="cd-free" style="color:var(--ink-2)"></p>
+      <a class="btn btn-primary" href="#checkout" data-close>Checkout</a>
+      <a class="btn btn-secondary" href="#cart" data-close>View cart</a>
+    </div>
+  </div>
+</dialog>
+<p class="sr" aria-live="polite" id="cart-live"></p>

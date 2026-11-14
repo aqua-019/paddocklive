@@ -9,3 +9,4 @@ media-src/
 .env
 .env.*
 !.env.example
+mockups/shop/dist/preview.html

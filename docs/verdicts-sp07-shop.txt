@@ -1,0 +1,20 @@
+VERIFIED :: SP-07 :: shop (1280) :: grid of six sample products; the Headwear filter shows the two hats :: claimed=6 · Trucker cap/Beanie measured=6 · Trucker cap/Beanie · fonts loaded :: PER=D3762 · D3815
+VERIFIED :: SP-07 :: header (900/1024/1280) :: eight nav links, the gold Contact button and the cart fit on one row :: claimed=one row, no overflow measured=true/true/true :: PER=LENS-15
+VERIFIED :: SP-07 :: item → drawer :: size is required, Bone 3XL is sold out, quantity 2 adds Olive L to the cart and the drawer opens on its title :: claimed=error+focus · 3XL off · $90.00 · drawer Olive · Size L ×2 · count 2 measured=err true · Bone 3XL off · $90.00 · open true · "Olive · Size L" ×2 · $90.00 · "Spend $10.00 more for free postage." · count 2 · focus #cd-title :: PER=D3762 · D0382 · D0381
+VERIFIED :: SP-07 :: cart :: View cart closes the drawer; + adds one, keeps focus on +, and free postage unlocks over $100 :: claimed=cart · 1 line · 3 · $135.00 · free · focus kept measured=view true · 1 line · drawer false · q 3 · AUD$135.00 · free true · focus true :: PER=D3763 · D0330
+VERIFIED :: SP-07 :: checkout :: Pay now on an empty form lists every missing detail and focuses the list :: claimed=7 errors · focus #co-err · 7 aria-invalid measured=7 errors · focus #co-err · 7 aria-invalid :: PER=D0310
+VERIFIED :: SP-07 :: checkout :: totals: discount, Express Post and GST worked out (GST = total ÷ 11) :: claimed=135 − 13.50 + 16.95 = 138.45 · GST 12.59 measured=Subtotal|$135.00|Discount WELCOME10|−$13.50|Express Post|$16.95|Total|AUD$138.45 Including $12.59 in GST :: PER=D3815 · D3761
+VERIFIED :: SP-07 :: checkout :: pick-up hides the address and postage, asks for a billing address and drops postage; Afterpay shows four payments :: claimed=hidden · hidden · billing · $121.50 · 4 × $34.61 (Express total $138.45) measured=true · true · billing true (same hidden true) · AUD$121.50 · "Four payments of $34.61, every two weeks. Afterpay opens to finish the payment." :: PER=D3764 · D3781
+VERIFIED :: SP-07 :: done :: Pay now (mockup) shows the confirmation, empties the cart and focuses the heading :: claimed=#done · Thanks, Sam · FFH-1001 · 0 · focus measured=#done · Thanks, Sam · "Order confirmed · FFH-1001" · 0 · #h-done :: PER=D0979
+VERIFIED :: SP-07 :: checkout :: express wallets lead the checkout; in the mockup they explain themselves :: claimed=Apple Pay/Google Pay/PayPal first · toast measured=Apple Pay/Google Pay/PayPal first=express · "Mockup: on the live shop, Apple Pay opens here to pay in one step." :: PER=D3764
+VERIFIED :: SP-07 :: shop :: one-option items add straight from the grid :: claimed=drawer · Sticker pack+Stubby holder · 2 measured=true · Sticker pack+Stubby holder · 2 :: PER=D3762
+VERIFIED :: SP-07 :: shop, item, cart, checkout :: hover recolours only (no transform or shadow change) :: claimed=0 changed measured=0 changed  :: PER=D3171 · LAW-03
+VERIFIED :: SP-07 :: all views (iPhone 13) :: no horizontal scroll; the drawer fills the phone width :: claimed=0px ×5 · drawer 390 measured=0/0/0/0/0px · drawer 390 wide, 0px :: PER=LENS-15
+VERIFIED :: SP-07 :: all views (iPhone 13) :: tap targets ≥ 44px :: claimed=0 under 44 measured=0  :: PER=D0551
+VERIFIED :: SP-07 :: checkout, item, cart (iPhone 13) :: no form text under 16px (iOS zoom) :: claimed=0 measured=0  :: PER=D4002
+VERIFIED :: SP-07 :: all views (320px) :: no horizontal scroll at 320px :: claimed=0px ×5 measured=0/0/0/0/0px :: PER=LENS-15
+VERIFIED :: SP-07 :: shop, item, cart, checkout :: new text meets 4.5:1 :: claimed=all ≥ 4.5 measured=min 6.79 · 22 checked :: PER=D0192
+VERIFIED :: SP-07 :: drawer (reduced motion) :: the cart drawer appears without sliding :: claimed=no transition measured=0s 0px :: PER=D3453
+VERIFIED :: SP-07 :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract
+
+18 verdicts · 0 FAILED

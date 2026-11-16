@@ -28,8 +28,8 @@ header = one(r'(<header class="site-head">.*?</header>)', body)
 footer = one(r'(<footer class="site-foot" id="footer">.*?</footer>)', body)
 site_js = one(r'<script>(.*?)</script>', body)
 
-LOGO = data_uri(PUB / 'brand/logo-lockup.png', 'image/png')
-PLATE = data_uri(PUB / 'brand/logo-lockup-plate.jpg', 'image/jpeg')
+BADGE = data_uri(PUB / 'brand/fitz-badge-256.webp', 'image/webp')      # Fitz's badge (16 Nov 2026): header, footer and the merch art
+BADGE_ART = data_uri(PUB / 'brand/fitz-badge-512.webp', 'image/webp')
 TOPO = data_uri(PUB / 'topo-tile.svg', 'image/svg+xml')
 
 # the site CSS, with its two file references made self-contained
@@ -47,14 +47,17 @@ header = header.replace(' aria-current=page', '')
 shop_li = '<li><a href="#shop" aria-current="page">Shop</a></li>'
 assert header.count('<li><a href="/reviews">Reviews</a></li>') == 2
 header = header.replace('<li><a href="/reviews">Reviews</a></li>', '<li><a href="/reviews">Reviews</a></li>' + shop_li)
-header = live_links(header).replace('src="/brand/logo-lockup.png"', f'src="{LOGO}"')
+BADGE_IMG = re.compile(r'src="/brand/fitz-badge-\d+\.webp" srcset="[^"]*" sizes="[^"]*"')
+header = BADGE_IMG.sub(f'src="{BADGE}"', live_links(header))
+assert 'src="/brand/' not in header
 cart_btn = ('<a class="cart-btn" id="cart-btn" href="#cart" aria-label="Cart, 0 items"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg>'
             '<span class="count" id="cart-count" data-zero aria-hidden="true">0</span></a>')
 assert header.count('</details>') == 1
 header = header.replace('</details>', '</details>\n    ' + cart_btn)
 
 footer = footer.replace('<li><a href="/reviews">Reviews</a></li>', '<li><a href="/reviews">Reviews</a></li><li><a href="#shop">Shop</a></li>')
-footer = live_links(footer).replace('src="/brand/logo-lockup.png"', f'src="{LOGO}"')
+footer = BADGE_IMG.sub(f'src="{BADGE}"', live_links(footer))
+assert 'src="/brand/' not in footer
 
 ICONS = ('<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.3 12.1a1 1 0 0 1-1 .9H7.3a1 1 0 0 1-1-.9z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></symbol>'
          '<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>'
@@ -65,7 +68,7 @@ ICONS = ('<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.3 12.1a1 1 
          '<symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></symbol>')
 sprite = sprite.replace('</svg>', ICONS + '</svg>')
 
-shop_css = (HERE / 'shop.css').read_text() + f'\n.art-logo{{background-image:url("{LOGO}")}}\n.art-plate{{background-image:url("{PLATE}")}}\n'
+shop_css = (HERE / 'shop.css').read_text() + f'\n.art-logo,.art-plate{{background-image:url("{BADGE_ART}")}}\n'
 shop_html = (HERE / 'shop.html').read_text()
 shop_js = (HERE / 'shop.js').read_text()
 

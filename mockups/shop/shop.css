@@ -25,8 +25,8 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 /* product art: a colour field standing in for Fitz's photos, with the lockup (dark colours) or the lockup plate as a patch (light colours) */
 .pimg{--ar:4/5;background:var(--pc,var(--chrome))}
 .pimg::after{display:none}
-.art{position:absolute;z-index:2;left:50%;top:47%;translate:-50% -50%;width:64%;aspect-ratio:640/181;background:center/contain no-repeat}
-.art.patch{width:50%;aspect-ratio:1040/294;border-radius:3px;box-shadow:0 0 0 3px color-mix(in srgb, var(--chrome) 22%, transparent)}
+/* the merch carries Fitz's round badge (16 Nov 2026) on every colour */
+.art{position:absolute;z-index:2;left:50%;top:46%;translate:-50% -50%;width:46%;aspect-ratio:1/1;background:center/contain no-repeat;border-radius:50%;box-shadow:0 0 0 2px color-mix(in srgb, var(--chrome) 18%, transparent)}
 .pimg .ptag{position:absolute;left:12px;bottom:12px;z-index:2;font:500 11px/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;background:color-mix(in srgb, var(--bg) 88%, transparent);color:var(--ink);padding:4px 7px;border-radius:3px}
 
 /* shop grid */
@@ -60,8 +60,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .gallery{display:grid;gap:10px;min-width:0}
 .thumbs{display:flex;flex-wrap:wrap;gap:8px}
 .thumbs button{width:64px;height:80px;padding:0;border:0;border-radius:var(--radius);background:var(--pc);box-shadow:inset 0 0 0 1px var(--line-strong);cursor:pointer;position:relative;overflow:hidden}
-.thumbs button .art{width:70%}
-.thumbs button .art.patch{width:62%}
+.thumbs button .art{width:62%}
 .thumbs button[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--bg),0 0 0 2px var(--ink)}
 .pinfo{min-width:0}
 .pinfo h1{font-size:var(--fs-h2);max-width:none}
@@ -122,8 +121,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .line{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:start;padding-block:16px;box-shadow:inset 0 -1px 0 var(--line)}
 .lines.big .line{grid-template-columns:96px minmax(0,1fr) auto;gap:18px}
 .thumb{position:relative;display:block;aspect-ratio:4/5;border-radius:var(--radius);background:var(--pc);box-shadow:inset 0 0 0 1px var(--line)}
-.thumb .art{width:74%}
-.thumb .art.patch{width:66%;box-shadow:none}
+.thumb .art{width:66%;box-shadow:none}
 .qbadge{position:absolute;top:-8px;right:-8px;z-index:3;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--ink-2);color:var(--bg);font:700 12px/22px var(--font-body);text-align:center}
 .ln-main{display:grid;gap:4px;min-width:0}
 .ln-name{font-weight:600;color:var(--ink);text-decoration:none;overflow-wrap:anywhere;justify-self:start;padding-block:9px;margin-block:-9px;transition:color var(--t-hover) var(--ease-out)}

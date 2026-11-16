@@ -1,0 +1,8 @@
+VERIFIED :: SP-09 :: home (1280) :: first visit plays; the badge lands on the header logo; the cover is removed and the header badge shows :: claimed=on · Δ ≤ 1.5px · removed · seen · opacity 1 measured=on true · Δx 0 Δy 0 Δw 0 · class false node false · seen 1 · header badge 1 :: PER=D4246 · D5131
+VERIFIED :: SP-09 :: home / services :: once per session, any key skips it, deep links and other pages never show it :: claimed=no repeat · skip < 600ms · #hash off · /services off measured=repeat false · skip 324ms · #hash false · services false :: PER=D4246
+VERIFIED :: SP-09 :: home (reduced motion) :: no splash at all, even when forced with ?splash :: claimed=off measured=false :: PER=D3453
+VERIFIED :: SP-09 :: home (no JS) :: the cover never shows without JavaScript :: claimed=display none measured=none :: PER=D4246
+VERIFIED :: SP-09 :: home (iPhone 13) :: plays and clears on a phone with no overflow :: claimed=removed · 0px · header badge shows measured=node false · overflow 0px · header badge 1 :: PER=LENS-15
+VERIFIED :: SP-09 :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract
+
+6 verdicts · 0 FAILED

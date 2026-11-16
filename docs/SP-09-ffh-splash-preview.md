@@ -1,4 +1,4 @@
-# SP-09 · Fitz Feral Hunters · Home splash (PREVIEW branch `splash-preview`, not on production)
+# SP-09 · Fitz Feral Hunters · Home splash (v1.4, live 16 Nov 2026; built on branch `splash-preview`)
 
 Compiled against: STAMP :: D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses
 
@@ -49,7 +49,9 @@ VERIFIED :: home (iPhone 13) :: plays and clears; no overflow
 VERIFIED :: all :: 0 console errors
 ```
 
-## Decision before it goes to production
+## Decision (16 Nov 2026)
+
+Aqua approved it for desktop and mobile ("that's golden… apply that to both live desktop and mobile"). The CLAUDE.md motion rule now makes an exception for this splash only. The points weighed before approval:
 
 - **CLAUDE.md says "nothing autoplays".** Shipping this means changing that rule, for example to "nothing autoplays except the first-visit home splash (SP-09)".
 - **D4252 notes that product estates have no loader at all.** A splash adds about 2.3 s before a first-time visitor can read the page. It's skippable, and it shows only once per session.

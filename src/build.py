@@ -1389,18 +1389,77 @@ def script():
                   .replace('%%PHONE%%', json.dumps(S['phone_display'])).replace('%%E164%%', json.dumps(S['phone_e164'])).replace('%%EMAIL%%', json.dumps(S['email']))
                   .replace('%%ARTIFACT%%', 'true' if ARTIFACT else 'false').replace('%%TITLES%%', json.dumps({k: TITLES[k][0] for k in TITLES})))
 
+
+# ---------------------------------------------------------------- splash (SP-09 preview; on only when site.json "splash" is true)
+SPLASH_HEAD = """<script>try{(function(){var r=document.documentElement,q=/[?&]splash(=|&|$)/.test(location.search);
+if(!matchMedia('(prefers-reduced-motion: no-preference)').matches)return;
+if(!q&&(location.hash||sessionStorage.getItem('ffh-splash')))return;
+r.classList.add('sp-on');var i=new Image();i.src='/brand/fitz-badge-768.webp';})()}catch(e){}</script>"""
+SPLASH_HTML = """<div class="splash" aria-hidden="true"><div class="sp-ink"></div><img class="sp-badge" src="/brand/fitz-badge-768.webp" width="300" height="300" alt="" decoding="async" loading="lazy"><button type="button" class="sp-skip" tabindex="-1">Skip</button></div>"""
+SPLASH_CSS = """
+/* SP-09 preview · splash: the badge on ink; the ink bleeds away from the badge and the badge lands on the header logo */
+@property --hole{syntax:'<percentage>';inherits:false;initial-value:-20%}
+:root{--z-splash:9999}
+.splash{display:none}
+html.sp-on .splash{display:block;position:fixed;inset:0;z-index:var(--z-splash);animation:sp-failsafe .3s linear 4.5s forwards}
+.sp-ink{position:absolute;inset:0;background:var(--chrome);--hole:-20%;
+  -webkit-mask-image:radial-gradient(circle at 50% 46%, transparent var(--hole), #000 calc(var(--hole) + 18%));
+          mask-image:radial-gradient(circle at 50% 46%, transparent var(--hole), #000 calc(var(--hole) + 18%))}
+.sp-badge{position:absolute;left:50%;top:46%;width:min(62vw,300px);height:auto;aspect-ratio:1/1;translate:-50% -50%;opacity:0;filter:drop-shadow(0 14px 36px rgb(0 0 0 / .45))}
+.sp-skip{position:absolute;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));min-height:44px;padding:0 18px;border:1px solid var(--foot-line);border-radius:var(--radius);background:transparent;color:var(--foot-ink);font:600 15px/1 var(--font-body);cursor:pointer;transition:background-color var(--t-hover) var(--ease-out)}
+.sp-skip:hover{background:color-mix(in srgb, var(--foot-ink) 10%, transparent)}
+html.sp-on .site-head .logo .badge{opacity:0;animation:sp-show 0s linear 4.8s forwards}
+@keyframes sp-failsafe{to{opacity:0;visibility:hidden}}
+@keyframes sp-show{to{opacity:1}}
+"""
+SPLASH_JS = """
+(function(){
+  var root=document.documentElement; if(!root.classList.contains('sp-on')) return;
+  var sp=document.querySelector('div.splash'), ink=sp.querySelector('.sp-ink'), b=sp.querySelector('.sp-badge'), target=document.querySelector('.site-head .logo .badge');
+  var E=getComputedStyle(root).getPropertyValue('--ease-out').trim()||'ease-out', done=false, EV=['pointerdown','keydown','wheel','touchmove','scroll'];
+  function end(){ root.classList.remove('sp-on'); sp.remove(); EV.forEach(function(e){ removeEventListener(e,skip,true); }); }
+  function finish(fast){
+    if(done) return; done=true; try{ sessionStorage.setItem('ffh-splash','1'); }catch(e){}
+    if(!fast||!sp.animate){ end(); return; }
+    var a=sp.animate([{opacity:1},{opacity:0}],{duration:240,easing:E}); a.onfinish=end;
+  }
+  function skip(){ finish(true); }
+  if(!target||!sp.animate||window.scrollY>40){ finish(false); return; }
+  EV.forEach(function(e){ addEventListener(e,skip,{capture:true,passive:true}); });
+  b.loading='eager';
+  var slow=setTimeout(function(){ finish(true); },900);           /* never hold an empty ink screen */
+  (b.decode?b.decode():Promise.resolve()).then(function(){ clearTimeout(slow); if(!done) arrive(); },function(){ clearTimeout(slow); finish(true); });
+  function arrive(){                                                /* D4246: scale .9 → 1 on the house curve */
+    var a=b.animate([{opacity:0,scale:.9},{opacity:1,scale:1}],{duration:800,delay:100,easing:E,fill:'forwards'});
+    a.onfinish=function(){ setTimeout(settle,420); };
+  }
+  function settle(){                                                /* the ink bleeds away from the badge; the badge lands on the header logo */
+    if(done) return;
+    var r1=b.getBoundingClientRect(), r2=target.getBoundingClientRect(), D=1000;
+    var dx=(r2.left+r2.width/2)-(r1.left+r1.width/2), dy=(r2.top+r2.height/2)-(r1.top+r1.height/2), s=r2.width/r1.width;
+    ink.animate([{'--hole':'-20%',opacity:1,offset:0},{opacity:1,offset:.6},{'--hole':'120%',opacity:0,offset:1}],{duration:D,easing:E,fill:'forwards'});
+    b.animate([{filter:'drop-shadow(0 14px 36px rgb(0 0 0 / .45))'},{filter:'drop-shadow(0 0 0 rgb(0 0 0 / 0))'}],{duration:D,easing:E,fill:'forwards'});
+    var a=b.animate([{transform:'translate(0px,0px) scale(1)'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:D,easing:E,fill:'forwards'});
+    a.onfinish=function(){ finish(false); };
+  }
+})();
+"""
+SPLASH_ON = bool(S.get('splash')) and not ARTIFACT
+
 def document(key, body, title, desc):
     path = HREF.get(key, '/404')
     canonical = S['url'].rstrip('/') + ('' if path == '/' else path)
     robots = '' if S.get('indexable') else '<meta name="robots" content="noindex, nofollow">\n'
     sheet_css = css + ("\n[data-sheet='off'] body::after{display:none}\n" if SHEET else "\n")
+    splash = SPLASH_ON and key == 'home'
+    if splash: sheet_css += SPLASH_CSS
     return f'''<!doctype html>
 <html lang="en-AU">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<title>{esc(title)}</title>
+{SPLASH_HEAD if splash else ''}<title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 {robots}<meta name="theme-color" content="#1b2622">
 <link rel="canonical" href="{canonical}">
@@ -1421,11 +1480,11 @@ def document(key, body, title, desc):
 <script type="application/ld+json">{jsonld()}</script>{extra_ld(key)}
 </head>
 <body>
-{SPRITE}{varbar()}{header(key)}
+{SPLASH_HTML if splash else ''}{SPRITE}{varbar()}{header(key)}
 <main id="main"{per("doc")}{per("tokens")}{per("type")}{per("motion")}{per("focus")}{per("ground")}{per("topo")}>
 {body}
 </main>
-{footer()}{ctabar()}{spec_dialog()}{script()}
+{footer()}{ctabar()}{spec_dialog()}{script()}{('<script>' + SPLASH_JS + '</script>') if splash else ''}
 </body>
 </html>'''
 

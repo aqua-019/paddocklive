@@ -1391,13 +1391,15 @@ def script():
 
 
 # ---------------------------------------------------------------- splash (SP-09 preview; on only when site.json "splash" is true)
+SPLASH_TOPO = '/topo-tile.svg'      # the page's own contour tile: the splash traces it, so the gold lines hand over to the page's lines
 SPLASH_HEAD = """<script>try{(function(){var r=document.documentElement,q=/[?&]splash(=|&|$)/.test(location.search);
 if(!matchMedia('(prefers-reduced-motion: no-preference)').matches)return;
 if(!q&&(location.hash||sessionStorage.getItem('ffh-splash')))return;
-r.classList.add('sp-on');var i=new Image();i.src='/brand/fitz-badge-768.webp';})()}catch(e){}</script>"""
-SPLASH_HTML = """<div class="splash" aria-hidden="true"><div class="sp-ink"></div><img class="sp-badge" src="/brand/fitz-badge-768.webp" width="300" height="300" alt="" decoding="async" loading="lazy"><button type="button" class="sp-skip" tabindex="-1">Skip</button></div>"""
+r.classList.add('sp-on');var i=new Image();i.src='/brand/fitz-badge-768.webp';
+window.__ffhTopo=fetch('""" + SPLASH_TOPO + """').then(function(x){return x.ok?x.text():'';}).catch(function(){return '';});})()}catch(e){}</script>"""
+SPLASH_HTML = """<div class="splash" aria-hidden="true"><div class="sp-ink"><canvas class="sp-topo"></canvas></div><img class="sp-badge" src="/brand/fitz-badge-768.webp" width="300" height="300" alt="" decoding="async" loading="lazy"><button type="button" class="sp-skip" tabindex="-1">Skip</button></div>"""
 SPLASH_CSS = """
-/* SP-09 preview · splash: the badge on ink; the ink bleeds away from the badge and the badge lands on the header logo */
+/* SP-09 preview · splash: the page's contours trace out in gold from the badge, then the ink bleeds away and the badge lands on the header logo */
 @property --hole{syntax:'<percentage>';inherits:false;initial-value:-20%}
 :root{--z-splash:9999}
 .splash{display:none}
@@ -1405,6 +1407,7 @@ html.sp-on .splash{display:block;position:fixed;inset:0;z-index:var(--z-splash);
 .sp-ink{position:absolute;inset:0;background:var(--chrome);--hole:-20%;
   -webkit-mask-image:radial-gradient(circle at 50% 46%, transparent var(--hole), #000 calc(var(--hole) + 18%));
           mask-image:radial-gradient(circle at 50% 46%, transparent var(--hole), #000 calc(var(--hole) + 18%))}
+.sp-topo{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sp-badge{position:absolute;left:50%;top:46%;width:min(62vw,300px);height:auto;aspect-ratio:1/1;translate:-50% -50%;opacity:0;filter:drop-shadow(0 14px 36px rgb(0 0 0 / .45))}
 .sp-skip{position:absolute;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));min-height:44px;padding:0 18px;border:1px solid var(--foot-line);border-radius:var(--radius);background:transparent;color:var(--foot-ink);font:600 15px/1 var(--font-body);cursor:pointer;transition:background-color var(--t-hover) var(--ease-out)}
 .sp-skip:hover{background:color-mix(in srgb, var(--foot-ink) 10%, transparent)}
@@ -1413,9 +1416,10 @@ html.sp-on .site-head .logo .badge{opacity:0;animation:sp-show 0s linear 4.8s fo
 @keyframes sp-show{to{opacity:1}}
 """
 SPLASH_JS = """
-(function(){
+window.ffhSplash=function(){
   var root=document.documentElement; if(!root.classList.contains('sp-on')) return;
-  var sp=document.querySelector('div.splash'), ink=sp.querySelector('.sp-ink'), b=sp.querySelector('.sp-badge'), target=document.querySelector('.site-head .logo .badge');
+  var sp=document.querySelector('div.splash'); if(!sp) return;
+  var ink=sp.querySelector('.sp-ink'), cv=sp.querySelector('.sp-topo'), b=sp.querySelector('.sp-badge'), target=document.querySelector('.site-head .logo .badge');
   var E=getComputedStyle(root).getPropertyValue('--ease-out').trim()||'ease-out', done=false, EV=['pointerdown','keydown','wheel','touchmove','scroll'];
   function end(){ root.classList.remove('sp-on'); sp.remove(); EV.forEach(function(e){ removeEventListener(e,skip,true); }); }
   function finish(fast){
@@ -1427,11 +1431,12 @@ SPLASH_JS = """
   if(!target||!sp.animate||window.scrollY>40){ finish(false); return; }
   EV.forEach(function(e){ addEventListener(e,skip,{capture:true,passive:true}); });
   b.loading='eager';
+  contours();
   var slow=setTimeout(function(){ finish(true); },900);           /* never hold an empty ink screen */
   (b.decode?b.decode():Promise.resolve()).then(function(){ clearTimeout(slow); if(!done) arrive(); },function(){ clearTimeout(slow); finish(true); });
   function arrive(){                                                /* D4246: scale .9 → 1 on the house curve */
     var a=b.animate([{opacity:0,scale:.9},{opacity:1,scale:1}],{duration:800,delay:100,easing:E,fill:'forwards'});
-    a.onfinish=function(){ setTimeout(settle,420); };
+    a.onfinish=function(){ setTimeout(settle,380); };
   }
   function settle(){                                                /* the ink bleeds away from the badge; the badge lands on the header logo */
     if(done) return;
@@ -1442,7 +1447,67 @@ SPLASH_JS = """
     var a=b.animate([{transform:'translate(0px,0px) scale(1)'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:D,easing:E,fill:'forwards'});
     a.onfinish=function(){ finish(false); };
   }
-})();
+  /* The page's own contour tile, traced in gold from the badge outward. Same tile size and origin as the
+     page's map (600px, 450px under 700px wide, from the top-left), so the lines hand over as the ink clears.
+     Each frame only adds the new piece of each line, so the cost is spread evenly however many lines there are. */
+  function contours(){
+    if(!cv||!window.__ffhTopo||!cv.getContext) return;
+    window.__ffhTopo.then(function(svg){
+      if(done||!svg) return;
+      var W=innerWidth, H=innerHeight, dpr=Math.min(2,window.devicePixelRatio||1);
+      cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+      var ctx=cv.getContext('2d'); ctx.scale(dpr,dpr); ctx.lineJoin='round'; ctx.lineCap='round';
+      var T=matchMedia('(max-width:699px)').matches?450:600, k=T/1200, cx=W/2, cy=H*.46;
+      var far=Math.hypot(Math.max(cx,W-cx),Math.max(cy,H-cy)), lines=[], re=/<path stroke-width="([\\d.]+)"[^>]* d="([^"]+)"/g, m;
+      while((m=re.exec(svg))){
+        var index=parseFloat(m[1])>2, subs=m[2].split('M');
+        for(var si=0;si<subs.length;si++){
+          var nums=subs[si].replace(/L/g,' ').trim().split(/\\s+/).map(Number); if(nums.length<4) continue;
+          for(var ox=0;ox<W;ox+=T) for(var oy=0;oy<H;oy+=T){
+            var n=nums.length, p=new Float32Array(n), near=1e9, j=0, inView=false;
+            for(var i=0;i<n;i+=2){
+              var x=ox+nums[i]*k, y=oy+nums[i+1]*k; p[i]=x; p[i+1]=y;
+              if(x>-4&&x<W+4&&y>-4&&y<H+4) inView=true;
+              var d=(x-cx)*(x-cx)+(y-cy)*(y-cy); if(d<near){ near=d; j=i; }
+            }
+            if(!inView) continue;
+            near=Math.sqrt(near);
+            /* each contour grows both ways from its point nearest the badge */
+            half(p.subarray(j), near, index);
+            var back=new Float32Array(j+2); for(var r=0;r<=j;r+=2){ back[r]=p[j-r]; back[r+1]=p[j-r+1]; } half(back, near, index);
+          }
+        }
+      }
+      function half(q, near, index){
+        var m=q.length/2; if(m<2) return;
+        var cum=new Float32Array(m); for(var i=1;i<m;i++) cum[i]=cum[i-1]+Math.hypot(q[2*i]-q[2*i-2],q[2*i+1]-q[2*i-1]);
+        var len=cum[m-1]; if(len<1) return;
+        lines.push({p:q,cum:cum,len:len,index:index,delay:near/far*560,dur:Math.max(260,Math.min(620,len/1.6)),at:0,seg:1});
+      }
+      var t0=performance.now(), styles=[[false,'#5d4f36',.9],[true,'#8a7d5b',1.5]];
+      function point(L,d){ var c=L.cum, s=L.seg; while(s<c.length-1&&c[s]<d) s++; var a=c[s-1], f=c[s]>a?(d-a)/(c[s]-a):1; return [L.p[2*s-2]+(L.p[2*s]-L.p[2*s-2])*f, L.p[2*s-1]+(L.p[2*s+1]-L.p[2*s-1])*f, s]; }
+      function frame(now){
+        if(done) return;
+        var t=now-t0, alive=false;
+        for(var g=0;g<2;g++){
+          ctx.strokeStyle=styles[g][1]; ctx.lineWidth=styles[g][2]; ctx.beginPath();
+          for(var li=0;li<lines.length;li++){
+            var L=lines[li]; if(L.index!==styles[g][0]) continue;
+            var q=Math.min(1,Math.max(0,(t-L.delay)/L.dur)); if(q<1) alive=true; if(q<=0||L.at>=L.len) continue;
+            var to=(1-Math.pow(1-q,3))*L.len; if(to<=L.at) continue;
+            var a=point(L,L.at); ctx.moveTo(a[0],a[1]);
+            var s=L.seg; while(s<L.cum.length&&L.cum[s]<=to){ ctx.lineTo(L.p[2*s],L.p[2*s+1]); s++; }
+            L.seg=Math.max(1,Math.min(s,L.cum.length-1)); var z=point(L,to); ctx.lineTo(z[0],z[1]); L.at=to;
+          }
+          ctx.stroke();
+        }
+        if(alive) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+};
+window.ffhSplash();
 """
 SPLASH_ON = bool(S.get('splash')) and not ARTIFACT
 

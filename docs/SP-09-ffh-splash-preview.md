@@ -8,8 +8,13 @@ Compiled against: STAMP :: D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218
 
 ## The sequence (home page only, about 2.3 s)
 
-1. **0–0.9 s:** Fitz's badge settles in on ink (`--chrome`), scaling 0.9 → 1 and fading in (D4246).
-2. **0.9–1.3 s:** hold.
+1. **0–1.1 s:** the page's own contour map traces itself in gold on the ink (Aqua, 16 Nov 2026: "topographical maps with lines extending in real time and fast", colours to match).
+   - It uses the same tile as the page's background, at the same size and origin (600 px, or 450 px under 700 px wide, from the top-left), so as the ink clears the gold lines hand over to the page's own contours.
+   - Each contour grows both ways from its point nearest the badge, so the map spreads outward from it: delay = distance ÷ farthest distance × 560 ms, and each half takes 260–620 ms depending on its length.
+   - Colours are gold `#5d4f36` (ordinary contours, 0.9 px) and champagne `#8a7d5b` (index contours, 1.5 px). These are the site's gold and champagne mixed into the ink, so there are no darker dots where pieces join.
+   - It's drawn on a canvas that adds only each frame's new piece of line. Long frames measured with the contours on match those with them off; they come from the page's own load.
+   - At the same time, Fitz's badge settles in on top, scaling 0.9 → 1 and fading in (D4246).
+2. **0.9–1.3 s:** hold, with the map complete.
 3. **1.3–2.3 s:** the badge flies to the header logo and lands on it to the pixel (D5131, measured Δ 0 px). Meanwhile the ink bleeds away from where the badge sat: a soft circle opens like a scope and fades, uncovering the home page that has been underneath the whole time.
 4. The cover is removed, and the header badge (hidden during the run) shows.
 

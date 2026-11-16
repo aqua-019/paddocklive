@@ -8,6 +8,6 @@ A clickable mockup of a Fitz Feral Hunters shop: product grid, product page, car
 | `build_mock.py` | Wraps the shop in the production shell taken from `public/services.html` |
 | `dist/shop-mockup.html` | The single-file page published as the claude.ai artifact |
 | `dist/preview.html` | The same page in a full document, for local checks |
-| `check.js` | Playwright checks (CAP-24): `node mockups/shop/check.js mockups/shop/dist/preview.html <outdir>` |
+| `check.cjs` | Playwright checks (CAP-24): `node mockups/shop/check.cjs mockups/shop/dist/preview.html <outdir>` |
 
 Rebuild after any change: `python3 src/build.py && python3 mockups/shop/build_mock.py`.

@@ -1,0 +1,1321 @@
+<title>Fitz Feral Hunters Splash</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<script>try{(function(){var r=document.documentElement,q=/[?&]splash(=|&|$)/.test(location.search);
+if(!matchMedia('(prefers-reduced-motion: no-preference)').matches)return;
+
+r.classList.add('sp-on');var i=new Image();i.src='brand/fitz-badge-768.webp';
+window.__ffhTopo=fetch('topo-tile.svg').then(function(x){return x.ok?x.text():'';}).catch(function(){return '';});})()}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: one calm document, five landmark sections hash-routed; fluid headings on a fixed 17px body; one accent, one hover verb (recolour), one curve pair; cascade in named layers. */
+@layer base, components, chrome, review, print;
+:root{
+
+  /* PALCAND "FFH Card" — sampled from the client's card: green #1b2622, gold #a07a48, champagne #cdb682, near-white type; ground kept from PAL Noma Forest Season */
+  --bg:#f8f6f2; --surface:#f1eee8; --surface-2:color-mix(in srgb, var(--bg), var(--ink) 7%);
+  --ink:#1b2622; --ink-2:color-mix(in srgb, var(--ink) 80%, var(--bg)); --ink-3:color-mix(in srgb, var(--ink) 38%, var(--bg));
+  --chrome:#1b2622; --chrome-2:color-mix(in srgb, var(--chrome), #ffffff 7%);
+  --gold:#a07a48; --gold-light:#cdb682; --gold-ink:color-mix(in srgb, var(--gold), var(--ink) 32%);
+  --accent:color-mix(in srgb, var(--chrome), #ffffff 12%); --accent-ink:#f8f6f2;
+  --line:color-mix(in srgb, var(--ink) 15%, transparent); --line-strong:color-mix(in srgb, var(--ink) 40%, transparent);
+  --wash:color-mix(in srgb, var(--ink) 8%, transparent); --wash-press:color-mix(in srgb, var(--ink) 16%, transparent);
+  --accent-hover:color-mix(in srgb, var(--accent), #ffffff 8%); --accent-press:color-mix(in srgb, var(--accent), var(--ink) 18%);
+  --focus:#2c84db; --focus-dark:#7cb8ff; --err:#9b2c20; --ok:#2E6E4E;
+  --foot-bg:var(--chrome); --foot-ink:#f8f6f2; --foot-line:color-mix(in srgb, #f8f6f2 18%, transparent);
+  --grain-blend:multiply; --grain-alpha:.16; --body-track:0; --ring:none;
+  --scrim:linear-gradient(to top, rgb(27 38 34 / .82), rgb(27 38 34 / 0) 70%);
+  --sp:"SP-01c PADDOCK";
+
+  --d700-stamp:"D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses";
+  --font-display:"Cinzel","Trajan Pro","Palatino Linotype",Georgia,serif;
+  --font-cond:"Barlow Condensed","Arial Narrow","Helvetica Neue",system-ui,sans-serif;
+  --font-body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --ease-out:cubic-bezier(.165,.84,.44,1); --ease-in:cubic-bezier(.895,.03,.685,.22);
+  --t-hover:.2s; --t-reveal:.344s; --t-exit:.2s;
+  --fs-body:17px; --lh-body:1.5; --fs-small:15px; --fs-caption:13px;
+  --fs-h1:clamp(2rem, 1.1rem + 3.4vw, 3.6rem);
+  --fs-h2:clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  --fs-h3:clamp(1.3rem, 1.15rem + .7vw, 1.6rem);
+  --fs-eyebrow:13px;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px)); --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  --radius:4px; --measure:65ch; --head-h:76px; --wrap:1180px;
+  color-scheme:light;
+  interpolate-size:allow-keywords;
+}
+
+/* body stays unlayered: the publish skeleton's own unlayered body reset would otherwise outrank a layered rule */
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/var(--lh-body) var(--font-body);letter-spacing:var(--body-track);font-variant-numeric:lining-nums proportional-nums;font-feature-settings:"pnum","lnum","liga";-webkit-font-smoothing:antialiased;text-wrap:pretty}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--chrome)}
+
+@layer base{
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.06;margin:0;text-wrap:balance;text-transform:uppercase;text-box:trim-both cap alphabetic}
+h1{font-size:var(--fs-h1);letter-spacing:.015em}
+h2{font-size:var(--fs-h2);letter-spacing:.02em}
+h3{font-family:var(--font-cond);font-size:var(--fs-h3);letter-spacing:.01em;line-height:1.05}
+p{margin:0}
+a{color:inherit;text-decoration-thickness:from-font;text-underline-offset:.14em}
+img,svg{max-width:100%;height:auto;display:block}
+button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-visible,.summary:focus-visible{outline:none}
+::selection{background:color-mix(in srgb, var(--accent) 35%, transparent)}
+[tabindex="-1"],.service,[data-page]{scroll-margin-top:calc(var(--head-h) + 24px)}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.stack>*+*{margin-block-start:var(--gap,16px)}
+.measure{max-width:var(--measure)}
+.eyebrow{font:600 var(--fs-eyebrow)/1.3 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.small{font-size:var(--fs-small)}
+.caption{font-size:var(--fs-caption);line-height:1.45;color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum","lnum"}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.mono{font-family:var(--font-mono);font-size:12px;letter-spacing:0}
+.ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+}
+
+@layer components{
+/* skip links */
+.skips{position:absolute;inset-inline-start:var(--gutter-l);top:0;z-index:40;display:flex;gap:8px}
+.skips a{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:0 0 var(--radius) var(--radius);white-space:nowrap}
+.skips a:focus{position:static;left:auto}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--chrome);color:var(--foot-ink);box-shadow:inset 0 -1px 0 var(--foot-line)}
+.site-head :focus-visible{outline-color:var(--focus-dark)}
+.logo{display:inline-flex;align-items:center;gap:10px;min-height:44px;flex:none;color:inherit;text-decoration:none}
+.logo .badge{width:56px;height:56px;display:block;flex:none}
+.wordmark{display:grid;gap:4px;font-family:var(--font-display);font-weight:700;line-height:1;text-transform:uppercase;white-space:nowrap}
+.wordmark .wm-1{font-size:25px;letter-spacing:.07em;color:var(--gold-light)}
+.wordmark .wm-2{font-size:11px;letter-spacing:.17em;color:var(--foot-ink)}
+@media (max-width:899px){.logo{gap:8px}.logo .badge{width:44px;height:44px}.wordmark{gap:3px}.wordmark .wm-1{font-size:20px}.wordmark .wm-2{font-size:9.5px;letter-spacing:.15em}}
+.foot-logo{gap:16px}
+.foot-logo .badge{width:104px;height:104px}
+.foot-logo .wordmark{gap:7px}
+.foot-logo .wordmark .wm-1{font-size:30px}
+.foot-logo .wordmark .wm-2{font-size:12.5px}
+.foot-logo .wordmark .wm-3{font:600 13px/1.2 var(--font-cond);letter-spacing:.08em;color:color-mix(in srgb, var(--foot-ink) 82%, transparent)}
+@supports (animation-timeline: scroll()){
+  .site-head{box-shadow:none;animation:scrolled-line linear both;animation-timeline:scroll(root);animation-range:0 96px}
+  @keyframes scrolled-line{from{box-shadow:inset 0 -1px 0 var(--foot-line)}to{box-shadow:inset 0 -1px 0 var(--gold),0 1px 0 var(--line)}}
+}
+.site-head .wrap{display:flex;align-items:center;gap:16px;min-height:var(--head-h)}
+.wordmark{display:flex;flex-direction:column;text-decoration:none;line-height:1;min-height:44px;justify-content:center}
+.wordmark b{font:700 22px/1 var(--font-display);text-transform:uppercase;letter-spacing:.01em}
+.wordmark small{font:600 11px/1.2 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-top:3px}
+.logo-slot{width:44px;height:44px;border:1px dashed var(--line-strong);border-radius:var(--radius);display:grid;place-items:center;font:600 9px/1.1 var(--font-mono);text-align:center;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;flex:none}
+.nav{margin-inline-start:auto}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px;align-items:center}
+.nav a:not(.btn){display:inline-flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:var(--foot-ink);font-weight:500;box-shadow:inset 0 -2px 0 transparent;transition:color var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.nav a:not(.btn):hover{color:var(--gold-light)}
+.nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--gold);font-weight:600}
+.nav .nav-cta{margin-inline-start:8px}
+.drawer{margin-inline-start:auto;display:none}
+.drawer summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid var(--foot-line);border-radius:var(--radius);font-weight:600;color:var(--foot-ink);transition:background-color var(--t-hover) var(--ease-out)}
+.drawer summary::-webkit-details-marker{display:none}
+.drawer summary:hover{background:color-mix(in srgb, var(--foot-ink) 10%, transparent)}
+.drawer[open] summary{background:color-mix(in srgb, var(--foot-ink) 10%, transparent)}
+.drawer ul{list-style:none;margin:0;padding:8px var(--gutter-r) 12px var(--gutter-l);position:absolute;inset-inline:0;top:100%;background:var(--chrome);color:var(--foot-ink);box-shadow:inset 0 1px 0 var(--foot-line),0 1px 0 var(--line)}
+.drawer li a{display:flex;align-items:center;min-height:48px;text-decoration:none;font-weight:500;padding:0 4px;box-shadow:inset 0 -1px 0 var(--foot-line);transition:color var(--t-hover) var(--ease-out)}
+.drawer li a:hover{color:var(--gold-light)}
+.drawer li a[aria-current="page"]{font-weight:700;color:var(--gold-light)}
+@media (max-width:899px){.nav{display:none}.drawer{display:block;position:static}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:var(--radius);border:1.5px solid transparent;font-weight:600;text-decoration:none;cursor:pointer;background:transparent;position:relative;transition:background-color var(--t-hover) var(--ease-out),color var(--t-hover) var(--ease-out),border-color var(--t-hover) var(--ease-out)}
+.btn::after{content:"";position:absolute;inset:-4px}
+.btn-primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn-primary:active{background:var(--accent-press);border-color:var(--accent-press)}
+.btn-gold{background:var(--gold-light);color:var(--chrome);border-color:var(--gold-light)}
+.btn-gold:hover{background:color-mix(in srgb, var(--gold-light), #ffffff 14%);border-color:color-mix(in srgb, var(--gold-light), #ffffff 14%)}
+.btn-gold:active{background:var(--gold);border-color:var(--gold)}
+.btn-secondary{border-color:var(--line-strong);color:var(--ink)}
+.btn-secondary:hover{background:var(--wash)}
+.btn-secondary:active{background:var(--wash-press)}
+.btn-quiet{min-height:44px;padding:0 12px;color:var(--ink-2);text-decoration:underline;text-underline-offset:.16em}
+.btn-quiet:hover{color:var(--ink)}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.7;cursor:progress}
+.btn .spin{width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 1s linear infinite;display:none}
+.btn.is-busy .spin{display:inline-block}
+@keyframes spin{to{rotate:1turn}}
+.copy{display:inline-flex;align-items:center;gap:6px;min-height:44px;min-width:44px;padding:0 10px;border:1px solid var(--line-strong);border-radius:var(--radius);background:transparent;font:600 13px/1 var(--font-body);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background-color var(--t-hover) var(--ease-out),color var(--t-hover) var(--ease-out),border-color var(--t-hover) var(--ease-out)}
+.copy:hover{background:var(--wash)}
+.copy[data-state="copied"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.contact-line{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.contact-line .kv{display:flex;align-items:center;gap:10px;min-width:0}
+.contact-line .kv b{font-weight:600;font-size:var(--fs-small);color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+.contact-line .kv span{font-weight:500;overflow-wrap:anywhere}
+.contact-line .kv span a,.confirm .small a,.form .note a,.gal figcaption a{display:inline-block;padding-block:12px;margin-block:-12px}
+@media (pointer:coarse){.copy,.nav a:not(.btn){min-height:48px}}
+
+/* sections */
+.page{padding-block:56px 72px;content-visibility:auto;contain-intrinsic-size:auto 900px}
+.page+.page{box-shadow:inset 0 1px 0 var(--line)}
+.band{padding-block:56px}
+.band.alt{background:var(--surface)}
+.band+.band{box-shadow:inset 0 1px 0 var(--line)}
+.band.invert{background:var(--foot-bg);color:var(--foot-ink)}
+.band.invert .eyebrow,.band.invert .caption{color:color-mix(in srgb, var(--foot-ink) 70%, transparent)}
+.sec-head{display:grid;gap:12px;margin-block-end:32px;max-width:52rem}
+.grid{display:grid;gap:24px}
+@media (min-width:700px){.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:699px){.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:900px){.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:899px) and (min-width:700px){.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* hero */
+.hero{padding-block:48px 56px}
+.hero-grid{display:grid;gap:32px;align-items:start}
+@media (min-width:900px){.hero-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px}.hero{padding-block:64px 72px}}
+.hero h1{max-width:14ch}
+.hero .lede{font-size:clamp(17px, 1rem + .35vw, 21px);line-height:1.45;max-width:var(--measure);color:var(--ink)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.descriptors{font:600 13px/1.6 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink)}
+.descriptors span{color:var(--gold);padding-inline:2px}
+.card-figure{margin:12px 0 0;display:grid;gap:8px}
+.card-figure img{width:100%;height:auto;border-radius:var(--radius);box-shadow:inset 0 0 0 1px var(--line)}
+.flag{display:inline-block;font:600 11px/1.2 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:3px 6px;vertical-align:middle}
+
+/* photo slots: honest placeholders, ratio-locked */
+.slot{position:relative;background:var(--surface-2);border-radius:var(--radius);overflow:hidden;aspect-ratio:var(--ar,4/3);max-width:100%;box-shadow:var(--ring);isolation:isolate}
+.slot::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px;opacity:var(--grain-alpha);mix-blend-mode:var(--grain-blend)}
+.slot::after{content:"";position:absolute;inset:0;background:var(--scrim);z-index:1;pointer-events:none}
+.slot .tag{position:absolute;top:10px;left:10px;z-index:2;font:600 10px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);border:1px dashed var(--line-strong);background:color-mix(in srgb, var(--bg) 70%, transparent);padding:3px 6px;border-radius:3px}
+.slot .label{position:absolute;inset-inline:12px;bottom:12px;z-index:2;color:var(--foot-ink);font:600 14px/1.3 var(--font-body)}
+.slot .label small{display:block;font:500 12px/1.3 var(--font-body);letter-spacing:.04em;opacity:.8;text-transform:uppercase}
+.slot .mark{position:absolute;inset:0;display:grid;place-items:center;z-index:0;color:var(--ink-3);font:700 clamp(28px,6vw,56px)/1 var(--font-cond);text-transform:uppercase;letter-spacing:.02em;opacity:.5}
+.slot.thermal{--slot-tint:color-mix(in srgb, var(--surface-2), var(--chrome) 22%);background:var(--slot-tint)}
+
+/* credentials wall */
+.creds{list-style:none;margin:0;padding:0;display:grid;gap:20px 24px}
+@media (min-width:700px){.creds{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:699px){.creds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.creds li{border-top:2px solid var(--gold);padding-top:12px;display:grid;gap:4px;min-width:0}
+.creds .eyebrow{color:var(--ink-2)}
+.creds b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;overflow-wrap:anywhere}
+.creds p{font-size:var(--fs-small);color:var(--ink-2)}
+.creds li.note{border-top-style:dashed;border-top-width:1px;border-top-color:var(--line-strong)}
+.status{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:var(--fs-small)}
+.status i{width:10px;height:10px;border-radius:50%;background:var(--ok);flex:none}
+
+/* service tiles */
+.tile{position:relative;display:grid;gap:12px;padding:20px;border-radius:var(--radius);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);min-width:0;container-type:inline-size;contain:layout paint}
+@container (min-width:340px){.tile{padding:24px}}
+.tile p{color:var(--ink-2);font-size:var(--fs-small)}
+.tile .stretch{position:absolute;inset:0;border-radius:inherit}
+.tile .btn{justify-self:start;position:relative;z-index:1}
+
+/* how it works */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:24px;counter-reset:step}
+@media (min-width:900px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.steps li{counter-increment:step;display:grid;gap:8px;position:relative;padding-left:0;min-width:0}
+.steps li::before{content:counter(step,decimal-leading-zero);font:700 15px/1 var(--font-mono);color:var(--ink-2);letter-spacing:.06em}
+.steps li::after{content:"";height:2px;background:var(--chrome);order:-1}
+@media (max-width:899px){.steps{border-left:2px solid var(--chrome);padding-left:20px}.steps li::after{display:none}}
+.steps b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase}
+.steps p{font-size:var(--fs-small);color:var(--ink-2)}
+
+/* drone feature band */
+.band.drone{background:var(--chrome);color:var(--foot-ink)}
+.band.drone .eyebrow,.band.drone .caption{color:var(--gold-light)}
+.band.drone h2{color:var(--foot-ink)}
+.band.drone .measure{color:color-mix(in srgb, var(--foot-ink) 85%, transparent)}
+.drone-grid{display:grid;gap:32px;align-items:center}
+@media (min-width:900px){.drone-grid{grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:48px}}
+.drone-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.drone-list li{display:flex;gap:10px;align-items:baseline;font-size:var(--fs-small);color:color-mix(in srgb, var(--foot-ink) 82%, transparent);border-top:1px solid var(--foot-line);padding-top:8px}
+.drone-list li b{color:var(--gold-light);font-weight:600;white-space:nowrap}
+.band.drone .btn-primary{background:var(--gold-light);color:var(--chrome);border-color:var(--gold-light)}
+.band.drone .btn-primary:hover{background:color-mix(in srgb, var(--gold-light), #ffffff 14%)}
+.band.drone .btn-quiet{color:var(--gold-light)}
+.band.drone .btn-quiet:hover{color:var(--foot-ink)}
+.band.drone :focus-visible{outline-color:var(--focus-dark)}
+.band.drone .slot{--scrim:linear-gradient(to top, rgb(27 38 34 / .9), rgb(27 38 34 / .1) 70%);box-shadow:inset 0 0 0 1px var(--foot-line)}
+.band.drone .slot .tag{color:var(--gold-light);border-color:var(--foot-line);background:color-mix(in srgb, var(--chrome) 70%, transparent)}
+
+/* trust triad */
+.triad{display:grid;gap:24px}
+@media (min-width:700px){.triad{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.triad div{display:grid;gap:6px;border-top:2px solid var(--gold);padding-top:14px}
+.triad b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase}
+.triad p{color:var(--ink-2);font-size:var(--fs-small)}
+
+/* testimonials (slots) */
+.ghost{border:1px dashed var(--line-strong);border-radius:var(--radius);padding:20px;display:grid;gap:10px;color:var(--ink-2);min-height:150px}
+.ghost q{font-size:var(--fs-body);font-style:italic;quotes:"\201C" "\201D"}
+.ghost .who{font-size:var(--fs-caption);letter-spacing:.04em;text-transform:uppercase}
+
+/* area chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.chips li{border:1px solid var(--line-strong);border-radius:999px;padding:6px 12px;font-size:var(--fs-small);font-weight:500}
+
+/* prose pages */
+.prose{max-width:var(--measure);display:grid;gap:18px}
+.prose h3{margin-top:12px}
+.prose ul{margin:0;padding-left:20px;display:grid;gap:6px}
+details.faq{border-top:1px solid var(--line)}
+details.faq:last-of-type{border-bottom:1px solid var(--line)}
+details.faq summary{cursor:pointer;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;list-style:none;padding:8px 0}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font:700 22px/1 var(--font-cond);color:var(--ink-2)}
+details.faq[open] summary::after{content:"\2212"}
+details.faq p{padding-bottom:16px;color:var(--ink-2);font-size:var(--fs-small)}
+details.faq::details-content{height:0;overflow:clip}
+details.faq[open]::details-content{height:auto}
+.service{display:grid;gap:10px;padding-block:24px;box-shadow:inset 0 1px 0 var(--line)}
+@media (min-width:700px){.service{grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:32px}}
+.service ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:var(--fs-small);display:grid;gap:4px}
+
+/* gallery */
+.gal{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:700px){.gal{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
+.gal li{content-visibility:auto;contain-intrinsic-size:auto 260px}
+.gal button{all:unset;display:block;cursor:pointer;border-radius:var(--radius);width:100%}
+.gal button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.gal .slot{--ar:4/3}
+.gal figcaption{font-size:var(--fs-caption);color:var(--ink-2);margin-top:6px}
+dialog.lightbox{border:0;padding:0;background:var(--bg);color:var(--ink);width:min(96vw, 1100px);max-width:none;border-radius:var(--radius);overscroll-behavior:contain;box-shadow:var(--ring)}
+dialog::backdrop{background:rgb(0 0 0 / .62)}
+dialog.lightbox .frame{display:grid;gap:12px;padding:16px}
+dialog.lightbox .bar{display:flex;align-items:center;gap:8px;justify-content:space-between}
+dialog.lightbox .bar .btn{min-width:44px}
+dialog.lightbox .slot{--ar:3/2}
+
+/* form */
+.form{display:grid;gap:20px;max-width:40rem}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.field legend{font-weight:600}
+.field .hint{font-size:var(--fs-caption);color:var(--ink-2)}
+.field input,.field textarea{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--ink);transition:border-color var(--t-hover) var(--ease-out),background-color var(--t-hover) var(--ease-out)}
+.field textarea{min-height:120px;resize:vertical;field-sizing:content}
+.field input:hover,.field textarea:hover{border-color:var(--ink-2)}
+.field input:user-invalid,.field textarea:user-invalid,.field .is-invalid{border-color:var(--err)}
+.field .err{font-size:var(--fs-caption);color:var(--err);font-weight:600;display:none}
+.field.has-err .err{display:block}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+.checks{display:grid;gap:4px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.checks label{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:500;cursor:pointer}
+.checks input{width:20px;height:20px;accent-color:var(--accent);margin:0}
+.summary{border:1.5px solid var(--err);border-radius:var(--radius);padding:14px 16px;display:grid;gap:6px}
+.summary ul{margin:0;padding-left:18px}
+.summary a{color:var(--err);font-weight:600}
+.confirm{border:2px solid var(--ok);border-radius:var(--radius);padding:20px;display:grid;gap:10px;background:var(--surface)}
+.confirm b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase}
+.form .note{font-size:var(--fs-caption);color:var(--ink-2)}
+
+/* contact page layout */
+.contact-grid{display:grid;gap:40px}
+@media (min-width:900px){.contact-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+.contact-list{display:grid;gap:18px}
+.contact-list .kv{display:grid;gap:4px}
+.contact-list .kv b{font-weight:600;font-size:var(--fs-small);color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+.contact-list .kv .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.contact-list .kv .row span{font:600 clamp(20px, 1rem + 1vw, 26px)/1.2 var(--font-body);overflow-wrap:anywhere}
+.socials{display:flex;flex-wrap:wrap;gap:12px}
+.socials a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--radius);text-decoration:none;font-weight:600;transition:background-color var(--t-hover) var(--ease-out)}
+.socials a:hover{background:var(--wash)}
+
+/* footer */
+.site-foot{background:var(--foot-bg);color:var(--foot-ink);padding-block:48px 40px;box-shadow:inset 0 1px 0 var(--gold)}
+.site-foot .wrap{display:grid;gap:32px}
+@media (min-width:700px){.site-foot .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}}
+.site-foot h4{font-size:13px;letter-spacing:.1em;color:var(--gold-light);margin-bottom:10px;font-family:var(--font-body);font-weight:600;text-box:normal}
+.site-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.site-foot li a{display:flex;align-items:center;min-height:44px;min-width:44px;text-decoration:none;transition:color var(--t-hover) var(--ease-out)}
+.site-foot li a:hover{color:color-mix(in srgb, var(--foot-ink) 70%, transparent)}
+.site-foot .cred-strip{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:var(--fs-small);font-weight:500;color:var(--gold-light);border-top:1px solid var(--gold);padding-top:16px}
+.site-foot .legal{font-size:var(--fs-caption);color:color-mix(in srgb, var(--foot-ink) 65%, transparent);display:flex;flex-wrap:wrap;gap:6px 18px}
+
+/* sticky mobile CTA bar */
+.cta-bar{position:fixed;inset-inline:0;bottom:0;z-index:15;display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--bg);box-shadow:inset 0 1px 0 var(--line-strong);padding:8px var(--gutter-r) calc(8px + env(safe-area-inset-bottom,0px)) var(--gutter-l)}
+.cta-bar .btn{min-height:48px;padding-inline:12px}
+@media (min-width:900px){.cta-bar{display:none}}
+@media (max-width:899px){.site-foot{padding-bottom:calc(40px + 72px + env(safe-area-inset-bottom,0px))}}
+
+/* compare slider (SP-02 set-piece) */
+.compare{margin:0;--split:50%}
+.compare .frame{position:relative;aspect-ratio:2/1;max-width:100%;border-radius:var(--radius);overflow:hidden;box-shadow:var(--ring)}
+@media (max-width:699px){.compare .frame{aspect-ratio:4/3}}
+.compare .frame .slot{position:absolute;inset:0;aspect-ratio:auto;border-radius:0}
+.compare .frame .top{position:absolute;inset:0;clip-path:inset(0 0 0 var(--split))}
+.compare .frame .top .label{inset-inline:auto 12px;text-align:right}
+.compare .frame .top .tag{left:auto;right:10px}
+.compare .handle{position:absolute;top:0;bottom:0;left:var(--split);width:2px;background:var(--ink);z-index:3;pointer-events:none;translate:-1px 0}
+.compare .handle::before{content:"";position:absolute;top:50%;left:50%;translate:-50% -50%;width:40px;height:40px;border-radius:50%;background:var(--bg);border:2px solid var(--ink);box-shadow:0 0 0 4px color-mix(in srgb, var(--bg) 40%, transparent)}
+.compare .ctl{display:grid;gap:6px;margin-top:12px}
+.compare .ctl input{width:100%;min-height:44px;accent-color:var(--accent);margin:0}
+.compare .ctl span{font-size:var(--fs-caption);color:var(--ink-2);display:flex;justify-content:space-between;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.hero-bleed{position:relative}
+.hero-bleed .text{position:relative;z-index:2}
+.bleed{margin-inline:calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r))}
+@media (min-width:1212px){.bleed{margin-inline:0}}
+
+/* motion: content reveals only, never chrome; declared only when motion is wanted (hard gate) */
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+    @keyframes rise{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+  }
+  dialog{opacity:0;translate:0 8px;transition:opacity var(--t-exit) var(--ease-in),translate var(--t-exit) var(--ease-in),overlay var(--t-exit) allow-discrete,display var(--t-exit) allow-discrete}
+  dialog[open]{opacity:1;translate:0 0;transition-duration:var(--t-reveal);transition-timing-function:var(--ease-out)}
+  @starting-style{dialog[open]{opacity:0;translate:0 8px}}
+  dialog::backdrop{opacity:0;transition:opacity var(--t-exit) var(--ease-in),overlay var(--t-exit) allow-discrete,display var(--t-exit) allow-discrete}
+  dialog[open]::backdrop{opacity:1;transition-duration:var(--t-reveal);transition-timing-function:var(--ease-out)}
+  @starting-style{dialog[open]::backdrop{opacity:0}}
+  details.faq::details-content{transition:height var(--t-reveal) var(--ease-out),content-visibility var(--t-reveal) allow-discrete}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+
+/* platform accessibility schemes */
+@media (forced-colors: active){
+  .btn,.copy,.socials a,.chips li{border:2px solid ButtonText}
+  .status i,.steps li::after,.creds li{forced-color-adjust:none}
+  .slot::before,.slot::after{display:none}
+}
+@media (prefers-contrast: more){
+  :root{--line:var(--line-strong);--ink-2:var(--ink)}
+}
+}
+
+@layer components{
+/* ---- v2 topographic sheet layer (SP-01b): contour field, MGA grid, map marginalia. Every stroke is bark ink at ≤12% alpha; nothing animates. */
+:root{--km:150px; --topo-alpha:1}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:var(--topo-alpha);
+  background-image:url("topo-tile.svg"),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 6%, transparent) 0 1px, transparent 1px var(--km)),
+    repeating-linear-gradient(180deg, color-mix(in srgb, var(--ink) 6%, transparent) 0 1px, transparent 1px var(--km));
+  background-size:600px 600px, var(--km) var(--km), var(--km) var(--km);background-position:0 0, 0 0, 0 0}
+@media (max-width:699px){body::after{background-image:url("topo-tile.svg");background-size:450px 450px;--topo-alpha:.85}}
+@media print{body::after{display:none}}
+.band.alt{background:color-mix(in srgb, var(--surface) 86%, transparent)}
+
+.tile,.ghost,.field input,.field textarea,.confirm,.summary{background:color-mix(in srgb, var(--bg) 92%, transparent)}
+.tile{background:color-mix(in srgb, var(--bg) 94%, transparent)}
+
+/* sheet meta line on section heads */
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font:500 11px/1.4 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.meta b{font-weight:700;color:var(--ink)}
+.meta .lead{flex:1 1 40px;min-width:24px;border-bottom:1px dotted var(--line-strong);translate:0 -4px}
+.sec-head .meta{order:-1}
+
+/* north arrow + datum chip in the header */
+.datum{display:none;align-items:center;gap:8px;margin-inline-start:12px;font:600 10px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+@media (min-width:1100px){.datum{display:inline-flex}}
+.north{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round}
+.north .fill{fill:currentColor;stroke:none}
+
+/* scale bar: 150 px = 1 km at this sheet's scale */
+.scalebar{display:flex;align-items:flex-end;gap:0;font:500 10px/1 var(--font-mono);letter-spacing:.06em;color:var(--ink-2);margin:0;user-select:none}
+.scalebar .bar{display:flex;height:6px;width:var(--km);box-shadow:inset 0 0 0 1px var(--ink)}
+.scalebar .bar i{flex:1;background:var(--ink)}
+.scalebar .bar i:nth-child(even){background:transparent}
+.scalebar .ticks{display:flex;justify-content:space-between;width:calc(var(--km) + 2.2ch);margin-left:-1.1ch;margin-top:5px}
+.scalebar .ticks span{text-align:center;width:2.2ch}
+.scalebar .unit{margin-left:10px;margin-bottom:1px}
+.scalebar.stack{flex-direction:column;align-items:flex-start}
+.divider{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:14px;border-top:1px solid var(--line)}
+.divider .mono{color:var(--ink-2);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* locality map + legend */
+.area-grid{display:grid;gap:28px}
+@media (min-width:900px){.area-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:start}}
+.map-scroll{overflow-x:auto;overscroll-behavior-x:contain;border-radius:var(--radius)}
+@media (max-width:699px){.map-scroll .map{min-width:640px}.map-scroll::after{content:"scroll sideways for the whole sheet";display:block;font:500 11px/1.4 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);padding:6px 0 0}}
+.map{display:block;width:100%;height:auto;background:color-mix(in srgb, var(--bg) 70%, transparent);box-shadow:inset 0 0 0 1px var(--line-strong);border-radius:var(--radius)}
+.map text{font-family:var(--font-mono);font-size:11px;fill:var(--ink);letter-spacing:.04em}
+.map .edge{font-size:9.5px;fill:var(--ink-2)}
+.map .grid{stroke:var(--ink);stroke-opacity:.14;stroke-width:1}
+.map .ring{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:3 4;stroke-opacity:.55}
+.map .town{fill:var(--bg);stroke:var(--ink);stroke-width:1.6}
+.map .base{fill:var(--accent);stroke:var(--ink);stroke-width:1.2}
+.map .frame{fill:none;stroke:var(--ink);stroke-width:1}
+.map .scale{stroke:var(--ink);stroke-width:1}
+.legend{display:grid;gap:10px;align-content:start}
+.legend dl{margin:0;display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px 14px;align-items:center;font-size:var(--fs-small)}
+.legend dt{height:18px;display:flex;align-items:center}
+.legend dd{margin:0;color:var(--ink-2)}
+.legend dd b{color:var(--ink);font-weight:600}
+.legend svg{width:56px;height:18px;overflow:visible}
+.legend .k{stroke:var(--ink);fill:none;stroke-width:1.2}
+.chips li .gr{font:500 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--ink-2);margin-left:8px}
+
+/* marginalia beside prose */
+.notes-layout{display:grid;gap:24px}
+@media (min-width:900px){.notes-layout{grid-template-columns:minmax(0,1fr) 15rem;gap:48px;align-items:start}}
+.margin-notes{display:grid;gap:14px;font-size:var(--fs-caption);line-height:1.45;color:var(--ink-2);border-left:1px solid var(--line-strong);padding-left:16px;position:sticky;top:calc(var(--head-h) + 24px)}
+@media (max-width:899px){.margin-notes{position:static;border-left:0;padding-left:0;border-top:1px dotted var(--line-strong);padding-top:14px}}
+.margin-notes p{display:grid;grid-template-columns:2ch 1fr;gap:6px}
+.margin-notes .n{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.margin-notes h4{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-box:normal}
+
+/* photo frames: registration ticks */
+.slot .corner{position:absolute;width:12px;height:12px;z-index:2;border:1.5px solid color-mix(in srgb, var(--foot-ink) 85%, transparent)}
+.slot .corner.tl{top:8px;left:8px;border-right:0;border-bottom:0}.slot .corner.tr{top:8px;right:8px;border-left:0;border-bottom:0}
+.slot .corner.bl{bottom:8px;left:8px;border-right:0;border-top:0}.slot .corner.br{bottom:8px;right:8px;border-left:0;border-top:0}
+.slot .label{inset-inline:22px;bottom:22px}
+
+/* ledger list with dotted leaders */
+.ledger{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ledger li{display:flex;align-items:baseline;gap:8px;font-size:var(--fs-small)}
+.ledger li b{font-weight:600;white-space:nowrap}
+.ledger li .lead{flex:1;border-bottom:1px dotted var(--line-strong);min-width:16px;translate:0 -4px}
+.ledger li span:last-child{color:var(--ink-2);text-align:right}
+
+/* footer marginalia */
+.site-foot .margin{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font:500 11px/1.5 var(--font-mono);letter-spacing:.05em;text-transform:uppercase;color:color-mix(in srgb, var(--foot-ink) 65%, transparent);border-top:1px solid var(--foot-line);padding-top:14px}
+.site-foot :focus-visible,.band.invert :focus-visible,.cta-bar :focus-visible{outline-color:var(--focus-dark)}
+.site-foot .scalebar{color:color-mix(in srgb, var(--foot-ink) 75%, transparent)}
+.site-foot .scalebar .bar{box-shadow:inset 0 0 0 1px var(--foot-ink)}
+.site-foot .scalebar .bar i{background:var(--foot-ink)}
+.site-foot .scalebar .bar i:nth-child(even){background:transparent}
+.site-foot .north{color:color-mix(in srgb, var(--foot-ink) 75%, transparent)}
+}
+
+@layer review{
+/* reviewer chrome (not part of the site) */
+.varbar{background:var(--surface-2);color:var(--ink);font:500 12px/1.4 var(--font-mono);border-bottom:1px solid var(--line)}
+.varbar .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;min-height:40px;padding-block:6px}
+.varbar strong{font-weight:700}
+.varbar .grow{flex:1 1 auto;min-width:0}
+.varbar .short{display:none}
+@media (max-width:699px){.varbar .long{display:none}.varbar .short{display:inline}.varbar .wrap{gap:6px 8px}.varbar button,.varbar a{padding:2px 8px}}
+.varbar button,.varbar a{font:inherit;min-height:32px;padding:2px 10px;border:1px solid var(--line-strong);border-radius:var(--radius);background:transparent;color:inherit;cursor:pointer;text-decoration:none;transition:background-color var(--t-hover) var(--ease-out),border-color var(--t-hover) var(--ease-out)}
+.varbar button:hover,.varbar a:hover{background:var(--wash)}
+.varbar button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.varbar a[aria-disabled="true"]{opacity:.55;pointer-events:none}
+@media (pointer:coarse){.varbar button,.varbar a{min-height:44px}}
+[data-motion="off"] *{animation:none!important;transition:none!important}
+[data-xray] [data-per]{outline:1px dashed color-mix(in srgb, var(--focus) 80%, transparent);outline-offset:-1px}
+dialog.spec{border:0;padding:0;width:min(96vw, 920px);max-width:none;max-height:92vh;background:var(--bg);color:var(--ink);border-radius:var(--radius);overscroll-behavior:contain;box-shadow:var(--ring)}
+dialog.spec .inner{padding:20px 20px 28px;display:grid;gap:18px;font-size:var(--fs-small)}
+dialog.spec h2{font-size:var(--fs-h3)}
+dialog.spec h3{font:600 13px/1.3 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-box:normal}
+dialog.spec pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 var(--font-mono);background:var(--surface);padding:12px;border-radius:var(--radius);margin:0;max-height:40vh;overflow:auto}
+dialog.spec .ids{columns:2;column-gap:24px;font:12px/1.5 var(--font-mono);margin:0;padding:0;list-style:none}
+@media (min-width:700px){dialog.spec .ids{columns:3}}
+dialog.spec .ids li{break-inside:avoid;overflow-wrap:anywhere}
+dialog.spec .counts{display:flex;flex-wrap:wrap;gap:8px 20px;font:600 13px/1.4 var(--font-mono)}
+dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;background:var(--bg);padding:12px 20px;box-shadow:inset 0 -1px 0 var(--line);z-index:2}
+}
+
+@layer print{
+@media print{
+  :root{--bg:#ffffff;--surface:#f4f4f4;--surface-2:#ececec;--ink:#111111;--ink-2:#444444;--ink-3:#999999;--line:#cccccc;--line-strong:#999999;--foot-bg:#ffffff;--foot-ink:#111111;--foot-line:#cccccc;--ring:inset 0 0 0 1px #cccccc;--scrim:none;--grain-alpha:0}
+  .varbar,.cta-bar,.skips,.drawer,.nav .nav-cta,dialog,.flag{display:none!important}
+  [data-page]{display:block!important}
+  .page{content-visibility:visible}
+  .reveal{animation:none!important;opacity:1!important}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:11px;color:#444}
+}
+}
+
+.varbar .hide{margin-inline-start:4px}
+.varbar[hidden]{display:none}
+.notfound{padding-block:96px}
+@layer components{
+/* v1.0 · real photos and video in the registration-tick frame */
+figure.slot{margin:0}
+.slot.photo picture{display:contents}
+.slot.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot.video{background:var(--chrome)}
+.slot.video::before,.slot.video::after{display:none}
+.slot.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--chrome);z-index:1}
+.slot .corner,.slot .dur{pointer-events:none}
+.slot.video .corner.bl,.slot.video .corner.br{display:none}
+.slot.photo::before,.slot.photo::after{display:none}
+.slot.video .corner.tl{display:none}
+.slot.video .play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:var(--radius)}
+.slot.video .play span{width:68px;height:68px;border-radius:50%;background:var(--gold-light);display:grid;place-items:center;transition:background-color var(--t-hover,.2s) cubic-bezier(.165,.84,.44,1)}
+.slot.video .play span::before{content:"";margin-left:6px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent var(--chrome)}
+.slot.video .play:hover span{background:color-mix(in srgb, var(--gold-light), #ffffff 18%)}
+.slot.video .play:focus-visible{outline:3px solid var(--focus-dark);outline-offset:-6px}
+.slot .dur{position:absolute;left:10px;top:10px;z-index:2;font:600 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--foot-ink);background:color-mix(in srgb, var(--chrome) 78%, transparent);padding:5px 7px;border-radius:3px}
+.vid.is-playing .dur{display:none}
+.vid{margin:0;display:grid;gap:10px;min-width:0;align-content:start}
+.vid figcaption{font-size:var(--fs-small);color:var(--ink-2);max-width:60ch}
+.vid figcaption b{display:block;color:var(--ink);font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;margin-bottom:4px}
+.band.drone .vid figcaption{color:color-mix(in srgb, var(--foot-ink) 78%, transparent)}
+.band.drone .vid figcaption b{color:var(--foot-ink)}
+.vids{list-style:none;margin:0;padding:0;display:grid;gap:28px;align-items:start}
+.vids .slot.video video{object-fit:cover}
+.vids .vid.is-playing .slot.video video{object-fit:contain}
+@media (min-width:700px){.vids{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.job-grid{display:grid;gap:24px}
+.job-grid .side{display:grid;gap:24px;align-content:start}
+@media (min-width:800px){.job-grid{grid-template-columns:minmax(0,.62fr) minmax(0,1fr);align-items:start}}
+@media (max-width:799px){.vid.tall .slot{--ar:4/5 !important}}
+h2.sub{font-size:var(--fs-h3);font-family:var(--font-cond);margin:8px 0 0}
+.stack>h2.sub+ul{margin-block-start:16px}
+dialog.lightbox .slot.in-lb{aspect-ratio:auto;height:min(72vh,720px)}
+dialog.lightbox .slot.in-lb img{object-fit:contain;background:var(--chrome)}
+.about-photos .slot{--ar:4/5 !important}
+/* v1.1 · seven nav links: tighten between the drawer breakpoint and the full width */
+@media (min-width:900px) and (max-width:1199px){.site-head .datum{display:none !important}.nav a:not(.btn){padding:0 8px}.nav .nav-cta{margin-inline-start:4px}}
+@media (min-width:900px) and (max-width:1023px){.nav a:not(.btn){padding:0 6px;font-size:16px}.nav .nav-cta .btn{padding-inline:12px !important}}
+.faq-index ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.faq-index a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--radius);text-decoration:none;font-weight:600;transition:background-color var(--t-hover) var(--ease-out)}
+.faq-index a:hover{background:var(--wash)}
+.faq-group,.g-block{scroll-margin-top:calc(var(--head-h) + 16px)}
+.faq-index .count{margin-inline-start:8px;font-weight:500;color:var(--ink-2)}
+.faq-group h2.sub{margin-bottom:8px}
+.cred-card h3{margin:0}
+details.faq p a{color:var(--ink);text-underline-offset:.16em}
+/* v1.0 final · About: the bio with one square portrait */
+.bio{display:grid;gap:24px;align-items:start}
+.bio .slot{max-width:640px;width:100%}
+.bio .lede{margin:0}
+
+/* v1.0 final · mobile pass */
+html{text-size-adjust:100%;-webkit-tap-highlight-color:color-mix(in srgb, var(--gold) 22%, transparent)}
+.nf-links{list-style:none;padding:0;display:grid;gap:0}
+.nf-links a{display:flex;align-items:center;min-height:44px}
+.cta-bar .ico{width:18px;height:18px;flex:none}
+.cta-bar .btn{white-space:nowrap;gap:8px}
+.cta-bar{transition:translate .2s cubic-bezier(.165,.84,.44,1),visibility 0s linear 0s}
+.cta-bar[data-off]{translate:0 calc(100% + 2px);visibility:hidden;transition:translate .2s cubic-bezier(.895,.03,.685,.22),visibility 0s linear .2s}
+@media (prefers-reduced-motion:reduce){.cta-bar,.cta-bar[data-off]{transition:none}}
+.contact-list .kv .row a.tel,.contact-list .kv .row a.mail,.site-foot p a.tel,.site-foot p a.mail{display:inline-block;padding-block:11px;margin-block:-11px}
+.site-foot .cols{display:grid;gap:28px}
+@media (max-width:699px){
+  .site-foot .cols>div:nth-child(2) ul{grid-template-columns:1fr 1fr;column-gap:16px}
+  .contact-line{gap:4px 20px}
+  .contact-line .kv{flex-wrap:wrap;row-gap:0}
+  .contact-line .kv span a{overflow-wrap:normal;word-break:normal}
+  .contact-line .kv b{font-size:13px}
+  .tile{padding:18px 18px 12px;gap:8px}
+  .tile .btn{min-height:44px;padding:0;border:0;background:none;text-decoration:underline;text-underline-offset:.18em;font-size:var(--fs-small);flex-direction:row;flex-wrap:nowrap;gap:6px}
+  .tile .btn::after{content:"→";position:static;inset:auto;text-decoration:none;display:inline-block}
+  .tile .btn:hover{background:none;color:var(--gold-ink)}
+  .proof-link{width:100%}
+}
+@media (max-width:359px){
+  .cta-bar .bar-long{display:none}
+  .cta-bar .btn{padding-inline:8px;font-size:16px}
+  .cta-row .btn{flex:1 1 100%}
+}
+@media (orientation:landscape) and (max-height:500px){
+  .site-head{position:relative}
+  .cta-bar{padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+  .cta-bar .btn{min-height:44px}
+}
+/* v1.1 · the sample report as proof: a hero link and a card that looks like the report's first page */
+.proof-link{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:8px 16px;border-radius:var(--radius);background:color-mix(in srgb, var(--gold-light) 30%, var(--bg));box-shadow:inset 0 0 0 1.5px var(--gold);color:var(--ink);text-decoration:none;font-size:var(--fs-small);justify-self:start;width:fit-content;max-width:100%;transition:background-color var(--t-hover) var(--ease-out)}
+.proof-link b{font-weight:700}
+.proof-link:hover{background:color-mix(in srgb, var(--gold-light) 55%, var(--bg))}
+.rc-ico{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.report-card{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:20px;align-items:center;padding:16px;border-radius:var(--radius);background:color-mix(in srgb, var(--gold-light) 18%, var(--bg));box-shadow:inset 0 0 0 2px var(--gold);color:var(--ink);text-decoration:none;max-width:40rem;transition:background-color var(--t-hover) var(--ease-out)}
+.report-card:hover{background:color-mix(in srgb, var(--gold-light) 34%, var(--bg))}
+.report-card:hover .rc-cta{background:color-mix(in srgb, var(--gold-light), #ffffff 14%)}
+.band.drone .report-card:focus-visible{outline-color:var(--focus-dark)}
+.rc-sheet{display:grid;gap:6px;align-content:start;background:#fbfaf7;border-top:3px solid var(--gold);border-radius:3px;padding:10px 10px 12px;box-shadow:inset 0 0 0 1px var(--line),0 1px 0 var(--line)}
+.rc-run{font:600 8.5px/1.2 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.rc-title{font:700 13px/1.05 var(--font-display);text-transform:uppercase;letter-spacing:.01em;color:var(--ink)}
+.rc-meta{display:grid;grid-template-columns:auto minmax(0,1fr);font-size:9px;line-height:1.3;box-shadow:inset 0 0 0 1px var(--line)}
+.rc-k{background:var(--chrome);color:var(--foot-ink);font-weight:600;padding:3px 6px;border-bottom:1px solid var(--foot-line)}
+.rc-v{padding:3px 6px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-sheet img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:2px}
+.rc-body{display:grid;gap:8px;align-content:center;justify-items:start}
+.rc-tag{display:inline-flex;align-items:center;gap:6px;font:600 var(--fs-eyebrow)/1.3 var(--font-body);letter-spacing:.09em;text-transform:uppercase;color:var(--gold-ink)}
+.rc-tag .rc-ico{width:16px;height:16px}
+.rc-head{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;color:var(--ink)}
+.rc-text{font-size:var(--fs-small);color:var(--ink-2)}
+.rc-cta{margin-top:4px;white-space:nowrap}
+.contact-list .kv .row .hint-copy{font:500 var(--fs-caption)/1.3 var(--font-body);color:var(--ink-2)}
+.band.drone .report-card{background:var(--bg);box-shadow:inset 0 0 0 2px var(--gold-light)}
+.band.drone .report-card:hover{background:color-mix(in srgb, var(--gold-light) 22%, var(--bg))}
+.band.drone .report-card .rc-head{color:var(--ink)}
+@media (max-width:520px){.report-card{grid-template-columns:1fr;gap:14px}.rc-sheet{max-width:210px}.rc-meta{display:none}}
+/* v1.1 · the sample report: a document sheet on the topo ground */
+.report{background:var(--bg);box-shadow:inset 0 0 0 1px var(--line-strong);border-top:3px solid var(--gold);border-radius:var(--radius);padding:clamp(20px,4vw,48px);max-width:52rem;display:grid;gap:14px}
+.report>*{margin:0}
+.report h2{font-size:var(--fs-h2)}
+.report h3{margin-top:14px;font-size:var(--fs-h3)}
+.report h4{font:700 15px/1.3 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-top:4px}
+.report ul,.report ol{padding-left:22px;display:grid;gap:6px}
+.report-run{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0}
+.report-head{display:grid;gap:8px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.report-head>*{margin:0}
+.report-sub{color:var(--ink-2)}
+.report-meta{display:grid;grid-template-columns:minmax(110px,auto) minmax(0,1fr);gap:0;margin:8px 0 0;font-size:var(--fs-small);box-shadow:inset 0 0 0 1px var(--line)}
+.report-meta dt{font-weight:600;background:var(--chrome);color:var(--foot-ink);padding:8px 12px;border-bottom:1px solid var(--foot-line)}
+.report-meta dd{margin:0;padding:8px 12px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.report-fig{margin:6px 0;max-width:34rem;display:grid;gap:8px}
+.report-fig figcaption{font-size:var(--fs-caption);color:var(--ink-2);font-style:italic}
+.report-foot{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:10px;margin-top:10px}
+.report-foot p{margin:0}
+.stack>h2.sub+ol.creds{margin-block-start:24px}
+@media (min-width:700px){.creds.creds-6{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cred-card .eyebrow{margin:0}
+/* v1.0 · phone numbers and the toast */
+a.tel{white-space:nowrap;color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;font-weight:600}
+a.tel:hover{color:var(--gold-ink)}
+.site-foot a.tel:hover,.band.invert a.tel:hover{color:var(--gold-light)}
+.contact-list .kv .row a.tel,.contact-list .kv .row a.mail{font:600 clamp(20px, 1rem + 1vw, 26px)/1.2 var(--font-body);overflow-wrap:anywhere}
+.contact-list .kv .row a.mail{font-size:19px}
+a.mail{color:inherit}
+.hint-copy{display:none;font-size:var(--fs-caption);color:var(--ink-2);font-weight:500}
+@media (hover:hover) and (pointer:fine){.hint-copy{display:inline}.touch-only{display:none !important}}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:60;background:var(--chrome);color:var(--foot-ink);padding:12px 18px;border-radius:var(--radius);font-weight:600;font-size:var(--fs-small);box-shadow:inset 0 0 0 1px var(--gold);max-width:calc(100vw - 32px);opacity:0;visibility:hidden;transition:opacity .2s cubic-bezier(.165,.84,.44,1),visibility 0s linear .2s}
+.toast.on{opacity:1;visibility:visible;transition:opacity .2s cubic-bezier(.165,.84,.44,1),visibility 0s}
+@media (max-width:899px){.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){.toast,.toast.on{transition:none}}
+/* v1.0 · the receipt dialog */
+dialog.sent{border:0;padding:0;background:var(--bg);color:var(--ink);width:min(94vw,600px);max-width:none;max-height:min(90vh,820px);border-radius:var(--radius);box-shadow:inset 0 0 0 2px var(--ok);overscroll-behavior:contain}
+dialog.sent[data-state="fallback"],dialog.sent[data-state="failed"]{box-shadow:inset 0 0 0 2px var(--gold)}
+dialog.sent::backdrop{background:rgb(27 38 34 / .62)}
+dialog.sent .frame{display:grid;gap:14px;padding:24px}
+dialog.sent h2{margin:0;font-size:var(--fs-h2)}
+dialog.sent h2:focus-visible{outline:none}
+dialog.sent #sent-lede{margin:0}
+dialog.sent .eyebrow{margin:0;color:var(--ok)}
+dialog.sent[data-state="fallback"] .eyebrow,dialog.sent[data-state="failed"] .eyebrow{color:var(--gold-ink)}
+.sent-list{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 16px;margin:0;padding:14px 16px;background:var(--surface);border-radius:var(--radius);font-size:var(--fs-small)}
+.sent-list dt{font-weight:600;color:var(--ink-2);text-transform:uppercase;font-size:12px;letter-spacing:.06em;padding-top:2px}
+.sent-list dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
+#sent-ref:empty,#sent-actions[hidden]{display:none}
+dialog.sent[data-state="fallback"] #sent-close,dialog.sent[data-state="failed"] #sent-close{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="failed"] #sent-close:hover{background:var(--wash)}
+/* v1.0 · reviews */
+.review{border-radius:var(--radius);padding:20px;display:grid;gap:10px;align-content:start;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);margin:0;min-width:0}
+.review blockquote{margin:0}
+.review .who{font-size:var(--fs-caption);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+.review .caption{margin:0}
+.review .reply{margin:0;border-left:2px solid var(--gold);padding-left:12px;font-size:var(--fs-small);color:var(--ink-2)}
+.review-empty,.review-closed{grid-column:1/-1;box-shadow:inset 0 0 0 1px var(--line-strong)}
+.reviews-write{display:grid;gap:24px;max-width:44rem}
+.field select{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--ink);font:inherit}
+.field select:hover{border-color:var(--ink-2)}
+.consent label{display:flex;gap:12px;align-items:flex-start;font-weight:500;cursor:pointer}
+.consent input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
+.cf-turnstile{min-height:65px}
+/* v1.2 · one gold Contact button in the nav and drawer */
+.drawer li.drawer-cta{padding-top:12px}
+.drawer li.drawer-cta a.btn{justify-content:center;box-shadow:none;color:var(--chrome);font-weight:700;padding:0 20px}
+.drawer li.drawer-cta a.btn:hover,.drawer li.drawer-cta a.btn[aria-current="page"]{color:var(--chrome)}
+/* v1.2 · reviews: stars, verified jobs, photos */
+.rv-stars{display:inline-flex;gap:2px;color:var(--gold)}
+.rv-stars svg{width:18px;height:18px;fill:currentColor;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round}
+.rv-stars svg.off{fill:transparent}
+.rv-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.rv-verified{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-caption);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ok)}
+.rv-verified svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.rv-photos,.rv-picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0;max-width:22rem}
+.rv-photos a{display:block;border-radius:var(--radius);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line);min-height:44px}
+.rv-photos img,.rv-picks img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--surface)}
+.rv-sum{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.rv-sum .rv-stars svg{width:24px;height:24px}
+.rv-sum b{font:700 var(--fs-h3)/1 var(--font-cond);letter-spacing:.01em}
+.rv-sum span:last-child{color:var(--ink-2);font-size:var(--fs-small)}
+.rv-how{border-radius:var(--radius);padding:20px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-strong);display:grid;gap:10px}
+.rv-how ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:var(--fs-small)}
+.rv-invite{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:var(--radius);box-shadow:inset 0 0 0 2px var(--ok);background:var(--surface);margin:0}
+.rv-invite .ico{color:var(--ok);margin-top:3px}
+.rv-invite.is-old{box-shadow:inset 0 0 0 2px var(--gold)}
+.rv-invite.is-old .ico{color:var(--gold)}
+.rate .opts{display:flex;gap:2px;margin-inline-start:-6px;position:relative}
+.rate .row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.rate label{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius);cursor:pointer}
+.rate label svg{width:34px;height:34px;fill:transparent;stroke:var(--ink-2);stroke-width:1.4;stroke-linejoin:round;transition:fill var(--t-hover) var(--ease-out),stroke var(--t-hover) var(--ease-out)}
+:where(.rate:has(input[value="1"]:checked)) .opts label:nth-of-type(-n+1) svg,
+:where(.rate:has(input[value="2"]:checked)) .opts label:nth-of-type(-n+2) svg,
+:where(.rate:has(input[value="3"]:checked)) .opts label:nth-of-type(-n+3) svg,
+:where(.rate:has(input[value="4"]:checked)) .opts label:nth-of-type(-n+4) svg,
+:where(.rate:has(input[value="5"]:checked)) .opts label:nth-of-type(-n+5) svg{fill:var(--gold);stroke:var(--gold)}
+@media (hover:hover){.rate .opts:hover label svg{fill:transparent;stroke:var(--ink-2)}.rate .opts label:hover svg,.rate .opts label:has(~ label:hover) svg{fill:var(--gold-light);stroke:var(--gold)}}
+.rate input:focus-visible + label{outline:2px solid var(--focus);outline-offset:-2px}
+.rate legend,#r-photos-field legend{padding:0}
+.rate-out{font-weight:600;color:var(--ink-2);font-size:var(--fs-small)}
+.field.rate.has-err label svg{stroke:var(--err)}
+.field .count{font-size:var(--fs-caption);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.field .count.is-ok{color:var(--ok);font-weight:600}
+.pick-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pick-in:focus-visible + .btn{outline:2px solid var(--focus);outline-offset:2px}
+.rv-picks:empty{display:none}
+.rv-picks li{display:grid;gap:4px}
+.rv-picks .rm{min-height:44px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:transparent;cursor:pointer;font-weight:600;font-size:var(--fs-small);transition:background-color var(--t-hover) var(--ease-out)}
+.rv-picks .rm:hover{background:var(--wash)}
+.rv-head-cta{justify-self:start}
+/* v1.3 · Fitz's badge (SP-08): hero seal, page-head seals, About sign-off, report letterhead, 404 */
+.hero-media{position:relative}
+.hero-seal{position:absolute;z-index:3;right:16px;bottom:-30px;width:136px;height:136px;filter:drop-shadow(0 6px 16px rgb(27 38 34 / .38))}
+@media (max-width:899px){.hero-seal{right:12px;bottom:-26px;width:96px;height:96px}}
+.with-seal{grid-template-columns:minmax(0,1fr) auto;column-gap:28px;align-items:start;max-width:none}
+.with-seal .sh-text{display:grid;gap:12px;min-width:0;max-width:52rem}
+.with-seal .head-seal{width:var(--seal,136px);height:var(--seal,136px)}
+@media (max-width:699px){.with-seal{grid-template-columns:minmax(0,1fr);row-gap:14px}.with-seal .head-seal{order:-1;width:76px;height:76px}}
+.contact-grid .with-seal{margin:0;--seal:104px}
+@media (max-width:699px){.contact-grid .with-seal .head-seal{width:72px;height:72px}}
+.signoff{display:flex;align-items:center;gap:16px;margin-block:8px 4px}
+.signoff .badge{width:88px;height:88px;flex:none}
+.signoff p{margin:0;display:grid;gap:2px}
+.signoff b{font:700 18px/1.15 var(--font-display);text-transform:uppercase;letter-spacing:.04em;color:var(--ink)}
+.signoff span{font-size:var(--fs-small);color:var(--ink-2)}
+.report-head{position:relative;padding-right:100px;min-height:80px}
+.report-badge{position:absolute;top:0;right:0;width:80px;height:80px}
+@media (max-width:599px){.report-head{padding-right:72px;min-height:60px}.report-badge{width:60px;height:60px}}
+.nf-badge{width:120px;height:120px;margin-bottom:8px}
+}
+
+[data-sheet='off'] body::after{display:none}
+
+/* SP-09 preview · splash: the page's contours trace out in gold from the badge, then the ink bleeds away and the badge lands on the header logo */
+@property --hole{syntax:'<percentage>';inherits:false;initial-value:-20%}
+:root{--z-splash:9999}
+.splash{display:none}
+html.sp-on .splash{display:block;position:fixed;inset:0;z-index:var(--z-splash);animation:sp-failsafe .3s linear 4.5s forwards}
+.sp-ink{position:absolute;inset:0;background:var(--chrome);--hole:-20%;
+  -webkit-mask-image:radial-gradient(circle at 50% 46%, transparent var(--hole), #000 calc(var(--hole) + 18%));
+          mask-image:radial-gradient(circle at 50% 46%, transparent var(--hole), #000 calc(var(--hole) + 18%))}
+.sp-topo{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sp-badge{position:absolute;left:50%;top:46%;width:min(62vw,300px);height:auto;aspect-ratio:1/1;translate:-50% -50%;opacity:0;filter:drop-shadow(0 14px 36px rgb(0 0 0 / .45))}
+.sp-skip{position:absolute;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));min-height:44px;padding:0 18px;border:1px solid var(--foot-line);border-radius:var(--radius);background:transparent;color:var(--foot-ink);font:600 15px/1 var(--font-body);cursor:pointer;transition:background-color var(--t-hover) var(--ease-out)}
+.sp-skip:hover{background:color-mix(in srgb, var(--foot-ink) 10%, transparent)}
+html.sp-on .site-head .logo .badge{opacity:0;animation:sp-show 0s linear 4.8s forwards}
+@keyframes sp-failsafe{to{opacity:0;visibility:hidden}}
+@keyframes sp-show{to{opacity:1}}
+</style>
+
+<div class="splash" aria-hidden="true"><div class="sp-ink"><canvas class="sp-topo"></canvas></div><img class="sp-badge" src="brand/fitz-badge-768.webp" width="300" height="300" alt="" decoding="async" loading="lazy"><button type="button" class="sp-skip" tabindex="-1">Skip</button></div><svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 11h7M9 14.5h7M9 18h4"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.75 5.9 6.45.75-4.8 4.4 1.3 6.35L12 17l-5.7 3.2 1.3-6.35-4.8-4.4 6.45-.75z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol><symbol id="i-north" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8"/><path class="fill" d="M12 3l4.5 9h-9z"/></symbol></svg>
+<div class="skips"><a href="#main">Skip to content</a><a href="https://fitzferalhunters.com.au/contact#enquiry">Skip to contact</a></div>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="https://fitzferalhunters.com.au/" aria-label="Fitz Feral Hunters, home"><img class="badge" src="brand/fitz-badge-160.webp" srcset="brand/fitz-badge-96.webp 96w, brand/fitz-badge-160.webp 160w, brand/fitz-badge-256.webp 256w, brand/fitz-badge-384.webp 384w, brand/fitz-badge-512.webp 512w, brand/fitz-badge-768.webp 768w" sizes="(min-width:900px) 56px, 44px" width="56" height="56" alt="" decoding="async" fetchpriority="high"><span class="wordmark"><span class="wm-1">Fitz</span><span class="wm-2">Feral Hunters</span></span></a>
+    <span class="datum" title="Grid: MGA zone 55, GDA2020"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>N · MGA 55</span></span>
+    <nav class="nav" aria-label="Primary"><ul><li><a href="https://fitzferalhunters.com.au/" aria-current=page>Home</a></li><li><a href="https://fitzferalhunters.com.au/services">Services</a></li><li><a href="https://fitzferalhunters.com.au/credentials">Credentials</a></li><li><a href="https://fitzferalhunters.com.au/about">About</a></li><li><a href="https://fitzferalhunters.com.au/gallery">Gallery</a></li><li><a href="https://fitzferalhunters.com.au/faq">FAQ</a></li><li><a href="https://fitzferalhunters.com.au/reviews">Reviews</a></li><li class="nav-cta"><a class="btn btn-gold" href="https://fitzferalhunters.com.au/contact" style="min-height:44px;padding-inline:20px">Contact</a></li></ul></nav>
+    <details class="drawer" id="drawer"><summary aria-label="Menu" aria-expanded="false">Menu</summary><ul><li><a href="https://fitzferalhunters.com.au/" aria-current=page>Home</a></li><li><a href="https://fitzferalhunters.com.au/services">Services</a></li><li><a href="https://fitzferalhunters.com.au/credentials">Credentials</a></li><li><a href="https://fitzferalhunters.com.au/about">About</a></li><li><a href="https://fitzferalhunters.com.au/gallery">Gallery</a></li><li><a href="https://fitzferalhunters.com.au/faq">FAQ</a></li><li><a href="https://fitzferalhunters.com.au/reviews">Reviews</a></li><li class="drawer-cta"><a class="btn btn-gold" href="https://fitzferalhunters.com.au/contact">Contact</a></li></ul></details>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div class="stack" style="--gap:22px">
+      <p class="meta"><b>Sheet</b><span>Home</span><span class="lead" aria-hidden="true"></span><span>GR <span class="num">063 758</span></span><span>MGA 55 · GDA2020</span></p>
+      <p class="eyebrow">Warragul, Gippsland · covering all of Victoria</p>
+      <h1 id="h-home" tabindex="-1">Professional pest &amp; vermin control across Victoria</h1>
+      <p class="lede">Licensed, insured feral animal control for farmers and landholders. Deer, rabbits, foxes, kangaroos, pigs and wild dogs, planned properly, done humanely, and the place left as I found it.</p>
+      <p class="descriptors">Contract pest control <span aria-hidden="true">·</span> Deer &amp; feral management <span aria-hidden="true">·</span> Thermal hunting <span aria-hidden="true">·</span> Farm security</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://fitzferalhunters.com.au/contact#enquiry" data-focus="enquiry">Request a quote</a>
+        <a class="btn btn-secondary num" href="tel:+61499866580">Call 0499 866 580</a>
+      </div>
+      <a class="proof-link" href="https://fitzferalhunters.com.au/drone-report"><svg class="rc-ico" aria-hidden="true"><use href="#i-doc"/></svg><span><b>Real job:</b> see a sample drone survey report</span><span aria-hidden="true">&rarr;</span></a>
+      <div class="contact-line">
+        <div class="kv"><b><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Phone</b><span><a class="tel num" href="tel:+61499866580">0499 866 580</a></span><span class="hint-copy">Click to copy</span></div>
+        <div class="kv"><b><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>Email</b><span><a class="mail" href="mailto:fitzferalhunters1@gmail.com?subject=Enquiry%20from%20the%20website">fitzferalhunters1@gmail.com</a></span><button type="button" class="copy" data-copy="fitzferalhunters1@gmail.com" aria-label="Copy email address">Copy</button></div>
+        <div class="kv"><b><svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg>Follow</b><span><a href="https://www.instagram.com/gippsland_gunner/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/search/top?q=Fitz%20Feral%20Hunters" target="_blank" rel="noopener">Facebook</a></span></div>
+      </div>
+    </div>
+    <div class="hero-media"><figure class="slot photo" style="--ar:4/5" data-ratio="806/1008"><picture><source type="image/webp" srcset="media/photo/fitz-hero-806-9a8152f3.webp 806w, media/photo/fitz-hero-640-5c8bfe3b.webp 640w" sizes="(min-width:900px) 40vw, 100vw"><img src="media/photo/fitz-hero-806-9a8152f3.jpg" srcset="media/photo/fitz-hero-806-9a8152f3.jpg 806w, media/photo/fitz-hero-640-5c8bfe3b.jpg 640w" sizes="(min-width:900px) 40vw, 100vw" alt="Robert Fitzgerald in a cap and olive fleece, binoculars on his chest, standing in a grassy paddock in low light beside his rifle and thermal scope on a tripod, with tall gum trees behind." width="806" height="1008" decoding="async" fetchpriority="high"></picture><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i></figure><img class="badge hero-seal" src="brand/fitz-badge-384.webp" srcset="brand/fitz-badge-96.webp 96w, brand/fitz-badge-160.webp 160w, brand/fitz-badge-256.webp 256w, brand/fitz-badge-384.webp 384w, brand/fitz-badge-512.webp 512w, brand/fitz-badge-768.webp 768w" sizes="(min-width:900px) 136px, 96px" width="136" height="136" alt="" decoding="async" loading="lazy"></div>
+  </div>
+</section>
+<div class="wrap divider"><span class="mono">Credentials</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band alt">
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Licensed · insured · accountable</p>
+      <h2>The paperwork is in order before the 4WD leaves the shed</h2>
+      <p class="status"><i aria-hidden="true"></i> Taking enquiries across Victoria</p>
+      
+    </div>
+    <ol class="creds reveal" aria-label="Credentials"><li><span class="eyebrow">Credential</span><b class="num">Firearms licence</b><p>Victorian firearms licence, current</p></li><li><span class="eyebrow">Credential</span><b class="num">Game Licence</b><p>Victorian Game Licence (deer)</p></li><li><span class="eyebrow">Credential</span><b class="num">SSAA member</b><p>Sporting Shooters&#x27; Association of Australia</p></li><li><span class="eyebrow">Credential</span><b class="num">Farmer Assist</b><p>SSAA Farmer Assist accredited</p></li><li><span class="eyebrow">Credential</span><b class="num">First Aid</b><p>Current first-aid certificate</p></li><li><span class="eyebrow">Credential</span><b class="num">AHCPMG304</b><p>Humane dispatch, nationally recognised unit</p></li><li><span class="eyebrow">Credential</span><b class="num">$20m public liability</b><p>Elders Insurance, every job covered</p></li><li class=note><span class="eyebrow">Note</span><b class="num">Certificates on request</b><p>Certificates and currency documents available on request, before work starts</p></li></ol>
+    <div class="cta-row"><a class="btn btn-secondary" href="https://fitzferalhunters.com.au/credentials">Credentials and insurance in full</a></div>
+  </div>
+</section>
+<div class="wrap divider"><span class="mono">Services</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band">
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head reveal"><p class="eyebrow">Services</p><h2>What I'm called out for</h2>
+      <p class="measure">Deer, rabbit and fox work is most of it. The rest is kangaroos, pigs and wild dogs. Night and thermal where it counts.</p></div>
+    <div class="grid grid-3">
+    <article class="tile reveal">
+      <h3>Deer control</h3><p>Sambar and fallow deer hammering pasture, fences, crops and tree plantings. Thermal-assisted night work, planned around your stock and your neighbours.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-deer" data-focus="svc-deer" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-deer" data-focus="svc-deer">Details<span class="sr"> for Deer control</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Rabbits</h3><p>Warrens under the fence line and chewed-out pasture. Control planned alongside your own warren work.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-rabbits" data-focus="svc-rabbits" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-rabbits" data-focus="svc-rabbits">Details<span class="sr"> for Rabbits</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Foxes</h3><p>Lamb and poultry losses, especially around lambing. Timed to the season and your stock.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-foxes" data-focus="svc-foxes" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-foxes" data-focus="svc-foxes">Details<span class="sr"> for Foxes</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Kangaroo culling</h3><p>Where numbers are hurting pasture, fences and water. Carried out under a valid Authority to Control Wildlife and the relevant code.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-kangaroos" data-focus="svc-kangaroos" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-kangaroos" data-focus="svc-kangaroos">Details<span class="sr"> for Kangaroo culling</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Feral pigs</h3><p>Dug-up paddocks, fouled dams and crop losses. Pigs move at night, so most pig work is thermal.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-pigs" data-focus="svc-pigs" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-pigs" data-focus="svc-pigs">Details<span class="sr"> for Feral pigs</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Wild dogs</h3><p>Stock attacks and losses on the bush edge. Planned with you and your neighbours where it helps.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-wild-dogs" data-focus="svc-wild-dogs" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-wild-dogs" data-focus="svc-wild-dogs">Details<span class="sr"> for Wild dogs</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Farm security</h3><p>After-hours monitoring and rapid response for properties with ongoing stock or asset risk.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-farm-security" data-focus="svc-farm-security" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-farm-security" data-focus="svc-farm-security">Details<span class="sr"> for Farm security</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Night work and thermal</h3><p>Most feral animals move after dark. Thermal optics find them, count them and take them cleanly, without lighting up the paddock.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-night" data-focus="svc-night" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-night" data-focus="svc-night">Details<span class="sr"> for Night work and thermal</span></a>
+    </article>
+    <article class="tile reveal">
+      <h3>Thermal drone scouting</h3><p>Daytime surveys with a DJI Matrice 4T: find the mob, count it and map where it moves before anyone walks in.</p>
+      <a class="stretch" href="https://fitzferalhunters.com.au/services#svc-drone" data-focus="svc-drone" aria-hidden="true" tabindex="-1"></a>
+      <a class="btn btn-secondary" href="https://fitzferalhunters.com.au/services#svc-drone" data-focus="svc-drone">Details<span class="sr"> for Thermal drone scouting</span></a>
+    </article></div>
+  </div>
+</section>
+
+<div class="wrap divider"><span class="mono">Thermal drone</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band drone">
+  <div class="wrap drone-grid">
+    <div class="stack reveal" style="--gap:16px">
+      <p class="eyebrow">New capability</p>
+      <h2>Thermal drone scouting with a DJI Matrice 4T</h2>
+      <p class="measure">Before a program starts, a daytime drone survey finds the mob, counts it and maps where it moves. Fewer wasted trips, a better plan, and a record you can keep.</p>
+      <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Mapping</b> the gullies, tree lines and tracks they use</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
+      <a class="report-card on-dark" href="https://fitzferalhunters.com.au/drone-report">
+      <span class="rc-sheet" aria-hidden="true"><span class="rc-run">Fitz Feral Hunters · Drone survey report</span><span class="rc-title">Drone property survey report</span><span class="rc-meta"><span class="rc-k">Report date</span><span class="rc-v">October 2026</span><span class="rc-k">Drone platform</span><span class="rc-v">DJI (visual RGB survey)</span><span class="rc-k">Location</span><span class="rc-v">Rural property, Gippsland, Victoria</span></span><img src="media/photo/report-fig1-512-4d5fcd03.jpg" alt="" width="512" height="287" loading="lazy" decoding="async"></span>
+      <span class="rc-body"><span class="rc-tag"><svg class="rc-ico" aria-hidden="true"><use href="#i-doc"/></svg>Real job · sample report</span><span class="rc-head">See what a drone survey gives you</span><span class="rc-text">A real report from a Gippsland property: what was seen, the habitat, findings and next steps. Property details removed.</span><span class="btn btn-gold rc-cta">Read the report <span aria-hidden="true">&rarr;</span></span></span>
+    </a>
+      <p style="margin:0"><a class="btn btn-quiet" href="https://fitzferalhunters.com.au/services#svc-drone" data-focus="svc-drone">Drone scouting details</a></p>
+    </div>
+    <figure class="vid"><div class="slot video" style="--ar:848/672"><video controls preload="none" playsinline poster="media/photo/drone-thermal-mob-poster-848-ae60778d.webp" width="848" height="672" aria-label="Video: Thermal drone: finding the mob" aria-describedby="vd-drone-thermal-mob"><source src="https://fitzferalhunters.com.au/media/video/drone-thermal-mob-1147f4e4.mp4" type="video/mp4"><a href="https://fitzferalhunters.com.au/media/video/drone-thermal-mob-1147f4e4.mp4">Download the video (0:47)</a></video><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="dur num" aria-hidden="true">0:47</span></div><figcaption><b>Thermal drone: finding the mob</b> From the thermal drone: a mob picked up on an open hillside and followed into the timber, before anyone walks in.</figcaption><p class="sr" id="vd-drone-thermal-mob">Black-and-white thermal footage from a drone flying over a hillside at first light. Several animals show as bright white shapes, first in the open and then moving through scattered trees. Length 0:47, no sound.</p></figure>
+  </div>
+</section>
+<div class="wrap divider"><span class="mono">How it works</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band alt">
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head reveal"><p class="eyebrow">How it works</p><h2>Four steps, no surprises</h2></div>
+    <ol class="steps"><li class="reveal"><b>Contact</b><p>Ring or send the enquiry form. Tell me the property, the animal and what it is costing you.</p></li><li class="reveal"><b>Site visit and plan</b><p>I walk the property with you, look at the damage and the ground, and we agree a plan, dates and safety arrangements.</p></li><li class="reveal"><b>The job</b><p>Planned, insured and done humanely under the codes. Stock, neighbours and access are sorted before the first night.</p></li><li class="reveal"><b>Follow-up</b><p>A short report on what was done and what to watch for, and a return visit if the numbers call for it.</p></li></ol>
+  </div>
+</section>
+<div class="wrap divider"><span class="mono">Standards</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band">
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head reveal"><p class="eyebrow">Why landholders call Fitz</p><h2>Turns up. Does it properly. Leaves it as found.</h2></div>
+    <div class="triad reveal">
+      <div><b>Licensed and insured</b><p>Firearms and Game licences, SSAA Farmer Assist, First Aid and $20 million public liability with Elders Insurance. Certificates on request.</p></div>
+      <div><b>Planned, not improvised</b><p>Every job starts with a walk of the property and a written plan: stock, neighbours, access, safe lines of fire, dates.</p></div>
+      <div><b>Humane under the codes</b><p>AHCPMG304 humane dispatch. Clean, legal and professional is the standard, not the upsell.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap divider"><span class="mono">From the job</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band">
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head reveal"><p class="eyebrow">From the job</p><h2>Drone, thermal and trail camera</h2>
+      <p class="measure">Real footage from properties across Victoria. Locations are never shown. Nothing plays or downloads until you press play.</p></div>
+    <div class="job-grid">
+      <figure class="vid tall"><div class="slot video" style="--ar:464/848"><video controls preload="none" playsinline poster="media/photo/deer-mob-hillside-poster-464-ac606385.webp" width="464" height="848" aria-label="Video: Fallow deer on a hillside paddock" aria-describedby="vd-deer-mob-hillside"><source src="https://fitzferalhunters.com.au/media/video/deer-mob-hillside-8e1838f8.mp4" type="video/mp4"><a href="https://fitzferalhunters.com.au/media/video/deer-mob-hillside-8e1838f8.mp4">Download the video (0:27)</a></video><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="dur num" aria-hidden="true">0:27</span></div><figcaption><b>Fallow deer on a hillside paddock</b> A mob of fallow deer moving up a steep paddock. Numbers like this are why landholders call.</figcaption><p class="sr" id="vd-deer-mob-hillside">Phone video, filmed upright, of a large mob of fallow deer in mixed colours running up a steep green hillside under a grey sky, past a fence line. Length 0:27, no sound.</p></figure>
+      <div class="side"><figure class="vid"><div class="slot video" style="--ar:848/464"><video controls preload="none" playsinline poster="media/photo/trailcam-stag-night-poster-848-7a264a09.webp" width="848" height="464" aria-label="Video: Stag on the trail camera before dawn" aria-describedby="vd-trailcam-stag-night"><source src="https://fitzferalhunters.com.au/media/video/trailcam-stag-night-537ca029.mp4" type="video/mp4"><a href="https://fitzferalhunters.com.au/media/video/trailcam-stag-night-537ca029.mp4">Download the video (0:20)</a></video><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="dur num" aria-hidden="true">0:20</span></div><figcaption><b>Stag on the trail camera before dawn</b> Trail cameras show what moves through and when. This stag came past at 5:58 am.</figcaption><p class="sr" id="vd-trailcam-stag-night">Black-and-white night footage from a trail camera on a bush track. An antlered stag walks across close to the camera and out of frame. Length 0:20, no sound.</p></figure><figure class="vid"><div class="slot video" style="--ar:848/464"><video controls preload="none" playsinline poster="media/photo/drone-first-light-poster-848-caec9292.webp" width="848" height="464" aria-label="Video: Early morning from the drone" aria-describedby="vd-drone-first-light"><source src="https://fitzferalhunters.com.au/media/video/drone-first-light-bf4716bd.mp4" type="video/mp4"><a href="https://fitzferalhunters.com.au/media/video/drone-first-light-bf4716bd.mp4">Download the video (1:00)</a></video><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="dur num" aria-hidden="true">1:00</span></div><figcaption><b>Early morning from the drone</b> An early-morning flight over hill country: deer picked out in the paddock from the air, then the gullies and tree lines they use.</figcaption><p class="sr" id="vd-drone-first-light">Aerial drone footage on a frosty morning over rolling paddocks. Three deer graze in a paddock seen from directly above, then the drone flies along gullies and tree lines. Length 1:00, no sound.</p></figure></div>
+    </div>
+    <div class="cta-row"><a class="btn btn-secondary" href="https://fitzferalhunters.com.au/gallery">All videos and photos</a></div>
+  </div>
+</section>
+<div class="wrap divider"><span class="mono">Reviews</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band alt" id="reviews-home">
+  <div class="wrap stack" style="--gap:28px">
+    <div class="sec-head reveal"><p class="eyebrow">Reviews</p><h2>What landholders say</h2>
+      <p class="measure small" style="color:var(--ink-2)">Every genuine review from someone Fitz has worked for goes up, good or bad, whatever the star rating, and each one is matched to a real job first. The only ones held back are spam, reviews from people he hasn&#x27;t worked for, abuse, and anything that names a property&#x27;s location or a person who hasn&#x27;t agreed to it. Reviews are never edited. A photo that shows where a property is, a number plate or someone&#x27;s face is left off.</p></div>
+    <div class="rv-sum" data-review-summary hidden></div>
+    <div class="grid grid-3" data-reviews="3" aria-live="polite"><div class="review review-empty" id="review-empty"><b>No reviews on the site yet.</b><p class="small" style="color:var(--ink-2);margin:0">If Fitz has done a job for you, yours can be the first. <a href="https://fitzferalhunters.com.au/reviews#write">Leave a review</a>.</p></div></div>
+    <div class="cta-row"><a class="btn btn-secondary" href="https://fitzferalhunters.com.au/reviews#write">Leave a review</a><a class="btn btn-quiet" href="https://fitzferalhunters.com.au/reviews">Read all reviews</a></div>
+  </div>
+</section>
+<div class="wrap divider"><span class="mono">Service area</span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure></div>
+<section class="band">
+  <div class="wrap stack" style="--gap:24px">
+    <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in Warragul, covering all of Victoria</h2>
+      <p class="measure">Gippsland comes first: it's home ground. Beyond it the 4WD goes anywhere in the state, for farms and private landholders. Ring and we'll work out the trip.</p></div>
+    
+    <ul class="chips reveal" aria-label="Regions served"><li>Gippsland</li><li>Latrobe Valley</li><li>South Gippsland</li><li>East Gippsland</li><li>Mornington Peninsula</li><li>Yarra Valley &amp; Dandenongs</li><li>North East &amp; High Country</li><li>Goulburn Valley</li><li>Central Victoria</li><li>Western District</li><li>Wimmera &amp; Mallee</li><li>Anywhere in Victoria by arrangement</li></ul>
+  </div>
+</section>
+<section class="band invert">
+  <div class="wrap stack" style="--gap:20px">
+    <h2 style="max-width:16ch">Got deer on the fence line? Get in touch.</h2>
+    <div class="cta-row">
+        <a class="btn btn-gold" href="https://fitzferalhunters.com.au/contact#enquiry" data-focus="enquiry">Request a quote</a>
+        <a class="btn btn-secondary num" href="tel:+61499866580" style="border-color:var(--foot-line);color:var(--foot-ink)">Call 0499 866 580</a>
+      </div>
+    <p class="caption">fitzferalhunters1@gmail.com · Instagram @gippsland_gunner · Facebook Fitz Feral Hunters</p>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot" id="footer">
+  <div class="wrap">
+    <div class="cols">
+      <div class="stack" style="--gap:12px">
+        <a class="logo foot-logo" href="https://fitzferalhunters.com.au/" aria-label="Fitz Feral Hunters, Protecting Victoria&#x27;s Farms, home"><img class="badge" src="brand/fitz-badge-256.webp" srcset="brand/fitz-badge-96.webp 96w, brand/fitz-badge-160.webp 160w, brand/fitz-badge-256.webp 256w, brand/fitz-badge-384.webp 384w, brand/fitz-badge-512.webp 512w, brand/fitz-badge-768.webp 768w" sizes="104px" width="104" height="104" alt="" decoding="async" loading="lazy"><span class="wordmark"><span class="wm-1">Fitz</span><span class="wm-2">Feral Hunters</span><span class="wm-3">Protecting Victoria&#x27;s Farms</span></span></a>
+        <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across all of Victoria.</p>
+        <p class="small"><a class="tel num" href="tel:+61499866580">0499 866 580</a> · <a class="mail" href="mailto:fitzferalhunters1@gmail.com?subject=Enquiry%20from%20the%20website">fitzferalhunters1@gmail.com</a></p>
+      </div>
+      <div><h4>Pages</h4><ul><li><a href="https://fitzferalhunters.com.au/">Home</a></li><li><a href="https://fitzferalhunters.com.au/services">Services</a></li><li><a href="https://fitzferalhunters.com.au/credentials">Credentials</a></li><li><a href="https://fitzferalhunters.com.au/about">About</a></li><li><a href="https://fitzferalhunters.com.au/gallery">Gallery</a></li><li><a href="https://fitzferalhunters.com.au/faq">FAQ</a></li><li><a href="https://fitzferalhunters.com.au/reviews">Reviews</a></li><li><a href="https://fitzferalhunters.com.au/contact">Contact</a></li><li><a href="https://fitzferalhunters.com.au/drone-report">Sample drone report</a></li></ul></div>
+      <div><h4>Elsewhere</h4><ul><li><a href="https://www.instagram.com/gippsland_gunner/" target="_blank" rel="noopener">Instagram @gippsland_gunner</a></li><li><a href="https://www.facebook.com/search/top?q=Fitz%20Feral%20Hunters" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://fitzferalhunters.com.au/contact#enquiry" data-focus="enquiry">Request a quote</a></li></ul></div>
+    </div>
+    <div class="cred-strip" aria-label="Credentials"><span>Firearms licence</span><span>Game Licence</span><span>SSAA member</span><span>Farmer Assist</span><span>First Aid</span><span>AHCPMG304</span><span>$20m public liability</span></div>
+    <div class="margin"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>Grid MGA zone 55 · datum GDA2020</span><span>Contour interval 10 m · index 50 m</span><span>Base GR <span class="num">063 758</span></span><figure class="scalebar" aria-label="Scale bar: 150 pixels represent 1 kilometre at this sheet scale"><div><div class="bar"><i></i><i></i><i></i><i></i></div><div class="ticks"><span>0</span><span>250</span><span>500</span><span>750</span><span>m</span></div></div><span class="unit">1 km</span></figure><span>Sheet styling after Victorian 1:25 000 topographic maps · field seed <span class="num">fitzferalhunters-paddock</span></span></div>
+    <div class="legal"><span>&copy; 2026 Fitz Feral Hunters</span><span>Warragul VIC</span><span>ABN 22 477 254 408</span><span>Work carried out under Victorian codes of practice</span></div>
+  </div>
+</footer>
+<div class="cta-bar" id="ctabar">
+  <a class="btn btn-secondary num" href="tel:+61499866580"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span class="bar-long">Call</span>0499 866 580</a>
+  <a class="btn btn-primary" href="https://fitzferalhunters.com.au/contact#enquiry" data-focus="enquiry">Request a quote</a>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  var ARTIFACT=false;
+  /* hash router (artifact build only): five sections, bare tokens */
+  if(ARTIFACT){
+    var pages=[].slice.call(document.querySelectorAll('[data-page]')), tokens=pages.map(function(p){return p.id});
+    var titles={"home": "Fitz Feral Hunters \u00b7 Pest & vermin control, Victoria", "services": "Services \u00b7 Fitz Feral Hunters", "about": "About \u00b7 Fitz Feral Hunters", "gallery": "Gallery \u00b7 Fitz Feral Hunters", "contact": "Contact \u00b7 Fitz Feral Hunters", "credentials": "Credentials and insurance \u00b7 Fitz Feral Hunters", "faq": "FAQ \u00b7 Fitz Feral Hunters", "drone-report": "Sample drone survey report \u00b7 Fitz Feral Hunters", "reviews": "Reviews \u00b7 Fitz Feral Hunters"};
+    var live=document.getElementById('route-live');
+    function current(){var h=(location.hash||'#home').slice(1);return tokens.indexOf(h)>-1?h:'home'}
+    function show(tok,focusId){
+      pages.forEach(function(p){p.hidden=(p.id!==tok)});
+      [].forEach.call(document.querySelectorAll('[data-route]'),function(a){ if(a.closest('.nav, .drawer, .site-foot')){ if(a.getAttribute('data-route')===tok && !a.classList.contains('btn')) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); } });
+      var d=document.getElementById('drawer'); if(d) d.removeAttribute('open');
+      document.title=titles[tok]||document.title; if(live) live.textContent=(titles[tok]||'').split(' · ')[0];
+      var target=focusId?document.getElementById(focusId):null;
+      if(target){ target.scrollIntoView({block:'start'}); (target.querySelector('input')||target).focus({preventScroll:true}); }
+      else { window.scrollTo({top:0,behavior:'instant'}); var h=document.getElementById('h-'+tok); if(h) h.focus({preventScroll:true}); }
+    }
+    document.addEventListener('click',function(e){ var a=e.target.closest('a[data-route]'); if(!a) return; var tok=a.getAttribute('data-route'); e.preventDefault(); var f=a.getAttribute('data-focus'); if(location.hash!=='#'+tok){ history.pushState(null,'','#'+tok); } show(tok,f); });
+    window.addEventListener('hashchange',function(){show(current())}); window.addEventListener('popstate',function(){show(current())});
+    show(current());
+  }
+  var PHONE="0499 866 580", E164="+61499866580", EMAIL="fitzferalhunters1@gmail.com";
+  /* toast: one shared polite live region, created at load so the first message is announced */
+  var toastEl=document.createElement('div'), toastT=null; toastEl.className='toast'; toastEl.setAttribute('role','status'); toastEl.setAttribute('aria-live','polite'); document.body.appendChild(toastEl);
+  function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(function(){ toastEl.classList.remove('on'); },2400); }
+  function selectText(el){ try{ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); }catch(e){} }
+  function copyText(txt,ok,fail){ try{ navigator.clipboard.writeText(txt).then(ok,fail); }catch(err){ fail(); } }
+  /* copy buttons (email) */
+  [].forEach.call(document.querySelectorAll('.copy'),function(b){
+    b.addEventListener('click',function(){
+      var txt=b.getAttribute('data-copy'), done=function(){b.setAttribute('data-state','copied');b.textContent='Copied';toast('Copied — '+txt);setTimeout(function(){b.removeAttribute('data-state');b.textContent='Copy'},1600)};
+      function fallback(){ var el=b.previousElementSibling; if(el) selectText(el); toast('Press Ctrl+C (⌘C on Mac) to copy'); }
+      copyText(txt,done,fallback);
+    });
+  });
+  /* phone numbers: touch phones dial (the plain tel: link); anything with a fine pointer copies the number instead */
+  var touch=window.matchMedia?matchMedia('(hover: none) and (pointer: coarse)'):{matches:true};
+  function telLabels(){ root.setAttribute('data-input',touch.matches?'touch':'pointer'); [].forEach.call(document.querySelectorAll('a[href^="tel:"]'),function(a){ a.setAttribute('aria-label',(touch.matches?'Call ':'Copy phone number ')+PHONE); if(!touch.matches) a.title='Click to copy '+PHONE; else a.removeAttribute('title'); }); }
+  telLabels(); if(touch.addEventListener) touch.addEventListener('change',telLabels);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href^="tel:"]'); if(!a) return;
+    if(touch.matches || e.defaultPrevented || e.button!==0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    copyText(PHONE,function(){ toast('Number copied — '+PHONE); },function(){ selectText(a); toast('Press Ctrl+C (⌘C on Mac) to copy '+PHONE); });
+  });
+  /* videos: a play button over the poster (native controls take over once playing; without script the native controls show), one at a time */
+  [].forEach.call(document.querySelectorAll('.vid video'),function(v){
+    var b=document.createElement('button'); b.type='button'; b.className='play'; b.setAttribute('aria-label','Play video: '+(v.getAttribute('aria-label')||'').replace(/^Video: /,'')); b.innerHTML='<span aria-hidden="true"></span>';
+    v.controls=false; v.parentNode.appendChild(b);
+    b.addEventListener('click',function(){ v.controls=true; b.remove(); var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); try{ v.focus({preventScroll:true}); }catch(e){} });
+    v.addEventListener('play',function(){ [].forEach.call(document.querySelectorAll('.vid video'),function(o){ if(o!==v && !o.paused) o.pause(); }); var f=v.closest('.vid'); if(f) f.classList.add('is-playing'); }); });
+  /* bot check loads only where a form asks for it */
+  if(document.querySelector('.cf-turnstile')){ var ts=document.createElement('script'); ts.src='https://challenges.cloudflare.com/turnstile/v0/api.js'; ts.async=true; ts.defer=true; document.head.appendChild(ts); }
+  /* the receipt dialog shared by the enquiry and review forms */
+  var sent=document.getElementById('sent'), sentClose=null;
+  function openSent(o){
+    if(!sent) return;
+    sent.setAttribute('data-state',o.state);
+    document.getElementById('sent-kicker').textContent=o.kicker; document.getElementById('sent-title').textContent=o.title; document.getElementById('sent-lede').textContent=o.lede;
+    var dl=document.getElementById('sent-list'); dl.replaceChildren(); (o.rows||[]).forEach(function(r){ if(!r[1]) return; var dt=document.createElement('dt'), dd=document.createElement('dd'); dt.textContent=r[0]; dd.textContent=r[1]; dl.appendChild(dt); dl.appendChild(dd); });
+    document.getElementById('sent-ref').textContent=o.ref||'';
+    var ac=document.getElementById('sent-actions'); ac.replaceChildren(); (o.actions||[]).forEach(function(x){ var a=document.createElement('a'); a.className='btn '+(x.cls||'btn-secondary'); a.href=x.href; a.textContent=x.label; ac.appendChild(a); }); ac.hidden=!(o.actions&&o.actions.length);
+    sentClose=o.onClose||null;
+    if(sent.showModal){ if(!sent.open) sent.showModal(); } else { sent.setAttribute('open',''); }
+    document.getElementById('sent-title').focus();
+  }
+  if(sent){
+    document.getElementById('sent-close').addEventListener('click',function(){ if(sent.close) sent.close(); else { sent.removeAttribute('open'); sent.dispatchEvent(new Event('close')); } });
+    sent.addEventListener('click',function(e){ if(e.target===sent) sent.close(); });
+    sent.addEventListener('close',function(){ var f=sentClose; sentClose=null; if(f) f(); });
+  }
+  function mailHref(subject,rows){ var b='Hi Fitz,\n\n'+rows.filter(function(r){return r[1]}).map(function(r){return r[0]+': '+r[1]}).join('\n')+'\n\n(written on the website)'; if(b.length>1600) b=b.slice(0,1600)+'…'; return 'mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(b); }
+  function stamp(){ try{ return new Date().toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}); }catch(e){ return ''; } }
+  /* mobile CTA bar exits while the form is in view */
+  var bar=document.getElementById('ctabar'), form=document.getElementById('enquiry'), heroCta=document.querySelector('.hero .cta-row');
+  if(bar && 'IntersectionObserver' in window){
+    var seen=new Map();
+    var io=new IntersectionObserver(function(es){ es.forEach(function(x){ seen.set(x.target, x.target===form ? (x.isIntersecting && x.intersectionRatio>0.15) : x.isIntersecting); });
+      var off=false; seen.forEach(function(v){ if(v) off=true; }); bar.toggleAttribute('data-off', off); bar.inert=off; },{threshold:[0,0.15,0.5]});
+    if(form) io.observe(form); if(heroCta) io.observe(heroCta);
+  }
+  /* the mobile menu closes on Escape, on a tap outside it, and after choosing a page */
+  var drawer=document.getElementById('drawer');
+  if(drawer){
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape' && drawer.open){ drawer.open=false; drawer.querySelector('summary').focus(); } });
+    document.addEventListener('click',function(e){ if(drawer.open && !drawer.contains(e.target)) drawer.open=false; });
+    drawer.addEventListener('toggle',function(){ drawer.querySelector('summary').setAttribute('aria-expanded', drawer.open?'true':'false'); });
+  }
+  /* lightbox */
+  var lb=document.getElementById('lightbox'), caps=["Thermal monocular used to spot deer on the hill.", "Rifle and thermal scope setup.", "Fitz working.", "Rifle and thermal on the tripod, the 4WD parked up the slope.", "Set up on the fence line, looking across the gully.", "Frosty hill country on a clear morning, from the drone."], idx=0, invoker=null;
+  function paint(i){ idx=(i+caps.length)%caps.length; var s=document.getElementById('lb-slot'); var src=document.querySelector('[data-lb="'+idx+'"] .slot'); if(src){ var c=src.cloneNode(true); c.classList.add('in-lb'); [].forEach.call(c.querySelectorAll('img,source'),function(x){ x.setAttribute('sizes','96vw'); x.removeAttribute('loading'); }); s.replaceChildren(c);} document.getElementById('lb-cap').textContent=caps[idx]; document.getElementById('lb-pos').textContent=(idx+1)+' of '+caps.length; }
+  if(lb && lb.showModal){
+    [].forEach.call(document.querySelectorAll('[data-lb]'),function(b){ b.addEventListener('click',function(){ invoker=b; paint(+b.getAttribute('data-lb')); lb.setAttribute('data-lightbox-state','open'); lb.showModal(); document.getElementById('lb-close').focus(); }); });
+    document.getElementById('lb-prev').addEventListener('click',function(){paint(idx-1)});
+    document.getElementById('lb-next').addEventListener('click',function(){paint(idx+1)});
+    document.getElementById('lb-close').addEventListener('click',function(){lb.close()});
+    lb.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft') paint(idx-1); if(e.key==='ArrowRight') paint(idx+1); });
+    lb.addEventListener('click',function(e){ if(e.target===lb) lb.close(); });
+    lb.addEventListener('close',function(){ lb.setAttribute('data-lightbox-state','closed'); if(invoker) invoker.focus(); });
+  }
+  /* form: progressive enhancement over the native form */
+  if(form){
+    form.setAttribute('novalidate','');
+    var fields=[['f-name','e-name',function(el){return el.value.trim().length>0}],
+                ['f-phone','e-phone',function(el){return el.value.replace(/\D/g,'').length>=8}],
+                ['f-email','e-email',function(el){return el.value.trim()===''||el.checkValidity()}],
+                ['f-loc','e-loc',function(el){return el.value.trim().length>0}]];
+    var KEY='ffh-enquiry-draft';
+    try{ var draft=JSON.parse(localStorage.getItem(KEY)||'null'); if(draft){ var restored=false; Object.keys(draft).forEach(function(k){ var el=document.getElementById(k); if(el && el.value==='' && draft[k]){ el.value=draft[k]; restored=true; } }); if(restored){ document.getElementById('draft-note').hidden=false; } } }catch(e){}
+    var saveT=null;
+    form.addEventListener('input',function(){ clearTimeout(saveT); saveT=setTimeout(function(){ try{ var o={}; fields.forEach(function(f){o[f[0]]=document.getElementById(f[0]).value}); o['f-msg']=document.getElementById('f-msg').value; localStorage.setItem(KEY,JSON.stringify(o)); }catch(e){} },300); });
+    function mark(el,errId,ok){ var w=el.closest('.field'); if(!w) return; w.classList.toggle('has-err',!ok); el.setAttribute('aria-invalid',ok?'false':'true'); if(!ok) el.setAttribute('aria-describedby',errId); }
+    fields.forEach(function(f){ var el=document.getElementById(f[0]); el.addEventListener('blur',function(){ if(el.value!=='') mark(el,f[1],f[2](el)); }); });
+    var sum=document.getElementById('err-summary'), list=document.getElementById('err-list');
+    function showErrors(errs){ list.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ev.preventDefault(); var t=document.getElementById(x[0]); (t.querySelector('input')||t).focus(); t.scrollIntoView({block:'center'})}); li.appendChild(a); list.appendChild(li); }); sum.hidden=false; sum.focus(); }
+    function succeed(){ var c=document.getElementById('confirm'); document.getElementById('confirm-name').textContent=document.getElementById('f-name').value.trim().split(' ')[0]||'there'; form.hidden=true; c.hidden=false; c.focus(); try{localStorage.removeItem(KEY)}catch(e){} }
+    var FIELD_IDS={name:'f-name',phone:'f-phone',email:'f-email',location:'f-loc',help:'f-help',message:'f-msg'};
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var errs=[];
+      fields.forEach(function(f){ var el=document.getElementById(f[0]); var ok=f[2](el); mark(el,f[1],ok); if(!ok) errs.push([f[0],document.getElementById(f[1]).textContent]); });
+      var anyHelp=form.querySelectorAll('input[name="help"]:checked').length>0; var hf=document.getElementById('f-help'); hf.classList.toggle('has-err',!anyHelp); if(!anyHelp) errs.push(['f-help',document.getElementById('e-help').textContent]);
+      if(errs.length){ showErrors(errs); return; }
+      sum.hidden=true;
+      var btn=document.getElementById('f-submit'); btn.style.width=btn.getBoundingClientRect().width+'px'; btn.classList.add('is-busy'); btn.setAttribute('aria-disabled','true'); btn.disabled=true; btn.querySelector('.lbl').textContent='Sending';
+      function reset(){ btn.classList.remove('is-busy'); btn.disabled=false; btn.removeAttribute('aria-disabled'); btn.style.width=''; btn.querySelector('.lbl').textContent='Send enquiry'; }
+      var fd=new FormData(form), payload={}; fd.forEach(function(v,k){ if(k==='help'){ (payload.help=payload.help||[]).push(v);} else payload[k]=v; });
+      var rows=[['Name',payload.name],['Phone',payload.phone],['Email',payload.email],['Location',payload.location],['Help with',(payload.help||[]).join(', ')],['Message',payload.message]];
+      var first=(payload.name||'').trim().split(' ')[0]||'there', subject='Enquiry: '+(payload.help||[]).join(', ')+' near '+payload.location;
+      var fallbackActions=function(){ return [{href:mailHref(subject,rows),label:'Email it to Fitz',cls:'btn-primary'},{href:'tel:'+E164,label:'Call '+PHONE}]; };
+      function delivered(ref){ openSent({state:'sent',kicker:'Enquiry sent',title:'Sent to Fitz',lede:'Thanks, '+first+'. Fitz has your enquiry and will ring '+payload.phone+', usually within two business days. This is what he received:',rows:rows,ref:(ref?'Reference '+ref+' · ':'')+stamp(),onClose:succeed}); }
+      function notYet(){ openSent({state:'fallback',kicker:'Not sent yet',title:'One more step',lede:'The website’s email isn’t switched on yet, so this hasn’t reached Fitz. Send it from your own email with the button below (it’s all filled in), or ring '+PHONE+'.',rows:rows,actions:fallbackActions()}); }
+      function failed(msg){ openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:(msg||'Something went wrong sending it.')+' Nothing reached Fitz. Send it from your own email, or ring '+PHONE+'.',rows:rows,actions:fallbackActions()}); }
+      if(ARTIFACT){ setTimeout(function(){ reset(); delivered('FFH-DEMO'); },900); return; }
+      fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+        .then(function(r){ return r.json().then(function(j){ return {status:r.status, j:j||{}}; },function(){ return {status:r.status, j:{}}; }); })
+        .then(function(res){ reset(); var j=res.j;
+          if(res.status===400 && j.fields){ showErrors(Object.keys(j.fields).map(function(k){ return [FIELD_IDS[k]||'f-submit', j.fields[k]]; })); return; }
+          if(j.ok && j.delivered){ delivered(j.ref); return; }
+          if(j.ok){ notYet(); return; }
+          failed(j.error); })
+        .catch(function(){ reset(); failed('No connection.'); });
+    });
+    document.getElementById('confirm-reset').addEventListener('click',function(e){ e.preventDefault(); form.reset(); document.getElementById('confirm').hidden=true; form.hidden=false; document.getElementById('f-name').focus(); });
+  }
+  /* reviews: stars, verified jobs and photos. Published reviews are added beside the baked-in ones; the form posts to the review queue */
+  var rlists=document.querySelectorAll('[data-reviews]'), rform=document.getElementById('review-form'), rsums=document.querySelectorAll('[data-review-summary]'), pfield=document.getElementById('r-photos-field');
+  var SVGNS='http://www.w3.org/2000/svg', WORDS=['','Poor','Fair','Good','Very good','Excellent'];
+  function svgUse(id,cls){ var v=document.createElementNS(SVGNS,'svg'); v.setAttribute('viewBox','0 0 24 24'); v.setAttribute('aria-hidden','true'); if(cls) v.setAttribute('class',cls); var u=document.createElementNS(SVGNS,'use'); u.setAttribute('href','#'+id); v.appendChild(u); return v; }
+  function starRow(n,label){ var s=document.createElement('span'); s.className='rv-stars'; if(label){ s.setAttribute('role','img'); s.setAttribute('aria-label',label); } else s.setAttribute('aria-hidden','true'); for(var i=1;i<=5;i++) s.appendChild(svgUse('i-star',i>n?'off':'')); return s; }
+  function monthName(m,long){ var x=/^(\d{4})-(\d\d)$/.exec(m||''); if(!x) return m==='earlier'?'More than two years ago':''; try{ return new Date(+x[1],+x[2]-1,15).toLocaleDateString('en-AU',{month:long?'long':'short',year:'numeric'}); }catch(e){ return m; } }
+  function reviewCard(r){ var f=document.createElement('figure'); f.className='review';
+    if(r.rating || r.verified){ var top=document.createElement('div'); top.className='rv-top'; if(r.rating) top.appendChild(starRow(r.rating,'Rated '+r.rating+' out of 5'));
+      if(r.verified){ var v=document.createElement('span'); v.className='rv-verified'; v.appendChild(svgUse('i-check')); v.appendChild(document.createTextNode('Verified job')); v.title=r.via==='link'?'Sent through the review link Fitz gave the customer after the job':'Fitz matched this review to a job he did'; top.appendChild(v); }
+      f.appendChild(top); }
+    var bq=document.createElement('blockquote'), q=document.createElement('q'); q.textContent=r.text; bq.appendChild(q); f.appendChild(bq);
+    if(r.photos && r.photos.length){ var ul=document.createElement('ul'); ul.className='rv-photos'; r.photos.forEach(function(p,i){ var li=document.createElement('li'), a=document.createElement('a'), im=document.createElement('img'); a.href=p.src; a.target='_blank'; a.rel='noopener'; a.setAttribute('aria-label','Photo '+(i+1)+' from '+r.name+'’s review, full size'); im.src=p.src; im.alt=''; im.loading='lazy'; im.decoding='async'; if(p.w){ im.width=p.w; im.height=p.h; } a.appendChild(im); li.appendChild(a); ul.appendChild(li); }); f.appendChild(ul); }
+    var who=document.createElement('figcaption'); who.className='who'; who.textContent=[r.name,r.property,r.region].filter(Boolean).join(' · '); f.appendChild(who);
+    var m=document.createElement('p'); m.className='caption'; var d=r.jobMonth&&r.jobMonth!=='earlier'?'Job '+monthName(r.jobMonth):''; if(!d){ try{ d=r.date?new Date(r.date).toLocaleDateString('en-AU',{month:'short',year:'numeric'}):''; }catch(e){} } m.textContent=[r.service,d].filter(Boolean).join(' · '); f.appendChild(m);
+    if(r.reply){ var rp=document.createElement('p'); rp.className='reply'; rp.textContent='Fitz: '+r.reply; f.appendChild(rp); } return f; }
+  function fillSummary(s){ if(!s || !s.count) return; [].forEach.call(rsums,function(el){ el.replaceChildren(); var b=document.createElement('b'), t=document.createElement('span'); b.textContent=(Math.round(s.average*10)/10).toFixed(1)+' out of 5'; t.textContent='from '+s.count+' review'+(s.count===1?'':'s'); el.appendChild(starRow(Math.round(s.average))); el.appendChild(b); el.appendChild(t); el.hidden=false; }); }
+  if((rlists.length || rform || rsums.length) && !ARTIFACT){
+    fetch('/api/reviews',{headers:{Accept:'application/json'}}).then(function(r){ return r.json(); }).then(function(j){
+      if(!j.enabled){ if(rform){ rform.hidden=true; document.getElementById('review-closed').hidden=false; } return; }
+      fillSummary(j.summary);
+      if(j.photos && pfield) pfield.hidden=false;
+      [].forEach.call(rlists,function(l){ var n=+l.getAttribute('data-reviews'), have=l.querySelectorAll('.review:not(.review-empty)').length, add=(j.reviews||[]).slice(0,Math.max(0,n-have)); if(!add.length) return; var e=l.querySelector('.review-empty'); if(e) e.remove(); add.forEach(function(r){ l.appendChild(reviewCard(r)); }); });
+    }).catch(function(){});
+  }
+  if(rform){
+    var rsum=document.getElementById('rv-summary'), rerrs=document.getElementById('rv-errs'), MIN=250, MAX=2000;
+    var rtext=document.getElementById('r-text'), rcount=document.getElementById('r-count'), rout=document.getElementById('r-rate-out'), rmonth=document.getElementById('r-month');
+    function count(){ var n=rtext.value.trim().length; rcount.textContent=n<MIN?(n+' of '+MIN+' characters, '+(MIN-n)+' to go'):(n+' characters. That’s enough; up to '+MAX+'.'); rcount.classList.toggle('is-ok',n>=MIN); }
+    rtext.addEventListener('input',count); count();
+    rform.addEventListener('change',function(e){ if(e.target.name==='rating'){ rout.textContent=e.target.value+' out of 5 · '+WORDS[+e.target.value]; document.getElementById('r-rating').classList.remove('has-err'); } });
+    /* the month list, rebuilt from today's date so it never goes stale */
+    (function(){ var keep=rmonth.value, now=new Date(), y=now.getFullYear(), m=now.getMonth()+1, o=['<option value="">Choose…</option>'];
+      for(var i=0;i<24;i++){ var v=y+'-'+(m<10?'0':'')+m; o.push('<option value="'+v+'">'+monthName(v,true)+'</option>'); if(--m===0){ m=12; y--; } }
+      o.push('<option value="earlier">More than two years ago</option>'); rmonth.innerHTML=o.join(''); rmonth.value=keep; })();
+    function pick(id,val){ var el=document.getElementById(id); if(!el||!val) return; [].forEach.call(el.options,function(o){ if((o.value||o.textContent)===val) el.value=o.value; }); }
+    /* Fitz's review link: ?invite=… (checked on the server; read here only to fill in what he already knows) */
+    var inv=''; try{ inv=new URLSearchParams(location.search).get('invite')||''; }catch(e){}
+    if(/^[A-Za-z0-9_-]{10,400}\.[A-Za-z0-9_-]{22}$/.test(inv)){
+      document.getElementById('r-invite').value=inv; var note=document.getElementById('r-invite-note'); note.hidden=false;
+      try{ var pl=JSON.parse(decodeURIComponent(escape(atob(inv.split('.')[0].replace(/-/g,'+').replace(/_/g,'/')))));
+        if(pl.n && !document.getElementById('r-name').value) document.getElementById('r-name').value=pl.n; pick('r-service',pl.s); pick('r-month',pl.m);
+        if(pl.e && pl.e<Date.now()){ note.classList.add('is-old'); document.getElementById('r-invite-text').textContent='This review link has expired. You can still leave a review; Fitz will match it to the job himself.'; }
+      }catch(e){}
+    }
+    /* photos: shrunk to 1600px JPEG in the browser (which also drops the location data); the server strips again */
+    var pin=document.getElementById('r-photos'), plist=document.getElementById('r-picks'), perr=document.getElementById('r-photos-err'), pbtn=document.getElementById('r-photos-btn'), picks=[];
+    function shrink(file){ return new Promise(function(ok,no){ var u=URL.createObjectURL(file), im=new Image(); im.onload=function(){ var w=im.naturalWidth, h=im.naturalHeight, k=Math.min(1,1600/Math.max(w,h)), c=document.createElement('canvas'); c.width=Math.max(1,Math.round(w*k)); c.height=Math.max(1,Math.round(h*k)); var x=c.getContext('2d'); x.fillStyle='#ffffff'; x.fillRect(0,0,c.width,c.height); x.drawImage(im,0,0,c.width,c.height); URL.revokeObjectURL(u); var q=.82, d=c.toDataURL('image/jpeg',q); while(d.length*.75>900000 && q>.45){ q-=.12; d=c.toDataURL('image/jpeg',q); } if(d.indexOf('data:image/jpeg')!==0) return no(); ok({data:d,w:c.width,h:c.height}); }; im.onerror=function(){ URL.revokeObjectURL(u); no(); }; im.src=u; }); }
+    function drawPicks(){ plist.replaceChildren(); picks.forEach(function(p,i){ var li=document.createElement('li'), im=document.createElement('img'), b=document.createElement('button'); im.src=p.data; im.alt='Photo '+(i+1)+' to attach'; b.type='button'; b.className='rm'; b.textContent='Remove'; b.setAttribute('aria-label','Remove photo '+(i+1)); b.addEventListener('click',function(){ picks.splice(i,1); drawPicks(); (picks.length?plist.querySelector('.rm'):pin).focus(); }); li.appendChild(im); li.appendChild(b); plist.appendChild(li); }); var full=picks.length>=3; pbtn.hidden=full; pin.disabled=full; pbtn.textContent=picks.length?'Add another photo':'Add photos'; }
+    function photoErr(t){ perr.textContent=t; pfield.classList.toggle('has-err',!!t); }
+    pin.addEventListener('change',function(){ var files=[].slice.call(pin.files||[]), room=3-picks.length; pin.value=''; photoErr(''); if(files.length>room){ photoErr('Up to 3 photos. The first '+room+' '+(room===1?'was':'were')+' added.'); files=files.slice(0,room); }
+      Promise.all(files.map(function(f){ return shrink(f).catch(function(){ return null; }); })).then(function(rs){ var bad=0; rs.forEach(function(r){ if(r) picks.push(r); else bad++; }); if(bad) photoErr((bad===1?'One photo':bad+' photos')+' couldn’t be read. Try a JPEG or PNG.'); drawPicks(); }); });
+    var rchecks=[['r-name',function(el){return /\S/.test(el.value)}],['r-region',function(el){return el.value!==''}],['r-property',function(el){return el.value!==''}],['r-service',function(el){return el.value!==''}],['r-month',function(el){return el.value!==''}],['r-text',function(el){return el.value.trim().length>=MIN}],['r-email',function(el){return el.value.trim()!=='' && el.checkValidity()}],['r-phone',function(el){ var d=el.value.replace(/\D/g,''); return el.value.trim()==='' || (d.length>=8 && d.length<=15); }]];
+    rform.addEventListener('submit',function(e){
+      e.preventDefault(); var errs=[];
+      var rated=rform.querySelector('input[name="rating"]:checked'), rw=document.getElementById('r-rating'); rw.classList.toggle('has-err',!rated); if(!rated) errs.push(['r-star-1',rw.querySelector('.err').textContent]);
+      rchecks.forEach(function(c){ var el=document.getElementById(c[0]), ok=c[1](el), w=el.closest('.field'); w.classList.toggle('has-err',!ok); el.setAttribute('aria-invalid',ok?'false':'true'); if(!ok) errs.push([c[0],c[0]==='r-text'?'Write at least '+MIN+' characters (you have '+el.value.trim().length+').':w.querySelector('.err').textContent]); });
+      var cons=rform.querySelector('input[name="consent"]'), cw=cons.closest('.field'); cw.classList.toggle('has-err',!cons.checked); if(!cons.checked) errs.push(['r-consent',cw.querySelector('.err').textContent]);
+      if(errs.length){ rerrs.replaceChildren(); errs.forEach(function(x){ var li=document.createElement('li'), a=document.createElement('a'); a.href='#'+x[0]; a.textContent=x[1]; a.addEventListener('click',function(ev){ ev.preventDefault(); var t=document.getElementById(x[0])||cons; t.focus(); (t.closest('.field')||t).scrollIntoView({block:'center'}); }); li.appendChild(a); rerrs.appendChild(li); }); rsum.hidden=false; rsum.focus(); return; }
+      rsum.hidden=true;
+      var p={}; new FormData(rform).forEach(function(v,k){ if(typeof v==='string') p[k]=v; }); p.consent=cons.checked; p.rating=+rated.value; if(picks.length) p.photos=picks.map(function(x){ return x.data; });
+      var rows=[['Rating','★★★★★☆☆☆☆☆'.slice(5-p.rating,10-p.rating)+'  '+p.rating+' out of 5'],['Name',p.name],['Region',p.region],['Property',p.property],['Work',p.service],['Job',monthName(p.jobMonth,true)],['Review',p.text],['Photos',picks.length?picks.length+' attached':'']];
+      var btn=document.getElementById('r-submit'); btn.classList.add('is-busy'); btn.disabled=true; btn.querySelector('.lbl').textContent=picks.length?'Sending photos':'Sending';
+      function done(){ btn.classList.remove('is-busy'); btn.disabled=false; btn.querySelector('.lbl').textContent='Send review'; }
+      var acts=function(){ return [{href:mailHref('A review for Fitz Feral Hunters',rows.concat(picks.length?[['Photos','(attach them to this email)']]:[])),label:'Email it to Fitz',cls:'btn-primary'}]; };
+      fetch(rform.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(p)})
+        .then(function(r){ return r.json().then(function(j){ return {status:r.status,j:j||{}}; },function(){ return {status:r.status,j:{}}; }); })
+        .then(function(res){ done(); var j=res.j;
+          if(j.ok){ var lede=(j.verified?'It came through Fitz’s review link, so it’ll show as a verified job once he publishes it.':'Fitz matches it to your job, then publishes it.')+' Every genuine review goes up, good or bad.'+(j.note?' '+j.note:'')+' This is what you sent:';
+            openSent({state:'sent',kicker:'Review sent',title:'Thanks, it’s with Fitz',lede:lede,rows:rows,ref:stamp(),onClose:function(){ rform.reset(); picks=[]; drawPicks(); count(); rout.textContent='Tap a star'; }}); return; }
+          if(res.status===400 && j.error){ rerrs.replaceChildren(); (j.errors||[j.error]).forEach(function(t){ var li=document.createElement('li'); li.textContent=t; rerrs.appendChild(li); }); rsum.hidden=false; rsum.focus(); return; }
+          openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:(j.error||'Something went wrong sending it.')+' You can email the same review to Fitz instead.',rows:rows,actions:acts()}); })
+        .catch(function(){ done(); openSent({state:'failed',kicker:'Not sent',title:'That didn’t go through',lede:'No connection. You can email the same review to Fitz instead.',rows:rows,actions:acts()}); });
+    });
+  }
+})();
+</script><script>
+window.ffhSplash=function(){
+  var root=document.documentElement; if(!root.classList.contains('sp-on')) return;
+  var sp=document.querySelector('div.splash'); if(!sp) return;
+  var ink=sp.querySelector('.sp-ink'), cv=sp.querySelector('.sp-topo'), b=sp.querySelector('.sp-badge'), target=document.querySelector('.site-head .logo .badge');
+  var E=getComputedStyle(root).getPropertyValue('--ease-out').trim()||'ease-out', done=false, EV=['pointerdown','keydown','wheel','touchmove','scroll'];
+  function end(){ root.classList.remove('sp-on'); sp.remove(); EV.forEach(function(e){ removeEventListener(e,skip,true); }); }
+  function finish(fast){
+    if(done) return; done=true; try{ sessionStorage.setItem('ffh-splash','1'); }catch(e){}
+    if(!fast||!sp.animate){ end(); return; }
+    var a=sp.animate([{opacity:1},{opacity:0}],{duration:240,easing:E}); a.onfinish=end;
+  }
+  function skip(){ finish(true); }
+  if(!target||!sp.animate||window.scrollY>40){ finish(false); return; }
+  EV.forEach(function(e){ addEventListener(e,skip,{capture:true,passive:true}); });
+  b.loading='eager';
+  contours();
+  var slow=setTimeout(function(){ finish(true); },900);           /* never hold an empty ink screen */
+  (b.decode?b.decode():Promise.resolve()).then(function(){ clearTimeout(slow); if(!done) arrive(); },function(){ clearTimeout(slow); finish(true); });
+  function arrive(){                                                /* D4246: scale .9 → 1 on the house curve */
+    var a=b.animate([{opacity:0,scale:.9},{opacity:1,scale:1}],{duration:800,delay:100,easing:E,fill:'forwards'});
+    a.onfinish=function(){ setTimeout(settle,380); };
+  }
+  function settle(){                                                /* the ink bleeds away from the badge; the badge lands on the header logo */
+    if(done) return;
+    var r1=b.getBoundingClientRect(), r2=target.getBoundingClientRect(), D=1000;
+    var dx=(r2.left+r2.width/2)-(r1.left+r1.width/2), dy=(r2.top+r2.height/2)-(r1.top+r1.height/2), s=r2.width/r1.width;
+    ink.animate([{'--hole':'-20%',opacity:1,offset:0},{opacity:1,offset:.6},{'--hole':'120%',opacity:0,offset:1}],{duration:D,easing:E,fill:'forwards'});
+    b.animate([{filter:'drop-shadow(0 14px 36px rgb(0 0 0 / .45))'},{filter:'drop-shadow(0 0 0 rgb(0 0 0 / 0))'}],{duration:D,easing:E,fill:'forwards'});
+    var a=b.animate([{transform:'translate(0px,0px) scale(1)'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:D,easing:E,fill:'forwards'});
+    a.onfinish=function(){ finish(false); };
+  }
+  /* The page's own contour tile, traced in gold from the badge outward. Same tile size and origin as the
+     page's map (600px, 450px under 700px wide, from the top-left), so the lines hand over as the ink clears.
+     Each frame only adds the new piece of each line, so the cost is spread evenly however many lines there are. */
+  function contours(){
+    if(!cv||!window.__ffhTopo||!cv.getContext) return;
+    window.__ffhTopo.then(function(svg){
+      if(done||!svg) return;
+      var W=innerWidth, H=innerHeight, dpr=Math.min(2,window.devicePixelRatio||1);
+      cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+      var ctx=cv.getContext('2d'); ctx.scale(dpr,dpr); ctx.lineJoin='round'; ctx.lineCap='round';
+      var T=matchMedia('(max-width:699px)').matches?450:600, k=T/1200, cx=W/2, cy=H*.46;
+      var far=Math.hypot(Math.max(cx,W-cx),Math.max(cy,H-cy)), lines=[], re=/<path stroke-width="([\d.]+)"[^>]* d="([^"]+)"/g, m;
+      while((m=re.exec(svg))){
+        var index=parseFloat(m[1])>2, subs=m[2].split('M');
+        for(var si=0;si<subs.length;si++){
+          var nums=subs[si].replace(/L/g,' ').trim().split(/\s+/).map(Number); if(nums.length<4) continue;
+          for(var ox=0;ox<W;ox+=T) for(var oy=0;oy<H;oy+=T){
+            var n=nums.length, p=new Float32Array(n), near=1e9, j=0, inView=false;
+            for(var i=0;i<n;i+=2){
+              var x=ox+nums[i]*k, y=oy+nums[i+1]*k; p[i]=x; p[i+1]=y;
+              if(x>-4&&x<W+4&&y>-4&&y<H+4) inView=true;
+              var d=(x-cx)*(x-cx)+(y-cy)*(y-cy); if(d<near){ near=d; j=i; }
+            }
+            if(!inView) continue;
+            near=Math.sqrt(near);
+            /* each contour grows both ways from its point nearest the badge */
+            half(p.subarray(j), near, index);
+            var back=new Float32Array(j+2); for(var r=0;r<=j;r+=2){ back[r]=p[j-r]; back[r+1]=p[j-r+1]; } half(back, near, index);
+          }
+        }
+      }
+      function half(q, near, index){
+        var m=q.length/2; if(m<2) return;
+        var cum=new Float32Array(m); for(var i=1;i<m;i++) cum[i]=cum[i-1]+Math.hypot(q[2*i]-q[2*i-2],q[2*i+1]-q[2*i-1]);
+        var len=cum[m-1]; if(len<1) return;
+        lines.push({p:q,cum:cum,len:len,index:index,delay:near/far*560,dur:Math.max(260,Math.min(620,len/1.6)),at:0,seg:1});
+      }
+      var t0=performance.now(), styles=[[false,'#5d4f36',.9],[true,'#8a7d5b',1.5]];
+      function point(L,d){ var c=L.cum, s=L.seg; while(s<c.length-1&&c[s]<d) s++; var a=c[s-1], f=c[s]>a?(d-a)/(c[s]-a):1; return [L.p[2*s-2]+(L.p[2*s]-L.p[2*s-2])*f, L.p[2*s-1]+(L.p[2*s+1]-L.p[2*s-1])*f, s]; }
+      function frame(now){
+        if(done) return;
+        var t=now-t0, alive=false;
+        for(var g=0;g<2;g++){
+          ctx.strokeStyle=styles[g][1]; ctx.lineWidth=styles[g][2]; ctx.beginPath();
+          for(var li=0;li<lines.length;li++){
+            var L=lines[li]; if(L.index!==styles[g][0]) continue;
+            var q=Math.min(1,Math.max(0,(t-L.delay)/L.dur)); if(q<1) alive=true; if(q<=0||L.at>=L.len) continue;
+            var to=(1-Math.pow(1-q,3))*L.len; if(to<=L.at) continue;
+            var a=point(L,L.at); ctx.moveTo(a[0],a[1]);
+            var s=L.seg; while(s<L.cum.length&&L.cum[s]<=to){ ctx.lineTo(L.p[2*s],L.p[2*s+1]); s++; }
+            L.seg=Math.max(1,Math.min(s,L.cum.length-1)); var z=point(L,to); ctx.lineTo(z[0],z[1]); L.at=to;
+          }
+          ctx.stroke();
+        }
+        if(alive) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+};
+window.ffhSplash();
+</script>
+
+
+<style>
+.sp-replay{position:fixed;left:max(16px, env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:var(--chrome);color:var(--foot-ink);font:600 15px/1 var(--font-body);cursor:pointer;box-shadow:0 0 0 1px var(--gold);transition:background-color var(--t-hover) var(--ease-out),color var(--t-hover) var(--ease-out)}
+.sp-replay:hover{background:var(--gold);color:var(--chrome)}
+.sp-replay svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:899px){.sp-replay{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+html.sp-on .sp-replay{visibility:hidden}
+</style>
+<template id="sp-tpl"><div class="splash" aria-hidden="true"><div class="sp-ink"><canvas class="sp-topo"></canvas></div><img class="sp-badge" src="brand/fitz-badge-768.webp" width="300" height="300" alt="" decoding="async" loading="lazy"><button type="button" class="sp-skip" tabindex="-1">Skip</button></div></template>
+<button type="button" class="sp-replay" id="sp-replay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"/></svg>Replay splash</button>
+<script>
+document.getElementById('sp-replay').addEventListener('click', function(){
+  var t=document.querySelector('.toast');
+  if(!matchMedia('(prefers-reduced-motion: no-preference)').matches){ if(t){ t.textContent='Your device asks for reduced motion, so the splash stays off.'; t.classList.add('on'); setTimeout(function(){ t.classList.remove('on'); },3200); } return; }
+  var old=document.querySelector('div.splash'); if(old) old.remove();
+  window.scrollTo(0,0);
+  window.__ffhTopo=window.__ffhTopo||fetch('topo-tile.svg').then(function(x){ return x.ok?x.text():''; }).catch(function(){ return ''; });
+  document.body.prepend(document.getElementById('sp-tpl').content.firstElementChild.cloneNode(true));
+  var root=document.documentElement; root.classList.remove('sp-on'); void root.offsetWidth; root.classList.add('sp-on');
+  setTimeout(function(){ window.ffhSplash(); }, 60);
+});
+</script>

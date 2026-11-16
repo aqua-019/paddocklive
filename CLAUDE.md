@@ -8,7 +8,7 @@ The live website for **Fitz Feral Hunters**: licensed, insured feral animal and 
   - Every other address (www.fitzferalhunters.com.au, fitzferalhunters.au, fitzferalhunters.online, fitzferalhunters.com and their www) is a 308 redirect to fitzferalhunters.com.au, set in the project's Domains settings. Paths carry through.
   - Mail still sends from `enquiries@fitzferalhunters.com` (Resend is verified on that domain); that's separate from the site's address.
 - Owner: Robert Fitzgerald (grew up in Korumburra, based in Warragul). Insurer: Elders Insurance, $20m public liability.
-- Built from Aqua's D700 design catalogue: the Paddock composition, SP-01 → SP-01e (mockups v0.1–0.3.2, repo `aqua-019/paddock1`), then SP-02 (v1.0), SP-03 (v1.1, client content, FAQ and Credentials pages), SP-04/05 (report proof, mobile) and SP-06 (v1.2, Contact button, star-rated reviews) in this repo.
+- Built from Aqua's D700 design catalogue: the Paddock composition, SP-01 → SP-01e (mockups v0.1–0.3.2, repo `aqua-019/paddock1`), then SP-02 (v1.0), SP-03 (v1.1, client content, FAQ and Credentials pages), SP-04/05 (report proof, mobile) SP-06 (v1.2, Contact button, star-rated reviews) and SP-08 (v1.3, Fitz's badge as the logo) in this repo. SP-07 is the shop mockup (`mockups/shop/`, not deployed).
 - The build plan is `docs/v1.0-prompts.md`. Prompts 1–5 are done in v1.0. Prompt 6: Resend is live (9 Nov 2026, mail from `enquiries@fitzferalhunters.com`); the privacy page and launch are what's left.
 
 ## The design is frozen
@@ -33,6 +33,7 @@ The client approved v0.3.2 exactly. Don't change tokens, type, the topographic s
 |---|---|
 | `python3 src/build.py` | Production build into `public/`. Public is committed; Vercel has no build step. |
 | `python3 src/build.py --review` | The mockup chrome: varbar, spec sheet, X-ray, placeholder flags, `data-per`. Rebuild production before committing. |
+| `python3 scripts/brand.py` | Rebuilds every badge file (sizes, tab icons, home-screen icon, share card) from `media-src/brand/fitz-badge.jpg` (gitignored original). Strips all metadata. |
 | `python3 scripts/media.py` | Encodes new photos and videos from `media-src/` (gitignored) into `public/media/`. Strips all metadata, GPS included. Fills in `content/media.json`. |
 | `node scripts/dev.mjs` | Local preview at http://localhost:3000 with the functions running. In-memory review store; mail off unless `.env.local` has keys. |
 | `npm test` | Function tests (`node --test`, fetch stubbed, no keys needed). |
@@ -71,6 +72,17 @@ The runtime has one npm dependency, `@vercel/blob` (pinned, review photos only).
 - **No night drone claims** (Fitz, 9 Nov 2026). Flying at night needs a licence he doesn't hold yet; he's booked on the course and drone credentials go up at the end of November. Until then the drone is daytime only (surveys, counts, mapping, stock and fence checks). Night and thermal work on the ground is fine. Fitz confirms all supplied drone footage was shot by day or at first light, so the clips themselves are fine; the copy just never says the drone flies at night.
 - Works for **farms and private landholders**. Don't say councils, land managers or public land (Fitz, 9 Nov 2026: none yet). Main work, in his order: deer, rabbits and foxes, then kangaroos, pigs and wild dogs. Region priority: Gippsland first, then all of Victoria.
 - Google Business Profile: service-area business, address hidden. Setup kit in `docs/google-business-profile.md`.
+- **Fitz's badge is the logo** (he supplied it 16 Nov 2026: rifle, FITZ / FERAL HUNTERS, mountains, pines and a stag on dark green with a gold ring). Don't redraw or recolour it.
+  - Header and footer: the badge plus a Cinzel wordmark, FITZ over FERAL HUNTERS (the footer adds the tagline). Its accessible name is the business name.
+  - Seals, alt="" because the name is in text nearby:
+    - bottom right of the home hero photo, clear of Fitz
+    - beside the Credentials and Contact page heads
+    - the About sign-off
+    - the drone report letterhead
+    - the 404 page
+  - Icons: tab `/icons/fitz-32.png` and `fitz-64.png`, home screen `/icons/fitz-touch-180.png` (also `/apple-touch-icon.png`).
+  - Share card `/og-badge-1200x630.png`; schema `logo` `/brand/fitz-badge-512.png`.
+  - The old rifle lockup files stay in `public/brand/` only for the shop mockup and for Fitz's printed card on About.
 - **No "Location withheld" plate** on any photo or video, and **no raised footnote numbers** in the text (Fitz, 10 Nov 2026). The Notes lists on Services and About stay, numbered 1, 2, 3… on the line, each written "Name – description".
 - The sample drone report (visual RGB survey, Oct 2026) is live at `/drone-report` from `content/report.json`. It's published without the ABN, the "Confidential" mark or the exact date, and the figures are cropped clean from his report.
 

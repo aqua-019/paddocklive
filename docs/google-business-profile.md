@@ -24,7 +24,7 @@ Google's own steps: [Sign up for a Business Profile](https://support.google.com/
    - the ute and tripod rig (cover)
    - Fitz on the sticks
    - the thermal scope view
-   - the logo: `public/brand/logo-lockup-plate.jpg`
+   - the logo: `public/brand/fitz-badge-512.png` (Fitz's round badge, 16 Nov 2026)
 
 ## Description (674 of 750 characters)
 

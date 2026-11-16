@@ -62,10 +62,18 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 /* header */
 .site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--chrome);color:var(--foot-ink);box-shadow:inset 0 -1px 0 var(--foot-line)}
 .site-head :focus-visible{outline-color:var(--focus-dark)}
-.logo{display:inline-flex;align-items:center;min-height:44px;flex:none}
-.logo img{height:56px;width:auto;display:block}
-@media (max-width:899px){.logo img{height:40px}}
-.foot-logo img{height:64px}
+.logo{display:inline-flex;align-items:center;gap:10px;min-height:44px;flex:none;color:inherit;text-decoration:none}
+.logo .badge{width:56px;height:56px;display:block;flex:none}
+.wordmark{display:grid;gap:4px;font-family:var(--font-display);font-weight:700;line-height:1;text-transform:uppercase;white-space:nowrap}
+.wordmark .wm-1{font-size:25px;letter-spacing:.07em;color:var(--gold-light)}
+.wordmark .wm-2{font-size:11px;letter-spacing:.17em;color:var(--foot-ink)}
+@media (max-width:899px){.logo{gap:8px}.logo .badge{width:44px;height:44px}.wordmark{gap:3px}.wordmark .wm-1{font-size:20px}.wordmark .wm-2{font-size:9.5px;letter-spacing:.15em}}
+.foot-logo{gap:16px}
+.foot-logo .badge{width:104px;height:104px}
+.foot-logo .wordmark{gap:7px}
+.foot-logo .wordmark .wm-1{font-size:30px}
+.foot-logo .wordmark .wm-2{font-size:12.5px}
+.foot-logo .wordmark .wm-3{font:600 13px/1.2 var(--font-cond);letter-spacing:.08em;color:color-mix(in srgb, var(--foot-ink) 82%, transparent)}
 @supports (animation-timeline: scroll()){
   .site-head{box-shadow:none;animation:scrolled-line linear both;animation-timeline:scroll(root);animation-range:0 96px}
   @keyframes scrolled-line{from{box-shadow:inset 0 -1px 0 var(--foot-line)}to{box-shadow:inset 0 -1px 0 var(--gold),0 1px 0 var(--line)}}

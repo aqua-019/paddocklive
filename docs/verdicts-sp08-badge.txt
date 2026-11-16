@@ -1,0 +1,9 @@
+VERIFIED :: SP-08 :: 10 pages (1280, 2×) :: the badge loads in the header and footer of every page, plus the seal, sign-off, letterhead or 404 badge where placed :: claimed=10/10 header+footer · 6 extras measured=10/10 · extras 6/6 · "Fitz Feral Hunters, home / FITZ FERAL HUNTERS" :: PER=D0401 · D0443 · D1150
+VERIFIED :: SP-08 :: header (2× desktop, 3× iPhone) :: srcset serves a file at least 2× the drawn size :: claimed=≥112px file for 56px · ≥132px for 44px measured=fitz-badge-160.webp for 56px · fitz-badge-160.webp for 44px · seal 96px :: PER=D0401
+VERIFIED :: SP-08 :: home hero (1280, iPhone 13) :: the seal stamps the bottom-right of the photo, clear of Fitz, without overflowing :: claimed=left edge ≥ 55% of the photo · in page measured=desktop 67% (+30px below) · phone 70% · in page true/true :: PER=D1150
+VERIFIED :: SP-08 :: header, footer, About :: wordmark and sign-off text meet 4.5:1 :: claimed=all ≥ 4.5 measured=FITZ 7.88 · FERAL HUNTERS 14.44 · tagline 10.13 · sign-off 7.76 :: PER=D0192
+VERIFIED :: SP-08 :: header (900/1024/1280/320) :: badge + wordmark fit where the old lockup did :: claimed=≤ 198px · 320 fits measured=186/186/186px · 320: 153px · gap to Menu 69px · overflow 0 :: PER=LENS-15
+VERIFIED :: SP-08 :: head + schema :: tab icons, home-screen icon, share card and schema logo are served :: claimed=7 × 200 image/png measured=fitz-32.png 200 image/png · fitz-64.png 200 image/png · fitz-touch-180.png 200 image/png · apple-touch-icon.png 200 image/png · favicon.png 200 image/png · og-badge-1200x630.png 200 image/png · fitz-badge-512.png 200 image/png :: PER=D0443
+VERIFIED :: SP-08 :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract
+
+7 verdicts · 0 FAILED

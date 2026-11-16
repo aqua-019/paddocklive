@@ -76,8 +76,25 @@ import base64
 def asset(path):
     """Brand asset URL: a site path, or a data URI in the single-file artifact build."""
     if not ARTIFACT: return path
-    p = PUB / path.lstrip('/'); mime = 'image/png' if p.suffix == '.png' else 'image/jpeg'
+    p = PUB / path.lstrip('/'); mime = {'.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml'}.get(p.suffix, 'image/jpeg')
     return f'data:{mime};base64,' + base64.b64encode(p.read_bytes()).decode()
+BADGE_W = (96, 160, 256, 384, 512, 768)          # scripts/brand.py writes these from Fitz's badge (16 Nov 2026)
+def badge(px, cls='', sizes=None, eager=False, alt=''):
+    """Fitz's round badge at a display size in CSS px. Decorative (alt="") wherever the name is also in text."""
+    best = next((w for w in BADGE_W if w >= px * 2), BADGE_W[-1])
+    if ARTIFACT:
+        src, srcset = asset(f'/brand/fitz-badge-{best}.webp'), ''
+    else:
+        src = f'/brand/fitz-badge-{best}.webp'
+        srcset = ' srcset="' + ', '.join(f'/brand/fitz-badge-{w}.webp {w}w' for w in BADGE_W) + f'" sizes="{sizes or str(px) + "px"}"'
+    load = ' fetchpriority="high"' if eager else ' loading="lazy"'
+    return f'<img class="badge{(" " + cls) if cls else ""}" src="{src}"{srcset} width="{px}" height="{px}" alt="{alt}" decoding="async"{load}>'
+def wordmark(tagline=False):
+    tl = f'<span class="wm-3">{esc(S["tagline"])}</span>' if tagline else ''
+    return f'<span class="wordmark"><span class="wm-1">Fitz</span><span class="wm-2">Feral Hunters</span>{tl}</span>'
+def seal_head(inner, px=120, small=76):
+    """A page head with the badge set beside it like a seal (Credentials, Contact)."""
+    return f'<div class="sec-head with-seal"{per("seal")}><div class="sh-text">{inner}</div>{badge(px, "head-seal", sizes=f"(min-width:700px) {px}px, {small}px")}</div>'
 css = (CSS.replace('@@TOKENS@@', TOKENS).replace('@@STAMP@@', STAMP).replace('@@GRAIN@@', GRAIN)
           .replace('@@TOPO@@', TOPO_URI).replace('@@SCHEME@@', 'light')
           .replace('background-size:1200px 1200px,', f'background-size:{int(1200*TOPO_SCALE)}px {int(1200*TOPO_SCALE)}px,')
@@ -315,6 +332,25 @@ dialog.sent[data-state="fallback"] #sent-close:hover,dialog.sent[data-state="fai
 .rv-picks .rm{min-height:44px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:transparent;cursor:pointer;font-weight:600;font-size:var(--fs-small);transition:background-color var(--t-hover) var(--ease-out)}
 .rv-picks .rm:hover{background:var(--wash)}
 .rv-head-cta{justify-self:start}
+/* v1.3 · Fitz's badge (SP-08): hero seal, page-head seals, About sign-off, report letterhead, 404 */
+.hero-media{position:relative}
+.hero-seal{position:absolute;z-index:3;right:16px;bottom:-30px;width:136px;height:136px;filter:drop-shadow(0 6px 16px rgb(27 38 34 / .38))}
+@media (max-width:899px){.hero-seal{right:12px;bottom:-26px;width:96px;height:96px}}
+.with-seal{grid-template-columns:minmax(0,1fr) auto;column-gap:28px;align-items:start;max-width:none}
+.with-seal .sh-text{display:grid;gap:12px;min-width:0;max-width:52rem}
+.with-seal .head-seal{width:var(--seal,136px);height:var(--seal,136px)}
+@media (max-width:699px){.with-seal{grid-template-columns:minmax(0,1fr);row-gap:14px}.with-seal .head-seal{order:-1;width:76px;height:76px}}
+.contact-grid .with-seal{margin:0;--seal:104px}
+@media (max-width:699px){.contact-grid .with-seal .head-seal{width:72px;height:72px}}
+.signoff{display:flex;align-items:center;gap:16px;margin-block:8px 4px}
+.signoff .badge{width:88px;height:88px;flex:none}
+.signoff p{margin:0;display:grid;gap:2px}
+.signoff b{font:700 18px/1.15 var(--font-display);text-transform:uppercase;letter-spacing:.04em;color:var(--ink)}
+.signoff span{font-size:var(--fs-small);color:var(--ink-2)}
+.report-head{position:relative;padding-right:100px;min-height:80px}
+.report-badge{position:absolute;top:0;right:0;width:80px;height:80px}
+@media (max-width:599px){.report-head{padding-right:72px;min-height:60px}.report-badge{width:60px;height:60px}}
+.nf-badge{width:120px;height:120px;margin-bottom:8px}
 }
 """
 
@@ -440,7 +476,7 @@ def header(current):
 <div class="skips"{per("skip")}><a href="#main">Skip to content</a><a href="{href('contact','enquiry')}"{route_attr('contact')}>Skip to contact</a></div>
 <header class="site-head"{per("header")}>
   <div class="wrap">
-    <a class="logo" href="{href('home')}"{route_attr('home')}{per("wordmark")}{per("logo")}><img src="{asset('/brand/logo-lockup.png')}" alt="{esc(S['name'])} — {esc(S['tagline'])}" width="640" height="181" decoding="async" fetchpriority="high"></a>
+    <a class="logo" href="{href('home')}"{route_attr('home')}{per("wordmark")}{per("logo")} aria-label="{esc(S['name'])}, home">{badge(56, sizes="(min-width:900px) 56px, 44px", eager=True)}{wordmark()}</a>
     {north()}
     <nav class="nav" aria-label="Primary"{per("nav")}><ul>{nav_links(current)}{contact_button(current)}</ul></nav>
     <details class="drawer" id="drawer"{per("burger")}><summary aria-label="Menu" aria-expanded="false">Menu</summary><ul>{nav_links(current)}{contact_button(current, drawer=True)}</ul></details>
@@ -455,7 +491,7 @@ def footer():
   <div class="wrap">
     <div class="cols">
       <div class="stack" style="--gap:12px">
-        <a class="logo foot-logo" href="{href('home')}"{route_attr('home')}{per("logo")}><img src="{asset('/brand/logo-lockup.png')}" alt="{esc(S['name'])} — {esc(S['tagline'])}" width="640" height="181" loading="lazy" decoding="async"></a>
+        <a class="logo foot-logo" href="{href('home')}"{route_attr('home')}{per("logo")} aria-label="{esc(S['name'])}, {esc(S['tagline'])}, home">{badge(104)}{wordmark(tagline=True)}</a>
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across {esc(S['region'])}.</p>
         <p class="small">{tel()} · {mailto()}</p>
       </div>
@@ -685,7 +721,7 @@ def home_body():
       {proof_link()}
       {contact_line()}
     </div>
-    {pic(hp, ar="4/5", sizes="(min-width:900px) 40vw, 100vw", eager=True) if isinstance(hp, str) else slot(hp[0], hp[1], hp[2], ar="4/5")}
+    <div class="hero-media"{per("seal")}>{pic(hp, ar="4/5", sizes="(min-width:900px) 40vw, 100vw", eager=True) if isinstance(hp, str) else slot(hp[0], hp[1], hp[2], ar="4/5")}{badge(136, "hero-seal", sizes="(min-width:900px) 136px, 96px")}</div>
   </div>
 </section>
 {divider("Credentials")}
@@ -809,6 +845,7 @@ def about_body():
         <div class="bio"{per("bio")}>{photo(portrait, ar="1/1", sizes="(min-width:700px) 640px, 100vw", eager=True)}<p class="lede">{esc(S['about_story'])}</p></div>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304, and a short report after. No mess and no surprises for the neighbours.</p>
         <p>I'm insured with {esc(S['insurer'])} for $20 million public liability, and I work for farms and private landholders: Gippsland first, then anywhere in Victoria.</p>
+        <div class="signoff"{per("seal")}>{badge(88)}<p><b>{esc(S['owner'])}</b><span>{esc(S['name'])} · {esc(S['base'])}, Gippsland</span></p></div>
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
         <p class="caption">{current_line}</p>
@@ -857,8 +894,8 @@ def contact_body():
 <section class="page" aria-labelledby="h-contact">
   <div class="wrap contact-grid">
     <div class="stack" style="--gap:28px">
-      <div class="sec-head" style="margin:0">{meta("Contact")}<p class="eyebrow">Contact</p><h1 id="h-contact" tabindex="-1" style="font-size:var(--fs-h2)">Ring, email or send the form</h1>
-        <p class="measure">Phone is quickest. If I'm out on a job I'll ring back the same day where I can.</p></div>
+      {seal_head(f'''{meta("Contact")}<p class="eyebrow">Contact</p><h1 id="h-contact" tabindex="-1" style="font-size:var(--fs-h2)">Ring, email or send the form</h1>
+        <p class="measure">Phone is quickest. If I'm out on a job I'll ring back the same day where I can.</p>''', px=104, small=72)}
       <div class="contact-list"{per("contactline")}>
         <div class="kv"><b>{ico("i-phone")}Phone</b><div class="row"><span>{tel()}</span><span class="hint-copy">Click to copy</span><a class="btn btn-secondary touch-only" href="tel:{S['phone_e164']}" aria-label="Call {S['phone_display']}">Call</a></div></div>
         <div class="kv"><b>{ico("i-mail")}Email</b><div class="row"><span style="font-size:19px">{mailto()}</span><button type="button" class="copy" data-copy="{S['email']}" aria-label="Copy email address">Copy</button></div></div>
@@ -988,8 +1025,8 @@ def credentials_body():
     return f'''
 <section class="page" aria-labelledby="h-credentials"{per("creds")}>
   <div class="wrap stack" style="--gap:36px">
-    <div class="sec-head">{meta("Credentials")}<p class="eyebrow">Credentials</p><h1 id="h-credentials" tabindex="-1" style="font-size:var(--fs-h2)">Licensed, insured and accountable</h1>
-      <p class="measure">Every job is done under current licences, a humane dispatch qualification and $20 million public liability insurance with {esc(S['insurer'])}. Certificates and currency documents are available on request, before any work starts.</p></div>
+    {seal_head(f'''{meta("Credentials")}<p class="eyebrow">Credentials</p><h1 id="h-credentials" tabindex="-1" style="font-size:var(--fs-h2)">Licensed, insured and accountable</h1>
+      <p class="measure">Every job is done under current licences, a humane dispatch qualification and $20 million public liability insurance with {esc(S['insurer'])}. Certificates and currency documents are available on request, before any work starts.</p>''', px=136)}
     <div class="stack" style="--gap:16px"><h2 class="sub">Licences and accreditations</h2><ol class="creds creds-6" aria-label="Licences and accreditations">{li}</ol></div>
     <div class="grid grid-2"{per("cred-detail")}>
       <article class="tile cred-card"><p class="eyebrow">Insurance</p><h3>$20 million public liability</h3><p>Insured with {esc(S['insurer'])} for every job. A certificate of currency is available on request.</p></article>
@@ -1055,7 +1092,8 @@ def report_body():
       <p class="measure">A real report from a drone survey on a rural property in Gippsland, October 2026, with the property's details removed. Every scouting job ends with a report like this: what was seen, what the ground is like, and what to do next.</p>
       <p class="caption measure">This survey used a standard visual (RGB) camera. Thermal surveys with the DJI Matrice 4T use the same format and add heat signatures, which pick out animals in cover and timber.</p></div>
     <article class="report" aria-labelledby="report-title">
-      <header class="report-head">
+      <header class="report-head"{per("seal")}>
+        {badge(80, "report-badge", sizes="(min-width:600px) 80px, 60px")}
         <p class="report-run">Fitz Feral Hunters · Drone survey report</p>
         <h2 id="report-title">{esc(R['title'])}</h2>
         <p class="report-sub">{esc(R['subtitle'])}</p>
@@ -1084,6 +1122,7 @@ def notfound_body():
     return f'''
 <section class="page notfound" aria-labelledby="h-404">
   <div class="wrap prose">
+    {badge(120, "nf-badge")}
     <p class="eyebrow">404</p>
     <h1 id="h-404" style="font-size:var(--fs-h2)">That page isn't here</h1>
     <p>The address may have been mistyped, or the page has moved. The main pages are below, and the phone always works.</p>
@@ -1334,7 +1373,7 @@ def jsonld():
     return json.dumps({
       "@context": "https://schema.org", "@type": "LocalBusiness", "name": S['name'],
       "description": TITLES['home'][1], "telephone": S['phone_e164'], "email": S['email'], "url": S['url'].rstrip('/') + '/',
-      "image": S['url'].rstrip('/') + '/og-1200x630.png',
+      "image": S['url'].rstrip('/') + '/og-badge-1200x630.png', "logo": S['url'].rstrip('/') + '/brand/fitz-badge-512.png',
       "address": {"@type": "PostalAddress", "addressLocality": S['base'], "addressRegion": "VIC", "addressCountry": "AU"},
       "areaServed": ["Gippsland", "Victoria, Australia"], "sameAs": [S['instagram']],
       "founder": {"@type": "Person", "name": S['owner']}, **({"taxID": "ABN " + S['abn']} if S.get('abn') else {}),
@@ -1365,14 +1404,15 @@ def document(key, body, title, desc):
 <meta name="description" content="{esc(desc)}">
 {robots}<meta name="theme-color" content="#1b2622">
 <link rel="canonical" href="{canonical}">
-<link rel="icon" href="/favicon.png" type="image/png" sizes="64x64">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/icons/fitz-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/icons/fitz-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/icons/fitz-touch-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{esc(S['name'])}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{S['url'].rstrip('/')}/og-1200x630.png">
+<meta property="og:image" content="{S['url'].rstrip('/')}/og-badge-1200x630.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1409,7 +1449,6 @@ def artifact_document():
 </main>
 {footer()}{ctabar()}{spec_dialog()}{script()}'''
 
-FAVICON = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="8" fill="#2E6E4E"/><path d="M18 14h30v9H28v9h17v9H28v9H18z" fill="#f8f6f2"/></svg>'''
 
 def main():
     allids = set()
@@ -1433,7 +1472,6 @@ def main():
         '// Generated by src/build.py from content/site.json. Do not edit by hand.\n'
         f'export const SERVICES = {json.dumps(REVIEW_SERVICES)};\nexport const REGIONS = {json.dumps(REGIONS)};\nexport const PROPERTY_TYPES = {json.dumps(PROPERTY_TYPES)};\n')
     (PUB / '404.html').write_text(document('404', notfound_body(), f"Page not found · {S['name']}", "That page isn't here."))
-    (PUB / 'favicon.svg').write_text(FAVICON)
     if SHEET: (PUB / 'topo-tile.svg').write_text(TOPO_SVG)
     elif (PUB / 'topo-tile.svg').exists(): (PUB / 'topo-tile.svg').unlink()
     base = S['url'].rstrip('/'); today = datetime.date.today().isoformat()

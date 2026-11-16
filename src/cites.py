@@ -92,6 +92,8 @@ PADDOCK = {
   "ledger": ["D0142","D0041","PAIR-794"],
   # v3 — the card colourway
   "logo": ["D0443","D0401","D0448","D0404","D0408","LENS-14"],
+  # SP-08: Fitz's badge as a seal on the hero photo, beside the Credentials and Contact heads, the About sign-off and the report letterhead
+  "seal": ["D0443","D0401","D0404","D0408","D1150"],
   "drone": ["D5303","D0059","D0297","D3399","D0141","LENS-03","LENS-13"],
   "brand": ["D0159","D0049","D5303","D3399","D3876","D0107","D0106","D1350","D3373","PAIR-184","PAIR-982","LAW-83","LAW-06","PALRULE-05","LENS-14","LENS-02"],
 }
